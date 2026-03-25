@@ -577,19 +577,24 @@
         throw new Error(`Twin returned status ${response.status}`);
       }
 
-      const data = await response.json();
+const rawText = await response.text();
 
-      removeTyping();
+removeTyping();
 
-      // ── Parse Twin's response ──────────────────────────────────
-      // Twin may return different shapes — we try to handle the most common ones.
-      // Adjust these field names if Twin uses different keys.
-      const replyText = data.message || data.text || data.reply || data.output || "Here's your generated creative.";
-      const imageUrl  = data.image || data.image_url || data.imageUrl || data.output_image || null;
-      // ──────────────────────────────────────────────────────────
+let replyText = "Your request was received — Twin is processing it.";
+let imageUrl = null;
+if (rawText && rawText.trim().length > 0) {
+  try {
+    const data = JSON.parse(rawText);
+    replyText = data.message || data.text || data.reply || data.output || data.result || replyText;
+    imageUrl = data.image || data.image_url || data.imageUrl || data.output_image || null;
+  } catch(e) {
+    const trimmed = rawText.trim();
+    if (trimmed.startsWith("http")) { imageUrl = trimmed; } else { replyText = trimmed; }
+  }
+}
 
-      addAgentMessage(replyText, imageUrl);
-
+addAgentMessage(replyText, imageUrl);
     } catch (err) {
       removeTyping();
       addErrorMessage(err.message || "Unknown error. Check browser console for details.");
