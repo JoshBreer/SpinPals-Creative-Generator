@@ -1,5 +1,14 @@
 [
   {
+    "id": "cr-17749772197E3C",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Surprise me",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/db/f72ab078411d82682e43c40cd6fa5efdbfbdeedc33c6167b728e344c0c6621.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T171428Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=09eaf76dada6fb6a8a05a3af8e5eed200c1a9234dfb431785980fa75556eeffc",
+    "created_at": "2026-03-31 17:13:39"
+  },
+  {
     "id": "cr-177497678518AD",
     "game_name": "Gems Bonanza",
     "format": "square",
