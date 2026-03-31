@@ -1,5 +1,14 @@
 [
   {
+    "id": "cr-1774977514F542",
+    "game_name": "Aztec Gems",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Surprise me",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1f/eeccadcecb932fdc00bfa70ca5ed52b492e90a807f8f22658b7e1132bbe42a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T171916Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=39e8c80bfe7f12f29116d126e1e164e7b52c066fba377c90c5c208abd45090a7",
+    "created_at": "2026-03-31 17:18:34"
+  },
+  {
     "id": "cr-17749772197E3C",
     "game_name": "Hot Pepper",
     "format": "square",
