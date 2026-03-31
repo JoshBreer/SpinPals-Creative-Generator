@@ -1,5 +1,23 @@
 [
   {
+    "id": "cr-177497678518AD",
+    "game_name": "Gems Bonanza",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Surprise me",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/87/ff69345fa179ede195a47c93d74250dbd66d0f462d6e19370fcff77a5ab862.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T170716Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0cc2f4aadcf762aabd6b1b4d7fba3ad7f5aa1dceee0afdbc18745d71dd809669",
+    "created_at": "2026-03-31 17:06:25"
+  },
+  {
+    "id": "cr-177497645988A3",
+    "game_name": "Starburst",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Neon / Urban",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/5b06b43619d4ead4c1d222196fab00fe5c374bde29b37cca9943e52a6f9544.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T170149Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=265a5e9fad0ff2160b4ed56d7b87abe82ca52b0cda091166e20a5f0db6a2efcc",
+    "created_at": "2026-03-31 17:00:59"
+  },
+  {
     "id": "cr-17749761133F7C",
     "game_name": "Dragon Kingdom",
     "format": "portrait",
