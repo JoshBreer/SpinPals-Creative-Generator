@@ -55,12 +55,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-se
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{font-weight:600;font-size:15px;color:var(--txt)}
 .loading-sub{font-size:13px;color:var(--txt2);margin-top:4px}
-.prog-bar{height:4px;background:var(--border);border-radius:4px;margin-top:16px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--green));width:0;border-radius:4px}
+.loading-elapsed{font-size:12px;color:var(--txt3);margin-top:8px}
 .result-box{text-align:center;padding:10px 0}
 .result-icon{font-size:40px;margin-bottom:10px}
 .result-title{font-weight:700;font-size:18px;color:var(--green);margin-bottom:6px}
 .result-text{font-size:14px;color:var(--txt2);line-height:1.5}
+.result-img{max-width:100%;max-height:50vh;border-radius:var(--r);margin:16px auto;display:block;object-fit:contain;border:1px solid var(--border)}
 .gallery-section{max-width:900px;margin:40px auto;padding:0 16px 40px}
 .gallery-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
 .gallery-heading{font-size:20px;font-weight:700;color:var(--gold)}
@@ -118,11 +118,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-se
 <script>
 const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dog Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
-const GALLERY_CREATIVES=[{"id":"cr-1774905781432","game_name":"Panda Fortune","format":"portrait","offer_text":"Weekend Special: Double GC on All Purchases","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b0/4079a5a07ca56f1eff932ada25f24604be39c5b0d8e2f157c92636c11eae69.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T212348Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f693182711769239a369553e1a7c590c0979a6963a2719bf44888617037257c0","created_at":"2026-03-30 21:23:01"},{"id":"cr-1774905418866","game_name":"Pyramid King","format":"square","offer_text":"VIP Exclusive: 100 SC + 1M GC Package","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/52/f7fbe457c2656cd0b9e03ec63647c161e6a651dca07cd95381ffdd387161c2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5b59daeb7a97d5d3ea6e31e8626481d3dab1a2c032c3c781443a9b081d617bc2","created_at":"2026-03-30 21:16:59"},{"id":"cr-1774905261297","game_name":"Fire Joker","format":"portrait","offer_text":"GC 400K + FREE SC 35 + 50 FREE SPINS","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/10/d87d1eddd10f9de2ac92ce8f23386ff234081145ec9ad3f085d81e11401d47.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211505Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a3741135f84c5d00879c79939f6c1c840af00c719f4feba3f4d204e8be5e4c14","created_at":"2026-03-30 21:14:21"},{"id":"cr-1774904631938","game_name":"King of the Sky","format":"square","offer_text":"25 FREE SC + 250K GC on First Purchase","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/55/becd63231f8b3b27b16f9a7034a897c7621c418f9ec8eb50c1aab10c85cf68.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211113Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c2583ef5343529db898d46372175fdc826d45ec20ab57367e018fcb2cb53a670","created_at":"2026-03-30 21:03:52"},{"id":"cr-1774904302187","game_name":"Great Rhino Megaways","format":"portrait","offer_text":"GC 400K + FREE SC 35 + 50 FREE SPINS","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/23/8ecfc79fcc49128eaa399bc87bbefb10ec5eb0e7b3fd6fed680fb59cfa87cd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211053Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dac524db20b4121012222816dc772c07dccfbb2a312df9ec888a9bb0a1859884","created_at":"2026-03-30 20:58:22"},{"id":"cr-1774903582769","game_name":"Emerald King","format":"portrait","offer_text":"6 SC FREE + 60K GC FREE + Daily FREE Spins","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f4/3a93424b138d04cab33bd9ec9a368a5e3c5fc4e53c32692d333a828ce95ff9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T205042Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8e6fc4b9f0215b4e657df5e621025a4a31e0fa3e52c61ea87c3ae1f6efafc87","created_at":"2026-03-30 20:46:23"},{"id":"cr-1774903001345","game_name":"Divine Fortune","format":"portrait","offer_text":"25 FREE SC + 250K GC on First Purchase","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/d8a96aaf960d583aa1a9487b55d5fcfd75e5e99f4d726d4aa616f785381965.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T204124Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7267410d5b820bdbb12f727469166bcbd01ab2155855577bcef87badee38de9a","created_at":"2026-03-30 20:36:41"},{"id":"cr-1774902745909","game_name":"Snoop Dog Dollars","format":"square","offer_text":"25 FREE SC + 250K GC on First Purchase","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1b/3571e07a9f3a3d9cee0c1a09f6e6a334d2384a7033d10a8ec4a89575b3168a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203710Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03a2b7d39173b9a3a41b557b6933fd482b8e46a32a9bda1341c59bc4a0ac1c8e","created_at":"2026-03-30 20:32:26"},{"id":"cr-1774902513623","game_name":"Snoop Dog Dollars","format":"square","offer_text":"GC 400K + FREE SC 35 + 50 FREE SPINS","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/88/a0102d3b3bb0cf7a7686570a28c0ddda5d0dd5e2a0aaf6abe7d77d99629d67.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203222Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=81d8b15da485e5ff4faa3963fbd262806d4cb08962c220fd2a40038bd6774106","created_at":"2026-03-30 20:28:34"},{"id":"cr-1774902260017","game_name":"Buffalo King Megaways","format":"square","offer_text":"GC 400K + FREE SC 35 + 50 FREE SPINS","style":"Surprise me","image_url":"https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd","created_at":"2026-03-30 20:24:20"}];
 const STYLES=['Tropical','Neon/Urban','Retro 70s','Icy/Winter','Celtic/Irish','Carnival','Dark/Gothic','Fire/Inferno','Arcade','Surprise me'];
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 
 let state={format:null,game:null,offer:null,style:null};
+let galleryData=[];
 const chatEl=document.getElementById('chat');
 const galleryEl=document.getElementById('gallery');
 const modal=document.getElementById('modal');
@@ -131,20 +132,6 @@ const modalTitle=document.getElementById('modal-title');
 const modalInfo=document.getElementById('modal-info');
 const modalDl=document.getElementById('modal-dl');
 
-function loadCreatives(){
-  let stored=[];
-  try{stored=JSON.parse(localStorage.getItem('sp_creatives')||'[]')}catch(e){}
-  const ids=new Set();
-  const all=[...GALLERY_CREATIVES,...stored];
-  return all.filter(c=>{if(ids.has(c.id))return false;ids.add(c.id);return true}).sort((a,b)=>b.created_at.localeCompare(a.created_at));
-}
-function saveCreative(c){
-  let stored=[];
-  try{stored=JSON.parse(localStorage.getItem('sp_creatives')||'[]')}catch(e){}
-  stored.push(c);
-  try{localStorage.setItem('sp_creatives',JSON.stringify(stored))}catch(e){}
-}
-
 function msg(html,type='bot'){
   const d=document.createElement('div');
   d.className='bubble '+(type==='user'?'user':'bot');
@@ -152,21 +139,21 @@ function msg(html,type='bot'){
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
+// Fetch gallery.json (cache-busted)
+async function fetchGallery(){
+  try{
+    const r=await fetch(GALLERY_URL+Date.now());
+    if(r.ok){galleryData=await r.json();return galleryData}
+  }catch(e){}
+  return galleryData;
+}
+
 async function triggerWebhook(data){
   try{
-    await fetch(WEBHOOK,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        game_name:data.game_name,
-        format:data.format,
-        offer_text:data.offer_text,
-        style:data.style
-      }),
-      mode:'no-cors'
-    });
+    await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data),mode:'no-cors'});
     return true;
-  }catch(e){console.log('Webhook error:',e);return false}
+  }catch(e){return false}
 }
 
 async function startChat(){
@@ -255,51 +242,75 @@ async function stepSummary(){
 
 async function doGenerate(){
   msg('&#10024; Generate Ad','user');await delay(250);
+
+  // Record how many creatives exist BEFORE triggering
+  const beforeCount=galleryData.length;
+  const beforeTime=new Date().toISOString().replace('T',' ').substring(0,19);
+  const startTs=Date.now();
+
   const loadMsg=msg('<div class="loading"><div class="spinner"></div>'+
-    '<div class="loading-text">Generating your ad...</div>'+
-    '<div class="loading-sub">Sending request to our AI engine for <span class="gold">'+state.game+'</span></div>'+
-    '<div class="prog-bar"><div class="prog-fill" id="prog"></div></div></div>');
+    '<div class="loading-text">Generating your <span class="gold">'+state.game+'</span> ad...</div>'+
+    '<div class="loading-sub">Our AI engine is working on it</div>'+
+    '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
 
-  // Send selections as JSON to webhook - the agent reads these from the payload
-  // and creates the DB record + generates the image itself
-  const ok=await triggerWebhook({
-    game_name:state.game,
-    format:state.format,
-    offer_text:state.offer,
-    style:state.style
-  });
+  // Fire webhook with selections as JSON payload
+  await triggerWebhook({game_name:state.game,format:state.format,offer_text:state.offer,style:state.style});
 
-  // Track locally for gallery
-  saveCreative({id:'cr-'+Date.now(),game_name:state.game,format:state.format,
-    offer_text:state.offer,style:state.style,image_url:'',
-    created_at:new Date().toISOString().replace('T',' ').substring(0,19),pending:true});
+  // Update elapsed timer
+  const timerInterval=setInterval(()=>{
+    const el=document.getElementById('elapsed');
+    if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';
+  },1000);
 
-  const prog=document.getElementById('prog');
-  if(prog){prog.style.transition='width 80s linear';setTimeout(()=>{prog.style.width='95%'},50)}
+  // Poll gallery.json every 7 seconds until a new entry appears
+  let found=null;
+  while(!found){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    // Look for a new entry that was not in the original set
+    if(fresh.length>beforeCount){
+      // Check the newest entry matches our request
+      const newest=fresh[0];
+      if(newest&&newest.game_name===state.game&&newest.image_url){
+        found=newest;
+      }
+    }
+    // Also check if any entry appeared after our request time with matching game
+    if(!found){
+      for(let i=0;i<fresh.length;i++){
+        if(fresh[i].game_name===state.game&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){
+          found=fresh[i];break;
+        }
+      }
+    }
+  }
 
-  await delay(80000);
+  clearInterval(timerInterval);
 
+  // Show the result inline
   const container=loadMsg.querySelector('.loading');
   if(container){
     container.innerHTML='<div class="result-box"><div class="result-icon">&#127912;</div>'+
-      '<div class="result-title">Ad Generation Triggered!</div>'+
-      '<div class="result-text">Your <span class="gold">'+state.game+'</span> ad has been sent to our AI engine.<br><br>'+
-      'The agent will create a database record, generate the image, and save it.<br>'+
-      'This typically takes <strong>60-90 seconds</strong>.<br><br>'+
-      '<span class="gold">Scroll down to the gallery</span> and hit Refresh to see your new creative!</div></div>';
+      '<div class="result-title">Your Ad is Ready!</div>'+
+      '<div class="result-text"><span class="gold">'+found.game_name+'</span> &middot; '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
+      '<img class="result-img" src="'+found.image_url+'" alt="'+found.game_name+' ad">'+
+      '</div>';
   }
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
-  const refreshBtn=document.createElement('button');refreshBtn.className='opt-btn opt-green';
-  refreshBtn.innerHTML='&#128260; Refresh Page';refreshBtn.onclick=()=>location.reload();acts.appendChild(refreshBtn);
+  const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;
+  dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
   anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+
+  // Refresh gallery
+  renderGallery();
 }
 
-// Gallery
+// Gallery (reads from galleryData which is fetched from gallery.json)
 function renderGallery(filter='all'){
   galleryEl.innerHTML='';
-  let items=loadCreatives().filter(c=>c.image_url&&!c.pending);
+  let items=galleryData.filter(c=>c.image_url);
   if(filter!=='all')items=items.filter(c=>c.format===filter);
   if(!items.length){galleryEl.innerHTML='<div class="gallery-empty">No creatives yet. Generate your first ad above!</div>';return}
   items.forEach(c=>{
@@ -315,7 +326,7 @@ document.querySelectorAll('.filter-tab').forEach(tab=>{
 
 function openModal(c){
   modalImg.src=c.image_url;modalTitle.textContent=c.game_name;
-  modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' \u00B7 '+c.style+' \u00B7 '+c.offer_text;
+  modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' \u00B7 '+(c.style||'')+' \u00B7 '+(c.offer_text||'');
   modalDl.href=c.image_url;modal.className='modal active';document.body.style.overflow='hidden';
 }
 function closeModal(){modal.className='modal';document.body.style.overflow=''}
@@ -323,7 +334,9 @@ document.getElementById('modal-close').onclick=closeModal;
 modal.onclick=e=>{if(e.target===modal)closeModal()};
 document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
 
-renderGallery();startChat();
+// Init: fetch gallery.json then render
+fetchGallery().then(()=>renderGallery());
+startChat();
 </script>
 </body>
 </html>
