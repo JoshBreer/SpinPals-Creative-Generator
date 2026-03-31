@@ -1,5 +1,14 @@
 [
   {
+    "id": "cr-177498019597BA",
+    "game_name": "Mega Fortune",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Carnival",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/67/2a591a6a4b5d1603007b46528745ff73d71a8f7c484cd694aa3a3276467e5f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T180353Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=136c074bedb3c8c667583859c3daf8666033333dca6f692310a37271c677e777",
+    "created_at": "2026-03-31 18:03:15"
+  },
+  {
     "id": "cr-1774977514F542",
     "game_name": "Aztec Gems",
     "format": "portrait",
