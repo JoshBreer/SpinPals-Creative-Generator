@@ -136,9 +136,7 @@ function loadCreatives(){
   try{stored=JSON.parse(localStorage.getItem('sp_creatives')||'[]')}catch(e){}
   const ids=new Set();
   const all=[...GALLERY_CREATIVES,...stored];
-  const unique=all.filter(c=>{if(ids.has(c.id))return false;ids.add(c.id);return true});
-  unique.sort((a,b)=>b.created_at.localeCompare(a.created_at));
-  return unique;
+  return all.filter(c=>{if(ids.has(c.id))return false;ids.add(c.id);return true}).sort((a,b)=>b.created_at.localeCompare(a.created_at));
 }
 function saveCreative(c){
   let stored=[];
@@ -150,10 +148,7 @@ function saveCreative(c){
 function msg(html,type='bot'){
   const d=document.createElement('div');
   d.className='bubble '+(type==='user'?'user':'bot');
-  d.innerHTML=html;
-  chatEl.appendChild(d);
-  chatEl.scrollTop=chatEl.scrollHeight;
-  return d;
+  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
@@ -162,42 +157,41 @@ async function triggerWebhook(data){
     await fetch(WEBHOOK,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data),
+      body:JSON.stringify({
+        game_name:data.game_name,
+        format:data.format,
+        offer_text:data.offer_text,
+        style:data.style
+      }),
       mode:'no-cors'
     });
-  }catch(e){console.log('Webhook triggered:',e)}
+    return true;
+  }catch(e){console.log('Webhook error:',e);return false}
 }
 
 async function startChat(){
-  chatEl.innerHTML='';
-  state={format:null,game:null,offer:null,style:null};
+  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};
   await delay(200);
   const m=msg('Ready to create a <span class="gold">Spin Pals</span> ad? &#10024;');
-  const btn=document.createElement('button');
-  btn.className='opt-btn opt-green';btn.textContent="Let's go!";
-  btn.onclick=()=>{btn.disabled=true;stepFormat()};
-  m.appendChild(btn);
+  const btn=document.createElement('button');btn.className='opt-btn opt-green';btn.textContent="Let's go!";
+  btn.onclick=()=>{btn.disabled=true;stepFormat()};m.appendChild(btn);
 }
 
 async function stepFormat(){
-  msg("Let's go!",'user');
-  await delay(250);
+  msg("Let's go!",'user');await delay(250);
   const m=msg('What <span class="gold">size</span> do you need?');
   const w=document.createElement('div');w.className='opt-group';
   [['portrait','Portrait (9:16)'],['square','Square (1:1)']].forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
-    b.onclick=()=>{state.format=val;msg(label,'user');stepGame()};
-    w.appendChild(b);
-  });
-  m.appendChild(w);
+    b.onclick=()=>{state.format=val;msg(label,'user');stepGame()};w.appendChild(b);
+  });m.appendChild(w);
 }
 
 async function stepGame(){
   await delay(250);
   const m=msg('Which <span class="gold">game</span> should we feature?');
   const sel=document.createElement('div');sel.className='game-sel';
-  const search=document.createElement('input');
-  search.type='text';search.className='game-search';search.placeholder='Search games...';
+  const search=document.createElement('input');search.type='text';search.className='game-search';search.placeholder='Search games...';
   sel.appendChild(search);
   const list=document.createElement('div');list.className='game-list';
   Object.keys(GAMES).sort().forEach(cat=>{
@@ -205,32 +199,21 @@ async function stepGame(){
     const hdr=document.createElement('div');hdr.className='cat-hdr';
     hdr.innerHTML=cat+' <span class="cat-arrow">&#9662;</span>';
     const items=document.createElement('div');items.className='game-items';
-    hdr.onclick=()=>{
-      const vis=items.style.display!=='none';
-      items.style.display=vis?'none':'block';
-      hdr.querySelector('.cat-arrow').innerHTML=vis?'&#9656;':'&#9662;';
-    };
+    hdr.onclick=()=>{const vis=items.style.display!=='none';items.style.display=vis?'none':'block';hdr.querySelector('.cat-arrow').innerHTML=vis?'&#9656;':'&#9662;'};
     GAMES[cat].forEach(g=>{
-      const it=document.createElement('div');it.className='game-item';
-      it.textContent=g.name;it.dataset.n=g.name.toLowerCase();
-      it.onclick=()=>{state.game=g.name;msg(g.name,'user');stepOffer()};
-      items.appendChild(it);
-    });
-    catDiv.appendChild(hdr);catDiv.appendChild(items);list.appendChild(catDiv);
-  });
-  sel.appendChild(list);m.appendChild(sel);
+      const it=document.createElement('div');it.className='game-item';it.textContent=g.name;it.dataset.n=g.name.toLowerCase();
+      it.onclick=()=>{state.game=g.name;msg(g.name,'user');stepOffer()};items.appendChild(it);
+    });catDiv.appendChild(hdr);catDiv.appendChild(items);list.appendChild(catDiv);
+  });sel.appendChild(list);m.appendChild(sel);
   search.oninput=()=>{
     const q=search.value.toLowerCase();
-    list.querySelectorAll('.game-item').forEach(it=>{
-      it.style.display=it.dataset.n.includes(q)?'':'none';
-    });
+    list.querySelectorAll('.game-item').forEach(it=>{it.style.display=it.dataset.n.includes(q)?'':'none'});
     [...list.children].forEach(cat=>{
       const vis=cat.querySelectorAll('.game-item:not([style*="display: none"])').length;
       cat.style.display=vis?'':'none';
       if(q&&vis){const gi=cat.querySelector('.game-items');if(gi)gi.style.display='block'}
     });
-  };
-  chatEl.scrollTop=chatEl.scrollHeight;
+  };chatEl.scrollTop=chatEl.scrollHeight;
 }
 
 async function stepOffer(){
@@ -240,10 +223,8 @@ async function stepOffer(){
   OFFERS.forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
     card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
-    card.onclick=()=>{state.offer=o.title;msg(o.title,'user');stepStyle()};
-    w.appendChild(card);
-  });
-  m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
+    card.onclick=()=>{state.offer=o.title;msg(o.title,'user');stepStyle()};w.appendChild(card);
+  });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
 async function stepStyle(){
@@ -253,61 +234,65 @@ async function stepStyle(){
   STYLES.forEach(s=>{
     const b=document.createElement('button');b.className='opt-btn';
     if(s==='Surprise me')b.classList.add('opt-purple');
-    b.textContent=s;
-    b.onclick=()=>{state.style=s;msg(s,'user');stepSummary()};
-    w.appendChild(b);
-  });
-  m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
+    b.textContent=s;b.onclick=()=>{state.style=s;msg(s,'user');stepSummary()};w.appendChild(b);
+  });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
 async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':'Square (1:1)';
-  const m=msg(
-    '<div class="summary-card"><div class="summary-title">Your Ad Creative</div>'+
+  const m=msg('<div class="summary-card"><div class="summary-title">Your Ad Creative</div>'+
     '<div class="summary-row"><span class="summary-label">Format:</span>'+fmtLabel+'</div>'+
     '<div class="summary-row"><span class="summary-label">Game:</span>'+state.game+'</div>'+
     '<div class="summary-row"><span class="summary-label">Offer:</span>'+state.offer+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Style:</span>'+state.style+'</div></div>'
-  );
+    '<div class="summary-row"><span class="summary-label">Style:</span>'+state.style+'</div></div>');
   const acts=document.createElement('div');acts.className='summary-actions';
-  const gen=document.createElement('button');gen.className='opt-btn opt-green';
-  gen.innerHTML='&#10024; Generate Ad';
-  gen.onclick=()=>{gen.disabled=true;doGenerate()};
-  acts.appendChild(gen);
-  const reset=document.createElement('button');reset.className='text-btn';
-  reset.textContent='Start Over';reset.onclick=startChat;
-  acts.appendChild(reset);
-  m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+  const gen=document.createElement('button');gen.className='opt-btn opt-green';gen.innerHTML='&#10024; Generate Ad';
+  gen.onclick=()=>{gen.disabled=true;doGenerate()};acts.appendChild(gen);
+  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start Over';reset.onclick=startChat;
+  acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
 async function doGenerate(){
-  msg('&#10024; Generate Ad','user');
-  await delay(250);
-  const loadMsg=msg(
-    '<div class="loading"><div class="spinner"></div>'+
+  msg('&#10024; Generate Ad','user');await delay(250);
+  const loadMsg=msg('<div class="loading"><div class="spinner"></div>'+
     '<div class="loading-text">Generating your ad...</div>'+
-    '<div class="loading-sub">Our AI is crafting a bold, flashy <span class="gold">'+state.game+'</span> ad</div>'+
-    '<div class="prog-bar"><div class="prog-fill" id="prog"></div></div></div>'
-  );
-  await triggerWebhook({game_name:state.game,format:state.format,offer_text:state.offer,style:state.style});
-  saveCreative({id:'cr-'+Date.now(),game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,image_url:'',created_at:new Date().toISOString().replace('T',' ').substring(0,19),pending:true});
+    '<div class="loading-sub">Sending request to our AI engine for <span class="gold">'+state.game+'</span></div>'+
+    '<div class="prog-bar"><div class="prog-fill" id="prog"></div></div></div>');
+
+  // Send selections as JSON to webhook - the agent reads these from the payload
+  // and creates the DB record + generates the image itself
+  const ok=await triggerWebhook({
+    game_name:state.game,
+    format:state.format,
+    offer_text:state.offer,
+    style:state.style
+  });
+
+  // Track locally for gallery
+  saveCreative({id:'cr-'+Date.now(),game_name:state.game,format:state.format,
+    offer_text:state.offer,style:state.style,image_url:'',
+    created_at:new Date().toISOString().replace('T',' ').substring(0,19),pending:true});
+
   const prog=document.getElementById('prog');
   if(prog){prog.style.transition='width 80s linear';setTimeout(()=>{prog.style.width='95%'},50)}
+
   await delay(80000);
+
   const container=loadMsg.querySelector('.loading');
   if(container){
     container.innerHTML='<div class="result-box"><div class="result-icon">&#127912;</div>'+
-    '<div class="result-title">Ad Generation Triggered!</div>'+
-    '<div class="result-text">Your <span class="gold">'+state.game+'</span> ad is being created by our AI engine.<br>It typically takes 60-90 seconds. Refresh the page to see it in the gallery!</div></div>';
+      '<div class="result-title">Ad Generation Triggered!</div>'+
+      '<div class="result-text">Your <span class="gold">'+state.game+'</span> ad has been sent to our AI engine.<br><br>'+
+      'The agent will create a database record, generate the image, and save it.<br>'+
+      'This typically takes <strong>60-90 seconds</strong>.<br><br>'+
+      '<span class="gold">Scroll down to the gallery</span> and hit Refresh to see your new creative!</div></div>';
   }
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
   const refreshBtn=document.createElement('button');refreshBtn.className='opt-btn opt-green';
-  refreshBtn.innerHTML='&#128260; Refresh Page';refreshBtn.onclick=()=>location.reload();
-  acts.appendChild(refreshBtn);
+  refreshBtn.innerHTML='&#128260; Refresh Page';refreshBtn.onclick=()=>location.reload();acts.appendChild(refreshBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
-  anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;
-  acts.appendChild(anotherBtn);
+  anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
@@ -320,19 +305,14 @@ function renderGallery(filter='all'){
   items.forEach(c=>{
     const card=document.createElement('div');card.className='gallery-card';
     card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
-    card.onclick=()=>openModal(c);
-    galleryEl.appendChild(card);
+    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
   });
 }
 document.querySelectorAll('.filter-tab').forEach(tab=>{
-  tab.onclick=()=>{
-    document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');
-    tab.className='filter-tab active';
-    renderGallery(tab.dataset.f);
-  };
+  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');
+    tab.className='filter-tab active';renderGallery(tab.dataset.f)};
 });
 
-// Modal
 function openModal(c){
   modalImg.src=c.image_url;modalTitle.textContent=c.game_name;
   modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' \u00B7 '+c.style+' \u00B7 '+c.offer_text;
@@ -343,8 +323,7 @@ document.getElementById('modal-close').onclick=closeModal;
 modal.onclick=e=>{if(e.target===modal)closeModal()};
 document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
 
-renderGallery();
-startChat();
+renderGallery();startChat();
 </script>
 </body>
 </html>
