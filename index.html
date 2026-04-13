@@ -251,7 +251,7 @@ document.querySelectorAll('.filter-tab').forEach(tab=>{
 });
 
 async function triggerWebhook(data){
-  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});return true;}catch(e){return false}
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 function msg(html,type='bot'){
