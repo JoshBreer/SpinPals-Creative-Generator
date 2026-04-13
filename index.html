@@ -3,135 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SpinPals Creative Studio</title>
+<title>RMGS Creative Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0f;--card:#13131a;--card2:#1a1a24;--border:#1e1e2e;--gold:#d4af37;--gold2:#e8c84a;--green:#22c55e;--green2:#16a34a;--purple:#7c3aed;--txt:#e2e2e2;--txt2:#9ca3af;--txt3:#6b7280;--r:12px}
+:root{
+  --bg:#08090f;
+  --bg2:#0b0d15;
+  --card:#0f1119;
+  --card2:#141720;
+  --border:#1c2030;
+  --blue:#2987BC;
+  --blue2:#1f6fa0;
+  --blue-glow:rgba(41,135,188,0.15);
+  --white:#ffffff;
+  --txt:#e8edf5;
+  --txt2:#8a96aa;
+  --txt3:#3a4255;
+  --green:#22c55e;
+  --green2:#16a34a;
+  --r:8px
+}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.6;min-height:100vh}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-.header{text-align:center;padding:32px 20px 24px;border-bottom:1px solid var(--border)}
-.header h1{font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--gold);letter-spacing:0.5px}
-.header p{color:var(--txt2);font-size:13px;margin-top:4px}
-.star{color:var(--gold);margin:0 6px}
-.chat-section{max-width:640px;margin:0 auto;padding:20px 16px}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#1c2030;border-radius:4px}
+ 
+.header{text-align:center;padding:36px 20px 28px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.header-logo{font-size:12px;font-weight:600;letter-spacing:4px;color:var(--blue);text-transform:uppercase;margin-bottom:10px}
+.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--white);letter-spacing:-0.5px}
+.header p{color:var(--txt2);font-size:14px;margin-top:6px}
+ 
+.email-gate{max-width:440px;margin:70px auto;padding:0 20px;text-align:center}
+.email-gate-title{font-size:26px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.3px}
+.email-gate-sub{font-size:15px;color:var(--txt2);margin-bottom:32px;line-height:1.6}
+.email-input-wrap{display:flex;flex-direction:column;gap:12px}
+.email-field{width:100%;padding:14px 18px;border-radius:var(--r);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:15px;outline:none;transition:.2s}
+.email-field:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.email-field.error{border-color:#ef4444}
+.email-field::placeholder{color:var(--txt3)}
+.email-error{font-size:13px;color:#ef4444;margin-top:-6px;display:none;text-align:left}
+.email-submit{padding:14px 28px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;letter-spacing:0.3px}
+.email-submit:hover{background:var(--blue2);box-shadow:0 0 24px var(--blue-glow)}
+ 
+.chat-section{max-width:620px;margin:0 auto;padding:24px 16px;display:none}
 .chat-msgs{display:flex;flex-direction:column;gap:12px;min-height:200px}
-.bubble{max-width:88%;padding:14px 18px;border-radius:16px;animation:fadeUp .4s ease}
-.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);border-bottom-left-radius:4px}
-.user{align-self:flex-end;background:var(--purple);color:#fff;border-bottom-right-radius:4px;font-weight:500;font-size:14px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.gold{color:var(--gold);font-weight:600}
+.bubble{max-width:88%;padding:14px 18px;border-radius:12px;animation:fadeUp .3s ease;font-size:15px}
+.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);border-bottom-left-radius:3px}
+.user{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:3px;font-weight:600}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.accent{color:var(--blue);font-weight:600}
+ 
 .opt-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.opt-btn{padding:10px 20px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--txt);cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;transition:.3s}
-.opt-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 12px rgba(212,175,55,.2)}
+.opt-btn{padding:9px 18px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt);cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;transition:.2s}
+.opt-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-glow)}
+.opt-blue{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.opt-blue:hover{background:var(--blue2);border-color:var(--blue2)}
 .opt-green{background:var(--green);border-color:var(--green);color:#fff;font-weight:600}
-.opt-green:hover{background:var(--green2);border-color:var(--green2);box-shadow:0 0 16px rgba(34,197,94,.3)}
-.opt-purple{border-color:var(--purple);color:var(--purple)}
-.opt-purple:hover{background:rgba(124,58,237,.1)}
+.opt-green:hover{background:var(--green2);border-color:var(--green2)}
+ 
 .game-sel{margin-top:12px}
-.game-search{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;margin-bottom:8px}
-.game-search:focus{border-color:var(--gold)}
-.game-list{max-height:280px;overflow-y:auto;border:1px solid var(--border);border-radius:8px;background:var(--card)}
-.cat-hdr{padding:8px 14px;font-size:12px;font-weight:600;color:var(--gold);text-transform:uppercase;background:rgba(212,175,55,.06);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.game-search{width:100%;padding:10px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;margin-bottom:8px}
+.game-search:focus{border-color:var(--blue)}
+.game-search::placeholder{color:var(--txt3)}
+.game-list{max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--card)}
+.cat-hdr{padding:8px 14px;font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:1px;background:rgba(41,135,188,0.06);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
 .cat-arrow{font-size:10px;color:var(--txt3)}
 .game-items{display:block}
-.game-item{padding:9px 14px 9px 24px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(30,30,46,.5);transition:.2s}
-.game-item:hover{background:var(--card2);color:var(--gold)}
+.game-item{padding:9px 14px 9px 22px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(28,32,48,.5);transition:.15s}
+.game-item:hover{background:var(--card2);color:var(--blue)}
+ 
 .offer-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.offer-card{padding:12px 16px;border:1px solid var(--border);border-radius:var(--r);background:var(--card);cursor:pointer;transition:.3s}
-.offer-card:hover{border-color:var(--gold);background:var(--card2)}
-.offer-title{font-weight:600;font-size:14px;color:var(--gold2)}
+.offer-card{padding:12px 16px;border:1px solid var(--border);border-radius:var(--r);background:var(--card);cursor:pointer;transition:.2s}
+.offer-card:hover{border-color:var(--blue);background:var(--card2)}
+.offer-title{font-weight:600;font-size:14px;color:var(--txt)}
 .offer-desc{font-size:12px;color:var(--txt3);margin-top:2px}
-.summary-card{background:var(--card2);border:1px solid var(--gold);border-radius:var(--r);padding:16px;margin-top:4px}
-.summary-title{font-weight:700;font-size:16px;color:var(--gold);margin-bottom:10px}
-.summary-row{font-size:13px;color:var(--txt2);padding:4px 0}
-.summary-label{color:var(--txt);font-weight:600;margin-right:6px}
+ 
+.summary-card{background:var(--card2);border:1px solid var(--blue);border-radius:var(--r);padding:16px;margin-top:4px}
+.summary-title{font-weight:700;font-size:13px;color:var(--white);margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
+.summary-row{font-size:14px;color:var(--txt2);padding:5px 0;border-bottom:1px solid var(--border)}
+.summary-row:last-of-type{border-bottom:none}
+.summary-label{color:var(--blue);font-weight:600;margin-right:8px}
 .summary-actions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
 .text-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline}
 .text-btn:hover{color:var(--txt)}
-.loading{text-align:center;padding:20px 0}
-.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-weight:600;font-size:15px;color:var(--txt)}
-.loading-sub{font-size:13px;color:var(--txt2);margin-top:4px}
+ 
+.loading{text-align:center;padding:24px 0}
+.pulse-dots{display:flex;gap:8px;justify-content:center;margin:0 auto 16px}
+.pulse-dots span{width:10px;height:10px;border-radius:50%;background:var(--blue);animation:pulse 1.4s ease-in-out infinite}
+.pulse-dots span:nth-child(2){animation-delay:0.2s}
+.pulse-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes pulse{0%,80%,100%{transform:scale(0.6);opacity:0.3}40%{transform:scale(1);opacity:1}}
+.loading-text{font-weight:600;font-size:15px;color:var(--white)}
+.est-time{font-size:13px;color:var(--blue);font-weight:500;margin-top:10px}
+.est-sub{font-size:12px;color:var(--txt3);margin-top:4px}
 .loading-elapsed{font-size:12px;color:var(--txt3);margin-top:8px}
+ 
 .result-box{text-align:center;padding:10px 0}
-.result-icon{font-size:40px;margin-bottom:10px}
 .result-title{font-weight:700;font-size:18px;color:var(--green);margin-bottom:6px}
 .result-text{font-size:14px;color:var(--txt2);line-height:1.5}
 .result-img{max-width:100%;max-height:50vh;border-radius:var(--r);margin:16px auto;display:block;object-fit:contain;border:1px solid var(--border)}
-.gallery-section{max-width:900px;margin:40px auto;padding:0 16px 40px}
-.gallery-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
-.gallery-heading{font-size:20px;font-weight:700;color:var(--gold)}
+ 
+.gallery-section{max-width:900px;margin:40px auto;padding:0 16px 60px;display:none}
+.gallery-hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.gallery-heading{font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.3px}
+.gallery-user-tag{font-size:12px;color:var(--blue);margin-top:3px;font-weight:500}
 .filter-bar{display:flex;gap:6px}
-.filter-tab{padding:7px 16px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;font-size:13px;transition:.3s}
+.filter-tab{padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;transition:.2s}
 .filter-tab:hover{border-color:var(--txt3)}
-.filter-tab.active{background:var(--gold);border-color:var(--gold);color:#000;font-weight:600}
+.filter-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.gallery-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.3s;position:relative}
-.gallery-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.gallery-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.2s;position:relative}
+.gallery-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.6)}
 .gallery-thumb{width:100%;aspect-ratio:1;background-size:cover;background-position:center;background-color:var(--card)}
 .gallery-overlay{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85));display:flex;justify-content:space-between;align-items:flex-end}
 .gallery-name{font-size:13px;font-weight:600;color:#fff}
-.gallery-badge{font-size:11px;padding:2px 8px;border-radius:20px;background:rgba(212,175,55,.2);color:var(--gold);font-weight:500}
-.gallery-empty{grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--txt3);font-size:14px}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1000;justify-content:center;align-items:center;padding:20px}
+.gallery-badge{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(41,135,188,0.25);color:var(--blue);font-weight:600}
+.gallery-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--txt3);font-size:15px}
+ 
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.94);z-index:1000;justify-content:center;align-items:center;padding:20px}
 .modal.active{display:flex}
 .modal-inner{max-width:600px;width:100%;max-height:90vh;text-align:center}
-.modal-close{position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;z-index:1001;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.3s}
+.modal-close{position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;z-index:1001;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
 .modal-close:hover{background:rgba(255,255,255,.1)}
 .modal-img{max-width:100%;max-height:65vh;border-radius:var(--r);object-fit:contain}
-.modal-title{font-size:18px;font-weight:700;color:var(--gold);margin-top:14px}
+.modal-title{font-size:20px;font-weight:700;color:var(--white);margin-top:14px}
 .modal-info{font-size:13px;color:var(--txt2);margin-top:4px}
-.modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:50px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.3s;border:none}
-.modal-dl:hover{background:var(--green2);box-shadow:0 0 16px rgba(34,197,94,.3)}
+.modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;border:none}
+.modal-dl:hover{background:var(--blue2)}
+ 
+.switch-user{text-align:center;padding:16px;margin-top:10px}
+.switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
+.switch-user button:hover{color:var(--txt2)}
+ 
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
-
-.pulse-dots{display:flex;gap:8px;justify-content:center;margin:0 auto 16px}
-.pulse-dots span{width:12px;height:12px;border-radius:50%;background:var(--gold);animation:pulse 1.4s ease-in-out infinite}
-.pulse-dots span:nth-child(2){animation-delay:0.2s}
-.pulse-dots span:nth-child(3){animation-delay:0.4s}
-@keyframes pulse{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
-.est-time{font-size:14px;color:var(--gold);font-weight:600;margin-top:12px}
-.est-sub{font-size:12px;color:var(--txt3);margin-top:4px}
 </style>
 </head>
 <body>
 <div class="header">
-<h1><span class="star">&#10022;</span>SpinPals Creative Studio<span class="star">&#10022;</span></h1>
-<p>AI-Powered Ad Generator</p>
+  <div class="header-logo">RMGS</div>
+  <h1>Creative Studio</h1>
+  <p>High-Performance Ad Creatives</p>
 </div>
-<section class="chat-section"><div id="chat" class="chat-msgs"></div></section>
-<section class="gallery-section">
-<div class="gallery-hdr">
-<h2 class="gallery-heading">Past Creatives</h2>
-<div class="filter-bar">
-<button class="filter-tab active" data-f="all">All</button>
-<button class="filter-tab" data-f="portrait">Portrait (9:16)</button>
-<button class="filter-tab" data-f="square">Square (1:1)</button>
+ 
+<div class="email-gate" id="emailGate">
+  <div class="email-gate-title">Access Your Dashboard</div>
+  <div class="email-gate-sub">Enter your work email to view your creatives and start generating ads.</div>
+  <div class="email-input-wrap">
+    <input type="email" class="email-field" id="emailField" placeholder="you@yourcompany.com" />
+    <div class="email-error" id="emailError">Please enter a valid email address</div>
+    <button class="email-submit" id="emailSubmit">Access Dashboard →</button>
+  </div>
 </div>
-</div>
-<div id="gallery" class="gallery-grid"></div>
+ 
+<section class="chat-section" id="chatSection"><div id="chat" class="chat-msgs"></div></section>
+ 
+<section class="gallery-section" id="gallerySection">
+  <div class="gallery-hdr">
+    <div>
+      <h2 class="gallery-heading">Your Creatives</h2>
+      <div class="gallery-user-tag" id="galleryUserTag"></div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-tab active" data-f="all">All</button>
+      <button class="filter-tab" data-f="portrait">Portrait 9:16</button>
+      <button class="filter-tab" data-f="square">Square 1:1</button>
+    </div>
+  </div>
+  <div id="gallery" class="gallery-grid"></div>
+  <div class="switch-user"><button onclick="resetUser()">Not you? Switch account</button></div>
 </section>
+ 
 <div id="modal" class="modal">
-<button class="modal-close" id="modal-close">&times;</button>
-<div class="modal-inner">
-<img class="modal-img" id="modal-img" src="" alt="">
-<div class="modal-title" id="modal-title"></div>
-<div class="modal-info" id="modal-info"></div>
-<a class="modal-dl" id="modal-dl" href="#">Download Image</a>
+  <button class="modal-close" id="modal-close">&times;</button>
+  <div class="modal-inner">
+    <img class="modal-img" id="modal-img" src="" alt="">
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-info" id="modal-info"></div>
+    <a class="modal-dl" id="modal-dl" href="#">Download Image</a>
+  </div>
 </div>
-</div>
+ 
 <script>
 const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dog Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
 const STYLES=['Tropical','Neon/Urban','Retro 70s','Icy/Winter','Celtic/Irish','Carnival','Dark/Gothic','Fire/Inferno','Arcade','Surprise me'];
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
-
 let state={format:null,game:null,offer:null,style:null};
 let galleryData=[];
+let currentUserEmail=null;
 const chatEl=document.getElementById('chat');
 const galleryEl=document.getElementById('gallery');
 const modal=document.getElementById('modal');
@@ -139,52 +199,81 @@ const modalImg=document.getElementById('modal-img');
 const modalTitle=document.getElementById('modal-title');
 const modalInfo=document.getElementById('modal-info');
 const modalDl=document.getElementById('modal-dl');
-
-function msg(html,type='bot'){
-  const d=document.createElement('div');
-  d.className='bubble '+(type==='user'?'user':'bot');
-  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
+ 
+function isValidEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+document.getElementById('emailSubmit').onclick=function(){
+  const email=document.getElementById('emailField').value.trim().toLowerCase();
+  const errEl=document.getElementById('emailError');
+  const fieldEl=document.getElementById('emailField');
+  if(!isValidEmail(email)){fieldEl.classList.add('error');errEl.style.display='block';return;}
+  fieldEl.classList.remove('error');errEl.style.display='none';activateDashboard(email);
+};
+document.getElementById('emailField').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('emailSubmit').click();});
+ 
+function activateDashboard(email){
+  currentUserEmail=email;
+  document.getElementById('emailGate').style.display='none';
+  document.getElementById('chatSection').style.display='block';
+  document.getElementById('gallerySection').style.display='block';
+  document.getElementById('galleryUserTag').textContent=email;
+  fetchGallery().then(()=>renderGallery());
+  startChat();
 }
-const delay=ms=>new Promise(r=>setTimeout(r,ms));
-
-// Fetch gallery.json (cache-busted)
+function resetUser(){
+  currentUserEmail=null;
+  document.getElementById('emailGate').style.display='block';
+  document.getElementById('chatSection').style.display='none';
+  document.getElementById('gallerySection').style.display='none';
+  document.getElementById('emailField').value='';
+  chatEl.innerHTML='';galleryEl.innerHTML='';
+}
+ 
 async function fetchGallery(){
-  try{
-    const r=await fetch(GALLERY_URL+Date.now());
-    if(r.ok){galleryData=await r.json();return galleryData}
-  }catch(e){}
+  try{const r=await fetch(GALLERY_URL+Date.now());if(r.ok){galleryData=await r.json();return galleryData}}catch(e){}
   return galleryData;
 }
-
-async function triggerWebhook(data){
-  try{
-    await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data),mode:'no-cors'});
-    return true;
-  }catch(e){return false}
+function renderGallery(filter='all'){
+  galleryEl.innerHTML='';
+  let items=galleryData.filter(c=>c.image_url&&c.user_email===currentUserEmail);
+  if(filter!=='all')items=items.filter(c=>c.format===filter);
+  if(!items.length){galleryEl.innerHTML='<div class="gallery-empty">No creatives yet. Generate your first ad above.</div>';return;}
+  items.forEach(c=>{
+    const card=document.createElement('div');card.className='gallery-card';
+    card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
+    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
+  });
 }
-
+document.querySelectorAll('.filter-tab').forEach(tab=>{
+  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');tab.className='filter-tab active';renderGallery(tab.dataset.f);};
+});
+ 
+async function triggerWebhook(data){
+  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+}
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
+function msg(html,type='bot'){
+  const d=document.createElement('div');d.className='bubble '+(type==='user'?'user':'bot');
+  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
+}
+ 
 async function startChat(){
-  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};
-  await delay(200);
-  const m=msg('Ready to create a <span class="gold">Spin Pals</span> ad? &#10024;');
-  const btn=document.createElement('button');btn.className='opt-btn opt-green';btn.textContent="Let's go!";
+  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};await delay(200);
+  const m=msg('Ready to generate your next ad creative?');
+  const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
   btn.onclick=()=>{btn.disabled=true;stepFormat()};m.appendChild(btn);
 }
-
 async function stepFormat(){
-  msg("Let's go!",'user');await delay(250);
-  const m=msg('What <span class="gold">size</span> do you need?');
+  msg("Let's go →",'user');await delay(250);
+  const m=msg('What <span class="accent">format</span> do you need?');
   const w=document.createElement('div');w.className='opt-group';
   [['portrait','Portrait (9:16)'],['square','Square (1:1)']].forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
     b.onclick=()=>{state.format=val;msg(label,'user');stepGame()};w.appendChild(b);
   });m.appendChild(w);
 }
-
 async function stepGame(){
   await delay(250);
-  const m=msg('Which <span class="gold">game</span> should we feature?');
+  const m=msg('Which <span class="accent">game</span> should we feature?');
   const sel=document.createElement('div');sel.className='game-sel';
   const search=document.createElement('input');search.type='text';search.className='game-search';search.placeholder='Search games...';
   sel.appendChild(search);
@@ -210,10 +299,9 @@ async function stepGame(){
     });
   };chatEl.scrollTop=chatEl.scrollHeight;
 }
-
 async function stepOffer(){
   await delay(250);
-  const m=msg('What <span class="gold">offer</span> should we feature?');
+  const m=msg('Which <span class="accent">offer</span> should we feature?');
   const w=document.createElement('div');w.className='offer-list';
   OFFERS.forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
@@ -221,131 +309,71 @@ async function stepOffer(){
     card.onclick=()=>{state.offer=o.title;msg(o.title,'user');stepStyle()};w.appendChild(card);
   });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
-
 async function stepStyle(){
   await delay(250);
-  const m=msg('What <span class="gold">visual style</span>?');
+  const m=msg('What <span class="accent">visual style</span>?');
   const w=document.createElement('div');w.className='opt-group';
   STYLES.forEach(s=>{
     const b=document.createElement('button');b.className='opt-btn';
-    if(s==='Surprise me')b.classList.add('opt-purple');
     b.textContent=s;b.onclick=()=>{state.style=s;msg(s,'user');stepSummary()};w.appendChild(b);
   });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
-
 async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':'Square (1:1)';
-  const m=msg('<div class="summary-card"><div class="summary-title">Your Ad Creative</div>'+
-    '<div class="summary-row"><span class="summary-label">Format:</span>'+fmtLabel+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Game:</span>'+state.game+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Offer:</span>'+state.offer+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Style:</span>'+state.style+'</div></div>');
+  const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
+    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Offer</span>'+state.offer+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div></div>');
   const acts=document.createElement('div');acts.className='summary-actions';
-  const gen=document.createElement('button');gen.className='opt-btn opt-green';gen.innerHTML='&#10024; Generate Ad';
+  const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
   gen.onclick=()=>{gen.disabled=true;doGenerate()};acts.appendChild(gen);
-  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start Over';reset.onclick=startChat;
+  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
   acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
-
 async function doGenerate(){
-  msg('&#10024; Generate Ad','user');await delay(250);
-
-  // Record how many creatives exist BEFORE triggering
-  const beforeCount=galleryData.length;
+  msg('Generate Ad →','user');await delay(250);
+  const beforeCount=galleryData.filter(c=>c.user_email===currentUserEmail).length;
   const beforeTime=new Date().toISOString().replace('T',' ').substring(0,19);
   const startTs=Date.now();
-
   const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
-    '<div class="loading-text">Generating your <span class="gold">'+state.game+'</span> ad...</div>'+
-    '<div class="est-time">Estimated wait: 2\u20135 minutes</div>'+
-    '<div class="est-sub">Our AI engine is crafting your custom creative</div>'+
+    '<div class="loading-text">Generating your '+state.game+' ad...</div>'+
+    '<div class="est-time">Estimated time: 2–5 minutes</div>'+
+    '<div class="est-sub">Our AI is crafting your creative</div>'+
     '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
-
-  // Fire webhook with selections as JSON payload
-  await triggerWebhook({game_name:state.game,format:state.format,offer_text:state.offer,style:state.style});
-
-  // Update elapsed timer
-  const timerInterval=setInterval(()=>{
-    const el=document.getElementById('elapsed');
-    if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';
-  },1000);
-
-  // Poll gallery.json every 7 seconds until a new entry appears
+  await triggerWebhook({game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail});
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
   let found=null;
   while(!found){
     await delay(7000);
     const fresh=await fetchGallery();
-    // Look for a new entry that was not in the original set
-    if(fresh.length>beforeCount){
-      // Check the newest entry matches our request
-      const newest=fresh[0];
-      if(newest&&newest.game_name===state.game&&newest.image_url){
-        found=newest;
-      }
-    }
-    // Also check if any entry appeared after our request time with matching game
-    if(!found){
-      for(let i=0;i<fresh.length;i++){
-        if(fresh[i].game_name===state.game&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){
-          found=fresh[i];break;
-        }
-      }
-    }
+    const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url);
+    if(userItems.length>beforeCount){const newest=userItems[0];if(newest&&newest.game_name===state.game&&newest.image_url){found=newest;}}
+    if(!found){for(let i=0;i<fresh.length;i++){if(fresh[i].user_email===currentUserEmail&&fresh[i].game_name===state.game&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){found=fresh[i];break;}}}
   }
-
   clearInterval(timerInterval);
-
-  // Show the result inline
   const container=loadMsg.querySelector('.loading');
-  if(container){
-    container.innerHTML='<div class="result-box"><div class="result-icon">&#127912;</div>'+
-      '<div class="result-title">Your Ad is Ready!</div>'+
-      '<div class="result-text"><span class="gold">'+found.game_name+'</span> &middot; '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
-      '<img class="result-img" src="'+found.image_url+'" alt="'+found.game_name+' ad">'+
-      '</div>';
-  }
+  if(container){container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div>'+
+    '<div class="result-text"><span style="color:var(--blue);font-weight:600">'+found.game_name+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
+    '<img class="result-img" src="'+found.image_url+'" alt="'+found.game_name+'"></div>';}
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
   const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;
   dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
   anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
-
-  // Refresh gallery
   renderGallery();
 }
-
-// Gallery (reads from galleryData which is fetched from gallery.json)
-function renderGallery(filter='all'){
-  galleryEl.innerHTML='';
-  let items=galleryData.filter(c=>c.image_url);
-  if(filter!=='all')items=items.filter(c=>c.format===filter);
-  if(!items.length){galleryEl.innerHTML='<div class="gallery-empty">No creatives yet. Generate your first ad above!</div>';return}
-  items.forEach(c=>{
-    const card=document.createElement('div');card.className='gallery-card';
-    card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
-    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
-  });
-}
-document.querySelectorAll('.filter-tab').forEach(tab=>{
-  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');
-    tab.className='filter-tab active';renderGallery(tab.dataset.f)};
-});
-
 function openModal(c){
   modalImg.src=c.image_url;modalTitle.textContent=c.game_name;
-  modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' \u00B7 '+(c.style||'')+' \u00B7 '+(c.offer_text||'');
+  modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
   modalDl.href=c.image_url;modal.className='modal active';document.body.style.overflow='hidden';
 }
 function closeModal(){modal.className='modal';document.body.style.overflow=''}
 document.getElementById('modal-close').onclick=closeModal;
 modal.onclick=e=>{if(e.target===modal)closeModal()};
 document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
-
-// Init: fetch gallery.json then render
-fetchGallery().then(()=>renderGallery());
-startChat();
 </script>
 </body>
 </html>
