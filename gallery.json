@@ -1,5 +1,14 @@
 [
   {
+    "id": "cr-17761232134F10",
+    "game_name": "Fishing Kingdom",
+    "format": "square",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Surprise me",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f2/82c9b78f5f01b2ba25e11ac9aa7d514a23f09d6edf3dfefeba0cc67f36eacf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T233416Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=da5f0ddc73b7f1615bdfe42d5a5af121d41c4b3c0e74a129eab29d5d43f03947",
+    "created_at": "2026-04-13 23:33:33"
+  },
+  {
     "id": "cr-17761156754AE5",
     "game_name": "Hot Pepper",
     "format": "portrait",
