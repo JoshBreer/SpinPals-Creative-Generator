@@ -183,7 +183,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dog Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
 const STYLES=['Tropical','Neon/Urban','Retro 70s','Icy/Winter','Celtic/Irish','Carnival','Dark/Gothic','Fire/Inferno','Arcade','Surprise me'];
-const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+const WEBHOOK='https://build.twin.so/triggers/9a6f1e5f-b49d-49d0-9ccc-77accf51639f/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 let state={format:null,game:null,offer:null,style:null};
 let galleryData=[];
@@ -259,19 +259,31 @@ function msg(html,type='bot'){
   d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
 }
 
+async function lockButtons(container){
+  container.querySelectorAll('button,.game-item,.offer-card').forEach(el=>{
+    el.style.pointerEvents='none';el.style.opacity='0.4';
+  });
+}
 async function startChat(){
   chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};await delay(200);
   const m=msg('Ready to generate your next ad creative?');
+  const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';
   const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
-  btn.onclick=()=>{btn.disabled=true;stepFormat()};m.appendChild(btn);
+  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';stepFormat()};
+  btnWrap.appendChild(btn);m.appendChild(btnWrap);
 }
 async function stepFormat(){
   msg("Let's go →",'user');await delay(250);
   const m=msg('What <span class="accent">format</span> do you need?');
   const w=document.createElement('div');w.className='opt-group';
-  [['portrait','Portrait (9:16)'],['square','Square (1:1)']].forEach(([val,label])=>{
+  [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']].forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
-    b.onclick=()=>{state.format=val;msg(label,'user');stepGame()};w.appendChild(b);
+    b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.format=val;msg(label,'user');stepGame();
+    };w.appendChild(b);
   });m.appendChild(w);
 }
 async function stepGame(){
@@ -289,7 +301,13 @@ async function stepGame(){
     hdr.onclick=()=>{const vis=items.style.display!=='none';items.style.display=vis?'none':'block';hdr.querySelector('.cat-arrow').innerHTML=vis?'&#9656;':'&#9662;'};
     GAMES[cat].forEach(g=>{
       const it=document.createElement('div');it.className='game-item';it.textContent=g.name;it.dataset.n=g.name.toLowerCase();
-      it.onclick=()=>{state.game=g.name;msg(g.name,'user');stepOffer()};items.appendChild(it);
+      it.onclick=()=>{
+        if(it.dataset.selected)return;
+        it.dataset.selected='1';
+        lockButtons(list);
+        it.style.opacity='1';it.style.color='var(--blue)';
+        state.game=g.name;msg(g.name,'user');stepOffer();
+      };items.appendChild(it);
     });catDiv.appendChild(hdr);catDiv.appendChild(items);list.appendChild(catDiv);
   });sel.appendChild(list);m.appendChild(sel);
   search.oninput=()=>{
@@ -309,7 +327,13 @@ async function stepOffer(){
   OFFERS.forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
     card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
-    card.onclick=()=>{state.offer=o.title;msg(o.title,'user');stepStyle()};w.appendChild(card);
+    card.onclick=()=>{
+      if(card.dataset.selected)return;
+      card.dataset.selected='1';
+      lockButtons(w);
+      card.style.opacity='1';card.style.borderColor='var(--blue)';
+      state.offer=o.title;msg(o.title,'user');stepStyle();
+    };w.appendChild(card);
   });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
 async function stepStyle(){
@@ -318,12 +342,17 @@ async function stepStyle(){
   const w=document.createElement('div');w.className='opt-group';
   STYLES.forEach(s=>{
     const b=document.createElement('button');b.className='opt-btn';
-    b.textContent=s;b.onclick=()=>{state.style=s;msg(s,'user');stepSummary()};w.appendChild(b);
+    b.textContent=s;b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.style=s;msg(s,'user');stepSummary();
+    };w.appendChild(b);
   });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
 async function stepSummary(){
   await delay(250);
-  const fmtLabel=state.format==='portrait'?'Portrait (9:16)':'Square (1:1)';
+  const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
     '<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>'+
@@ -331,7 +360,7 @@ async function stepSummary(){
     '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div></div>');
   const acts=document.createElement('div');acts.className='summary-actions';
   const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
-  gen.onclick=()=>{gen.disabled=true;doGenerate()};acts.appendChild(gen);
+  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate()};acts.appendChild(gen);
   const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
   acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
