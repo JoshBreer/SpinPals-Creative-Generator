@@ -1,10 +1,21 @@
 [
   {
+    "id": "cr-177614078534CA",
+    "game_name": "Book of Dead",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Surprise me",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7e/3f580c10faefea44488ce3f5946fe07188a67784f094157cb09a6ea438dc00.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T042707Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ffeaca617597523e88556ccbc74bbddb640f2bc87b0295fb7d4bc9b7580bf977",
+    "created_at": "2026-04-14 04:26:25"
+  },
+  {
     "id": "cr-17761232134F10",
     "game_name": "Fishing Kingdom",
     "format": "square",
     "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f2/82c9b78f5f01b2ba25e11ac9aa7d514a23f09d6edf3dfefeba0cc67f36eacf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T233416Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=da5f0ddc73b7f1615bdfe42d5a5af121d41c4b3c0e74a129eab29d5d43f03947",
     "created_at": "2026-04-13 23:33:33"
   },
@@ -14,6 +25,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Fire/Inferno",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/26/465a7305a246100c3abca6d299e957719019534da1bd98158d8d7337a062fd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T212838Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8b2b6cacbc71601d9837c6c7ec50e1585359be78183bf4f034e0195616ca9fb",
     "created_at": "2026-04-13 21:27:55"
   },
@@ -23,6 +35,7 @@
     "format": "square",
     "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
     "style": "Dark/Gothic",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4a/b50638699418f489820bb75b839a7dd492087cbfd0ef22fa3ecaf6983fb647.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260401%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260401T193335Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b16afb54d10095551133309447f9b6d7e5c591ea6e2c9a66cc68378b10f53e32",
     "created_at": "2026-04-01 19:32:57"
   },
@@ -32,6 +45,7 @@
     "format": "square",
     "offer_text": "25 FREE SC + 250K GC on First Purchase",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b4/73e749fb3a6f6ee35cffb371be1659755586dc38a8943418fa90efe8bef760.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260401%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260401T192758Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4c8e034c89a253560d7000b2251016a20d6dcbef4357412bd4726d8e4aa3625d",
     "created_at": "2026-04-01 19:27:11"
   },
@@ -41,6 +55,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/64/76b7a74019fccfc85c91c7f2840f9296c0375e5b0fdb3fead6d64f4be8da62.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260401%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260401T191738Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1453d57a6b9249dd6346f395cc7f59fdd805e2211b2dacfd364245ff7120f21d",
     "created_at": "2026-04-01 19:16:52"
   },
@@ -50,6 +65,7 @@
     "format": "square",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Retro 70s",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a1/ade6c3b5204452a5a30a2501aeb837f3fad71dccfb0d5ca50f8151927ac67f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T184253Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e2caf3d5e8a0a5b67a6870aa17c02eacbb66bfc9ede3158eab1ac820737cd406",
     "created_at": "2026-03-31 18:42:08"
   },
@@ -59,6 +75,7 @@
     "format": "square",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/35/42935b4bd6cda8d99160e00c85f5fe8b0efd75e37591bd7285f23ec3e65e1d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T183539Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac66cae1c2475f024a415cc404bbee52629b3c7a8e78fbe4b147c06ca68e29be",
     "created_at": "2026-03-31 18:34:53"
   },
@@ -68,6 +85,7 @@
     "format": "square",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Carnival",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/67/2a591a6a4b5d1603007b46528745ff73d71a8f7c484cd694aa3a3276467e5f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T180353Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=136c074bedb3c8c667583859c3daf8666033333dca6f692310a37271c677e777",
     "created_at": "2026-03-31 18:03:15"
   },
@@ -77,6 +95,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1f/eeccadcecb932fdc00bfa70ca5ed52b492e90a807f8f22658b7e1132bbe42a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T171916Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=39e8c80bfe7f12f29116d126e1e164e7b52c066fba377c90c5c208abd45090a7",
     "created_at": "2026-03-31 17:18:34"
   },
@@ -86,6 +105,7 @@
     "format": "square",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/db/f72ab078411d82682e43c40cd6fa5efdbfbdeedc33c6167b728e344c0c6621.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T171428Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=09eaf76dada6fb6a8a05a3af8e5eed200c1a9234dfb431785980fa75556eeffc",
     "created_at": "2026-03-31 17:13:39"
   },
@@ -95,6 +115,7 @@
     "format": "square",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/87/ff69345fa179ede195a47c93d74250dbd66d0f462d6e19370fcff77a5ab862.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T170716Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0cc2f4aadcf762aabd6b1b4d7fba3ad7f5aa1dceee0afdbc18745d71dd809669",
     "created_at": "2026-03-31 17:06:25"
   },
@@ -104,6 +125,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Neon / Urban",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/5b06b43619d4ead4c1d222196fab00fe5c374bde29b37cca9943e52a6f9544.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T170149Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=265a5e9fad0ff2160b4ed56d7b87abe82ca52b0cda091166e20a5f0db6a2efcc",
     "created_at": "2026-03-31 17:00:59"
   },
@@ -113,6 +135,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fb/665d7f38012ddf5259c76558c8e941d77b7ceecf0a0ea55f80c30e8980ea0b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T165601Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ed83e223d55c24bc00e2ac4f99de38ef03f34f794d57562849cee724f3dc3fa2",
     "created_at": "2026-03-31 16:55:13"
   },
@@ -122,6 +145,7 @@
     "format": "portrait",
     "offer_text": "25 FREE SC + 250K GC on First Purchase",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/db/7192b580fa363dd63f4268bb4c0c44b3e45fb0861f74d9355550f1eee0320d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T160742Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00c98c2a25fb2752097b9f706b9de45c241cf4d4d4ce5a2b8c7866da746f03ce",
     "created_at": "2026-03-31 16:07:19"
   },
@@ -131,6 +155,7 @@
     "format": "portrait",
     "offer_text": "Weekend Special: Double GC on All Purchases",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b0/4079a5a07ca56f1eff932ada25f24604be39c5b0d8e2f157c92636c11eae69.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T212348Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f693182711769239a369553e1a7c590c0979a6963a2719bf44888617037257c0",
     "created_at": "2026-03-30 21:23:01"
   },
@@ -140,6 +165,7 @@
     "format": "square",
     "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/52/f7fbe457c2656cd0b9e03ec63647c161e6a651dca07cd95381ffdd387161c2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5b59daeb7a97d5d3ea6e31e8626481d3dab1a2c032c3c781443a9b081d617bc2",
     "created_at": "2026-03-30 21:16:59"
   },
@@ -149,6 +175,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/10/d87d1eddd10f9de2ac92ce8f23386ff234081145ec9ad3f085d81e11401d47.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211505Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a3741135f84c5d00879c79939f6c1c840af00c719f4feba3f4d204e8be5e4c14",
     "created_at": "2026-03-30 21:14:21"
   },
@@ -158,6 +185,7 @@
     "format": "square",
     "offer_text": "25 FREE SC + 250K GC on First Purchase",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/55/becd63231f8b3b27b16f9a7034a897c7621c418f9ec8eb50c1aab10c85cf68.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211113Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c2583ef5343529db898d46372175fdc826d45ec20ab57367e018fcb2cb53a670",
     "created_at": "2026-03-30 21:03:52"
   },
@@ -167,6 +195,7 @@
     "format": "portrait",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/23/8ecfc79fcc49128eaa399bc87bbefb10ec5eb0e7b3fd6fed680fb59cfa87cd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211053Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dac524db20b4121012222816dc772c07dccfbb2a312df9ec888a9bb0a1859884",
     "created_at": "2026-03-30 20:58:22"
   },
@@ -176,6 +205,7 @@
     "format": "portrait",
     "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f4/3a93424b138d04cab33bd9ec9a368a5e3c5fc4e53c32692d333a828ce95ff9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T205042Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8e6fc4b9f0215b4e657df5e621025a4a31e0fa3e52c61ea87c3ae1f6efafc87",
     "created_at": "2026-03-30 20:46:23"
   },
@@ -185,6 +215,7 @@
     "format": "portrait",
     "offer_text": "25 FREE SC + 250K GC on First Purchase",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/d8a96aaf960d583aa1a9487b55d5fcfd75e5e99f4d726d4aa616f785381965.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T204124Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7267410d5b820bdbb12f727469166bcbd01ab2155855577bcef87badee38de9a",
     "created_at": "2026-03-30 20:36:41"
   },
@@ -194,6 +225,7 @@
     "format": "square",
     "offer_text": "25 FREE SC + 250K GC on First Purchase",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1b/3571e07a9f3a3d9cee0c1a09f6e6a334d2384a7033d10a8ec4a89575b3168a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203710Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03a2b7d39173b9a3a41b557b6933fd482b8e46a32a9bda1341c59bc4a0ac1c8e",
     "created_at": "2026-03-30 20:32:26"
   },
@@ -203,6 +235,7 @@
     "format": "square",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/88/a0102d3b3bb0cf7a7686570a28c0ddda5d0dd5e2a0aaf6abe7d77d99629d67.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203222Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=81d8b15da485e5ff4faa3963fbd262806d4cb08962c220fd2a40038bd6774106",
     "created_at": "2026-03-30 20:28:34"
   },
@@ -212,6 +245,7 @@
     "format": "square",
     "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
     "style": "Surprise me",
+    "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
   }
