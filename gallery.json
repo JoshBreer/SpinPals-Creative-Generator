@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776141347A1B2",
+    "game_name": "Fortune Tiger",
+    "format": "portrait",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Surprise me",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/79/ff39b14cf72518713b7c9ac49aa8d4f9dfcd06f3f65ebbc121e2a34c8e31ea.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T043636Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7d7e8efe16cd75b372b35d152958d25ee20b22023c4fff394c821519af0898d5",
+    "created_at": "2026-04-14 04:35:47"
+  },
+  {
+    "id": "cr-1776141347C3D4",
+    "game_name": "Fortune Tiger",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Surprise me",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ef/534ac406278ed35236b6fdb0a376812973f574299471cd9d1576d1a82c4f42.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T043658Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7e03f7d036376c90a455ffb5d5ad3e6778c62192e53ddc063278a03a2a162f91",
+    "created_at": "2026-04-14 04:35:47"
+  },
+  {
     "id": "cr-177614078534CA",
     "game_name": "Book of Dead",
     "format": "portrait",
