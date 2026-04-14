@@ -265,7 +265,9 @@ async function lockButtons(container){
   });
 }
 async function startChat(){
-  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};await delay(200);
+  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};
+  window.scrollTo({top:0,behavior:'smooth'});
+  await delay(200);
   const m=msg('Ready to generate your next ad creative?');
   const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';
   const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
