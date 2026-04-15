@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1776267764888E",
+    "game_name": "The Dog House",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Surprise me",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1a/7eca1535b58428566c8ee52546226c46f8233395c654d43aa19631c297772a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T154328Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e93f280d59616c9064c1adbf8a2c5dcff3c2ba806da453be5a81918f7a14a710",
+    "created_at": "2026-04-15 15:42:44"
+  },
+  {
     "id": "cr-17762274868B0D",
     "game_name": "Lucky Clover",
     "format": "portrait",
