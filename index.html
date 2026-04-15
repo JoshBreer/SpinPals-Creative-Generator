@@ -348,7 +348,7 @@ async function stepOffer(){
       card.dataset.selected='1';
       lockButtons(w);
       card.style.opacity='1';card.style.borderColor='var(--blue)';
-      state.offer=o.title;msg(o.title,'user');stepStyle();
+      state.offer=o.title;msg(o.title,'user');stepSummary();
     };w.appendChild(card);
   });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
