@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17762805777AE7",
+    "game_name": "Ocean King",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Bold Text",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4f/9c213dd29b713954b07cd8175f9c4d7465fe68608b46b6d0be8f4fc63d2a09.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T191653Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=666c34fa9463bd7d881e0b6e4eeac297921175dd2e649a73c05f21a57bcacfd7",
+    "created_at": "2026-04-15 19:16:17"
+  },
+  {
     "id": "cr-17762777474831",
     "game_name": "Test",
     "format": "portrait",
