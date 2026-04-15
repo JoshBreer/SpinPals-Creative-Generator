@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776271100A1B2",
+    "game_name": "Jackpot Megaways",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Celtic/Irish",
+    "user_email": "justinc@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/45/9277915ecdc9934702f49afdb95263b4f5ef51cf1663b7137545610375fed5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T163903Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=43b012b2981e42ceb328acf2832994e957703a76ba58753e1eff82134ce5cc3d",
+    "created_at": "2026-04-15 16:38:20"
+  },
+  {
+    "id": "cr-1776271100C3D4",
+    "game_name": "Jackpot Megaways",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Celtic/Irish",
+    "user_email": "justinc@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/93/9810ce4694c6503b28f4822907ed6d4e64a7d868f25c48e6a0a306ba6b6d0a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T163926Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b41db57edf66e9d4b9307b47c0531ed2e5ed92e851f1888b5501dece6aac010d",
+    "created_at": "2026-04-15 16:38:20"
+  },
+  {
     "id": "cr-1776267764888E",
     "game_name": "The Dog House",
     "format": "square",
