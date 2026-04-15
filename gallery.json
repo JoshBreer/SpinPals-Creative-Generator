@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17762274868B0D",
+    "game_name": "Lucky Clover",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Surprise me",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/2b/6fff07754885cca734f36382e56fece9de8fe85e6acc6171cd9f9df38b3c05.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T043206Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=31ea490f313d03733812a4f3afae61b5901d7d90d633b55b3ae747608cb3321b",
+    "created_at": "2026-04-15 04:31:26"
+  },
+  {
     "id": "cr-1776142501A66DB",
     "game_name": "Cowboys Gold",
     "format": "portrait",
