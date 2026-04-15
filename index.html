@@ -8,33 +8,18 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#08090f;
-  --bg2:#0b0d15;
-  --card:#0f1119;
-  --card2:#141720;
-  --border:#1c2030;
-  --blue:#2987BC;
-  --blue2:#1f6fa0;
-  --blue-glow:rgba(41,135,188,0.15);
-  --white:#ffffff;
-  --txt:#e8edf5;
-  --txt2:#8a96aa;
-  --txt3:#3a4255;
-  --green:#22c55e;
-  --green2:#16a34a;
-  --r:8px
+  --bg:#08090f;--bg2:#0b0d15;--card:#0f1119;--card2:#141720;--border:#1c2030;
+  --blue:#2987BC;--blue2:#1f6fa0;--blue-glow:rgba(41,135,188,0.15);
+  --white:#ffffff;--txt:#e8edf5;--txt2:#8a96aa;--txt3:#3a4255;
+  --green:#22c55e;--green2:#16a34a;--r:8px
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant Garamond',Georgia,'Times New Roman',serif;font-size:15px;line-height:1.6;min-height:100vh}
+body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant Garamond',Georgia,serif;font-size:15px;line-height:1.6;min-height:100vh}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#1c2030;border-radius:4px}
 
-.header{text-align:center;padding:20px 20px 16px;border-bottom:1px solid var(--border);background:var(--bg2)}
-.header-logo{font-size:12px;font-weight:600;letter-spacing:4px;color:var(--blue);text-transform:uppercase;margin-bottom:10px}
-.header h1{font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--white);letter-spacing:-0.5px}
-.header p{color:var(--txt2);font-size:14px;margin-top:6px}
-
+/* EMAIL GATE */
 .email-gate{max-width:440px;margin:70px auto;padding:0 20px;text-align:center}
-.email-gate-title{font-size:26px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.3px}
+.email-gate-title{font-size:26px;font-weight:700;color:var(--white);margin-bottom:8px}
 .email-gate-sub{font-size:15px;color:var(--txt2);margin-bottom:32px;line-height:1.6}
 .email-input-wrap{display:flex;flex-direction:column;gap:12px}
 .email-field{width:100%;padding:14px 18px;border-radius:var(--r);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:15px;outline:none;transition:.2s}
@@ -42,9 +27,19 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .email-field.error{border-color:#ef4444}
 .email-field::placeholder{color:var(--txt3)}
 .email-error{font-size:13px;color:#ef4444;margin-top:-6px;display:none;text-align:left}
-.email-submit{padding:14px 28px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;letter-spacing:0.3px}
+.email-submit{padding:14px 28px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
 .email-submit:hover{background:var(--blue2);box-shadow:0 0 24px var(--blue-glow)}
 
+/* AGENT PENDING */
+.agent-pending{display:none;max-width:480px;margin:70px auto;padding:0 20px;text-align:center}
+.agent-pending-icon{font-size:40px;margin-bottom:20px}
+.agent-pending-title{font-size:22px;font-weight:700;color:var(--white);margin-bottom:12px}
+.agent-pending-sub{font-size:15px;color:var(--txt2);line-height:1.7;margin-bottom:28px}
+.agent-pending-email{font-size:13px;color:var(--txt3);margin-bottom:24px}
+.agent-pending-email span{color:var(--blue)}
+.switch-btn{padding:10px 24px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);font-family:inherit;font-size:13px;cursor:pointer}
+
+/* CHAT */
 .chat-section{max-width:620px;margin:0 auto;padding:24px 16px;display:none}
 .chat-msgs{display:flex;flex-direction:column;gap:12px;min-height:200px}
 .bubble{max-width:88%;padding:14px 18px;border-radius:12px;animation:fadeUp .3s ease;font-size:15px}
@@ -53,6 +48,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .accent{color:var(--blue);font-weight:600}
 
+/* BUTTONS */
 .opt-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .opt-btn{padding:9px 18px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt);cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;transition:.2s}
 .opt-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-glow)}
@@ -61,23 +57,19 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .opt-green{background:var(--green);border-color:var(--green);color:#fff;font-weight:600}
 .opt-green:hover{background:var(--green2);border-color:var(--green2)}
 
+/* GAME DROPDOWN */
 .game-sel{margin-top:12px}
-.game-search{width:100%;padding:10px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;margin-bottom:8px}
-.game-search:focus{border-color:var(--blue)}
-.game-search::placeholder{color:var(--txt3)}
-.game-list{max-height:260px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--card)}
-.cat-hdr{padding:8px 14px;font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:1px;background:rgba(41,135,188,0.06);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
-.cat-arrow{font-size:10px;color:var(--txt3)}
-.game-items{display:block}
-.game-item{padding:9px 14px 9px 22px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(28,32,48,.5);transition:.15s}
-.game-item:hover{background:var(--card2);color:var(--blue)}
+.game-dropdown{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;cursor:pointer;transition:.2s}
+.game-dropdown:focus{border-color:var(--blue)}
 
+/* OFFERS */
 .offer-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .offer-card{padding:12px 16px;border:1px solid var(--border);border-radius:var(--r);background:var(--card);cursor:pointer;transition:.2s}
 .offer-card:hover{border-color:var(--blue);background:var(--card2)}
 .offer-title{font-weight:600;font-size:14px;color:var(--txt)}
 .offer-desc{font-size:12px;color:var(--txt3);margin-top:2px}
 
+/* SUMMARY */
 .summary-card{background:var(--card2);border:1px solid var(--blue);border-radius:var(--r);padding:16px;margin-top:4px}
 .summary-title{font-weight:700;font-size:13px;color:var(--white);margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
 .summary-row{font-size:14px;color:var(--txt2);padding:5px 0;border-bottom:1px solid var(--border)}
@@ -87,6 +79,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .text-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline}
 .text-btn:hover{color:var(--txt)}
 
+/* LOADING */
 .loading{text-align:center;padding:24px 0}
 .pulse-dots{display:flex;gap:8px;justify-content:center;margin:0 auto 16px}
 .pulse-dots span{width:10px;height:10px;border-radius:50%;background:var(--blue);animation:pulse 1.4s ease-in-out infinite}
@@ -98,14 +91,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .est-sub{font-size:12px;color:var(--txt3);margin-top:4px}
 .loading-elapsed{font-size:12px;color:var(--txt3);margin-top:8px}
 
+/* RESULT */
 .result-box{text-align:center;padding:10px 0}
 .result-title{font-weight:700;font-size:18px;color:var(--green);margin-bottom:6px}
 .result-text{font-size:14px;color:var(--txt2);line-height:1.5}
 .result-img{max-width:100%;max-height:50vh;border-radius:var(--r);margin:16px auto;display:block;object-fit:contain;border:1px solid var(--border)}
 
+/* GALLERY */
 .gallery-section{max-width:900px;margin:40px auto;padding:0 16px 60px;display:none}
 .gallery-hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.gallery-heading{font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.3px}
+.gallery-heading{font-size:20px;font-weight:700;color:var(--white)}
 .gallery-user-tag{font-size:12px;color:var(--blue);margin-top:3px;font-weight:500}
 .filter-bar{display:flex;gap:6px}
 .filter-tab{padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;transition:.2s}
@@ -120,6 +115,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .gallery-badge{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(41,135,188,0.25);color:var(--blue);font-weight:600}
 .gallery-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--txt3);font-size:15px}
 
+/* MODAL */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.94);z-index:1000;justify-content:center;align-items:center;padding:20px}
 .modal.active{display:flex}
 .modal-inner{max-width:600px;width:100%;max-height:90vh;text-align:center}
@@ -131,9 +127,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;border:none}
 .modal-dl:hover{background:var(--blue2)}
 
+/* SWITCH USER */
 .switch-user{text-align:center;padding:16px;margin-top:10px}
 .switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
 .switch-user button:hover{color:var(--txt2)}
+
+/* CUSTOM INPUT */
 .custom-input-wrap{margin-top:12px;display:none}
 .custom-input-wrap.visible{display:block}
 .custom-textarea{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;resize:vertical;min-height:80px;transition:.2s}
@@ -147,7 +146,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 </head>
 <body>
 
-
+<!-- EMAIL GATE -->
 <div class="email-gate" id="emailGate">
   <div class="email-gate-title">Access Your Dashboard</div>
   <div class="email-gate-sub">Enter your work email to view your creatives and start generating ads.</div>
@@ -158,8 +157,21 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   </div>
 </div>
 
-<div id="agentPending" style="display:none;max-width:480px;margin:70px auto;padding:0 20px;text-align:center"><div style="font-size:40px;margin-bottom:20px">⚙️</div><div style="font-size:22px;font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.3px">Your Agent is Being Configured</div><div style="font-size:15px;color:var(--txt2);line-height:1.7;margin-bottom:28px">We're setting up your personalised creative workspace. You'll be notified by the RMGS team once your dashboard is ready.</div><div style="font-size:13px;color:var(--txt3);margin-bottom:24px">Logged in as: <span id="agentPendingEmail" style="color:var(--blue)"></span></div><button onclick="resetUser()" style="padding:10px 24px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);font-family:inherit;font-size:13px;cursor:pointer;">Switch Account</button></div><section class="chat-section" id="chatSection"><div id="chat" class="chat-msgs"></div></section>
+<!-- AGENT PENDING -->
+<div class="agent-pending" id="agentPending">
+  <div class="agent-pending-icon">⚙️</div>
+  <div class="agent-pending-title">Your Agent is Being Configured</div>
+  <div class="agent-pending-sub">We're setting up your personalised creative workspace. You'll be notified by the RMGS team once your dashboard is ready.</div>
+  <div class="agent-pending-email">Logged in as: <span id="agentPendingEmail"></span></div>
+  <button class="switch-btn" onclick="resetUser()">Switch Account</button>
+</div>
 
+<!-- CHAT -->
+<section class="chat-section" id="chatSection">
+  <div id="chat" class="chat-msgs"></div>
+</section>
+
+<!-- GALLERY -->
 <section class="gallery-section" id="gallerySection">
   <div class="gallery-hdr">
     <div>
@@ -176,49 +188,52 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   <div class="switch-user"><button onclick="resetUser()">Not you? Switch account</button></div>
 </section>
 
+<!-- MODAL -->
 <div id="modal" class="modal">
-  <button class="modal-close" id="modal-close">&times;</button>
+  <button class="modal-close" id="modalClose">&times;</button>
   <div class="modal-inner">
-    <img class="modal-img" id="modal-img" src="" alt="">
-    <div class="modal-title" id="modal-title"></div>
-    <div class="modal-info" id="modal-info"></div>
-    <a class="modal-dl" id="modal-dl" href="#">Download Image</a>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-info" id="modalInfo"></div>
+    <a class="modal-dl" id="modalDl" href="#">Download Image</a>
   </div>
 </div>
 
 <script>
-const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dog Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
+const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dogg Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
+
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
-const STYLES=['Classic','Text Only','Realistic','Custom'];
+
 const TOP_GAMES=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
+
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
-let state={format:null,game:null,offer:null,style:null};
+
+let state={format:null,game:null,offer:null,style:null,customInstructions:null};
 let galleryData=[];
 let currentUserEmail=null;
+
 const chatEl=document.getElementById('chat');
 const galleryEl=document.getElementById('gallery');
 const modal=document.getElementById('modal');
-const modalImg=document.getElementById('modal-img');
-const modalTitle=document.getElementById('modal-title');
-const modalInfo=document.getElementById('modal-info');
-const modalDl=document.getElementById('modal-dl');
 
+// ---- EMAIL GATE ----
 function isValidEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
 document.getElementById('emailSubmit').onclick=function(){
   const email=document.getElementById('emailField').value.trim().toLowerCase();
   const errEl=document.getElementById('emailError');
   const fieldEl=document.getElementById('emailField');
   if(!isValidEmail(email)){fieldEl.classList.add('error');errEl.style.display='block';return;}
-  fieldEl.classList.remove('error');errEl.style.display='none';activateDashboard(email);
+  fieldEl.classList.remove('error');errEl.style.display='none';
+  activateDashboard(email);
 };
 document.getElementById('emailField').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('emailSubmit').click();});
 
 function activateDashboard(email){
   currentUserEmail=email;
   document.getElementById('emailGate').style.display='none';
-  const isSpinPals=email.endsWith('@spinpals.com');
-  if(isSpinPals){
+  if(email.endsWith('@spinpals.com')){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
@@ -229,6 +244,7 @@ function activateDashboard(email){
     document.getElementById('agentPendingEmail').textContent=email;
   }
 }
+
 function resetUser(){
   currentUserEmail=null;
   document.getElementById('emailGate').style.display='block';
@@ -236,13 +252,16 @@ function resetUser(){
   document.getElementById('gallerySection').style.display='none';
   document.getElementById('agentPending').style.display='none';
   document.getElementById('emailField').value='';
-  chatEl.innerHTML='';galleryEl.innerHTML='';
+  chatEl.innerHTML='';
+  galleryEl.innerHTML='';
 }
 
+// ---- GALLERY ----
 async function fetchGallery(){
   try{const r=await fetch(GALLERY_URL+Date.now());if(r.ok){galleryData=await r.json();return galleryData}}catch(e){}
   return galleryData;
 }
+
 function renderGallery(filter='all'){
   galleryEl.innerHTML='';
   let items=galleryData.filter(c=>c.image_url&&c.user_email===currentUserEmail);
@@ -251,37 +270,56 @@ function renderGallery(filter='all'){
   items.forEach(c=>{
     const card=document.createElement('div');card.className='gallery-card';
     card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
-    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
+    card.onclick=()=>openModal(c);
+    galleryEl.appendChild(card);
   });
 }
+
 document.querySelectorAll('.filter-tab').forEach(tab=>{
-  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');tab.className='filter-tab active';renderGallery(tab.dataset.f);};
+  tab.onclick=()=>{
+    document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');
+    tab.className='filter-tab active';
+    renderGallery(tab.dataset.f);
+  };
 });
 
+// ---- WEBHOOK ----
 async function triggerWebhook(data){
   try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
 }
+
+// ---- CHAT HELPERS ----
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
+
 function msg(html,type='bot'){
-  const d=document.createElement('div');d.className='bubble '+(type==='user'?'user':'bot');
-  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
+  const d=document.createElement('div');
+  d.className='bubble '+(type==='user'?'user':'bot');
+  d.innerHTML=html;
+  chatEl.appendChild(d);
+  chatEl.scrollTop=chatEl.scrollHeight;
+  return d;
 }
 
-async function lockButtons(container){
-  container.querySelectorAll('button,.game-item,.offer-card').forEach(el=>{
+function lockButtons(container){
+  container.querySelectorAll('button,.offer-card').forEach(el=>{
     el.style.pointerEvents='none';el.style.opacity='0.4';
   });
 }
+
+// ---- STEP 1: START ----
 async function startChat(){
-  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null,customInstructions:null};
+  chatEl.innerHTML='';
+  state={format:null,game:null,offer:null,style:null,customInstructions:null};
   window.scrollTo({top:0,behavior:'smooth'});
   await delay(200);
   const m=msg('Ready to generate your next ad creative?');
   const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';
   const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
-  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';stepFormat()};
+  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';stepFormat();};
   btnWrap.appendChild(btn);m.appendChild(btnWrap);
 }
+
+// ---- STEP 2: FORMAT ----
 async function stepFormat(){
   msg("Let's go →",'user');await delay(250);
   const m=msg('What <span class="accent">format</span> do you need?');
@@ -293,65 +331,13 @@ async function stepFormat(){
       lockButtons(w);
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
       state.format=val;msg(label,'user');stepStyle();
-    };w.appendChild(b);
-  });m.appendChild(w);
-}
-async function stepGame(){
-  await delay(250);
-  const m=msg('Which <span class="accent">game</span> should we feature?');
-  const sel=document.createElement('div');sel.className='game-sel';
-
-  // Dropdown select
-  const dropdown=document.createElement('select');dropdown.className='game-search';
-  dropdown.style.cursor='pointer';
-
-  // Default option
-  const defaultOpt=document.createElement('option');defaultOpt.value='';defaultOpt.textContent='Select a game...';defaultOpt.disabled=true;defaultOpt.selected=true;
-  dropdown.appendChild(defaultOpt);
-
-  // Top Performing group
-  const topGroup=document.createElement('optgroup');topGroup.label='⭐ Top Performing';
-  TOP_GAMES.forEach(name=>{
-    const o=document.createElement('option');o.value=name;o.textContent=name;topGroup.appendChild(o);
+    };
+    w.appendChild(b);
   });
-  dropdown.appendChild(topGroup);
-
-  // All Games groups
-  Object.keys(GAMES).sort().forEach(cat=>{
-    const group=document.createElement('optgroup');group.label=cat;
-    GAMES[cat].forEach(g=>{
-      const o=document.createElement('option');o.value=g.name;o.textContent=g.name;group.appendChild(o);
-    });
-    dropdown.appendChild(group);
-  });
-
-  dropdown.onchange=()=>{
-    const val=dropdown.value;
-    if(!val)return;
-    dropdown.disabled=true;dropdown.style.opacity='0.6';
-    state.game=val;msg(val,'user');stepOffer();
-  };
-
-  sel.appendChild(dropdown);
-  m.appendChild(sel);
-  chatEl.scrollTop=chatEl.scrollHeight;
+  m.appendChild(w);
 }
-async function stepOffer(){
-  await delay(250);
-  const m=msg('Which <span class="accent">offer</span> should we feature?');
-  const w=document.createElement('div');w.className='offer-list';
-  OFFERS.forEach(o=>{
-    const card=document.createElement('div');card.className='offer-card';
-    card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
-    card.onclick=()=>{
-      if(card.dataset.selected)return;
-      card.dataset.selected='1';
-      lockButtons(w);
-      card.style.opacity='1';card.style.borderColor='var(--blue)';
-      state.offer=o.title;msg(o.title,'user');stepSummary();
-    };w.appendChild(card);
-  });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
-}
+
+// ---- STEP 3: STYLE ----
 async function stepStyle(){
   await delay(250);
   const m=msg('What <span class="accent">creative style</span> do you want?');
@@ -366,7 +352,7 @@ async function stepStyle(){
     state.style='Classic';state.customInstructions=null;msg('Classic','user');stepGame();
   };w.appendChild(bClassic);
 
-  // Text Only
+  // Text Only — skips game
   const bText=document.createElement('button');bText.className='opt-btn';bText.textContent='Text Only';
   bText.onclick=()=>{
     if(bText.disabled)return;
@@ -412,45 +398,124 @@ async function stepStyle(){
   m.appendChild(customWrap);
   chatEl.scrollTop=chatEl.scrollHeight;
 }
+
+// ---- STEP 4: GAME (skipped for Text Only) ----
+async function stepGame(){
+  await delay(250);
+  const m=msg('Which <span class="accent">game</span> should we feature?');
+  const sel=document.createElement('div');sel.className='game-sel';
+  const dropdown=document.createElement('select');dropdown.className='game-dropdown';
+
+  const defaultOpt=document.createElement('option');defaultOpt.value='';defaultOpt.textContent='Select a game...';defaultOpt.disabled=true;defaultOpt.selected=true;
+  dropdown.appendChild(defaultOpt);
+
+  // Top Performing group
+  const topGroup=document.createElement('optgroup');topGroup.label='⭐ Top Performing';
+  TOP_GAMES.forEach(name=>{
+    const o=document.createElement('option');o.value=name;o.textContent=name;topGroup.appendChild(o);
+  });
+  dropdown.appendChild(topGroup);
+
+  // All other categories
+  Object.keys(GAMES).sort().forEach(cat=>{
+    const group=document.createElement('optgroup');group.label=cat;
+    GAMES[cat].forEach(g=>{
+      const o=document.createElement('option');o.value=g.name;o.textContent=g.name;group.appendChild(o);
+    });
+    dropdown.appendChild(group);
+  });
+
+  dropdown.onchange=()=>{
+    const val=dropdown.value;
+    if(!val)return;
+    dropdown.disabled=true;dropdown.style.opacity='0.6';
+    state.game=val;msg(val,'user');stepOffer();
+  };
+
+  sel.appendChild(dropdown);m.appendChild(sel);
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ---- STEP 5: OFFER ----
+async function stepOffer(){
+  await delay(250);
+  const m=msg('Which <span class="accent">offer</span> should we feature?');
+  const w=document.createElement('div');w.className='offer-list';
+  OFFERS.forEach(o=>{
+    const card=document.createElement('div');card.className='offer-card';
+    card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
+    card.onclick=()=>{
+      if(card.dataset.selected)return;
+      card.dataset.selected='1';
+      lockButtons(w);
+      card.style.opacity='1';card.style.borderColor='var(--blue)';
+      state.offer=o.title;msg(o.title,'user');stepSummary();
+    };
+    w.appendChild(card);
+  });
+  m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ---- STEP 6: SUMMARY ----
 async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const gameRow=state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
+  const customRow=state.customInstructions?'<div class="summary-row"><span class="summary-label">Instructions</span>'+state.customInstructions+'</div>':'';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div>'+
+    gameRow+
     '<div class="summary-row"><span class="summary-label">Offer</span>'+state.offer+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div></div>');
+    customRow+'</div>');
   const acts=document.createElement('div');acts.className='summary-actions';
   const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
-  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate()};acts.appendChild(gen);
+  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate();};acts.appendChild(gen);
   const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
   acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
+
+// ---- GENERATE ----
 async function doGenerate(){
   msg('Generate Ad →','user');await delay(250);
   const beforeCount=galleryData.filter(c=>c.user_email===currentUserEmail).length;
   const beforeTime=new Date().toISOString().replace('T',' ').substring(0,19);
   const startTs=Date.now();
   const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
-    '<div class="loading-text">Generating your '+state.game+' ad...</div>'+
+    '<div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div>'+
     '<div class="est-time">Estimated time: 2–5 minutes</div>'+
-    '<div class="est-sub">Our AI is crafting your creative</div>'+
+    '<div class="est-sub">Your creative is being crafted</div>'+
     '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
-  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail};if(state.customInstructions)payload.custom_instructions=state.customInstructions;await triggerWebhook(payload);
+
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail};
+  if(state.customInstructions)payload.custom_instructions=state.customInstructions;
+  await triggerWebhook(payload);
+
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
   let found=null;
   while(!found){
     await delay(7000);
     const fresh=await fetchGallery();
     const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url);
-    if(userItems.length>beforeCount){const newest=userItems[0];if(newest&&newest.game_name===state.game&&newest.image_url){found=newest;}}
-    if(!found){for(let i=0;i<fresh.length;i++){if(fresh[i].user_email===currentUserEmail&&fresh[i].game_name===state.game&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){found=fresh[i];break;}}}
+    if(userItems.length>beforeCount){
+      const newest=userItems[0];
+      if(newest&&newest.image_url)found=newest;
+    }
+    if(!found){
+      for(let i=0;i<fresh.length;i++){
+        if(fresh[i].user_email===currentUserEmail&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){found=fresh[i];break;}
+      }
+    }
   }
+
   clearInterval(timerInterval);
   const container=loadMsg.querySelector('.loading');
-  if(container){container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div>'+
-    '<div class="result-text"><span style="color:var(--blue);font-weight:600">'+found.game_name+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
-    '<img class="result-img" src="'+found.image_url+'" alt="'+found.game_name+'"></div>';}
+  if(container){
+    container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div>'+
+      '<div class="result-text"><span style="color:var(--blue);font-weight:600">'+(found.game_name&&found.game_name!=='N/A'?found.game_name:state.style)+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
+      '<img class="result-img" src="'+found.image_url+'" alt="ad"></div>';
+  }
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
   const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;
   dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
@@ -459,15 +524,19 @@ async function doGenerate(){
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
   renderGallery();
 }
+
+// ---- MODAL ----
 function openModal(c){
-  modalImg.src=c.image_url;modalTitle.textContent=c.game_name;
-  modalInfo.textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
-  modalDl.href=c.image_url;modal.className='modal active';document.body.style.overflow='hidden';
+  document.getElementById('modalImg').src=c.image_url;
+  document.getElementById('modalTitle').textContent=c.game_name;
+  document.getElementById('modalInfo').textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
+  document.getElementById('modalDl').href=c.image_url;
+  modal.className='modal active';document.body.style.overflow='hidden';
 }
-function closeModal(){modal.className='modal';document.body.style.overflow=''}
-document.getElementById('modal-close').onclick=closeModal;
-modal.onclick=e=>{if(e.target===modal)closeModal()};
-document.onkeydown=e=>{if(e.key==='Escape')closeModal()};
+function closeModal(){modal.className='modal';document.body.style.overflow='';}
+document.getElementById('modalClose').onclick=closeModal;
+modal.onclick=e=>{if(e.target===modal)closeModal();};
+document.onkeydown=e=>{if(e.key==='Escape')closeModal();};
 </script>
 </body>
 </html>
