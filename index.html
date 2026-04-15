@@ -134,6 +134,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .switch-user{text-align:center;padding:16px;margin-top:10px}
 .switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
 .switch-user button:hover{color:var(--txt2)}
+.custom-input-wrap{margin-top:12px;display:none}
+.custom-input-wrap.visible{display:block}
+.custom-textarea{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;resize:vertical;min-height:80px;transition:.2s}
+.custom-textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.custom-textarea::placeholder{color:var(--txt3)}
+.custom-submit{margin-top:8px;padding:9px 18px;border-radius:6px;border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.custom-submit:hover{background:var(--blue2)}
 
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
 </style>
@@ -182,7 +189,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 <script>
 const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dog Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
-const STYLES=['Tropical','Neon/Urban','Retro 70s','Icy/Winter','Celtic/Irish','Carnival','Dark/Gothic','Fire/Inferno','Arcade','Bold Text','Realistic','Surprise me'];
+const STYLES=['Tropical','Neon/Urban','Retro 70s','Icy/Winter','Celtic/Irish','Carnival','Dark/Gothic','Fire/Inferno','Arcade','Bold Text','Surprise me'];
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 let state={format:null,game:null,offer:null,style:null};
@@ -265,7 +272,7 @@ async function lockButtons(container){
   });
 }
 async function startChat(){
-  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null};
+  chatEl.innerHTML='';state={format:null,game:null,offer:null,style:null,customInstructions:null};
   window.scrollTo({top:0,behavior:'smooth'});
   await delay(200);
   const m=msg('Ready to generate your next ad creative?');
@@ -348,9 +355,36 @@ async function stepStyle(){
       if(b.disabled)return;
       lockButtons(w);
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
-      state.style=s;msg(s,'user');stepSummary();
+      customWrap.classList.remove('visible');
+      state.style=s;state.customInstructions=null;msg(s,'user');stepSummary();
     };w.appendChild(b);
-  });m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
+  });
+  // Custom button
+  const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
+  customBtn.onclick=()=>{
+    if(customBtn.disabled)return;
+    customWrap.classList.toggle('visible');
+    customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';
+  };w.appendChild(customBtn);
+  m.appendChild(w);
+  // Custom text input
+  const customWrap=document.createElement('div');customWrap.className='custom-input-wrap';
+  const textarea=document.createElement('textarea');textarea.className='custom-textarea';
+  textarea.placeholder='Describe exactly what you want... e.g. "Bold text style but with a purple background and yellow CTA button"';
+  const submitBtn=document.createElement('button');submitBtn.className='custom-submit';submitBtn.textContent='Use This Style →';
+  submitBtn.onclick=()=>{
+    const val=textarea.value.trim();
+    if(!val)return;
+    lockButtons(w);
+    customBtn.style.opacity='1';
+    state.style='Custom';
+    state.customInstructions=val;
+    msg('Custom: '+val,'user');
+    stepSummary();
+  };
+  customWrap.appendChild(textarea);customWrap.appendChild(submitBtn);
+  m.appendChild(customWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
 }
 async function stepSummary(){
   await delay(250);
@@ -376,7 +410,7 @@ async function doGenerate(){
     '<div class="est-time">Estimated time: 2–5 minutes</div>'+
     '<div class="est-sub">Our AI is crafting your creative</div>'+
     '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
-  await triggerWebhook({game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail});
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail};if(state.customInstructions)payload.custom_instructions=state.customInstructions;await triggerWebhook(payload);
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
   let found=null;
   while(!found){
