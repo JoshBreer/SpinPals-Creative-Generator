@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17762892014872",
+    "game_name": "Fortune Rabbit",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/92/5870a6134ea0b764de0c45ca961cbb90268bf28f5478a89ad053fbfeae4c36.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T214044Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=248a70f2b4aced5c912de02708af05dbb31d5198a416052e6a31165f80f508cc",
+    "created_at": "2026-04-15 21:40:01"
+  },
+  {
     "id": "cr-1776287484C7CD",
     "game_name": "Coins of Leprechaun",
     "format": "portrait",
