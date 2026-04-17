@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17764654090FDF",
+    "game_name": "Thunderstruck II",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Classic",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/01/699516c6e765714c9ca9ad02c77133c5e8f43ef6eada89422813bcce185a58.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223732Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9b97e863ff7a75b65532639be00a8a44e05ae9d82dcb052b4d1b0760a12fa58e",
+    "created_at": "2026-04-17 22:36:49"
+  },
+  {
     "id": "cr-17764496928417",
     "game_name": "N/A",
     "format": "portrait",
@@ -538,65 +548,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "Football (Champions League)",
-    "format": "portrait",
-    "offer_text": "100% First Deposit Bonus up to $150",
-    "style": "Realistic",
-    "platform": "betewin",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a5/bd165fe2b5918417f33a760436794ade202dd8b2f119f0ee3fb0c45c415781.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T220300Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=397b76cf08b65c3b77fcdf7de38a7a5aefe9bd988d6c803f07d4ddea604d34ec",
-    "created_at": "2026-04-17T22:03:00Z"
-  },
-  {
-    "game_name": "Basketball (EuroLeague)",
-    "format": "portrait",
-    "offer_text": "Weekly Sports Cashback up to 15%",
-    "style": "Realistic",
-    "platform": "bankobet",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/16/91ee94c53ddc204bf525189e6abc059ec905ddf5804f78502224c88ff386f4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T220923Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a844605ed3dd8051c6b8530276c047e53af2f2257efa5925a40aec526ea99c1b",
-    "created_at": "2026-04-17T22:10:30.655Z"
-  },
-  {
-    "game_name": "N/A",
-    "format": "portrait",
-    "offer_text": "100% First Deposit Bonus up to $150",
-    "style": "Text Only",
-    "platform": "betewin",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b9/9f9a0dec46a8a7b96e5b98cef1d14dac126b3e6b4837190d6bb157b8774540.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T221418Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dce7e6231b7b99bb860d16845a7343511d4589d6de714e455c00932807f21f84",
-    "created_at": "2026-04-17T22:14:18Z"
-  },
-  {
-    "game_name": "Football - Premier League",
-    "format": "portrait",
-    "offer_text": "Casino Welcome Bonus up to 3,000 TRY + 200 Free Spins",
-    "style": "Realistic",
-    "platform": "bankobet",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a1/3a661f5c23f0037c0c09ec24c6380bcdd787eb3023a62b990294de39beb26e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T222102Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4467aaf1837bf7d64044c26ee4c9f3a230d10196900ec2ddf322c13f41c60d68",
-    "created_at": "2026-04-17T22:21:00Z"
-  },
-  {
-    "game_name": "European Roulette",
-    "format": "portrait",
-    "offer_text": "Monthly Casino Cashback up to 20%",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/2a/4bc9d9e96fd4f1bd6117bfa7c741fe78b72837fecd5880b6a9d969503d3e64.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223310Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c6210409b1f49cc33c67a4c1dd67a0890f2d3ee6866d4fc491e854974ad2691b",
-    "created_at": "2026-04-17T22:33:46Z"
-  },
-  {
-    "game_name": "European Roulette",
-    "format": "square",
-    "offer_text": "Monthly Casino Cashback up to 20%",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/03/56a7ad65d4ee94e395b7d295c9ad7e595262e57abe9626402cdda9d2b42f3a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223329Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=316f2dd265ec9b19d23a4da428e1fc2b64bc604a17d03dbecad96da687d652b7",
-    "created_at": "2026-04-17T22:33:46Z"
   }
 ]
