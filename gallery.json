@@ -568,5 +568,15 @@
     "user_email": "josh@mario.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b9/9f9a0dec46a8a7b96e5b98cef1d14dac126b3e6b4837190d6bb157b8774540.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T221418Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dce7e6231b7b99bb860d16845a7343511d4589d6de714e455c00932807f21f84",
     "created_at": "2026-04-17T22:14:18Z"
+  },
+  {
+    "game_name": "Football - Premier League",
+    "format": "portrait",
+    "offer_text": "Casino Welcome Bonus up to 3,000 TRY + 200 Free Spins",
+    "style": "Realistic",
+    "platform": "bankobet",
+    "user_email": "josh@mario.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a1/3a661f5c23f0037c0c09ec24c6380bcdd787eb3023a62b990294de39beb26e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T222102Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4467aaf1837bf7d64044c26ee4c9f3a230d10196900ec2ddf322c13f41c60d68",
+    "created_at": "2026-04-17T22:21:00Z"
   }
 ]
