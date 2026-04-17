@@ -548,8 +548,9 @@ async function doQuickGenerate(){
 
   await delay(400);
 
-  const beforeCount=galleryData.filter(c=>c.user_email===currentUserEmail).length;
-  const beforeTime=new Date().toISOString().replace('T',' ').substring(0,19);
+  // Force fresh fetch before generating so we have accurate snapshot
+  await fetchGallery();
+  const beforeIds=new Set(galleryData.filter(c=>c.user_email===currentUserEmail&&c.image_url).map(c=>c.image_url));
   const startTs=Date.now();
 
   const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
@@ -853,6 +854,8 @@ async function doGenerate(){
       '</div>');
     return;
   }
+  // Force fresh fetch before generating so beforeIds is always accurate
+  await fetchGallery();
   const beforeIds=new Set(galleryData.filter(c=>c.user_email===currentUserEmail&&c.image_url).map(c=>c.image_url));
   const startTs=Date.now();
   const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
