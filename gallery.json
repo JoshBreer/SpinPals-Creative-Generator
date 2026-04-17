@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17764437145701",
+    "game_name": "Classic Blackjack",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/60/0809ecbaaf8a3bb9ce6f08afbbd2716b54edd3b6c23bdb25f34f5d45c12867.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T163535Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c546d497364a67369fb8b0901446734f289c8e510aa421c57504f5c3da6117ab",
+    "created_at": "2026-04-17 16:35:14"
+  },
+  {
     "id": "cr-1776389952DF46",
     "game_name": "Sweet Bonanza",
     "format": "portrait",
