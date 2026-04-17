@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1776389952DF46",
+    "game_name": "Sweet Bonanza",
+    "format": "portrait",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/38/fea5c0ff3c30d83f96ecafb0e2475f6772168223fd0e7b872cfd1afc9da7b3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T013930Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=555c716ae693a6f14db8a4a1d3e7a9af93135e8ca3502775e2499cd8e8ea426a",
+    "created_at": "2026-04-17 01:39:12"
+  },
+  {
     "id": "cr-177631021235ED",
     "game_name": "Thunderstruck II",
     "format": "portrait",
