@@ -224,10 +224,127 @@ const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishin
 
 const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
 
+// MARIO - BETEWIN top performing
+const BETEWIN_TOP = ['Gates of Olympus','Sweet Bonanza','Aviator','Football (Premier League)','Football (Champions League)','Lightning Roulette','Big Bass Bonanza','Crazy Time'];
+
+// BETEWIN full game/sport list
+const BETEWIN_GAMES = {
+  'Top Sports': [
+    {id:'football-pl',name:'Football - Premier League'},
+    {id:'football-ucl',name:'Football - Champions League'},
+    {id:'football-laliga',name:'Football - La Liga'},
+    {id:'football-serie-a',name:'Football - Serie A'},
+    {id:'football-bundesliga',name:'Football - Bundesliga'},
+    {id:'basketball-nba',name:'Basketball - NBA'},
+    {id:'basketball-euroleague',name:'Basketball - EuroLeague'},
+    {id:'tennis-atp',name:'Tennis - ATP Tour'},
+    {id:'cricket-ipl',name:'Cricket - IPL'},
+    {id:'esports-cs2',name:'Esports - CS2'},
+    {id:'esports-dota2',name:'Esports - Dota 2'}
+  ],
+  'Slots': [
+    {id:'gates-olympus',name:'Gates of Olympus'},
+    {id:'sweet-bonanza',name:'Sweet Bonanza'},
+    {id:'big-bass-bonanza',name:'Big Bass Bonanza'},
+    {id:'dog-house',name:'The Dog House'},
+    {id:'starlight-princess',name:'Starlight Princess'},
+    {id:'sugar-rush',name:'Sugar Rush'},
+    {id:'book-of-dead',name:'Book of Dead'},
+    {id:'wolf-gold',name:'Wolf Gold'},
+    {id:'starburst',name:'Starburst'},
+    {id:'reactoonz',name:'Reactoonz'},
+    {id:'fire-joker',name:'Fire Joker'},
+    {id:'gonzo-quest',name:"Gonzo's Quest"}
+  ],
+  'Live Casino': [
+    {id:'lightning-roulette',name:'Lightning Roulette'},
+    {id:'crazy-time',name:'Crazy Time'},
+    {id:'live-blackjack',name:'Live Blackjack'},
+    {id:'speed-baccarat',name:'Speed Baccarat'},
+    {id:'dream-catcher',name:'Dream Catcher'},
+    {id:'monopoly-live',name:'Monopoly Live'},
+    {id:'dragon-tiger',name:'Dragon Tiger'}
+  ],
+  'Crash Games': [
+    {id:'aviator',name:'Aviator'},
+    {id:'jetx',name:'JetX'},
+    {id:'cash-crash',name:'Cash or Crash'}
+  ]
+};
+
+// BETEWIN offers
+const BETEWIN_OFFERS = [
+  {id:'bw-1',title:'100% First Deposit Bonus up to $150',description:'Sports welcome bonus for new players'},
+  {id:'bw-2',title:'Casino Welcome Package up to $1,750 + 150 Free Spins',description:'First four deposits casino bonus'},
+  {id:'bw-3',title:'Weekly Sports Cashback 3%',description:'Get 3% back on weekly sports losses'},
+  {id:'bw-4',title:'Free Bet on Champions League',description:'Activate freebets for Champions League bets'},
+  {id:'bw-5',title:'VIP Cashback Program',description:'8-tier VIP system with increasing cashback rewards'},
+  {id:'bw-6',title:'30 Free Spins on First Deposit',description:'Casino free spins on signup'}
+];
+
+// BANKOBET top performing
+const BANKOBET_TOP = ['Football (Süper Lig)','Football (Champions League)','Live Blackjack','Lightning Roulette','Aviator','Sweet Bonanza','Basketball (EuroLeague)','Crazy Time'];
+
+// BANKOBET full game/sport list
+const BANKOBET_GAMES = {
+  'Top Sports': [
+    {id:'football-superlig',name:'Football - Süper Lig'},
+    {id:'football-ucl',name:'Football - Champions League'},
+    {id:'football-europa',name:'Football - Europa League'},
+    {id:'football-pl',name:'Football - Premier League'},
+    {id:'basketball-euroleague',name:'Basketball - EuroLeague'},
+    {id:'basketball-bsl',name:'Basketball - BSL (Turkey)'},
+    {id:'tennis-atp',name:'Tennis - ATP Tour'},
+    {id:'volleyball-efv',name:'Volleyball - European Championships'},
+    {id:'esports-cs2',name:'Esports - CS2'},
+    {id:'esports-lol',name:'Esports - League of Legends'}
+  ],
+  'Slots': [
+    {id:'sweet-bonanza',name:'Sweet Bonanza'},
+    {id:'gates-olympus',name:'Gates of Olympus'},
+    {id:'aviator',name:'Aviator'},
+    {id:'big-bass',name:'Big Bass Bonanza'},
+    {id:'book-of-dead',name:'Book of Dead'},
+    {id:'reactoonz',name:'Reactoonz'},
+    {id:'starburst',name:'Starburst'},
+    {id:'wolf-gold',name:'Wolf Gold'},
+    {id:'fire-joker',name:'Fire Joker'},
+    {id:'doom-of-dead',name:'Doom of Dead'}
+  ],
+  'Live Casino': [
+    {id:'lightning-roulette',name:'Lightning Roulette'},
+    {id:'crazy-time',name:'Crazy Time'},
+    {id:'live-blackjack',name:'Live Blackjack'},
+    {id:'live-baccarat',name:'Live Baccarat'},
+    {id:'live-poker',name:'Live Poker - Texas Hold em'},
+    {id:'dragon-tiger',name:'Dragon Tiger'},
+    {id:'speed-roulette',name:'Speed Roulette'}
+  ],
+  'Table Games': [
+    {id:'blackjack-classic',name:'Classic Blackjack'},
+    {id:'european-roulette',name:'European Roulette'},
+    {id:'american-roulette',name:'American Roulette'},
+    {id:'baccarat',name:'Baccarat'},
+    {id:'three-card-poker',name:'Three Card Poker'}
+  ]
+};
+
+// BANKOBET offers
+const BANKOBET_OFFERS = [
+  {id:'bb-1',title:'100% First Deposit Bonus up to 5,000 TRY',description:'New player welcome bonus'},
+  {id:'bb-2',title:'Casino Welcome Bonus up to 3,000 TRY + 200 Free Spins',description:'Casino welcome package for new players'},
+  {id:'bb-3',title:'Weekly Sports Cashback up to 15%',description:'Get back up to 1,500 TRY on weekly sports losses'},
+  {id:'bb-4',title:'Monthly Casino Cashback up to 20%',description:'Loyal players earn up to 2,500 TRY cashback'},
+  {id:'bb-5',title:'Daily Free Spins up to 50',description:'Free spins on deposits starting at 150 TRY'},
+  {id:'bb-6',title:'Boosted Odds up to 30%',description:'Boost your accumulator bet winnings'},
+  {id:'bb-7',title:'Sports Free Bet up to €20',description:'Free bet for new sports players'}
+];
+
 const TOP_GAMES=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
 
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const FEEDBACK_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 
 let state={format:null,game:null,offer:null,style:null,customInstructions:null};
@@ -254,7 +371,7 @@ document.getElementById('emailField').addEventListener('keydown',function(e){if(
 function activateDashboard(email){
   currentUserEmail=email;
   document.getElementById('emailGate').style.display='none';
-  if(email.endsWith('@spinpals.com')||email.endsWith('@rmgs.online')){
+  if(email.endsWith('@spinpals.com')||email.endsWith('@rmgs.online')||email.endsWith('@mario.com')){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
@@ -305,8 +422,9 @@ document.querySelectorAll('.filter-tab').forEach(tab=>{
 });
 
 // ---- WEBHOOK ----
-async function triggerWebhook(data){
-  try{await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+async function triggerWebhook(data, url){
+  const endpoint=url||WEBHOOK;
+  try{await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
 }
 
 // ---- DAILY LIMIT ----
@@ -353,14 +471,18 @@ function lockButtons(container){
 // ---- STEP 1: START ----
 async function startChat(){
   chatEl.innerHTML='';
-  state={format:null,game:null,offer:null,style:null,customInstructions:null};
+  state={format:null,game:null,offer:null,style:null,customInstructions:null,platform:null};
   window.scrollTo({top:0,behavior:'smooth'});
   await delay(200);
   const m=msg('Ready to generate your next ad creative?');
   const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';btnWrap.style.display='flex';btnWrap.style.gap='10px';btnWrap.style.flexWrap='wrap';
 
   const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
-  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';stepFormat();};
+  btn.onclick=()=>{
+    if(btn.disabled)return;
+    btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';
+    if(currentUserEmail.endsWith('@mario.com')){stepPlatform();}else{stepFormat();}
+  };
   btnWrap.appendChild(btn);
 
   const quickBtn=document.createElement('button');quickBtn.className='opt-btn';quickBtn.textContent='⚡ Quick Generate';
@@ -370,17 +492,44 @@ async function startChat(){
   m.appendChild(btnWrap);
 }
 
+// ---- MARIO: STEP 1.5 - PLATFORM SELECTION ----
+async function stepPlatform(){
+  await delay(250);
+  const m=msg('Which <span class="accent">platform</span> are we creating for?');
+  const w=document.createElement('div');w.className='opt-group';
+  [['betewin','Betewin'],['bankobet','Bankobet']].forEach(([val,label])=>{
+    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.platform=val;msg(label,'user');stepFormat();
+    };w.appendChild(b);
+  });m.appendChild(w);
+}
+
 // ---- QUICK GENERATE ----
 async function doQuickGenerate(){
   const formats=['portrait','square','both'];
   const styles=['Classic','Realistic'];
+  const isMarioQuick=currentUserEmail.endsWith('@mario.com');
+  // For mario quick generate, randomly pick platform too
+  if(isMarioQuick){
+    state.platform=Math.random()>0.5?'betewin':'bankobet';
+  }
   const allGames=[];
-  Object.values(GAMES).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
+  if(isMarioQuick){
+    const gd=state.platform==='betewin'?BETEWIN_GAMES:BANKOBET_GAMES;
+    Object.values(gd).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
+  } else {
+    Object.values(GAMES).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
+  }
+  const offersPool=isMarioQuick?(state.platform==='betewin'?BETEWIN_OFFERS:BANKOBET_OFFERS):OFFERS;
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
   const randStyle=styles[Math.floor(Math.random()*styles.length)];
   const randGame=allGames[Math.floor(Math.random()*allGames.length)];
-  const randOffer=OFFERS[Math.floor(Math.random()*OFFERS.length)];
+  const randOffer=offersPool[Math.floor(Math.random()*offersPool.length)];
 
   state.format=randFormat;
   state.style=randStyle;
@@ -419,8 +568,9 @@ async function doQuickGenerate(){
       '</div>');
     return;
   }
-  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail};
-  await triggerWebhook(payload);
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  const webhookUrl=currentUserEmail.endsWith('@mario.com')?MARIO_WEBHOOK:WEBHOOK;
+  await triggerWebhook(payload, webhookUrl);
   incrementGenerationCount(currentUserEmail);
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
@@ -618,7 +768,9 @@ async function stepGame(){
   randomItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>Random Game';
   randomItem.onclick=()=>{
     const allGames=[];
-    Object.values(GAMES).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
+    const isMarioRand=currentUserEmail.endsWith("@mario.com");
+    const randGamesData=isMarioRand?(state.platform==="betewin"?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
+    Object.values(randGamesData).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
     const pick=allGames[Math.floor(Math.random()*allGames.length)];
     selected.querySelector('.selected-text').textContent=pick;
     selected.classList.remove('open');
@@ -629,8 +781,17 @@ async function stepGame(){
   };
   list.appendChild(randomItem);
 
-  addGroup('Top Performing', TOP_GAMES, true);
-  Object.keys(GAMES).sort().forEach(cat=>addGroup(cat, GAMES[cat].map(g=>g.name), false));
+  // Use platform-specific games for mario, SpinPals games otherwise
+  const isMario=currentUserEmail.endsWith('@mario.com');
+  const topGames=isMario?(state.platform==='betewin'?BETEWIN_TOP:BANKOBET_TOP):TOP_GAMES;
+  const gamesData=isMario?(state.platform==='betewin'?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
+
+  addGroup('Top Performing', topGames, true);
+  if(isMario){
+    Object.keys(gamesData).sort().forEach(cat=>addGroup(cat, gamesData[cat].map(g=>g.name), false));
+  } else {
+    Object.keys(gamesData).sort().forEach(cat=>addGroup(cat, gamesData[cat].map(g=>g.name), false));
+  }
 
   wrap.appendChild(selected);wrap.appendChild(list);
   sel.appendChild(wrap);m.appendChild(sel);
@@ -642,7 +803,9 @@ async function stepOffer(){
   await delay(250);
   const m=msg('Which <span class="accent">offer</span> should we feature?');
   const w=document.createElement('div');w.className='offer-list';
-  OFFERS.forEach(o=>{
+  const isMario=currentUserEmail.endsWith('@mario.com');
+  const offersToShow=isMario?(state.platform==='betewin'?BETEWIN_OFFERS:BANKOBET_OFFERS):OFFERS;
+  offersToShow.forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
     card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
     card.onclick=()=>{
@@ -661,9 +824,11 @@ async function stepOffer(){
 async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
   const gameRow=state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
   const customRow=state.customInstructions?'<div class="summary-row"><span class="summary-label">Instructions</span>'+state.customInstructions+'</div>':'';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
+    platformRow+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
     '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div>'+
     gameRow+
@@ -698,9 +863,10 @@ async function doGenerate(){
     '<div class="est-sub">Your creative is being crafted</div>'+
     '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
 
-  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail};
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
-  await triggerWebhook(payload);
+  const webhookUrl=currentUserEmail.endsWith('@mario.com')?MARIO_WEBHOOK:WEBHOOK;
+  await triggerWebhook(payload, webhookUrl);
   incrementGenerationCount(currentUserEmail);
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
