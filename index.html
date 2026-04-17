@@ -481,7 +481,7 @@ async function startChat(){
   btn.onclick=()=>{
     if(btn.disabled)return;
     btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';
-    if(currentUserEmail.endsWith('@mario.com')){stepPlatform();}else{stepFormat();}
+    if(currentUserEmail.endsWith('@mario.com')||currentUserEmail.endsWith('@rmgs.online')){stepClient();}else{stepFormat();}
   };
   btnWrap.appendChild(btn);
 
@@ -490,6 +490,29 @@ async function startChat(){
   btnWrap.appendChild(quickBtn);
 
   m.appendChild(btnWrap);
+}
+
+// ---- RMGS: CLIENT SELECTION (for rmgs.online users) ----
+async function stepClient(){
+  await delay(250);
+  const m=msg('Which <span class="accent">client</span> are we creating for?');
+  const w=document.createElement('div');w.className='opt-group';
+  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)']].forEach(([val,label])=>{
+    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      if(val==='spinpals'){
+        state.platform=null;
+        msg(label,'user');
+        stepFormat();
+      } else {
+        msg(label,'user');
+        stepPlatform();
+      }
+    };w.appendChild(b);
+  });m.appendChild(w);
 }
 
 // ---- MARIO: STEP 1.5 - PLATFORM SELECTION ----
@@ -571,7 +594,7 @@ async function doQuickGenerate(){
     return;
   }
   const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
-  const webhookUrl=currentUserEmail.endsWith('@mario.com')?MARIO_WEBHOOK:WEBHOOK;
+  const webhookUrl=(currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null))?MARIO_WEBHOOK:WEBHOOK;
   await triggerWebhook(payload, webhookUrl);
   incrementGenerationCount(currentUserEmail);
 
@@ -874,7 +897,7 @@ async function doGenerate(){
 
   const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
-  const webhookUrl=currentUserEmail.endsWith('@mario.com')?MARIO_WEBHOOK:WEBHOOK;
+  const webhookUrl=(currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null))?MARIO_WEBHOOK:WEBHOOK;
   await triggerWebhook(payload, webhookUrl);
   incrementGenerationCount(currentUserEmail);
 
