@@ -141,6 +141,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .custom-submit{margin-top:8px;padding:9px 18px;border-radius:6px;border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
 .custom-submit:hover{background:var(--blue2)}
 
+.feedback-wrap{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px}
+.feedback-label{font-size:13px;color:var(--txt2)}
+.feedback-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:9px 16px;font-size:14px;cursor:pointer;transition:.2s;color:var(--txt2);display:flex;align-items:center;gap:6px}
+.feedback-btn:hover{border-color:var(--blue);background:var(--blue-glow)}
+.feedback-btn.selected-up{border-color:var(--green);background:rgba(34,197,94,0.15);color:var(--green)}
+.feedback-btn.selected-down{border-color:#ef4444;background:rgba(239,68,68,0.15);color:#ef4444}
+.feedback-btn:disabled{cursor:default}
+.feedback-thanks{font-size:13px;color:var(--txt2);margin-top:8px;text-align:center;display:none}
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
 </style>
 </head>
@@ -207,6 +215,7 @@ const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spin
 const TOP_GAMES=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
 
 const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+const FEEDBACK_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 
 let state={format:null,game:null,offer:null,style:null,customInstructions:null};
@@ -425,6 +434,33 @@ async function doQuickGenerate(){
   dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
   anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
+  // Feedback buttons
+  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
+  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
+  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';thumbsUp.title='Good creative';
+  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';thumbsDown.title='Needs improvement';
+  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
+
+  thumbsUp.onclick=async()=>{
+    if(thumbsUp.disabled)return;
+    thumbsUp.classList.add('selected-up');
+    thumbsDown.disabled=true;thumbsUp.disabled=true;
+    thankMsg.style.display='block';
+    await sendFeedback('positive',found);
+  };
+  thumbsDown.onclick=async()=>{
+    if(thumbsDown.disabled)return;
+    thumbsDown.classList.add('selected-down');
+    thumbsUp.disabled=true;thumbsDown.disabled=true;
+    thankMsg.style.display='block';
+    await sendFeedback('negative',found);
+  };
+
+  feedbackWrap.appendChild(feedbackLabel);
+  feedbackWrap.appendChild(thumbsUp);
+  feedbackWrap.appendChild(thumbsDown);
+  loadMsg.appendChild(feedbackWrap);
+  loadMsg.appendChild(thankMsg);
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
   renderGallery();
 }
@@ -642,8 +678,56 @@ async function doGenerate(){
   dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
   anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
+  // Feedback buttons
+  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
+  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
+  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';thumbsUp.title='Good creative';
+  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';thumbsDown.title='Needs improvement';
+  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
+
+  thumbsUp.onclick=async()=>{
+    if(thumbsUp.disabled)return;
+    thumbsUp.classList.add('selected-up');
+    thumbsDown.disabled=true;thumbsUp.disabled=true;
+    thankMsg.style.display='block';
+    await sendFeedback('positive',found);
+  };
+  thumbsDown.onclick=async()=>{
+    if(thumbsDown.disabled)return;
+    thumbsDown.classList.add('selected-down');
+    thumbsUp.disabled=true;thumbsDown.disabled=true;
+    thankMsg.style.display='block';
+    await sendFeedback('negative',found);
+  };
+
+  feedbackWrap.appendChild(feedbackLabel);
+  feedbackWrap.appendChild(thumbsUp);
+  feedbackWrap.appendChild(thumbsDown);
+  loadMsg.appendChild(feedbackWrap);
+  loadMsg.appendChild(thankMsg);
   loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
   renderGallery();
+}
+
+// ---- FEEDBACK ----
+async function sendFeedback(feedback, imageData){
+  try{
+    await fetch(FEEDBACK_WEBHOOK,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        event:'creative_feedback',
+        feedback:feedback,
+        game_name:imageData.game_name,
+        format:imageData.format,
+        style:imageData.style,
+        offer_text:imageData.offer_text,
+        image_url:imageData.image_url,
+        user_email:currentUserEmail
+      }),
+      mode:'no-cors'
+    });
+  }catch(e){}
 }
 
 // ---- MODAL ----
