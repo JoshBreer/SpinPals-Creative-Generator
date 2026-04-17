@@ -548,5 +548,15 @@
     "user_email": "josh@mario.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a5/bd165fe2b5918417f33a760436794ade202dd8b2f119f0ee3fb0c45c415781.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T220300Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=397b76cf08b65c3b77fcdf7de38a7a5aefe9bd988d6c803f07d4ddea604d34ec",
     "created_at": "2026-04-17T22:03:00Z"
+  },
+  {
+    "game_name": "Basketball (EuroLeague)",
+    "format": "portrait",
+    "offer_text": "Weekly Sports Cashback up to 15%",
+    "style": "Realistic",
+    "platform": "bankobet",
+    "user_email": "josh@mario.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/16/91ee94c53ddc204bf525189e6abc059ec905ddf5804f78502224c88ff386f4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T220923Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a844605ed3dd8051c6b8530276c047e53af2f2257efa5925a40aec526ea99c1b",
+    "created_at": "2026-04-17T22:10:30.655Z"
   }
 ]
