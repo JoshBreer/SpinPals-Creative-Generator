@@ -168,12 +168,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 
 <!-- EMAIL GATE -->
 <div class="email-gate" id="emailGate">
-  <div class="email-gate-title">Access Your Dashboard</div>
-  <div class="email-gate-sub">Enter your work email to view your creatives and start generating ads.</div>
+  <div class="email-gate-title">Creative Generator</div>
+  <div class="email-gate-sub">Enter your work email to access your creative generator.</div>
   <div class="email-input-wrap">
     <input type="email" class="email-field" id="emailField" placeholder="you@yourcompany.com" />
     <div class="email-error" id="emailError">Please enter a valid email address</div>
-    <button class="email-submit" id="emailSubmit">Access Dashboard →</button>
+    <button class="email-submit" id="emailSubmit">Access Creative Generator →</button>
   </div>
 </div>
 
@@ -410,7 +410,7 @@ async function doQuickGenerate(){
     '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
 
   // Check daily limit
-  if(hasReachedDailyLimit(currentUserEmail)){
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
     msg('<div style="text-align:center;padding:10px 0">'+
       '<div style="font-size:28px;margin-bottom:12px">⛔</div>'+
       '<div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div>'+
@@ -680,7 +680,7 @@ async function stepSummary(){
 async function doGenerate(){
   msg('Generate Ad →','user');await delay(250);
   // Check daily limit
-  if(hasReachedDailyLimit(currentUserEmail)){
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
     msg('<div style="text-align:center;padding:10px 0">'+
       '<div style="font-size:28px;margin-bottom:12px">⛔</div>'+
       '<div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div>'+
