@@ -59,8 +59,20 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 
 /* GAME DROPDOWN */
 .game-sel{margin-top:12px}
-.game-dropdown{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;cursor:pointer;transition:.2s}
-.game-dropdown:focus{border-color:var(--blue)}
+.game-dropdown-wrap{position:relative;width:100%;user-select:none}
+.game-dropdown-selected{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt2);font-family:inherit;font-size:14px;cursor:pointer;transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.game-dropdown-selected:hover{border-color:var(--blue)}
+.game-dropdown-selected.open{border-color:var(--blue);color:var(--txt)}
+.game-dropdown-selected .selected-text{color:inherit}
+.game-dropdown-arrow{transition:.2s;color:var(--txt3)}
+.game-dropdown-selected.open .game-dropdown-arrow{transform:rotate(180deg);color:var(--blue)}
+.game-dropdown-list{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);z-index:100;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.game-dropdown-list.open{display:block}
+.game-dropdown-group-label{padding:8px 14px;font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:1px;background:rgba(41,135,188,0.06);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.game-dropdown-group-label svg{flex-shrink:0}
+.game-dropdown-item{padding:9px 14px 9px 22px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(28,32,48,.4);transition:.15s}
+.game-dropdown-item:hover{background:var(--card2);color:var(--blue)}
+.game-dropdown-item:last-child{border-bottom:none}
 
 /* OFFERS */
 .offer-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
@@ -550,35 +562,56 @@ async function stepGame(){
   await delay(250);
   const m=msg('Which <span class="accent">game</span> should we feature?');
   const sel=document.createElement('div');sel.className='game-sel';
-  const dropdown=document.createElement('select');dropdown.className='game-dropdown';
 
-  const defaultOpt=document.createElement('option');defaultOpt.value='';defaultOpt.textContent='Select a game...';defaultOpt.disabled=true;defaultOpt.selected=true;
-  dropdown.appendChild(defaultOpt);
+  const wrap=document.createElement('div');wrap.className='game-dropdown-wrap';
 
-  // Top Performing group
-  const topGroup=document.createElement('optgroup');topGroup.label='⭐ Top Performing';
-  TOP_GAMES.forEach(name=>{
-    const o=document.createElement('option');o.value=name;o.textContent=name;topGroup.appendChild(o);
-  });
-  dropdown.appendChild(topGroup);
+  const selected=document.createElement('div');selected.className='game-dropdown-selected';
+  selected.innerHTML='<span class="selected-text">Select a game...</span><svg class="game-dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
 
-  // All other categories
-  Object.keys(GAMES).sort().forEach(cat=>{
-    const group=document.createElement('optgroup');group.label=cat;
-    GAMES[cat].forEach(g=>{
-      const o=document.createElement('option');o.value=g.name;o.textContent=g.name;group.appendChild(o);
-    });
-    dropdown.appendChild(group);
-  });
+  const list=document.createElement('div');list.className='game-dropdown-list';
 
-  dropdown.onchange=()=>{
-    const val=dropdown.value;
-    if(!val)return;
-    dropdown.disabled=true;dropdown.style.opacity='0.6';
-    state.game=val;msg(val,'user');stepOffer();
+  // Toggle open/close
+  selected.onclick=()=>{
+    selected.classList.toggle('open');
+    list.classList.toggle('open');
   };
 
-  sel.appendChild(dropdown);m.appendChild(sel);
+  // Close when clicking outside
+  document.addEventListener('click',function closeDropdown(e){
+    if(!wrap.contains(e.target)){
+      selected.classList.remove('open');
+      list.classList.remove('open');
+      document.removeEventListener('click',closeDropdown);
+    }
+  });
+
+  function addGroup(label, games, isTop){
+    const groupLabel=document.createElement('div');groupLabel.className='game-dropdown-group-label';
+    if(isTop){
+      groupLabel.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'+label;
+    } else {
+      groupLabel.textContent=label;
+    }
+    list.appendChild(groupLabel);
+    games.forEach(name=>{
+      const item=document.createElement('div');item.className='game-dropdown-item';item.textContent=name;
+      item.onclick=()=>{
+        selected.querySelector('.selected-text').textContent=name;
+        selected.classList.remove('open');selected.classList.add('open');
+        selected.style.pointerEvents='none';selected.style.opacity='0.7';
+        list.classList.remove('open');
+        selected.style.color='var(--txt)';
+        state.game=name;msg(name,'user');stepOffer();
+      };
+      list.appendChild(item);
+    });
+  }
+
+  addGroup('Top Performing', TOP_GAMES, true);
+  Object.keys(GAMES).sort().forEach(cat=>addGroup(cat, GAMES[cat].map(g=>g.name), false));
+
+  wrap.appendChild(selected);wrap.appendChild(list);
+  sel.appendChild(wrap);m.appendChild(sel);
   chatEl.scrollTop=chatEl.scrollHeight;
 }
 
