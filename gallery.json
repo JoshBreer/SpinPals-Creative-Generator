@@ -578,5 +578,25 @@
     "user_email": "josh@mario.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a1/3a661f5c23f0037c0c09ec24c6380bcdd787eb3023a62b990294de39beb26e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T222102Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4467aaf1837bf7d64044c26ee4c9f3a230d10196900ec2ddf322c13f41c60d68",
     "created_at": "2026-04-17T22:21:00Z"
+  },
+  {
+    "game_name": "European Roulette",
+    "format": "portrait",
+    "offer_text": "Monthly Casino Cashback up to 20%",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "josh@mario.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/2a/4bc9d9e96fd4f1bd6117bfa7c741fe78b72837fecd5880b6a9d969503d3e64.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223310Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c6210409b1f49cc33c67a4c1dd67a0890f2d3ee6866d4fc491e854974ad2691b",
+    "created_at": "2026-04-17T22:33:46Z"
+  },
+  {
+    "game_name": "European Roulette",
+    "format": "square",
+    "offer_text": "Monthly Casino Cashback up to 20%",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "josh@mario.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/03/56a7ad65d4ee94e395b7d295c9ad7e595262e57abe9626402cdda9d2b42f3a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223329Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=316f2dd265ec9b19d23a4da428e1fc2b64bc604a17d03dbecad96da687d652b7",
+    "created_at": "2026-04-17T22:33:46Z"
   }
 ]
