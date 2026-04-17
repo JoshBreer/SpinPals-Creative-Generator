@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17764451744279",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/16/9b13c99f700c46058fc41923b4ebabbe318b85ab5cbea3b62117b9b672278e.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T170043Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=10899b8dff60ee23e441ec9681eebc1376942296a2d95282351434783f38665f",
+    "created_at": "2026-04-17 16:59:34"
+  },
+  {
     "id": "cr-17764447900AF0",
     "game_name": "Mustang Gold",
     "format": "square",
