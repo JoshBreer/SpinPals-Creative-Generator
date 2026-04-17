@@ -579,9 +579,8 @@ async function doQuickGenerate(){
   while(!found){
     await delay(7000);
     const fresh=await fetchGallery();
-    const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url);
-    if(userItems.length>beforeCount){const newest=userItems[0];if(newest&&newest.image_url)found=newest;}
-    if(!found){for(let i=0;i<fresh.length;i++){if(fresh[i].user_email===currentUserEmail&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){found=fresh[i];break;}}}
+    const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url&&c.created_at>=beforeTime);
+    if(userItems.length>0){found=userItems[0];}
   }
 
   clearInterval(timerInterval);
@@ -875,16 +874,8 @@ async function doGenerate(){
   while(!found){
     await delay(7000);
     const fresh=await fetchGallery();
-    const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url);
-    if(userItems.length>beforeCount){
-      const newest=userItems[0];
-      if(newest&&newest.image_url)found=newest;
-    }
-    if(!found){
-      for(let i=0;i<fresh.length;i++){
-        if(fresh[i].user_email===currentUserEmail&&fresh[i].created_at>=beforeTime&&fresh[i].image_url){found=fresh[i];break;}
-      }
-    }
+    const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url&&c.created_at>=beforeTime);
+    if(userItems.length>0){found=userItems[0];}
   }
 
   clearInterval(timerInterval);
