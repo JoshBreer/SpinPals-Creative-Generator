@@ -581,7 +581,11 @@ async function doQuickGenerate(){
     await delay(7000);
     const fresh=await fetchGallery();
     const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url&&!beforeIds.has(c.id||c.image_url.split('?')[0]));
-    if(userItems.length>0){found=userItems[0];}
+    if(userItems.length>0){
+      // Sort by created_at descending to get the most recent new entry
+      userItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+      found=userItems[0];
+    }
   }
 
   clearInterval(timerInterval);
@@ -877,7 +881,11 @@ async function doGenerate(){
     await delay(7000);
     const fresh=await fetchGallery();
     const userItems=fresh.filter(c=>c.user_email===currentUserEmail&&c.image_url&&!beforeIds.has(c.id||c.image_url.split('?')[0]));
-    if(userItems.length>0){found=userItems[0];}
+    if(userItems.length>0){
+      // Sort by created_at descending to get the most recent new entry
+      userItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+      found=userItems[0];
+    }
   }
 
   clearInterval(timerInterval);
