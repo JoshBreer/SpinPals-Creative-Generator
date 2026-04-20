@@ -867,13 +867,23 @@ function showResult(loadMsg,found){
   thumbsDown.onclick=async()=>{if(thumbsDown.disabled)return;thumbsDown.classList.add('selected-down');thumbsUp.disabled=true;thumbsDown.disabled=true;thankMsg.style.display='block';await sendFeedback('negative',found);};
   feedbackWrap.appendChild(feedbackLabel);feedbackWrap.appendChild(thumbsUp);feedbackWrap.appendChild(thumbsDown);
 
-  // Facebook upload
-  const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
+  // Facebook upload card with instructions
+  const fbWrap=document.createElement('div');
+  fbWrap.style.cssText='margin-top:16px;border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--card2);';
+  const fbTitle=document.createElement('div');
+  fbTitle.style.cssText='font-size:11px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;';
+  fbTitle.textContent='Add to Facebook Media Library';
+  const fbSteps=document.createElement('div');fbSteps.style.cssText='display:flex;flex-direction:column;gap:8px;margin-bottom:12px;';
+  [['1','Download your image using the button above'],['2','Click Open Media Library below — it opens your Ads Manager'],['3','Click Add Images and upload the file you just downloaded']].forEach(([num,text])=>{
+    const step=document.createElement('div');step.style.cssText='display:flex;gap:8px;align-items:center;';
+    step.innerHTML='<span style="min-width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+num+'</span><span style="font-size:13px;color:var(--txt2);">'+text+'</span>';
+    fbSteps.appendChild(step);
+  });
   const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
-  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
-  
+  fbBtn.style.cssText='width:100%;justify-content:center;margin:0;';
+  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Open Media Library';
   fbBtn.onclick=()=>openFacebookMediaLibrary(fbBtn);
-  fbWrap.appendChild(fbBtn);
+  fbWrap.appendChild(fbTitle);fbWrap.appendChild(fbSteps);fbWrap.appendChild(fbBtn);
 
   loadMsg.appendChild(feedbackWrap);
   loadMsg.appendChild(thankMsg);
@@ -894,7 +904,17 @@ async function sendFeedback(feedback,imageData){
 // FACEBOOK MEDIA LIBRARY
 // ============================================================
 function openFacebookMediaLibrary(btn){
-  window.open('https://adsmanager.facebook.com/adsmanager/manage/images','_blank');
+  // Route to correct ad account based on client
+  const isMario=isMarioFlow();
+  if(isMario){
+    // Mario ad account not yet configured
+    btn.style.borderColor='var(--txt3)';btn.style.color='var(--txt3)';
+    btn.disabled=true;
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Facebook Media Library Being Configured';
+    return;
+  }
+  // SpinPals - open directly in SpinPals ad account
+  window.open('https://adsmanager.facebook.com/adsmanager/manage/images?act=2178254872545632','_blank');
   btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Opened — upload your image there';
   btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
   btn.disabled=true;
