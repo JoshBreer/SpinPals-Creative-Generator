@@ -638,5 +638,15 @@
     "user_email": "cristiano@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/df/c7be6961d598bab37780d85d0892b09db7dd83e514cb1d578293d0679b4a40.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T171146Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f0a7fcbf85a4ebdfdbfe20d60175503143d9df64170c8456bac98f7d5ec52588",
     "created_at": "2026-04-20T17:11:46Z"
+  },
+  {
+    "game_name": "Starlight Princess",
+    "format": "portrait",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "cristiano@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/86/5aef3c89fc5084aad9a920a5bc864e4cc95ea3aabcba86a7c603c21512b8d8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T173431Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0d63a3e31b33f3f4e49ec02c8487121747a96b39ada89b9c67da3ce6e3aeadb8",
+    "created_at": "2026-04-20T17:34:31Z"
   }
 ]
