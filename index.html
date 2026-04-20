@@ -253,8 +253,6 @@ const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const DAILY_LIMIT=10;
-const FB_APP_ID='PENDING';
-const FB_AD_ACCOUNT_ID='act_2178254872545632';
 
 // ============================================================
 // STATE
@@ -779,9 +777,9 @@ function showResult(loadMsg,found){
   const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
   const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
   fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
-  const fbStatus=document.createElement('div');fbStatus.className='fb-status';
-  fbBtn.onclick=()=>uploadToFacebook(found.image_url,fbBtn,fbStatus);
-  fbWrap.appendChild(fbBtn);fbWrap.appendChild(fbStatus);
+  
+  fbBtn.onclick=()=>openFacebookMediaLibrary(fbBtn);
+  fbWrap.appendChild(fbBtn);
 
   loadMsg.appendChild(feedbackWrap);
   loadMsg.appendChild(thankMsg);
@@ -799,15 +797,13 @@ async function sendFeedback(feedback,imageData){
 }
 
 // ============================================================
-// FACEBOOK UPLOAD
+// FACEBOOK MEDIA LIBRARY
 // ============================================================
-async function uploadToFacebook(imageUrl,btn,statusEl){
-  btn.disabled=true;btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Uploading...';
-  if(FB_APP_ID==='PENDING'){
-    btn.disabled=false;btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
-    statusEl.className='fb-status error';statusEl.textContent='Facebook connection not yet configured. Coming soon.';
-    setTimeout(()=>{statusEl.className='fb-status';},3000);return;
-  }
+function openFacebookMediaLibrary(btn){
+  window.open('https://business.facebook.com/media','_blank');
+  btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Opened — upload your image there';
+  btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
+  btn.disabled=true;
 }
 
 // ============================================================
