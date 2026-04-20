@@ -691,7 +691,17 @@ async function doQuickGenerate(){
   const snapCount=snapKeys.size;
   const startTs=Date.now();
 
-  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 2–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
   const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
   await triggerWebhook(payload,getWebhook());
@@ -699,8 +709,41 @@ async function doQuickGenerate(){
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+  }
+
   let found=null;
-  while(!found){
+  while(!found&&!stopped){
     await delay(7000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
@@ -710,7 +753,7 @@ async function doQuickGenerate(){
     }
   }
   clearInterval(timerInterval);
-  showResult(loadMsg,found);
+  if(found)showResult(loadMsg,found);
 }
 
 // ============================================================
@@ -729,7 +772,17 @@ async function doGenerate(){
   const snapCount=snapKeys.size;
   const startTs=Date.now();
 
-  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 2–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
   const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
@@ -738,8 +791,49 @@ async function doGenerate(){
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.appendChild(stopBtn2);
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  const stopBtn2=document.createElement('button');
+  stopBtn2.style.cssText=stopBtn.style.cssText;
+  stopBtn2.textContent='Stop Generation';
+  stopBtn2.onmouseover=()=>{stopBtn2.style.background='rgba(239,68,68,0.1)';};
+  stopBtn2.onmouseout=()=>{stopBtn2.style.background='transparent';};
+  stopBtn2.onclick=stopBtn.onclick;
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+  }
+
   let found=null;
-  while(!found){
+  while(!found&&!stopped){
     await delay(7000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
@@ -749,7 +843,7 @@ async function doGenerate(){
     }
   }
   clearInterval(timerInterval);
-  showResult(loadMsg,found);
+  if(found)showResult(loadMsg,found);
 }
 
 // ============================================================
