@@ -925,13 +925,29 @@ function buildFalPrompt(){
     }
   }
 
-  const prompt=`Professional gambling advertisement creative for ${brandName}, a ${brandContext}.
-Format: ${aspectRatio} advertisement.
-${game?'Featured game: '+game+'. '+gameContext:''}
-Promotion: "${offer}"
-Style: ${styleGuide}
-Requirements: Include prominent "${brandName}" branding text. Show the offer text "${offer}" clearly and legibly. Include a bold call-to-action button. Add a small "18+" responsible gambling disclaimer at the bottom. Professional ad agency quality. High contrast. Visually striking. No watermarks.
-${language==='Turkish'?'All text in Turkish language.':'All text in English.'}`;
+  const prompt=`You are a senior art director at a world-class gambling advertising agency. Create a ${aspectRatio} social media ad creative that looks like it was produced by a 00/hour design team. This must be photorealistic, visually stunning, and completely professional.
+
+VISUAL CONCEPT:
+${game?gameContext:'Dynamic, high-energy casino or sports betting atmosphere. Luxury, excitement, winning energy.'}
+
+OFFER TO DISPLAY:
+The following offer text must appear large, bold, and perfectly legible in the creative: "${offer}"
+
+STYLE:
+${styleGuide}
+
+ABSOLUTE RULES - violating any of these is unacceptable:
+1. ZERO brand names, logos, platform names, or company names anywhere in the image
+2. CTA button must contain ONLY the words PLAY NOW or CLAIM BONUS - absolutely no arrows, chevrons, icons, badges, or any symbols anywhere near or on the button
+3. Disclaimer text at the very bottom must read EXACTLY: "18+ | Play Responsibly | T&Cs Apply" - this text must be small but perfectly sharp, crisp, and 100% legible
+4. Every single word, number, and character in the entire image must be perfectly legible, correctly spelled, and razor sharp - zero blurry text, zero distorted letters, zero gibberish, zero placeholder text
+5. No QR codes, no random icons, no unidentified symbols, no watermarks anywhere
+6. The offer text "${offer}" must be the dominant headline - large, bold, impossible to miss
+7. Composition must feel like a premium Facebook or Instagram ad - not a stock photo, not a generic template
+8. Lighting must be dramatic and cinematic - deep shadows, bright highlights, rich color contrast
+9. The image must feel exciting, high-stakes, and aspirational
+
+${language==='Turkish'?'LANGUAGE: Every single word in this image must be in Turkish. CTA button must say HEMEN OYNA or BONUSU AL. Disclaimer must say: 18+ | Sorumlu Oynayın | Şartlar Geçerlidir':'LANGUAGE: All text in English only.'}`;
 
   return prompt;
 }
