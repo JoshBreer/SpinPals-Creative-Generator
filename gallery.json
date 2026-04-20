@@ -628,5 +628,15 @@
     "user_email": "josh@mario.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/3f/140a8e9c803e9573cfd7bfdd2f1ee92eaef471e841c3b6284539d542967511.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T163025Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=028709d2ac2026ab0ffe88e1617564bf905f4bc25c658ce2aeb57441f723d1d5",
     "created_at": "2026-04-20T16:30:25Z"
+  },
+  {
+    "game_name": "Live Blackjack",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "cristiano@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/df/c7be6961d598bab37780d85d0892b09db7dd83e514cb1d578293d0679b4a40.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T171146Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f0a7fcbf85a4ebdfdbfe20d60175503143d9df64170c8456bac98f7d5ec52588",
+    "created_at": "2026-04-20T17:11:46Z"
   }
 ]
