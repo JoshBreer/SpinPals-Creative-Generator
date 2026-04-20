@@ -63,13 +63,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .game-dropdown-selected{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt2);font-family:inherit;font-size:14px;cursor:pointer;transition:.2s;display:flex;justify-content:space-between;align-items:center}
 .game-dropdown-selected:hover{border-color:var(--blue)}
 .game-dropdown-selected.open{border-color:var(--blue);color:var(--txt)}
-.game-dropdown-selected .selected-text{color:inherit}
 .game-dropdown-arrow{transition:.2s;color:var(--txt3)}
 .game-dropdown-selected.open .game-dropdown-arrow{transform:rotate(180deg);color:var(--blue)}
 .game-dropdown-list{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);z-index:100;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .game-dropdown-list.open{display:block}
 .game-dropdown-group-label{padding:8px 14px;font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:1px;background:rgba(41,135,188,0.06);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
-.game-dropdown-group-label svg{flex-shrink:0}
 .game-dropdown-item{padding:9px 14px 9px 22px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(28,32,48,.4);transition:.15s}
 .game-dropdown-item:hover{background:var(--card2);color:var(--blue)}
 .game-dropdown-item:last-child{border-bottom:none}
@@ -143,14 +141,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .switch-user{text-align:center;padding:16px;margin-top:10px}
 .switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
 .switch-user button:hover{color:var(--txt2)}
-.fb-btn{background:none;border:1px solid #1877f2;border-radius:6px;padding:9px 16px;cursor:pointer;transition:.2s;color:#1877f2;font-family:inherit;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
-.fb-btn:hover{background:rgba(24,119,242,0.1);}
-.fb-btn:disabled{opacity:0.5;cursor:default}
-.fb-btn.success{border-color:var(--green);color:var(--green)}
-.fb-btn.uploading{opacity:0.7}
-.fb-status{font-size:12px;margin-top:6px;text-align:center;display:none}
-.fb-status.success{color:var(--green);display:block}
-.fb-status.error{color:#ef4444;display:block}
 
 /* CUSTOM INPUT */
 .custom-input-wrap{margin-top:12px;display:none}
@@ -161,6 +151,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .custom-submit{margin-top:8px;padding:9px 18px;border-radius:6px;border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
 .custom-submit:hover{background:var(--blue2)}
 
+/* FEEDBACK */
 .feedback-wrap{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px}
 .feedback-label{font-size:13px;color:var(--txt2)}
 .feedback-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:9px 16px;font-size:14px;cursor:pointer;transition:.2s;color:var(--txt2);display:flex;align-items:center;gap:6px}
@@ -169,6 +160,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .feedback-btn.selected-down{border-color:#ef4444;background:rgba(239,68,68,0.15);color:#ef4444}
 .feedback-btn:disabled{cursor:default}
 .feedback-thanks{font-size:13px;color:var(--txt2);margin-top:8px;text-align:center;display:none}
+
+/* FACEBOOK BUTTON */
+.fb-btn{background:none;border:1px solid #1877f2;border-radius:6px;padding:9px 16px;cursor:pointer;transition:.2s;color:#1877f2;font-family:inherit;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;margin:0 auto}
+.fb-btn:hover{background:rgba(24,119,242,0.1)}
+.fb-btn:disabled{opacity:0.5;cursor:default}
+.fb-btn.success{border-color:var(--green);color:var(--green)}
+.fb-status{font-size:12px;margin-top:6px;text-align:center;display:none}
+.fb-status.success{color:var(--green);display:block}
+.fb-status.error{color:#ef4444;display:block}
+
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
 </style>
 </head>
@@ -176,10 +177,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 
 <!-- EMAIL GATE -->
 <div class="email-gate" id="emailGate">
-  <div class="email-gate-title">Creative Generator</div>
+  <div class="email-gate-title">Access Your Dashboard</div>
   <div class="email-gate-sub">Enter your work email to access your creative generator.</div>
   <div class="email-input-wrap">
-    <input type="email" class="email-field" id="emailField" placeholder="you@yourcompany.com" />
+    <input type="email" class="email-field" id="emailField" placeholder="you@yourcompany.com"/>
     <div class="email-error" id="emailError">Please enter a valid email address</div>
     <button class="email-submit" id="emailSubmit">Access Creative Generator →</button>
   </div>
@@ -228,142 +229,71 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 </div>
 
 <script>
-const GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dogg Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
+// ============================================================
+// DATA
+// ============================================================
 
-const OFFERS=[{"id":"offer-1","title":"6 SC FREE + 60K GC FREE + Daily FREE Spins","description":"New player welcome bonus"},{"id":"offer-2","title":"GC 400K + FREE SC 35 + 50 FREE SPINS","description":"Premium signup offer"},{"id":"offer-3","title":"25 FREE SC + 250K GC on First Purchase","description":"First purchase bonus"},{"id":"offer-4","title":"Daily Login Bonus: Up to 10 SC FREE","description":"Daily rewards program"},{"id":"offer-5","title":"Refer a Friend: Get 20 SC + 100K GC","description":"Referral program"},{"id":"offer-6","title":"Weekend Special: Double GC on All Purchases","description":"Weekend promotion"},{"id":"offer-7","title":"VIP Exclusive: 100 SC + 1M GC Package","description":"VIP tier reward"}];
+// SPINPALS GAMES
+const SPINPALS_GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dogg Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
+const SPINPALS_TOP=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
+const SPINPALS_OFFERS=[{id:'s1',title:'6 SC FREE + 60K GC FREE + Daily FREE Spins',description:'New player welcome bonus'},{id:'s2',title:'GC 400K + FREE SC 35 + 50 FREE SPINS',description:'Premium signup offer'},{id:'s3',title:'25 FREE SC + 250K GC on First Purchase',description:'First purchase bonus'},{id:'s4',title:'Daily Login Bonus: Up to 10 SC FREE',description:'Daily rewards program'},{id:'s5',title:'Refer a Friend: Get 20 SC + 100K GC',description:'Referral program'},{id:'s6',title:'Weekend Special: Double GC on All Purchases',description:'Weekend promotion'},{id:'s7',title:'VIP Exclusive: 100 SC + 1M GC Package',description:'VIP tier reward'}];
 
-// MARIO - BETEWIN top performing
-const BETEWIN_TOP = ['Gates of Olympus','Sweet Bonanza','Aviator','Football (Premier League)','Football (Champions League)','Lightning Roulette','Big Bass Bonanza','Crazy Time'];
+// BETEWIN GAMES
+const BETEWIN_TOP=['Gates of Olympus','Sweet Bonanza','Aviator','Football - Premier League','Football - Champions League','Lightning Roulette','Big Bass Bonanza','Crazy Time'];
+const BETEWIN_GAMES={'Top Sports':[{id:'fp',name:'Football - Premier League'},{id:'fuc',name:'Football - Champions League'},{id:'fll',name:'Football - La Liga'},{id:'fsa',name:'Football - Serie A'},{id:'fbu',name:'Football - Bundesliga'},{id:'nba',name:'Basketball - NBA'},{id:'eur',name:'Basketball - EuroLeague'},{id:'atp',name:'Tennis - ATP Tour'},{id:'ipl',name:'Cricket - IPL'},{id:'cs2',name:'Esports - CS2'},{id:'d2',name:'Esports - Dota 2'}],'Slots':[{id:'go',name:'Gates of Olympus'},{id:'sb',name:'Sweet Bonanza'},{id:'bbb',name:'Big Bass Bonanza'},{id:'dh',name:'The Dog House'},{id:'sp',name:'Starlight Princess'},{id:'sr',name:'Sugar Rush'},{id:'bod',name:'Book of Dead'},{id:'wg',name:'Wolf Gold'},{id:'st',name:'Starburst'},{id:'re',name:'Reactoonz'},{id:'fj',name:'Fire Joker'},{id:'gq',name:"Gonzo's Quest"}],'Live Casino':[{id:'lr',name:'Lightning Roulette'},{id:'ct',name:'Crazy Time'},{id:'lbj',name:'Live Blackjack'},{id:'spb',name:'Speed Baccarat'},{id:'dc',name:'Dream Catcher'},{id:'ml',name:'Monopoly Live'},{id:'dt',name:'Dragon Tiger'}],'Crash Games':[{id:'av',name:'Aviator'},{id:'jx',name:'JetX'},{id:'cc',name:'Cash or Crash'}]};
+const BETEWIN_OFFERS=[{id:'bw1',title:'100% First Deposit Bonus up to $150',description:'Sports welcome bonus for new players'},{id:'bw2',title:'Casino Welcome Package up to $1,750 + 150 Free Spins',description:'First four deposits casino bonus'},{id:'bw3',title:'Weekly Sports Cashback 3%',description:'Get 3% back on weekly sports losses'},{id:'bw4',title:'Free Bet on Champions League',description:'Activate freebets for Champions League bets'},{id:'bw5',title:'VIP Cashback Program',description:'8-tier VIP system with increasing cashback rewards'},{id:'bw6',title:'30 Free Spins on First Deposit',description:'Casino free spins on signup'}];
 
-// BETEWIN full game/sport list
-const BETEWIN_GAMES = {
-  'Top Sports': [
-    {id:'football-pl',name:'Football - Premier League'},
-    {id:'football-ucl',name:'Football - Champions League'},
-    {id:'football-laliga',name:'Football - La Liga'},
-    {id:'football-serie-a',name:'Football - Serie A'},
-    {id:'football-bundesliga',name:'Football - Bundesliga'},
-    {id:'basketball-nba',name:'Basketball - NBA'},
-    {id:'basketball-euroleague',name:'Basketball - EuroLeague'},
-    {id:'tennis-atp',name:'Tennis - ATP Tour'},
-    {id:'cricket-ipl',name:'Cricket - IPL'},
-    {id:'esports-cs2',name:'Esports - CS2'},
-    {id:'esports-dota2',name:'Esports - Dota 2'}
-  ],
-  'Slots': [
-    {id:'gates-olympus',name:'Gates of Olympus'},
-    {id:'sweet-bonanza',name:'Sweet Bonanza'},
-    {id:'big-bass-bonanza',name:'Big Bass Bonanza'},
-    {id:'dog-house',name:'The Dog House'},
-    {id:'starlight-princess',name:'Starlight Princess'},
-    {id:'sugar-rush',name:'Sugar Rush'},
-    {id:'book-of-dead',name:'Book of Dead'},
-    {id:'wolf-gold',name:'Wolf Gold'},
-    {id:'starburst',name:'Starburst'},
-    {id:'reactoonz',name:'Reactoonz'},
-    {id:'fire-joker',name:'Fire Joker'},
-    {id:'gonzo-quest',name:"Gonzo's Quest"}
-  ],
-  'Live Casino': [
-    {id:'lightning-roulette',name:'Lightning Roulette'},
-    {id:'crazy-time',name:'Crazy Time'},
-    {id:'live-blackjack',name:'Live Blackjack'},
-    {id:'speed-baccarat',name:'Speed Baccarat'},
-    {id:'dream-catcher',name:'Dream Catcher'},
-    {id:'monopoly-live',name:'Monopoly Live'},
-    {id:'dragon-tiger',name:'Dragon Tiger'}
-  ],
-  'Crash Games': [
-    {id:'aviator',name:'Aviator'},
-    {id:'jetx',name:'JetX'},
-    {id:'cash-crash',name:'Cash or Crash'}
-  ]
-};
+// BANKOBET GAMES
+const BANKOBET_TOP=['Football - Süper Lig','Football - Champions League','Live Blackjack','Lightning Roulette','Aviator','Sweet Bonanza','Basketball - EuroLeague','Crazy Time'];
+const BANKOBET_GAMES={'Top Sports':[{id:'fsl',name:'Football - Süper Lig'},{id:'fuc',name:'Football - Champions League'},{id:'fel',name:'Football - Europa League'},{id:'fpl',name:'Football - Premier League'},{id:'bel',name:'Basketball - EuroLeague'},{id:'bsl',name:'Basketball - BSL (Turkey)'},{id:'tatp',name:'Tennis - ATP Tour'},{id:'vol',name:'Volleyball - European Championships'},{id:'cs2',name:'Esports - CS2'},{id:'lol',name:'Esports - League of Legends'}],'Slots':[{id:'sb',name:'Sweet Bonanza'},{id:'go',name:'Gates of Olympus'},{id:'av',name:'Aviator'},{id:'bbb',name:'Big Bass Bonanza'},{id:'bod',name:'Book of Dead'},{id:'re',name:'Reactoonz'},{id:'st',name:'Starburst'},{id:'wg',name:'Wolf Gold'},{id:'fj',name:'Fire Joker'},{id:'dod',name:'Doom of Dead'}],'Live Casino':[{id:'lr',name:'Lightning Roulette'},{id:'ct',name:'Crazy Time'},{id:'lbj',name:'Live Blackjack'},{id:'lb',name:'Live Baccarat'},{id:'lp',name:"Live Poker - Texas Hold'em"},{id:'dt',name:'Dragon Tiger'},{id:'spr',name:'Speed Roulette'}],'Table Games':[{id:'cbj',name:'Classic Blackjack'},{id:'er',name:'European Roulette'},{id:'ar',name:'American Roulette'},{id:'bac',name:'Baccarat'},{id:'tcp',name:'Three Card Poker'}]};
+const BANKOBET_OFFERS=[{id:'bb1',title:'100% First Deposit Bonus up to 5,000 TRY',description:'New player welcome bonus'},{id:'bb2',title:'Casino Welcome Bonus up to 3,000 TRY + 200 Free Spins',description:'Casino welcome package'},{id:'bb3',title:'Weekly Sports Cashback up to 15%',description:'Up to 1,500 TRY back on sports losses'},{id:'bb4',title:'Monthly Casino Cashback up to 20%',description:'Up to 2,500 TRY monthly cashback'},{id:'bb5',title:'Daily Free Spins up to 50',description:'Free spins on deposits from 150 TRY'},{id:'bb6',title:'Boosted Odds up to 30%',description:'Boost your accumulator winnings'},{id:'bb7',title:'Sports Free Bet up to €20',description:'Free bet for new sports players'}];
 
-// BETEWIN offers
-const BETEWIN_OFFERS = [
-  {id:'bw-1',title:'100% First Deposit Bonus up to $150',description:'Sports welcome bonus for new players'},
-  {id:'bw-2',title:'Casino Welcome Package up to $1,750 + 150 Free Spins',description:'First four deposits casino bonus'},
-  {id:'bw-3',title:'Weekly Sports Cashback 3%',description:'Get 3% back on weekly sports losses'},
-  {id:'bw-4',title:'Free Bet on Champions League',description:'Activate freebets for Champions League bets'},
-  {id:'bw-5',title:'VIP Cashback Program',description:'8-tier VIP system with increasing cashback rewards'},
-  {id:'bw-6',title:'30 Free Spins on First Deposit',description:'Casino free spins on signup'}
-];
-
-// BANKOBET top performing
-const BANKOBET_TOP = ['Football (Süper Lig)','Football (Champions League)','Live Blackjack','Lightning Roulette','Aviator','Sweet Bonanza','Basketball (EuroLeague)','Crazy Time'];
-
-// BANKOBET full game/sport list
-const BANKOBET_GAMES = {
-  'Top Sports': [
-    {id:'football-superlig',name:'Football - Süper Lig'},
-    {id:'football-ucl',name:'Football - Champions League'},
-    {id:'football-europa',name:'Football - Europa League'},
-    {id:'football-pl',name:'Football - Premier League'},
-    {id:'basketball-euroleague',name:'Basketball - EuroLeague'},
-    {id:'basketball-bsl',name:'Basketball - BSL (Turkey)'},
-    {id:'tennis-atp',name:'Tennis - ATP Tour'},
-    {id:'volleyball-efv',name:'Volleyball - European Championships'},
-    {id:'esports-cs2',name:'Esports - CS2'},
-    {id:'esports-lol',name:'Esports - League of Legends'}
-  ],
-  'Slots': [
-    {id:'sweet-bonanza',name:'Sweet Bonanza'},
-    {id:'gates-olympus',name:'Gates of Olympus'},
-    {id:'aviator',name:'Aviator'},
-    {id:'big-bass',name:'Big Bass Bonanza'},
-    {id:'book-of-dead',name:'Book of Dead'},
-    {id:'reactoonz',name:'Reactoonz'},
-    {id:'starburst',name:'Starburst'},
-    {id:'wolf-gold',name:'Wolf Gold'},
-    {id:'fire-joker',name:'Fire Joker'},
-    {id:'doom-of-dead',name:'Doom of Dead'}
-  ],
-  'Live Casino': [
-    {id:'lightning-roulette',name:'Lightning Roulette'},
-    {id:'crazy-time',name:'Crazy Time'},
-    {id:'live-blackjack',name:'Live Blackjack'},
-    {id:'live-baccarat',name:'Live Baccarat'},
-    {id:'live-poker',name:'Live Poker - Texas Hold em'},
-    {id:'dragon-tiger',name:'Dragon Tiger'},
-    {id:'speed-roulette',name:'Speed Roulette'}
-  ],
-  'Table Games': [
-    {id:'blackjack-classic',name:'Classic Blackjack'},
-    {id:'european-roulette',name:'European Roulette'},
-    {id:'american-roulette',name:'American Roulette'},
-    {id:'baccarat',name:'Baccarat'},
-    {id:'three-card-poker',name:'Three Card Poker'}
-  ]
-};
-
-// BANKOBET offers
-const BANKOBET_OFFERS = [
-  {id:'bb-1',title:'100% First Deposit Bonus up to 5,000 TRY',description:'New player welcome bonus'},
-  {id:'bb-2',title:'Casino Welcome Bonus up to 3,000 TRY + 200 Free Spins',description:'Casino welcome package for new players'},
-  {id:'bb-3',title:'Weekly Sports Cashback up to 15%',description:'Get back up to 1,500 TRY on weekly sports losses'},
-  {id:'bb-4',title:'Monthly Casino Cashback up to 20%',description:'Loyal players earn up to 2,500 TRY cashback'},
-  {id:'bb-5',title:'Daily Free Spins up to 50',description:'Free spins on deposits starting at 150 TRY'},
-  {id:'bb-6',title:'Boosted Odds up to 30%',description:'Boost your accumulator bet winnings'},
-  {id:'bb-7',title:'Sports Free Bet up to €20',description:'Free bet for new sports players'}
-];
-
-const TOP_GAMES=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
-
-const WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
-const FEEDBACK_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+// WEBHOOKS
+const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
+const DAILY_LIMIT=10;
+const FB_APP_ID='PENDING';
+const FB_AD_ACCOUNT_ID='act_2178254872545632';
 
-let state={format:null,game:null,offer:null,style:null,customInstructions:null};
+// ============================================================
+// STATE
+// ============================================================
+let state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
 let galleryData=[];
 let currentUserEmail=null;
+
+// Helper: is this a Mario flow?
+function isMarioFlow(){
+  return state.client==='mario';
+}
+
+// Helper: get correct webhook
+function getWebhook(){
+  return isMarioFlow()?MARIO_WEBHOOK:SPINPALS_WEBHOOK;
+}
+
+// Helper: get correct games
+function getGames(){
+  if(!isMarioFlow()) return {top:SPINPALS_TOP, all:SPINPALS_GAMES};
+  if(state.platform==='betewin') return {top:BETEWIN_TOP, all:BETEWIN_GAMES};
+  return {top:BANKOBET_TOP, all:BANKOBET_GAMES};
+}
+
+// Helper: get correct offers
+function getOffers(){
+  if(!isMarioFlow()) return SPINPALS_OFFERS;
+  if(state.platform==='betewin') return BETEWIN_OFFERS;
+  return BANKOBET_OFFERS;
+}
 
 const chatEl=document.getElementById('chat');
 const galleryEl=document.getElementById('gallery');
 const modal=document.getElementById('modal');
 
-// ---- EMAIL GATE ----
+// ============================================================
+// EMAIL GATE
+// ============================================================
 function isValidEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
 
 document.getElementById('emailSubmit').onclick=function(){
@@ -377,9 +307,12 @@ document.getElementById('emailSubmit').onclick=function(){
 document.getElementById('emailField').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('emailSubmit').click();});
 
 function activateDashboard(email){
-  currentUserEmail=email.trim().toLowerCase();
+  currentUserEmail=email;
   document.getElementById('emailGate').style.display='none';
-  if(email.endsWith('@spinpals.com')||email.endsWith('@rmgs.online')||email.endsWith('@mario.com')){
+  const isSpinPals=email.endsWith('@spinpals.com');
+  const isMario=email.endsWith('@mario.com');
+  const isRmgs=email.endsWith('@rmgs.online');
+  if(isSpinPals||isMario||isRmgs){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
@@ -393,16 +326,18 @@ function activateDashboard(email){
 
 function resetUser(){
   currentUserEmail=null;
+  state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
   document.getElementById('emailGate').style.display='block';
   document.getElementById('chatSection').style.display='none';
   document.getElementById('gallerySection').style.display='none';
   document.getElementById('agentPending').style.display='none';
   document.getElementById('emailField').value='';
-  chatEl.innerHTML='';
-  galleryEl.innerHTML='';
+  chatEl.innerHTML='';galleryEl.innerHTML='';
 }
 
-// ---- GALLERY ----
+// ============================================================
+// GALLERY
+// ============================================================
 async function fetchGallery(){
   try{const r=await fetch(GALLERY_URL+Date.now());if(r.ok){galleryData=await r.json();return galleryData}}catch(e){}
   return galleryData;
@@ -410,102 +345,79 @@ async function fetchGallery(){
 
 function renderGallery(filter='all'){
   galleryEl.innerHTML='';
-  let items=galleryData.filter(c=>c.image_url&&c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail.trim().toLowerCase());
+  let items=galleryData.filter(c=>c.image_url&&c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail);
   if(filter!=='all')items=items.filter(c=>c.format===filter);
   if(!items.length){galleryEl.innerHTML='<div class="gallery-empty">No creatives yet. Generate your first ad above.</div>';return;}
   items.forEach(c=>{
     const card=document.createElement('div');card.className='gallery-card';
     card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
-    card.onclick=()=>openModal(c);
-    galleryEl.appendChild(card);
+    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
   });
 }
 
 document.querySelectorAll('.filter-tab').forEach(tab=>{
-  tab.onclick=()=>{
-    document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');
-    tab.className='filter-tab active';
-    renderGallery(tab.dataset.f);
-  };
+  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');tab.className='filter-tab active';renderGallery(tab.dataset.f);};
 });
 
-// ---- WEBHOOK ----
-async function triggerWebhook(data, url){
-  const endpoint=url||WEBHOOK;
-  try{await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+// ============================================================
+// DAILY LIMIT
+// ============================================================
+function getTodayKey(email){return 'gen_count_'+email+'_'+new Date().toISOString().split('T')[0];}
+function getGenerationCount(email){return parseInt(localStorage.getItem(getTodayKey(email))||'0',10);}
+function incrementGenerationCount(email){localStorage.setItem(getTodayKey(email),getGenerationCount(email)+1);}
+function hasReachedDailyLimit(email){return getGenerationCount(email)>=DAILY_LIMIT;}
+
+// ============================================================
+// WEBHOOK
+// ============================================================
+async function triggerWebhook(data,url){
+  try{await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
 }
 
-// ---- DAILY LIMIT ----
-const DAILY_LIMIT=10;
-
-function getTodayKey(email){
-  const today=new Date().toISOString().split('T')[0];
-  return 'gen_count_'+email+'_'+today;
-}
-
-function getGenerationCount(email){
-  const key=getTodayKey(email);
-  return parseInt(localStorage.getItem(key)||'0',10);
-}
-
-function incrementGenerationCount(email){
-  const key=getTodayKey(email);
-  const current=getGenerationCount(email);
-  localStorage.setItem(key,current+1);
-}
-
-function hasReachedDailyLimit(email){
-  return getGenerationCount(email)>=DAILY_LIMIT;
-}
-
-// ---- CHAT HELPERS ----
+// ============================================================
+// CHAT HELPERS
+// ============================================================
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
 function msg(html,type='bot'){
   const d=document.createElement('div');
   d.className='bubble '+(type==='user'?'user':'bot');
-  d.innerHTML=html;
-  chatEl.appendChild(d);
-  chatEl.scrollTop=chatEl.scrollHeight;
-  return d;
+  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
 }
 
 function lockButtons(container){
-  container.querySelectorAll('button,.offer-card').forEach(el=>{
-    el.style.pointerEvents='none';el.style.opacity='0.4';
-  });
+  container.querySelectorAll('button,.offer-card').forEach(el=>{el.style.pointerEvents='none';el.style.opacity='0.4';});
 }
 
-// ---- STEP 1: START ----
+// ============================================================
+// FLOW - startChat
+// ============================================================
 async function startChat(){
   chatEl.innerHTML='';
-  state={format:null,game:null,offer:null,style:null,customInstructions:null,platform:null};
+  state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
   window.scrollTo({top:0,behavior:'smooth'});
   await delay(200);
-  // rmgs.online goes straight to client selection - no ready screen
-  if(currentUserEmail.endsWith('@rmgs.online')){stepClient();return;}
-  const m=msg('Ready to generate your next ad creative?');
-  const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';btnWrap.style.display='flex';btnWrap.style.gap='10px';btnWrap.style.flexWrap='wrap';
 
-  const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
-  btn.onclick=()=>{
-    if(btn.disabled)return;
-    btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';
-    if(currentUserEmail.endsWith('@mario.com')){stepClient();}else{stepFormat();}
-  };
-  btnWrap.appendChild(btn);
+  // RMGS.ONLINE: show big client selector first
+  if(currentUserEmail.endsWith('@rmgs.online')){
+    showRmgsClientSelector();
+    return;
+  }
 
-  const quickBtn=document.createElement('button');quickBtn.className='opt-btn';quickBtn.textContent='⚡ Quick Generate';
-  quickBtn.onclick=()=>{if(quickBtn.disabled)return;quickBtn.disabled=true;quickBtn.style.opacity='0.5';btn.disabled=true;btn.style.opacity='0.5';doQuickGenerate();};
-  btnWrap.appendChild(quickBtn);
-
-  m.appendChild(btnWrap);
+  // SPINPALS or MARIO: set client automatically
+  if(currentUserEmail.endsWith('@spinpals.com')){
+    state.client='spinpals';
+    showStartButtons();
+  } else if(currentUserEmail.endsWith('@mario.com')){
+    state.client='mario';
+    stepPlatform();
+  }
 }
 
-// ---- RMGS: CLIENT SELECTION (for rmgs.online users) ----
-async function stepClient(){
-  await delay(200);
-  // Bigger prominent client selection for rmgs.online
+// ============================================================
+// RMGS CLIENT SELECTOR (only for rmgs.online)
+// ============================================================
+function showRmgsClientSelector(){
   const wrap=document.createElement('div');
   wrap.style.cssText='text-align:center;padding:30px 20px;';
   const title=document.createElement('div');
@@ -516,25 +428,26 @@ async function stepClient(){
   sub.textContent='Select a client to get started.';
   const w=document.createElement('div');
   w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
+
   [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)']].forEach(([val,label])=>{
     const b=document.createElement('button');
     b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
     b.textContent=label;
-    b.onmouseover=()=>{b.style.borderColor='var(--blue)';b.style.color='var(--blue)';b.style.background='var(--blue-glow)';};
+    b.onmouseover=()=>{if(!b.dataset.selected){b.style.borderColor='var(--blue)';b.style.color='var(--blue)';b.style.background='var(--blue-glow)';}};
     b.onmouseout=()=>{if(!b.dataset.selected){b.style.borderColor='var(--border)';b.style.color='var(--txt)';b.style.background='var(--card)';}};
     b.onclick=()=>{
       if(b.dataset.selected)return;
       b.dataset.selected='1';
       w.querySelectorAll('button').forEach(x=>{x.style.pointerEvents='none';x.style.opacity='0.4';});
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.client=val;
       chatEl.innerHTML='';
+      msg(label,'user');
       if(val==='spinpals'){
         state.platform=null;
-        msg(label,'user');
-        stepRmgsStart();
+        showStartButtons();
       } else {
-        msg(label,'user');
-        stepPlatformRmgs();
+        stepPlatform();
       }
     };
     w.appendChild(b);
@@ -543,11 +456,13 @@ async function stepClient(){
   chatEl.appendChild(wrap);
 }
 
-// ---- RMGS: LETS GO / QUICK GENERATE after client selection ----
-async function stepRmgsStart(){
+// ============================================================
+// SHOW START BUTTONS (Let's go / Quick Generate)
+// ============================================================
+async function showStartButtons(){
   await delay(250);
   const m=msg('Ready to generate your next ad creative?');
-  const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';btnWrap.style.display='flex';btnWrap.style.gap='10px';btnWrap.style.flexWrap='wrap';
+  const btnWrap=document.createElement('div');btnWrap.style.cssText='margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;';
   const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
   btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';stepFormat();};
   btnWrap.appendChild(btn);
@@ -557,23 +472,9 @@ async function stepRmgsStart(){
   m.appendChild(btnWrap);
 }
 
-// ---- RMGS: PLATFORM SELECTION then LETS GO for mario path ----
-async function stepPlatformRmgs(){
-  await delay(250);
-  const m=msg('Which <span class="accent">platform</span> are we creating for?');
-  const w=document.createElement('div');w.className='opt-group';
-  [['betewin','Betewin'],['bankobet','Bankobet']].forEach(([val,label])=>{
-    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
-    b.onclick=()=>{
-      if(b.disabled)return;
-      lockButtons(w);
-      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
-      state.platform=val;msg(label,'user');stepRmgsStart();
-    };w.appendChild(b);
-  });m.appendChild(w);
-}
-
-// ---- MARIO: STEP 1.5 - PLATFORM SELECTION ----
+// ============================================================
+// STEP: PLATFORM (Mario only)
+// ============================================================
 async function stepPlatform(){
   await delay(250);
   const m=msg('Which <span class="accent">platform</span> are we creating for?');
@@ -584,148 +485,14 @@ async function stepPlatform(){
       if(b.disabled)return;
       lockButtons(w);
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
-      state.platform=val;msg(label,'user');stepFormat();
+      state.platform=val;msg(label,'user');showStartButtons();
     };w.appendChild(b);
   });m.appendChild(w);
 }
 
-// ---- QUICK GENERATE ----
-async function doQuickGenerate(){
-  const formats=['portrait','square','both'];
-  const styles=['Classic','Realistic'];
-  const isMarioQuick=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
-  // For mario quick generate, randomly pick platform too
-  if(isMarioQuick){
-    state.platform=Math.random()>0.5?'betewin':'bankobet';
-  }
-  const allGames=[];
-  if(isMarioQuick){
-    const gd=state.platform==='betewin'?BETEWIN_GAMES:BANKOBET_GAMES;
-    Object.values(gd).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
-  } else {
-    Object.values(GAMES).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
-  }
-  const offersPool=isMarioQuick?(state.platform==='betewin'?BETEWIN_OFFERS:BANKOBET_OFFERS):OFFERS;
-
-  const randFormat=formats[Math.floor(Math.random()*formats.length)];
-  const randStyle=styles[Math.floor(Math.random()*styles.length)];
-  const randGame=allGames[Math.floor(Math.random()*allGames.length)];
-  const randOffer=offersPool[Math.floor(Math.random()*offersPool.length)];
-
-  state.format=randFormat;
-  state.style=randStyle;
-  state.game=randGame;
-  state.offer=randOffer.title;
-  state.customInstructions=null;
-
-  const fmtLabel=randFormat==='portrait'?'Portrait (9:16)':randFormat==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
-  msg('⚡ Quick Generate','user');
-  await delay(250);
-  msg('<div class="summary-card"><div class="summary-title">Quick Generate — Selected For You</div>'+
-    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Style</span>'+randStyle+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Offer</span>'+randOffer.title+'</div></div>');
-
-  await delay(400);
-
-  // Force fresh fetch before generating so we have accurate snapshot
-  await fetchGallery();
-  const snapCount=galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).length;
-  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
-  const startTs=Date.now();
-
-  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
-    '<div class="loading-text">Generating your '+randGame+' ad...</div>'+
-    '<div class="est-time">Estimated time: 2–5 minutes</div>'+
-    '<div class="est-sub">Your creative is being crafted</div>'+
-    '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
-
-  // Check daily limit
-  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
-    msg('<div style="text-align:center;padding:10px 0">'+
-      '<div style="font-size:28px;margin-bottom:12px">⛔</div>'+
-      '<div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div>'+
-      '<div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div>'+
-      '<div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div>'+
-      '</div>');
-    return;
-  }
-  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
-  const webhookUrl=(currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null))?MARIO_WEBHOOK:WEBHOOK;
-  await triggerWebhook(payload, webhookUrl);
-  incrementGenerationCount(currentUserEmail);
-
-  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
-
-  let found=null;
-  while(!found){
-    await delay(7000);
-    const fresh=await fetchGallery();
-    const freshUserItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
-    if(freshUserItems.length>snapCount){
-      const newItems=freshUserItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
-      if(newItems.length>0){
-        newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-        found=newItems[0];
-      }
-    }
-  }
-
-  clearInterval(timerInterval);
-  const container=loadMsg.querySelector('.loading');
-  if(container){
-    container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div>'+
-      '<div class="result-text"><span style="color:var(--blue);font-weight:600">'+found.game_name+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
-      '<img class="result-img" src="'+found.image_url+'" alt="ad"></div>';
-  }
-  const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
-  const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;
-  dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
-  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
-  anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
-  // Feedback buttons
-  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
-  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
-  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';thumbsUp.title='Good creative';
-  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';thumbsDown.title='Needs improvement';
-  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
-
-  thumbsUp.onclick=async()=>{
-    if(thumbsUp.disabled)return;
-    thumbsUp.classList.add('selected-up');
-    thumbsDown.disabled=true;thumbsUp.disabled=true;
-    thankMsg.style.display='block';
-    await sendFeedback('positive',found);
-  };
-  thumbsDown.onclick=async()=>{
-    if(thumbsDown.disabled)return;
-    thumbsDown.classList.add('selected-down');
-    thumbsUp.disabled=true;thumbsDown.disabled=true;
-    thankMsg.style.display='block';
-    await sendFeedback('negative',found);
-  };
-
-  feedbackWrap.appendChild(feedbackLabel);
-  feedbackWrap.appendChild(thumbsUp);
-  feedbackWrap.appendChild(thumbsDown);
-  // Facebook upload button
-  const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
-  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';fbBtn.style.cssText='margin:0 auto;';
-  fbBtn.innerHTML=getFbBtnHTML();
-  const fbStatus=document.createElement('div');fbStatus.className='fb-status';
-  fbBtn.onclick=()=>uploadToFacebook(found.image_url,fbBtn,fbStatus);
-  fbWrap.appendChild(fbBtn);fbWrap.appendChild(fbStatus);
-
-  loadMsg.appendChild(feedbackWrap);
-  loadMsg.appendChild(thankMsg);
-  loadMsg.appendChild(acts);
-  loadMsg.appendChild(fbWrap);
-  chatEl.scrollTop=chatEl.scrollHeight;
-  renderGallery();
-}
-
-// ---- STEP 2: FORMAT ----
+// ============================================================
+// STEP: FORMAT
+// ============================================================
 async function stepFormat(){
   msg("Let's go →",'user');await delay(250);
   const m=msg('What <span class="accent">format</span> do you need?');
@@ -733,192 +500,134 @@ async function stepFormat(){
   [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']].forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
     b.onclick=()=>{
-      if(b.disabled)return;
-      lockButtons(w);
+      if(b.disabled)return;lockButtons(w);
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
       state.format=val;msg(label,'user');stepStyle();
-    };
-    w.appendChild(b);
-  });
-  m.appendChild(w);
+    };w.appendChild(b);
+  });m.appendChild(w);
 }
 
-// ---- STEP 3: STYLE ----
+// ============================================================
+// STEP: STYLE
+// ============================================================
 async function stepStyle(){
   await delay(250);
   const m=msg('What <span class="accent">creative style</span> do you want?');
   const w=document.createElement('div');w.className='opt-group';
 
-  // Classic
   const bClassic=document.createElement('button');bClassic.className='opt-btn';bClassic.textContent='Classic';
-  bClassic.onclick=()=>{
-    if(bClassic.disabled)return;
-    lockButtons(w);customWrap.classList.remove('visible');
-    bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';
-    state.style='Classic';state.customInstructions=null;msg('Classic','user');stepGame();
-  };w.appendChild(bClassic);
+  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');stepGame();};
+  w.appendChild(bClassic);
 
-  // Text Only — skips game
   const bText=document.createElement('button');bText.className='opt-btn';bText.textContent='Text Only';
-  bText.onclick=()=>{
-    if(bText.disabled)return;
-    lockButtons(w);customWrap.classList.remove('visible');
-    bText.style.opacity='1';bText.style.borderColor='var(--blue)';bText.style.color='var(--blue)';
-    state.style='Text Only';state.customInstructions=null;state.game='N/A';msg('Text Only','user');stepOffer();
-  };w.appendChild(bText);
+  bText.onclick=()=>{if(bText.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bText.style.opacity='1';bText.style.borderColor='var(--blue)';bText.style.color='var(--blue)';state.style='Text Only';state.customInstructions=null;state.game='N/A';msg('Text Only','user');stepOffer();};
+  w.appendChild(bText);
 
-  // Realistic
   const bRealistic=document.createElement('button');bRealistic.className='opt-btn';bRealistic.textContent='Realistic';
-  bRealistic.onclick=()=>{
-    if(bRealistic.disabled)return;
-    lockButtons(w);customWrap.classList.remove('visible');
-    bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';
-    state.style='Realistic';state.customInstructions=null;msg('Realistic','user');stepGame();
-  };w.appendChild(bRealistic);
+  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');stepGame();};
+  w.appendChild(bRealistic);
 
-  // Custom
   const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
-  customBtn.onclick=()=>{
-    if(customBtn.disabled)return;
-    customWrap.classList.toggle('visible');
-    customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';
-  };w.appendChild(customBtn);
+  customBtn.onclick=()=>{if(customBtn.disabled)return;customWrap.classList.toggle('visible');customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';};
+  w.appendChild(customBtn);
   m.appendChild(w);
 
-  // Custom textarea
   const customWrap=document.createElement('div');customWrap.className='custom-input-wrap';
   const textarea=document.createElement('textarea');textarea.className='custom-textarea';
-  textarea.placeholder='Describe exactly what you want... e.g. "Bold text, purple background, yellow CTA button"';
+  textarea.placeholder='Describe exactly what you want...';
   const submitBtn=document.createElement('button');submitBtn.className='custom-submit';submitBtn.textContent='Use This Style →';
   submitBtn.onclick=()=>{
-    const val=textarea.value.trim();
-    if(!val)return;
-    lockButtons(w);
-    customBtn.style.opacity='1';
-    state.style='Custom';
-    state.customInstructions=val;
-    msg('Custom: '+val,'user');
-    stepGame();
+    const val=textarea.value.trim();if(!val)return;
+    lockButtons(w);customBtn.style.opacity='1';
+    state.style='Custom';state.customInstructions=val;
+    msg('Custom: '+val,'user');stepGame();
   };
   customWrap.appendChild(textarea);customWrap.appendChild(submitBtn);
   m.appendChild(customWrap);
   chatEl.scrollTop=chatEl.scrollHeight;
 }
 
-// ---- STEP 4: GAME (skipped for Text Only) ----
+// ============================================================
+// STEP: GAME
+// ============================================================
 async function stepGame(){
   await delay(250);
   const m=msg('Which <span class="accent">game</span> should we feature?');
   const sel=document.createElement('div');sel.className='game-sel';
-
   const wrap=document.createElement('div');wrap.className='game-dropdown-wrap';
-
   const selected=document.createElement('div');selected.className='game-dropdown-selected';
   selected.innerHTML='<span class="selected-text">Select a game...</span><svg class="game-dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-
   const list=document.createElement('div');list.className='game-dropdown-list';
 
-  // Toggle open/close
-  selected.onclick=()=>{
-    selected.classList.toggle('open');
-    list.classList.toggle('open');
-  };
+  selected.onclick=()=>{selected.classList.toggle('open');list.classList.toggle('open');};
+  document.addEventListener('click',function closeDD(e){if(!wrap.contains(e.target)){selected.classList.remove('open');list.classList.remove('open');document.removeEventListener('click',closeDD);}});
 
-  // Close when clicking outside
-  document.addEventListener('click',function closeDropdown(e){
-    if(!wrap.contains(e.target)){
-      selected.classList.remove('open');
-      list.classList.remove('open');
-      document.removeEventListener('click',closeDropdown);
-    }
-  });
-
-  function addGroup(label, games, isTop){
-    const groupLabel=document.createElement('div');groupLabel.className='game-dropdown-group-label';
-    if(isTop){
-      groupLabel.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'+label;
-    } else {
-      groupLabel.textContent=label;
-    }
-    list.appendChild(groupLabel);
+  function addGroup(label,games,isTop){
+    const gl=document.createElement('div');gl.className='game-dropdown-group-label';
+    if(isTop){gl.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'+label;}
+    else{gl.textContent=label;}
+    list.appendChild(gl);
     games.forEach(name=>{
       const item=document.createElement('div');item.className='game-dropdown-item';item.textContent=name;
       item.onclick=()=>{
+        if(item.dataset.selected)return;item.dataset.selected='1';
         selected.querySelector('.selected-text').textContent=name;
-        selected.classList.remove('open');selected.classList.add('open');
         selected.style.pointerEvents='none';selected.style.opacity='0.7';
-        list.classList.remove('open');
-        selected.style.color='var(--txt)';
+        list.classList.remove('open');selected.classList.remove('open');
         state.game=name;msg(name,'user');stepOffer();
       };
       list.appendChild(item);
     });
   }
 
-  // Random pick item at very top
-  const randomItem=document.createElement('div');randomItem.className='game-dropdown-item';
-  randomItem.style.borderBottom='1px solid var(--blue)';
-  randomItem.style.color='var(--blue)';
-  randomItem.style.fontWeight='600';
-  randomItem.style.display='flex';
-  randomItem.style.alignItems='center';
-  randomItem.style.gap='8px';
-  randomItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>Random Game';
-  randomItem.onclick=()=>{
-    const allGames=[];
-    const isMarioRand=currentUserEmail.endsWith("@mario.com")||(currentUserEmail.endsWith("@rmgs.online")&&state.platform&&state.platform!=="spinpals"&&state.platform!==null);
-    const randGamesData=isMarioRand?(state.platform==="betewin"?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
-    Object.values(randGamesData).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
-    const pick=allGames[Math.floor(Math.random()*allGames.length)];
+  // Random game item
+  const randItem=document.createElement('div');randItem.className='game-dropdown-item';
+  randItem.style.cssText='border-bottom:1px solid var(--blue);color:var(--blue);font-weight:600;display:flex;align-items:center;gap:8px;';
+  randItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>Random Game';
+  randItem.onclick=()=>{
+    const {top,all}=getGames();
+    const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+    const pick=allNames[Math.floor(Math.random()*allNames.length)];
     selected.querySelector('.selected-text').textContent=pick;
-    selected.classList.remove('open');
     selected.style.pointerEvents='none';selected.style.opacity='0.7';
-    list.classList.remove('open');
-    selected.style.color='var(--txt)';
+    list.classList.remove('open');selected.classList.remove('open');
     state.game=pick;msg(pick,'user');stepOffer();
   };
-  list.appendChild(randomItem);
+  list.appendChild(randItem);
 
-  // Use platform-specific games for mario, SpinPals games otherwise
-  const isMario=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
-  const topGames=isMario?(state.platform==='betewin'?BETEWIN_TOP:BANKOBET_TOP):TOP_GAMES;
-  const gamesData=isMario?(state.platform==='betewin'?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
-
-  addGroup('Top Performing', topGames, true);
-  if(isMario){
-    Object.keys(gamesData).sort().forEach(cat=>addGroup(cat, gamesData[cat].map(g=>g.name), false));
-  } else {
-    Object.keys(gamesData).sort().forEach(cat=>addGroup(cat, gamesData[cat].map(g=>g.name), false));
-  }
+  // Use getGames() helper - automatically uses correct client's games
+  const {top,all}=getGames();
+  addGroup('Top Performing',top,true);
+  Object.keys(all).sort().forEach(cat=>addGroup(cat,all[cat].map(g=>g.name),false));
 
   wrap.appendChild(selected);wrap.appendChild(list);
   sel.appendChild(wrap);m.appendChild(sel);
   chatEl.scrollTop=chatEl.scrollHeight;
 }
 
-// ---- STEP 5: OFFER ----
+// ============================================================
+// STEP: OFFER
+// ============================================================
 async function stepOffer(){
   await delay(250);
   const m=msg('Which <span class="accent">offer</span> should we feature?');
   const w=document.createElement('div');w.className='offer-list';
-  const isMario=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
-  const offersToShow=isMario?(state.platform==='betewin'?BETEWIN_OFFERS:BANKOBET_OFFERS):OFFERS;
-  offersToShow.forEach(o=>{
+  // Use getOffers() helper - automatically uses correct client's offers
+  getOffers().forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
     card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
     card.onclick=()=>{
-      if(card.dataset.selected)return;
-      card.dataset.selected='1';
-      lockButtons(w);
-      card.style.opacity='1';card.style.borderColor='var(--blue)';
+      if(card.dataset.selected)return;card.dataset.selected='1';
+      lockButtons(w);card.style.opacity='1';card.style.borderColor='var(--blue)';
       state.offer=o.title;msg(o.title,'user');stepSummary();
-    };
-    w.appendChild(card);
+    };w.appendChild(card);
   });
   m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
-// ---- STEP 6: SUMMARY ----
+// ============================================================
+// STEP: SUMMARY
+// ============================================================
 async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
@@ -939,34 +648,55 @@ async function stepSummary(){
   acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
 }
 
-// ---- GENERATE ----
-async function doGenerate(){
-  msg('Generate Ad →','user');await delay(250);
+// ============================================================
+// QUICK GENERATE
+// ============================================================
+async function doQuickGenerate(){
+  // For mario without platform selected yet, pick one randomly
+  if(isMarioFlow()&&!state.platform){
+    state.platform=Math.random()>0.5?'betewin':'bankobet';
+  }
+
+  const formats=['portrait','square','both'];
+  const styles=['Classic','Realistic'];
+  const {top,all}=getGames();
+  const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  const offers=getOffers();
+
+  const randFormat=formats[Math.floor(Math.random()*formats.length)];
+  const randStyle=styles[Math.floor(Math.random()*styles.length)];
+  const randGame=allNames[Math.floor(Math.random()*allNames.length)];
+  const randOffer=offers[Math.floor(Math.random()*offers.length)];
+
+  state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
+
+  const fmtLabel=randFormat==='portrait'?'Portrait (9:16)':randFormat==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
+  msg('⚡ Quick Generate','user');
+  await delay(250);
+  msg('<div class="summary-card"><div class="summary-title">Quick Generate — Selected For You</div>'+
+    platformRow+
+    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+randStyle+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Offer</span>'+randOffer.title+'</div></div>');
+  await delay(400);
+
   // Check daily limit
   if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
-    msg('<div style="text-align:center;padding:10px 0">'+
-      '<div style="font-size:28px;margin-bottom:12px">⛔</div>'+
-      '<div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div>'+
-      '<div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div>'+
-      '<div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div>'+
-      '</div>');
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
     return;
   }
-  // Force fresh fetch to get accurate snapshot before generating
-  await fetchGallery();
-  const snapCount=galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).length;
-  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
-  const startTs=Date.now();
-  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div>'+
-    '<div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div>'+
-    '<div class="est-time">Estimated time: 2–5 minutes</div>'+
-    '<div class="est-sub">Your creative is being crafted</div>'+
-    '<div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
 
-  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
-  if(state.customInstructions)payload.custom_instructions=state.customInstructions;
-  const webhookUrl=(currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null))?MARIO_WEBHOOK:WEBHOOK;
-  await triggerWebhook(payload, webhookUrl);
+  await fetchGallery();
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 2–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
+
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
@@ -975,57 +705,80 @@ async function doGenerate(){
   while(!found){
     await delay(7000);
     const fresh=await fetchGallery();
-    const freshUserItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
-    if(freshUserItems.length>snapCount){
-      const newItems=freshUserItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
-      if(newItems.length>0){
-        newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-        found=newItems[0];
-      }
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
     }
   }
-
   clearInterval(timerInterval);
-  const container=loadMsg.querySelector('.loading');
-  if(container){
-    container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div>'+
-      '<div class="result-text"><span style="color:var(--blue);font-weight:600">'+(found.game_name&&found.game_name!=='N/A'?found.game_name:state.style)+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div>'+
-      '<img class="result-img" src="'+found.image_url+'" alt="ad"></div>';
+  showResult(loadMsg,found);
+}
+
+// ============================================================
+// GENERATE
+// ============================================================
+async function doGenerate(){
+  msg('Generate Ad →','user');await delay(250);
+
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
   }
+
+  await fetchGallery();
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  const loadMsg=msg('<div class="loading"><div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 2–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div></div>');
+
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  if(state.customInstructions)payload.custom_instructions=state.customInstructions;
+  await triggerWebhook(payload,getWebhook());
+  incrementGenerationCount(currentUserEmail);
+
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
+  let found=null;
+  while(!found){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
+    }
+  }
+  clearInterval(timerInterval);
+  showResult(loadMsg,found);
+}
+
+// ============================================================
+// SHOW RESULT
+// ============================================================
+function showResult(loadMsg,found){
+  const container=loadMsg.querySelector('.loading');
+  if(container){container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div><div class="result-text"><span style="color:var(--blue);font-weight:600">'+(found.game_name&&found.game_name!=='N/A'?found.game_name:state.style)+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div><img class="result-img" src="'+found.image_url+'" alt="ad"></div>';}
+
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
-  const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;
-  dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
-  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';
-  anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
-  // Feedback buttons
+  const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
+  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
+
+  // Feedback
   const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
   const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
-  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';thumbsUp.title='Good creative';
-  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';thumbsDown.title='Needs improvement';
+  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
   const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
+  thumbsUp.onclick=async()=>{if(thumbsUp.disabled)return;thumbsUp.classList.add('selected-up');thumbsDown.disabled=true;thumbsUp.disabled=true;thankMsg.style.display='block';await sendFeedback('positive',found);};
+  thumbsDown.onclick=async()=>{if(thumbsDown.disabled)return;thumbsDown.classList.add('selected-down');thumbsUp.disabled=true;thumbsDown.disabled=true;thankMsg.style.display='block';await sendFeedback('negative',found);};
+  feedbackWrap.appendChild(feedbackLabel);feedbackWrap.appendChild(thumbsUp);feedbackWrap.appendChild(thumbsDown);
 
-  thumbsUp.onclick=async()=>{
-    if(thumbsUp.disabled)return;
-    thumbsUp.classList.add('selected-up');
-    thumbsDown.disabled=true;thumbsUp.disabled=true;
-    thankMsg.style.display='block';
-    await sendFeedback('positive',found);
-  };
-  thumbsDown.onclick=async()=>{
-    if(thumbsDown.disabled)return;
-    thumbsDown.classList.add('selected-down');
-    thumbsUp.disabled=true;thumbsDown.disabled=true;
-    thankMsg.style.display='block';
-    await sendFeedback('negative',found);
-  };
-
-  feedbackWrap.appendChild(feedbackLabel);
-  feedbackWrap.appendChild(thumbsUp);
-  feedbackWrap.appendChild(thumbsDown);
-  // Facebook upload button
+  // Facebook upload
   const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
-  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';fbBtn.style.cssText='margin:0 auto;';
-  fbBtn.innerHTML=getFbBtnHTML();
+  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
+  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
   const fbStatus=document.createElement('div');fbStatus.className='fb-status';
   fbBtn.onclick=()=>uploadToFacebook(found.image_url,fbBtn,fbStatus);
   fbWrap.appendChild(fbBtn);fbWrap.appendChild(fbStatus);
@@ -1038,89 +791,28 @@ async function doGenerate(){
   renderGallery();
 }
 
-// ---- FEEDBACK ----
-async function sendFeedback(feedback, imageData){
-  try{
-    await fetch(FEEDBACK_WEBHOOK,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        event:'creative_feedback',
-        feedback:feedback,
-        game_name:imageData.game_name,
-        format:imageData.format,
-        style:imageData.style,
-        offer_text:imageData.offer_text,
-        image_url:imageData.image_url,
-        user_email:currentUserEmail
-      }),
-      mode:'no-cors'
-    });
-  }catch(e){}
+// ============================================================
+// FEEDBACK
+// ============================================================
+async function sendFeedback(feedback,imageData){
+  try{await fetch(getWebhook(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'creative_feedback',feedback:feedback,game_name:imageData.game_name,format:imageData.format,style:imageData.style,offer_text:imageData.offer_text,image_url:imageData.image_url,user_email:currentUserEmail}),mode:'no-cors'});}catch(e){}
 }
 
-// ---- FACEBOOK MEDIA LIBRARY UPLOAD ----
-// Placeholder - will be wired up with real App Token once Meta App is set up
-const FB_APP_ID = 'PENDING'; // Will be filled in once Meta App is created
-const FB_AD_ACCOUNT_ID = 'act_2178254872545632'; // SpinPals account
-
-async function uploadToFacebook(imageUrl, btn, statusEl){
-  btn.disabled=true;
-  btn.classList.add('uploading');
-  btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Uploading...';
-
-  // Check if access token is configured
-  if(FB_APP_ID === 'PENDING'){
-    btn.disabled=false;
-    btn.classList.remove('uploading');
-    btn.innerHTML=getFbBtnHTML();
-    statusEl.className='fb-status error';
-    statusEl.textContent='Facebook connection not yet configured. Coming soon.';
-    setTimeout(()=>{statusEl.className='fb-status';},3000);
-    return;
-  }
-
-  try{
-    // Will use Meta Marketing API to upload to media library
-    // POST /act_{ad-account-id}/adimages with the image URL
-    const token = localStorage.getItem('fb_access_token');
-    if(!token){
-      // Trigger OAuth flow
-      window.open('https://www.facebook.com/dialog/oauth?client_id='+FB_APP_ID+'&redirect_uri='+encodeURIComponent(window.location.href)+'&scope=ads_management,business_management&response_type=token','_blank','width=600,height=600');
-      statusEl.className='fb-status error';
-      statusEl.textContent='Please connect your Facebook account first.';
-      btn.disabled=false;btn.classList.remove('uploading');btn.innerHTML=getFbBtnHTML();
-      return;
-    }
-
-    const res = await fetch('https://graph.facebook.com/v19.0/'+FB_AD_ACCOUNT_ID+'/adimages', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({url: imageUrl, access_token: token})
-    });
-    const data = await res.json();
-    if(data.images||data.id){
-      btn.classList.remove('uploading');
-      btn.classList.add('success');
-      btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Uploaded to Facebook';
-      statusEl.className='fb-status success';
-      statusEl.textContent='Creative added to your Facebook Media Library.';
-    } else {
-      throw new Error(data.error?.message||'Upload failed');
-    }
-  } catch(e){
-    btn.disabled=false;btn.classList.remove('uploading');btn.innerHTML=getFbBtnHTML();
-    statusEl.className='fb-status error';
-    statusEl.textContent='Upload failed: '+e.message;
-    setTimeout(()=>{statusEl.className='fb-status';},4000);
+// ============================================================
+// FACEBOOK UPLOAD
+// ============================================================
+async function uploadToFacebook(imageUrl,btn,statusEl){
+  btn.disabled=true;btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Uploading...';
+  if(FB_APP_ID==='PENDING'){
+    btn.disabled=false;btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
+    statusEl.className='fb-status error';statusEl.textContent='Facebook connection not yet configured. Coming soon.';
+    setTimeout(()=>{statusEl.className='fb-status';},3000);return;
   }
 }
 
-function getFbBtnHTML(){
-  return '<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
-}
-
-// ---- MODAL ----
+// ============================================================
+// MODAL
+// ============================================================
 function openModal(c){
   document.getElementById('modalImg').src=c.image_url;
   document.getElementById('modalTitle').textContent=c.game_name;
