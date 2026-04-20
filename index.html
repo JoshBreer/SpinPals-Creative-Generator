@@ -578,6 +578,21 @@ async function stepGame(){
     });
   }
 
+  // No Specific Game option (shown for Custom style only)
+  if(state.style==='Custom'){
+    const noGameItem=document.createElement('div');noGameItem.className='game-dropdown-item';
+    noGameItem.style.cssText='border-bottom:1px solid var(--border);color:var(--txt2);font-weight:600;display:flex;align-items:center;gap:8px;';
+    noGameItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>No Specific Game';
+    noGameItem.onclick=()=>{
+      if(noGameItem.dataset.selected)return;noGameItem.dataset.selected='1';
+      selected.querySelector('.selected-text').textContent='No Specific Game';
+      selected.style.pointerEvents='none';selected.style.opacity='0.7';
+      list.classList.remove('open');selected.classList.remove('open');
+      state.game='N/A';msg('No Specific Game','user');stepOffer();
+    };
+    list.appendChild(noGameItem);
+  }
+
   // Random game item
   const randItem=document.createElement('div');randItem.className='game-dropdown-item';
   randItem.style.cssText='border-bottom:1px solid var(--blue);color:var(--blue);font-weight:600;display:flex;align-items:center;gap:8px;';
