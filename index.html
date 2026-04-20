@@ -763,7 +763,7 @@ async function doQuickGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
   }
 
   let found=null;
@@ -777,6 +777,8 @@ async function doQuickGenerate(){
     }
   }
   clearInterval(timerInterval);
+  // Wait for fal.ai to finish if it hasn't already (it's usually done long before Twin)
+  await falPromise;
   if(found)showResult(loadMsg,found,falImageUrl);
 }
 
@@ -812,6 +814,10 @@ async function doGenerate(){
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
+
+  // Run fal.ai in parallel - fires immediately alongside Twin
+  let falImageUrl=null;
+  const falPromise=generateWithFal().then(url=>{falImageUrl=url;}).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -853,7 +859,7 @@ async function doGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
   }
 
   let found=null;
@@ -867,7 +873,8 @@ async function doGenerate(){
     }
   }
   clearInterval(timerInterval);
-  if(found)showResult(loadMsg,found);
+  await falPromise;
+  if(found)showResult(loadMsg,found,falImageUrl);
 }
 
 // ============================================================
