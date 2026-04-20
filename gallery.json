@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17767189556077p",
+    "game_name": "Gates of Olympus",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/21/4cd8d1fe65a4df9b469699e2cf392a9d5d6c3c62196c2d65f1e0e62eb730f0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T210324Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=490e001d10d02019f2d46ca36b7383fda86abbd4fd3e642890088a6e26d32159",
+    "created_at": "2026-04-20 21:02:35"
+  },
+  {
+    "id": "cr-17767189555515s",
+    "game_name": "Gates of Olympus",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/80/8c4cba1ac36640a8398b2259c23fac4815c3efb3d8603064ef08bd2d5cc7df.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T210349Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dfebe1e657e03935f77f634c7fd5a58f603fc66b563c6bee727d8a2b9267cc12",
+    "created_at": "2026-04-20 21:02:35"
+  },
+  {
     "id": "cr-17767178342DB4",
     "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
