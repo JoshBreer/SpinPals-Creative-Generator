@@ -650,9 +650,9 @@
     "created_at": "2026-04-20T17:34:31Z"
   },
   {
-    "game_name": "Football - SÃÂ¼per Lig",
+    "game_name": "Football - SÃÂÃÂ¼per Lig",
     "format": "portrait",
-    "offer_text": "HaftalÃÂ±k Spor KayÃÂ±p ÃÂ°adesi Ã¢ÂÂ %15'e kadar",
+    "offer_text": "HaftalÃÂÃÂ±k Spor KayÃÂÃÂ±p ÃÂÃÂ°adesi ÃÂ¢ÃÂÃÂ %15'e kadar",
     "style": "Realistic",
     "platform": "bankobet",
     "user_email": "josh@rmgs.online",
@@ -660,13 +660,23 @@
     "created_at": "2026-04-20T18:13:00.000Z"
   },
   {
-    "game_name": "Football - SÃ¼per Lig",
+    "game_name": "Football - SÃÂ¼per Lig",
     "format": "portrait",
-    "offer_text": "Casino HoÅ Geldin Paketi â 3.000 TRY + 200 Ãcretsiz DÃ¶nÃ¼Å",
+    "offer_text": "Casino HoÃÂ Geldin Paketi Ã¢ÂÂ 3.000 TRY + 200 ÃÂcretsiz DÃÂ¶nÃÂ¼ÃÂ",
     "style": "Realistic",
     "platform": "bankobet",
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9e/5da9b8ab8cd8161c790e37269548e1dfe75f54a55ca8c5d6d64d1c3568c1a2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T182001Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a278e53a1715c7e9b87e95bb1a6cfeb2e825e5fde4d9e95eed71add53322d440",
     "created_at": "2026-04-20T18:20:00Z"
+  },
+  {
+    "game_name": "Dragon Tiger",
+    "format": "portrait",
+    "offer_text": "Casino Welcome Package up to $1,750 + 150 Free Spins",
+    "style": "Realistic",
+    "platform": "betewin",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0e/273ea38912a76f500f62ebc0a8221fe3cbd1bc5a3660c4a3236eb8c6dc6f15.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T184114Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c56b407aa25b5a930b60389e99eec02547ecd1cefaffaa521ec1bdd5509752e6",
+    "created_at": "2026-04-20T18:42:07.757Z"
   }
 ]
