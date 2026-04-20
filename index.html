@@ -224,7 +224,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
     <img class="modal-img" id="modalImg" src="" alt="">
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-info" id="modalInfo"></div>
-    <a class="modal-dl" id="modalDl" href="#">Download Image</a>
+    <button class="modal-dl" id="modalDl" onclick="downloadImage()">Download Image</button>
   </div>
 </div>
 
@@ -394,6 +394,9 @@ async function startChat(){
   chatEl.innerHTML='';
   state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
   window.scrollTo({top:0,behavior:'smooth'});
+  document.body.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  try{window.parent.scrollTo({top:0,behavior:'smooth'});}catch(e){}
   await delay(200);
 
   // RMGS.ONLINE: show big client selector first
@@ -869,7 +872,25 @@ function showResult(loadMsg,found){
   if(container){container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div><div class="result-text"><span style="color:var(--blue);font-weight:600">'+(found.game_name&&found.game_name!=='N/A'?found.game_name:state.style)+'</span> · '+(found.format==='portrait'?'9:16':'1:1')+'</div><img class="result-img" src="'+found.image_url+'" alt="ad"></div>';}
 
   const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
-  const dlBtn=document.createElement('a');dlBtn.className='opt-btn opt-green';dlBtn.href=found.image_url;dlBtn.textContent='Download Image';dlBtn.style.textDecoration='none';acts.appendChild(dlBtn);
+  const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent='Download Image';
+  dlBtn.onclick=async()=>{
+    try{
+      dlBtn.textContent='Downloading...';dlBtn.disabled=true;
+      const res=await fetch(found.image_url);
+      const blob=await res.blob();
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      const ext=found.image_url.includes('.png')?'.png':'.jpg';
+      a.href=url;a.download=(found.game_name||'creative').replace(/[^a-z0-9]/gi,'-')+ext;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      dlBtn.textContent='Downloaded ✓';
+    }catch(e){
+      dlBtn.disabled=false;dlBtn.textContent='Download Image';
+      window.open(found.image_url,'_blank');
+    }
+  };
+  acts.appendChild(dlBtn);
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
 
   // Feedback
@@ -938,6 +959,20 @@ function openFacebookMediaLibrary(btn){
 // ============================================================
 // MODAL
 // ============================================================
+function downloadImage(){
+  const img=document.getElementById('modalImg');
+  if(!img.src)return;
+  fetch(img.src).then(r=>r.blob()).then(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const ext=img.src.includes('.png')?'.png':'.jpg';
+    const title=document.getElementById('modalTitle').textContent||'creative';
+    a.href=url;a.download=title.replace(/[^a-z0-9]/gi,'-')+ext;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }).catch(()=>window.open(img.src,'_blank'));
+}
+
 function openModal(c){
   document.getElementById('modalImg').src=c.image_url;
   document.getElementById('modalTitle').textContent=c.game_name;
