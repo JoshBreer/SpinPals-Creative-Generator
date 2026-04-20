@@ -254,6 +254,8 @@ const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
 const FAL_MODEL='fal-ai/flux-pro';
+const GITHUB_TOKEN='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';
+const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
 
 // ============================================================
@@ -729,7 +731,7 @@ async function doQuickGenerate(){
 
   // Run fal.ai in parallel - don't await, let it complete independently
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(url=>{falImageUrl=url;}).catch(()=>{});
+  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -817,7 +819,7 @@ async function doGenerate(){
 
   // Run fal.ai in parallel - fires immediately alongside Twin
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(url=>{falImageUrl=url;}).catch(()=>{});
+  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -995,6 +997,51 @@ async function generateWithFal(){
     console.error('fal.ai error:',e);
     return null;
   }
+}
+
+// ============================================================
+// SAVE FAL IMAGE TO GALLERY
+// ============================================================
+async function saveFalToGallery(imageUrl){
+  try{
+    // Fetch current gallery.json
+    const shaRes=await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    });
+    const shaData=await shaRes.json();
+    const sha=shaData.sha;
+    const currentContent=JSON.parse(atob(shaData.content.replace(/
+/g,'')));
+
+    // Add new fal entry
+    const newEntry={
+      id:'fal-'+Date.now(),
+      game_name:state.game||'N/A',
+      format:state.format,
+      offer_text:state.offer,
+      style:state.style+(state.customInstructions?' (Custom)':''),
+      platform:state.platform||'spinpals',
+      user_email:currentUserEmail,
+      image_url:imageUrl,
+      created_at:new Date().toISOString(),
+      source:'fal'
+    };
+    currentContent.unshift(newEntry);
+
+    // Save back to GitHub
+    await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
+      method:'PUT',
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:'Add fal.ai creative for '+currentUserEmail,
+        content:btoa(unescape(encodeURIComponent(JSON.stringify(currentContent,null,2)))),
+        sha:sha
+      })
+    });
+    // Update local gallery data
+    galleryData.unshift(newEntry);
+    renderGallery();
+  }catch(e){console.error('Failed to save fal image to gallery:',e);}
 }
 
 // ============================================================
