@@ -523,16 +523,46 @@ async function stepClient(){
       if(val==='spinpals'){
         state.platform=null;
         msg(label,'user');
-        stepFormat();
+        stepRmgsStart();
       } else {
         msg(label,'user');
-        stepPlatform();
+        stepPlatformRmgs();
       }
     };
     w.appendChild(b);
   });
   wrap.appendChild(title);wrap.appendChild(sub);wrap.appendChild(w);
   chatEl.appendChild(wrap);
+}
+
+// ---- RMGS: LETS GO / QUICK GENERATE after client selection ----
+async function stepRmgsStart(){
+  await delay(250);
+  const m=msg('Ready to generate your next ad creative?');
+  const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';btnWrap.style.display='flex';btnWrap.style.gap='10px';btnWrap.style.flexWrap='wrap';
+  const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
+  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';stepFormat();};
+  btnWrap.appendChild(btn);
+  const quickBtn=document.createElement('button');quickBtn.className='opt-btn';quickBtn.textContent='⚡ Quick Generate';
+  quickBtn.onclick=()=>{if(quickBtn.disabled)return;quickBtn.disabled=true;quickBtn.style.opacity='0.5';btn.disabled=true;btn.style.opacity='0.5';doQuickGenerate();};
+  btnWrap.appendChild(quickBtn);
+  m.appendChild(btnWrap);
+}
+
+// ---- RMGS: PLATFORM SELECTION then LETS GO for mario path ----
+async function stepPlatformRmgs(){
+  await delay(250);
+  const m=msg('Which <span class="accent">platform</span> are we creating for?');
+  const w=document.createElement('div');w.className='opt-group';
+  [['betewin','Betewin'],['bankobet','Bankobet']].forEach(([val,label])=>{
+    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.platform=val;msg(label,'user');stepRmgsStart();
+    };w.appendChild(b);
+  });m.appendChild(w);
 }
 
 // ---- MARIO: STEP 1.5 - PLATFORM SELECTION ----
