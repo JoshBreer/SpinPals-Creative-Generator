@@ -648,5 +648,15 @@
     "user_email": "cristiano@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/86/5aef3c89fc5084aad9a920a5bc864e4cc95ea3aabcba86a7c603c21512b8d8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T173431Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0d63a3e31b33f3f4e49ec02c8487121747a96b39ada89b9c67da3ce6e3aeadb8",
     "created_at": "2026-04-20T17:34:31Z"
+  },
+  {
+    "game_name": "Football - SÃ¼per Lig",
+    "format": "portrait",
+    "offer_text": "HaftalÄ±k Spor KayÄ±p Ä°adesi â %15'e kadar",
+    "style": "Realistic",
+    "platform": "bankobet",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ba/0dd86ebb76203b00f3f61502a939631ba03896bd0899060b2db58c8c5c886a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T181307Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a414bb9007559cb219e3347d7e7b937feff5ab1947225dbde78e37c815eb4a85",
+    "created_at": "2026-04-20T18:13:00.000Z"
   }
 ]
