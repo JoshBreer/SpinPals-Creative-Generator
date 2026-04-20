@@ -143,6 +143,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .switch-user{text-align:center;padding:16px;margin-top:10px}
 .switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
 .switch-user button:hover{color:var(--txt2)}
+.fb-btn{background:none;border:1px solid #1877f2;border-radius:6px;padding:9px 16px;cursor:pointer;transition:.2s;color:#1877f2;font-family:inherit;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.fb-btn:hover{background:rgba(24,119,242,0.1);}
+.fb-btn:disabled{opacity:0.5;cursor:default}
+.fb-btn.success{border-color:var(--green);color:var(--green)}
+.fb-btn.uploading{opacity:0.7}
+.fb-status{font-size:12px;margin-top:6px;text-align:center;display:none}
+.fb-status.success{color:var(--green);display:block}
+.fb-status.error{color:#ef4444;display:block}
 
 /* CUSTOM INPUT */
 .custom-input-wrap{margin-top:12px;display:none}
@@ -585,7 +593,7 @@ async function stepPlatform(){
 async function doQuickGenerate(){
   const formats=['portrait','square','both'];
   const styles=['Classic','Realistic'];
-  const isMarioQuick=currentUserEmail.endsWith('@mario.com');
+  const isMarioQuick=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
   // For mario quick generate, randomly pick platform too
   if(isMarioQuick){
     state.platform=Math.random()>0.5?'betewin':'bankobet';
@@ -701,9 +709,19 @@ async function doQuickGenerate(){
   feedbackWrap.appendChild(feedbackLabel);
   feedbackWrap.appendChild(thumbsUp);
   feedbackWrap.appendChild(thumbsDown);
+  // Facebook upload button
+  const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
+  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';fbBtn.style.cssText='margin:0 auto;';
+  fbBtn.innerHTML=getFbBtnHTML();
+  const fbStatus=document.createElement('div');fbStatus.className='fb-status';
+  fbBtn.onclick=()=>uploadToFacebook(found.image_url,fbBtn,fbStatus);
+  fbWrap.appendChild(fbBtn);fbWrap.appendChild(fbStatus);
+
   loadMsg.appendChild(feedbackWrap);
   loadMsg.appendChild(thankMsg);
-  loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+  loadMsg.appendChild(acts);
+  loadMsg.appendChild(fbWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
   renderGallery();
 }
 
@@ -848,7 +866,7 @@ async function stepGame(){
   randomItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>Random Game';
   randomItem.onclick=()=>{
     const allGames=[];
-    const isMarioRand=currentUserEmail.endsWith("@mario.com");
+    const isMarioRand=currentUserEmail.endsWith("@mario.com")||(currentUserEmail.endsWith("@rmgs.online")&&state.platform&&state.platform!=="spinpals"&&state.platform!==null);
     const randGamesData=isMarioRand?(state.platform==="betewin"?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
     Object.values(randGamesData).forEach(cat=>cat.forEach(g=>allGames.push(g.name)));
     const pick=allGames[Math.floor(Math.random()*allGames.length)];
@@ -862,7 +880,7 @@ async function stepGame(){
   list.appendChild(randomItem);
 
   // Use platform-specific games for mario, SpinPals games otherwise
-  const isMario=currentUserEmail.endsWith('@mario.com');
+  const isMario=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
   const topGames=isMario?(state.platform==='betewin'?BETEWIN_TOP:BANKOBET_TOP):TOP_GAMES;
   const gamesData=isMario?(state.platform==='betewin'?BETEWIN_GAMES:BANKOBET_GAMES):GAMES;
 
@@ -883,7 +901,7 @@ async function stepOffer(){
   await delay(250);
   const m=msg('Which <span class="accent">offer</span> should we feature?');
   const w=document.createElement('div');w.className='offer-list';
-  const isMario=currentUserEmail.endsWith('@mario.com');
+  const isMario=currentUserEmail.endsWith('@mario.com')||(currentUserEmail.endsWith('@rmgs.online')&&state.platform&&state.platform!=='spinpals'&&state.platform!==null);
   const offersToShow=isMario?(state.platform==='betewin'?BETEWIN_OFFERS:BANKOBET_OFFERS):OFFERS;
   offersToShow.forEach(o=>{
     const card=document.createElement('div');card.className='offer-card';
@@ -1004,9 +1022,19 @@ async function doGenerate(){
   feedbackWrap.appendChild(feedbackLabel);
   feedbackWrap.appendChild(thumbsUp);
   feedbackWrap.appendChild(thumbsDown);
+  // Facebook upload button
+  const fbWrap=document.createElement('div');fbWrap.style.cssText='text-align:center;margin-top:12px;';
+  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';fbBtn.style.cssText='margin:0 auto;';
+  fbBtn.innerHTML=getFbBtnHTML();
+  const fbStatus=document.createElement('div');fbStatus.className='fb-status';
+  fbBtn.onclick=()=>uploadToFacebook(found.image_url,fbBtn,fbStatus);
+  fbWrap.appendChild(fbBtn);fbWrap.appendChild(fbStatus);
+
   loadMsg.appendChild(feedbackWrap);
   loadMsg.appendChild(thankMsg);
-  loadMsg.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+  loadMsg.appendChild(acts);
+  loadMsg.appendChild(fbWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
   renderGallery();
 }
 
@@ -1029,6 +1057,67 @@ async function sendFeedback(feedback, imageData){
       mode:'no-cors'
     });
   }catch(e){}
+}
+
+// ---- FACEBOOK MEDIA LIBRARY UPLOAD ----
+// Placeholder - will be wired up with real App Token once Meta App is set up
+const FB_APP_ID = 'PENDING'; // Will be filled in once Meta App is created
+const FB_AD_ACCOUNT_ID = 'act_2178254872545632'; // SpinPals account
+
+async function uploadToFacebook(imageUrl, btn, statusEl){
+  btn.disabled=true;
+  btn.classList.add('uploading');
+  btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Uploading...';
+
+  // Check if access token is configured
+  if(FB_APP_ID === 'PENDING'){
+    btn.disabled=false;
+    btn.classList.remove('uploading');
+    btn.innerHTML=getFbBtnHTML();
+    statusEl.className='fb-status error';
+    statusEl.textContent='Facebook connection not yet configured. Coming soon.';
+    setTimeout(()=>{statusEl.className='fb-status';},3000);
+    return;
+  }
+
+  try{
+    // Will use Meta Marketing API to upload to media library
+    // POST /act_{ad-account-id}/adimages with the image URL
+    const token = localStorage.getItem('fb_access_token');
+    if(!token){
+      // Trigger OAuth flow
+      window.open('https://www.facebook.com/dialog/oauth?client_id='+FB_APP_ID+'&redirect_uri='+encodeURIComponent(window.location.href)+'&scope=ads_management,business_management&response_type=token','_blank','width=600,height=600');
+      statusEl.className='fb-status error';
+      statusEl.textContent='Please connect your Facebook account first.';
+      btn.disabled=false;btn.classList.remove('uploading');btn.innerHTML=getFbBtnHTML();
+      return;
+    }
+
+    const res = await fetch('https://graph.facebook.com/v19.0/'+FB_AD_ACCOUNT_ID+'/adimages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({url: imageUrl, access_token: token})
+    });
+    const data = await res.json();
+    if(data.images||data.id){
+      btn.classList.remove('uploading');
+      btn.classList.add('success');
+      btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Uploaded to Facebook';
+      statusEl.className='fb-status success';
+      statusEl.textContent='Creative added to your Facebook Media Library.';
+    } else {
+      throw new Error(data.error?.message||'Upload failed');
+    }
+  } catch(e){
+    btn.disabled=false;btn.classList.remove('uploading');btn.innerHTML=getFbBtnHTML();
+    statusEl.className='fb-status error';
+    statusEl.textContent='Upload failed: '+e.message;
+    setTimeout(()=>{statusEl.className='fb-status';},4000);
+  }
+}
+
+function getFbBtnHTML(){
+  return '<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Upload to Facebook';
 }
 
 // ---- MODAL ----
