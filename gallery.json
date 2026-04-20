@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17767112586423",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/40/b104ef2c217df9710f376506cd75d5ba75ca081cc6446b63cfdecd7f4f18c8.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T185526Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6f6f3ad0e1ae4d019c7eca5ae3ae4374dd9888492986c725adcc36372d54555d",
+    "created_at": "2026-04-20 18:54:18"
+  },
+  {
     "id": "cr-1776700032528F",
     "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
@@ -608,75 +618,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "Football - Champions League",
-    "format": "square",
-    "offer_text": "100% First Deposit Bonus up to $150",
-    "style": "Realistic",
-    "platform": "betewin",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fe/98900ba36b9b6de4e2264c784a851497fe773dba32156959ea802a8a6c7c21.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T162604Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aa379b0d2b6c03317f0d1f643bbe8f5638229f7f98d3e18384f138eb51fc4024",
-    "created_at": "2026-04-20T16:26:00Z"
-  },
-  {
-    "game_name": "Classic Blackjack",
-    "format": "square",
-    "offer_text": "Daily Free Spins up to 50",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "josh@mario.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/3f/140a8e9c803e9573cfd7bfdd2f1ee92eaef471e841c3b6284539d542967511.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T163025Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=028709d2ac2026ab0ffe88e1617564bf905f4bc25c658ce2aeb57441f723d1d5",
-    "created_at": "2026-04-20T16:30:25Z"
-  },
-  {
-    "game_name": "Live Blackjack",
-    "format": "square",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "cristiano@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/df/c7be6961d598bab37780d85d0892b09db7dd83e514cb1d578293d0679b4a40.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T171146Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f0a7fcbf85a4ebdfdbfe20d60175503143d9df64170c8456bac98f7d5ec52588",
-    "created_at": "2026-04-20T17:11:46Z"
-  },
-  {
-    "game_name": "Starlight Princess",
-    "format": "portrait",
-    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "cristiano@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/86/5aef3c89fc5084aad9a920a5bc864e4cc95ea3aabcba86a7c603c21512b8d8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T173431Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0d63a3e31b33f3f4e49ec02c8487121747a96b39ada89b9c67da3ce6e3aeadb8",
-    "created_at": "2026-04-20T17:34:31Z"
-  },
-  {
-    "game_name": "Football - SÃÂÃÂ¼per Lig",
-    "format": "portrait",
-    "offer_text": "HaftalÃÂÃÂ±k Spor KayÃÂÃÂ±p ÃÂÃÂ°adesi ÃÂ¢ÃÂÃÂ %15'e kadar",
-    "style": "Realistic",
-    "platform": "bankobet",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ba/0dd86ebb76203b00f3f61502a939631ba03896bd0899060b2db58c8c5c886a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T181307Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a414bb9007559cb219e3347d7e7b937feff5ab1947225dbde78e37c815eb4a85",
-    "created_at": "2026-04-20T18:13:00.000Z"
-  },
-  {
-    "game_name": "Football - SÃÂ¼per Lig",
-    "format": "portrait",
-    "offer_text": "Casino HoÃÂ Geldin Paketi Ã¢ÂÂ 3.000 TRY + 200 ÃÂcretsiz DÃÂ¶nÃÂ¼ÃÂ",
-    "style": "Realistic",
-    "platform": "bankobet",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9e/5da9b8ab8cd8161c790e37269548e1dfe75f54a55ca8c5d6d64d1c3568c1a2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T182001Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a278e53a1715c7e9b87e95bb1a6cfeb2e825e5fde4d9e95eed71add53322d440",
-    "created_at": "2026-04-20T18:20:00Z"
-  },
-  {
-    "game_name": "Dragon Tiger",
-    "format": "portrait",
-    "offer_text": "Casino Welcome Package up to $1,750 + 150 Free Spins",
-    "style": "Realistic",
-    "platform": "betewin",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0e/273ea38912a76f500f62ebc0a8221fe3cbd1bc5a3660c4a3236eb8c6dc6f15.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T184114Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c56b407aa25b5a930b60389e99eec02547ecd1cefaffaa521ec1bdd5509752e6",
-    "created_at": "2026-04-20T18:42:07.757Z"
   }
 ]
