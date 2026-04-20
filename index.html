@@ -474,6 +474,8 @@ async function startChat(){
   state={format:null,game:null,offer:null,style:null,customInstructions:null,platform:null};
   window.scrollTo({top:0,behavior:'smooth'});
   await delay(200);
+  // rmgs.online goes straight to client selection - no ready screen
+  if(currentUserEmail.endsWith('@rmgs.online')){stepClient();return;}
   const m=msg('Ready to generate your next ad creative?');
   const btnWrap=document.createElement('div');btnWrap.style.marginTop='14px';btnWrap.style.display='flex';btnWrap.style.gap='10px';btnWrap.style.flexWrap='wrap';
 
@@ -481,7 +483,7 @@ async function startChat(){
   btn.onclick=()=>{
     if(btn.disabled)return;
     btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';
-    if(currentUserEmail.endsWith('@mario.com')||currentUserEmail.endsWith('@rmgs.online')){stepClient();}else{stepFormat();}
+    if(currentUserEmail.endsWith('@mario.com')){stepClient();}else{stepFormat();}
   };
   btnWrap.appendChild(btn);
 
@@ -494,15 +496,30 @@ async function startChat(){
 
 // ---- RMGS: CLIENT SELECTION (for rmgs.online users) ----
 async function stepClient(){
-  await delay(250);
-  const m=msg('Which <span class="accent">client</span> are we creating for?');
-  const w=document.createElement('div');w.className='opt-group';
+  await delay(200);
+  // Bigger prominent client selection for rmgs.online
+  const wrap=document.createElement('div');
+  wrap.style.cssText='text-align:center;padding:30px 20px;';
+  const title=document.createElement('div');
+  title.style.cssText='font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;';
+  title.textContent='Who are we creating for?';
+  const sub=document.createElement('div');
+  sub.style.cssText='font-size:14px;color:var(--txt2);margin-bottom:28px;';
+  sub.textContent='Select a client to get started.';
+  const w=document.createElement('div');
+  w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
   [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)']].forEach(([val,label])=>{
-    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    const b=document.createElement('button');
+    b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
+    b.textContent=label;
+    b.onmouseover=()=>{b.style.borderColor='var(--blue)';b.style.color='var(--blue)';b.style.background='var(--blue-glow)';};
+    b.onmouseout=()=>{if(!b.dataset.selected){b.style.borderColor='var(--border)';b.style.color='var(--txt)';b.style.background='var(--card)';}};
     b.onclick=()=>{
-      if(b.disabled)return;
-      lockButtons(w);
+      if(b.dataset.selected)return;
+      b.dataset.selected='1';
+      w.querySelectorAll('button').forEach(x=>{x.style.pointerEvents='none';x.style.opacity='0.4';});
       b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      chatEl.innerHTML='';
       if(val==='spinpals'){
         state.platform=null;
         msg(label,'user');
@@ -511,8 +528,11 @@ async function stepClient(){
         msg(label,'user');
         stepPlatform();
       }
-    };w.appendChild(b);
-  });m.appendChild(w);
+    };
+    w.appendChild(b);
+  });
+  wrap.appendChild(title);wrap.appendChild(sub);wrap.appendChild(w);
+  chatEl.appendChild(wrap);
 }
 
 // ---- MARIO: STEP 1.5 - PLATFORM SELECTION ----
