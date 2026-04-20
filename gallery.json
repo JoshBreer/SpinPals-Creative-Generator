@@ -618,5 +618,15 @@
     "user_email": "josh@mario.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fe/98900ba36b9b6de4e2264c784a851497fe773dba32156959ea802a8a6c7c21.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T162604Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aa379b0d2b6c03317f0d1f643bbe8f5638229f7f98d3e18384f138eb51fc4024",
     "created_at": "2026-04-20T16:26:00Z"
+  },
+  {
+    "game_name": "Classic Blackjack",
+    "format": "square",
+    "offer_text": "Daily Free Spins up to 50",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "josh@mario.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/3f/140a8e9c803e9573cfd7bfdd2f1ee92eaef471e841c3b6284539d542967511.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T163025Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=028709d2ac2026ab0ffe88e1617564bf905f4bc25c658ce2aeb57441f723d1d5",
+    "created_at": "2026-04-20T16:30:25Z"
   }
 ]
