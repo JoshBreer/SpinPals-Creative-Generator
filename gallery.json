@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17767971707AEC",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d8/8fa673f3dd71dcdb2d8cd600150f4f2e2c5534c0dbd87a940d91bf96a8ae0a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T184726Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=093ba06663a408ca105ef9d5603147df93658db95a7d915ba124b40e9fff59c0",
+    "created_at": "2026-04-21 18:46:10"
+  },
+  {
     "id": "cr-177678987068F6",
     "game_name": "Hot Pepper",
     "format": "portrait",
@@ -798,25 +808,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "Sweet Bonanza",
-    "format": "portrait",
-    "offer_text": "Casino Hos Geldin Paketi - 3.000 TRY + 200 Ucretsiz Donus",
-    "style": "Custom",
-    "platform": "bankobet",
-    "user_email": "buhan@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7a/5d0005670acb6e854feb3bd9fb8fdc1dc99673568d04dd5c9559d0b4c5d898.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T164415Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=25779bf61ae81ab19917ba21430e3a2fea5b7d5530824bf2712e8b88cb22b77f",
-    "created_at": "2026-04-21T16:46:28.679Z"
-  },
-  {
-    "game_name": "Sweet Bonanza",
-    "format": "square",
-    "offer_text": "Casino Hos Geldin Paketi - 3.000 TRY + 200 Ucretsiz Donus",
-    "style": "Custom",
-    "platform": "bankobet",
-    "user_email": "buhan@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/5c/0fd47dbaf14168171987f4b93beb6edbc9e27762d3e4fb058c3dbaa7a1f57e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T164435Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3c400299fd0a4670cc3d7342fd5d9371846689a48afa1fef10561f2cb9d8f455",
-    "created_at": "2026-04-21T16:46:28.679Z"
   }
 ]
