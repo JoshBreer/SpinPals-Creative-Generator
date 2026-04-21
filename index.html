@@ -1004,29 +1004,16 @@ async function generateWithFal(){
 // ============================================================
 async function saveFalToGallery(imageUrl){
   try{
-    const newEntry={
-      id:'fal-'+Date.now(),
-      game_name:state.game||'N/A',
-      format:state.format,
-      offer_text:state.offer,
-      style:state.style,
-      platform:state.platform||'spinpals',
-      user_email:currentUserEmail,
-      image_url:imageUrl,
-      created_at:new Date().toISOString(),
-      source:'fal'
-    };
-    const shaRes=await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
-    const shaData=await shaRes.json();
-    const currentContent=JSON.parse(atob(shaData.content.split('').filter(c=>c!='
-'&&c!='
-').join('')));
-    currentContent.unshift(newEntry);
-    await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{method:'PUT',headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:'fal creative',content:btoa(unescape(encodeURIComponent(JSON.stringify(currentContent,null,2)))),sha:shaData.sha})});
+    const newEntry={id:"fal-"+Date.now(),game_name:state.game||"N/A",format:state.format,offer_text:state.offer,style:state.style,platform:state.platform||"spinpals",user_email:currentUserEmail,image_url:imageUrl,created_at:new Date().toISOString(),source:"fal"};
+    const r=await fetch("https://api.github.com/repos/"+GITHUB_REPO+"/contents/gallery.json",{headers:{"Authorization":"token "+GITHUB_TOKEN,"Accept":"application/vnd.github.v3+json"}});
+    const d=await r.json();
+    const arr=JSON.parse(atob(d.content.replace(/\s/g,"")));
+    arr.unshift(newEntry);
+    await fetch("https://api.github.com/repos/"+GITHUB_REPO+"/contents/gallery.json",{method:"PUT",headers:{"Authorization":"token "+GITHUB_TOKEN,"Accept":"application/vnd.github.v3+json","Content-Type":"application/json"},body:JSON.stringify({message:"fal creative",content:btoa(unescape(encodeURIComponent(JSON.stringify(arr,null,2)))),sha:d.sha})});
     galleryData.unshift(newEntry);
     renderGallery();
-  }catch(e){console.error('fal gallery save failed:',e);}
-}
+  }catch(e){console.error("fal save failed",e);}
+};
 
 // ============================================================
 // SHOW RESULT
