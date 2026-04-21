@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-177678987068F6",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ba/1079638a16f47c1899611002df2259c2c302f4bc27716e1c4c83704cc97c1e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T164510Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=35144dc48485a3d7ad31d58a93258c4be7931756a551bbd2e3efb135da72cf70",
+    "created_at": "2026-04-21 16:44:30"
+  },
+  {
     "id": "cr-1776789408E87C",
     "game_name": "N/A",
     "format": "portrait",
