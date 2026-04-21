@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17768042107325p",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ee/ef8e46c42ebfad0dc9f4a63c16934b80f863dbe44873258304ec323a7a4c39.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T204446Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8c2a03a3c75857e477c3f810db05f8e53929b7e8f47012a5474d081a3fa9387d",
+    "created_at": "2026-04-21 20:43:30"
+  },
+  {
+    "id": "cr-17768042106471s",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/53/d7fc6957c11860c8b26cefecd8140626f403584630fba63b6110672151f37d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T204418Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=68888785a1d09103c4fdb873594f1b020eaf063a6eeafc04a36b26e2027d8315",
+    "created_at": "2026-04-21 20:43:30"
+  },
+  {
     "id": "cr-17768040489131",
     "game_name": "Gates of Olympus",
     "format": "portrait",
