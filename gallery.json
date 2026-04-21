@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776788226C808",
+    "game_name": "King of the Sky",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9d/d344f73b00c4b9e3dac9751cda3772cd68e06ae74782e23a89e3a44ad0b958.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161834Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7dffcd8b2cec8423fdf78f38ae2b6709963ddc3293c91ddca0290103233f6951",
+    "created_at": "2026-04-21 16:17:06"
+  },
+  {
+    "id": "cr-177678822212CB",
+    "game_name": "King of the Sky",
+    "format": "portrait",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b7/1c6c2aef526199bc452bc740bdb6c412ca8f6f944b53f90038a45200bae301.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161812Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=32055793c7c8992ed205c1c5cb7df406bb32704fb433bc386094ea66bace5f88",
+    "created_at": "2026-04-21 16:17:02"
+  },
+  {
     "id": "cr-177678808552B7p",
     "game_name": "Treasure Wild",
     "format": "portrait",
