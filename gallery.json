@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776797291A1B2",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/09/0d8ddd55ae875caaa2141bbdc7ff8188fff1c654fc08df4bb14b3bb3be271a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T184932Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3431d6777c8113f5116e39e1d48ae3ce6a070f26da6d3574cf973263bb29c031",
+    "created_at": "2026-04-21 18:48:11"
+  },
+  {
+    "id": "cr-1776797291C3D4",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/17/1bfb0208cd18b5d37d46b562e3caf35f7f0c8eee46af9128caad99b022a85d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T184858Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fb5c6472a90d6738512031f91ba62449d2a0727d16d1c6c5e3a5a2328d7c8437",
+    "created_at": "2026-04-21 18:48:11"
+  },
+  {
     "id": "cr-17767971707AEC",
     "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
