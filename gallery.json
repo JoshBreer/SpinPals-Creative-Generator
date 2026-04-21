@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-177678808552B7p",
+    "game_name": "Treasure Wild",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b1/0fe48362e4f9163d2ed35485d6d3380de2c8c35c76d84c6753e29952d8b337.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161532Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=394a187c5406aa258e22413bf2d4ad0c1b989adc131e13d7503f26b4f3f0f8f7",
+    "created_at": "2026-04-21 16:14:45"
+  },
+  {
+    "id": "cr-177678808592A5s",
+    "game_name": "Treasure Wild",
+    "format": "square",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f0/9563623e8c556ce6f4794b77a03259a51c893a71b330c0486af1c22169a9a4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161558Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d1caf2ea6dff2f16dd570bd5529ea91f27ec82f9515624699e3d2ce192d3b49b",
+    "created_at": "2026-04-21 16:14:45"
+  },
+  {
     "id": "cr-1776787806A0BD",
     "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
