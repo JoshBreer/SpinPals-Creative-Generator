@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17767976907DA1p",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/06/9b49b2e03350834432b2bd4b66950f89d98e2e3d71e7e6679ae55009a69e99.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T185531Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1f6638c825167aeeb1bd8f55add4b907841d5a04947391ea07c6c805cabc6b17",
+    "created_at": "2026-04-21 18:54:50"
+  },
+  {
+    "id": "cr-1776797690F16Fs",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/21/97502e1302929a632187f8bb34fc49d9ef98ed8b8085242d4b8f81404ee464.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T185551Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8d74447f3e591857f305b125930954164241087443ec8195543a26036b9c2124",
+    "created_at": "2026-04-21 18:54:50"
+  },
+  {
     "id": "cr-1776797467284D",
     "game_name": "Hot Pepper",
     "format": "square",
