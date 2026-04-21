@@ -1004,44 +1004,28 @@ async function generateWithFal(){
 // ============================================================
 async function saveFalToGallery(imageUrl){
   try{
-    // Fetch current gallery.json
-    const shaRes=await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}
-    });
-    const shaData=await shaRes.json();
-    const sha=shaData.sha;
-    const currentContent=JSON.parse(atob(shaData.content.replace(/
-/g,'')));
-
-    // Add new fal entry
     const newEntry={
       id:'fal-'+Date.now(),
       game_name:state.game||'N/A',
       format:state.format,
       offer_text:state.offer,
-      style:state.style+(state.customInstructions?' (Custom)':''),
+      style:state.style,
       platform:state.platform||'spinpals',
       user_email:currentUserEmail,
       image_url:imageUrl,
       created_at:new Date().toISOString(),
       source:'fal'
     };
+    const shaRes=await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
+    const shaData=await shaRes.json();
+    const currentContent=JSON.parse(atob(shaData.content.split('').filter(c=>c!='
+'&&c!='
+').join('')));
     currentContent.unshift(newEntry);
-
-    // Save back to GitHub
-    await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
-      method:'PUT',
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify({
-        message:'Add fal.ai creative for '+currentUserEmail,
-        content:btoa(unescape(encodeURIComponent(JSON.stringify(currentContent,null,2)))),
-        sha:sha
-      })
-    });
-    // Update local gallery data
+    await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{method:'PUT',headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:'fal creative',content:btoa(unescape(encodeURIComponent(JSON.stringify(currentContent,null,2)))),sha:shaData.sha})});
     galleryData.unshift(newEntry);
     renderGallery();
-  }catch(e){console.error('Failed to save fal image to gallery:',e);}
+  }catch(e){console.error('fal gallery save failed:',e);}
 }
 
 // ============================================================
