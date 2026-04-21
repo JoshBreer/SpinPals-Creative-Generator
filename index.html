@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RMGS Creative Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08090f;--bg2:#0b0d15;--card:#0f1119;--card2:#141720;--border:#1c2030;
+  --blue:#2987BC;--blue2:#1f6fa0;--blue-glow:rgba(41,135,188,0.15);
+  --white:#ffffff;--txt:#e8edf5;--txt2:#8a96aa;--txt3:#3a4255;
+  --green:#22c55e;--green2:#16a34a;--r:8px
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant Garamond',Georgia,serif;font-size:15px;line-height:1.6;min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#1c2030;border-radius:4px}
+
+/* EMAIL GATE */
+.email-gate{max-width:440px;margin:70px auto;padding:0 20px;text-align:center}
+.email-gate-title{font-size:26px;font-weight:700;color:var(--white);margin-bottom:8px}
+.email-gate-sub{font-size:15px;color:var(--txt2);margin-bottom:32px;line-height:1.6}
+.email-input-wrap{display:flex;flex-direction:column;gap:12px}
+.email-field{width:100%;padding:14px 18px;border-radius:var(--r);border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:15px;outline:none;transition:.2s}
+.email-field:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.email-field.error{border-color:#ef4444}
+.email-field::placeholder{color:var(--txt3)}
+.email-error{font-size:13px;color:#ef4444;margin-top:-6px;display:none;text-align:left}
+.email-submit{padding:14px 28px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:.2s}
+.email-submit:hover{background:var(--blue2);box-shadow:0 0 24px var(--blue-glow)}
+
+/* AGENT PENDING */
+.agent-pending{display:none;max-width:480px;margin:70px auto;padding:0 20px;text-align:center}
+.agent-pending-icon{font-size:40px;margin-bottom:20px}
+.agent-pending-title{font-size:22px;font-weight:700;color:var(--white);margin-bottom:12px}
+.agent-pending-sub{font-size:15px;color:var(--txt2);line-height:1.7;margin-bottom:28px}
+.agent-pending-email{font-size:13px;color:var(--txt3);margin-bottom:24px}
+.agent-pending-email span{color:var(--blue)}
+.switch-btn{padding:10px 24px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);font-family:inherit;font-size:13px;cursor:pointer}
+
+/* CHAT */
+.chat-section{max-width:620px;margin:0 auto;padding:24px 16px;display:none}
+.chat-msgs{display:flex;flex-direction:column;gap:12px;min-height:200px}
+.bubble{max-width:88%;padding:14px 18px;border-radius:12px;animation:fadeUp .3s ease;font-size:15px}
+.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);border-bottom-left-radius:3px}
+.user{align-self:flex-end;background:var(--blue);color:#fff;border-bottom-right-radius:3px;font-weight:600}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.accent{color:var(--blue);font-weight:600}
+
+/* BUTTONS */
+.opt-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.opt-btn{padding:9px 18px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt);cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;transition:.2s}
+.opt-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-glow)}
+.opt-blue{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.opt-blue:hover{background:var(--blue2);border-color:var(--blue2)}
+.opt-green{background:var(--green);border-color:var(--green);color:#fff;font-weight:600}
+.opt-green:hover{background:var(--green2);border-color:var(--green2)}
+
+/* GAME DROPDOWN */
+.game-sel{margin-top:12px}
+.game-dropdown-wrap{position:relative;width:100%;user-select:none}
+.game-dropdown-selected{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt2);font-family:inherit;font-size:14px;cursor:pointer;transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.game-dropdown-selected:hover{border-color:var(--blue)}
+.game-dropdown-selected.open{border-color:var(--blue);color:var(--txt)}
+.game-dropdown-arrow{transition:.2s;color:var(--txt3)}
+.game-dropdown-selected.open .game-dropdown-arrow{transform:rotate(180deg);color:var(--blue)}
+.game-dropdown-list{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);z-index:100;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.game-dropdown-list.open{display:block}
+.game-dropdown-group-label{padding:8px 14px;font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:1px;background:rgba(41,135,188,0.06);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.game-dropdown-item{padding:9px 14px 9px 22px;font-size:14px;color:var(--txt2);cursor:pointer;border-bottom:1px solid rgba(28,32,48,.4);transition:.15s}
+.game-dropdown-item:hover{background:var(--card2);color:var(--blue)}
+.game-dropdown-item:last-child{border-bottom:none}
+
+/* OFFERS */
+.offer-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.offer-card{padding:12px 16px;border:1px solid var(--border);border-radius:var(--r);background:var(--card);cursor:pointer;transition:.2s}
+.offer-card:hover{border-color:var(--blue);background:var(--card2)}
+.offer-title{font-weight:600;font-size:14px;color:var(--txt)}
+.offer-desc{font-size:12px;color:var(--txt3);margin-top:2px}
+
+/* SUMMARY */
+.summary-card{background:var(--card2);border:1px solid var(--blue);border-radius:var(--r);padding:16px;margin-top:4px}
+.summary-title{font-weight:700;font-size:13px;color:var(--white);margin-bottom:10px;text-transform:uppercase;letter-spacing:1.5px}
+.summary-row{font-size:14px;color:var(--txt2);padding:5px 0;border-bottom:1px solid var(--border)}
+.summary-row:last-of-type{border-bottom:none}
+.summary-label{color:var(--blue);font-weight:600;margin-right:8px}
+.summary-actions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.text-btn{background:none;border:none;color:var(--txt3);cursor:pointer;font-family:inherit;font-size:13px;text-decoration:underline}
+.text-btn:hover{color:var(--txt)}
+
+/* LOADING */
+.loading{text-align:center;padding:24px 0}
+.pulse-dots{display:flex;gap:8px;justify-content:center;margin:0 auto 16px}
+.pulse-dots span{width:10px;height:10px;border-radius:50%;background:var(--blue);animation:pulse 1.4s ease-in-out infinite}
+.pulse-dots span:nth-child(2){animation-delay:0.2s}
+.pulse-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes pulse{0%,80%,100%{transform:scale(0.6);opacity:0.3}40%{transform:scale(1);opacity:1}}
+.loading-text{font-weight:600;font-size:15px;color:var(--white)}
+.est-time{font-size:13px;color:var(--blue);font-weight:500;margin-top:10px}
+.est-sub{font-size:12px;color:var(--txt3);margin-top:4px}
+.loading-elapsed{font-size:12px;color:var(--txt3);margin-top:8px}
+
+/* RESULT */
+.result-box{text-align:center;padding:10px 0}
+.result-title{font-weight:700;font-size:18px;color:var(--green);margin-bottom:6px}
+.result-text{font-size:14px;color:var(--txt2);line-height:1.5}
+.result-img{max-width:100%;max-height:50vh;border-radius:var(--r);margin:16px auto;display:block;object-fit:contain;border:1px solid var(--border)}
+
+/* GALLERY */
+.gallery-section{max-width:900px;margin:40px auto;padding:0 16px 60px;display:none}
+.gallery-hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.gallery-heading{font-size:20px;font-weight:700;color:var(--white)}
+.gallery-user-tag{font-size:12px;color:var(--blue);margin-top:3px;font-weight:500}
+.filter-bar{display:flex;gap:6px}
+.filter-tab{padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--txt2);cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;transition:.2s}
+.filter-tab:hover{border-color:var(--txt3)}
+.filter-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.gallery-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.2s;position:relative}
+.gallery-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.6)}
+.gallery-thumb{width:100%;aspect-ratio:1;background-size:cover;background-position:center;background-color:var(--card)}
+.gallery-overlay{position:absolute;bottom:0;left:0;right:0;padding:10px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85));display:flex;justify-content:space-between;align-items:flex-end}
+.gallery-name{font-size:13px;font-weight:600;color:#fff}
+.gallery-badge{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(41,135,188,0.25);color:var(--blue);font-weight:600}
+.gallery-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--txt3);font-size:15px}
+
+/* MODAL */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.94);z-index:1000;justify-content:center;align-items:center;padding:20px}
+.modal.active{display:flex}
+.modal-inner{max-width:600px;width:100%;max-height:90vh;text-align:center}
+.modal-close{position:fixed;top:16px;right:20px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;z-index:1001;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
+.modal-close:hover{background:rgba(255,255,255,.1)}
+.modal-img{max-width:100%;max-height:65vh;border-radius:var(--r);object-fit:contain}
+.modal-title{font-size:20px;font-weight:700;color:var(--white);margin-top:14px}
+.modal-info{font-size:13px;color:var(--txt2);margin-top:4px}
+.modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;border:none}
+.modal-dl:hover{background:var(--blue2)}
+
+/* SWITCH USER */
+.switch-user{text-align:center;padding:16px;margin-top:10px}
+.switch-user button{background:none;border:none;color:var(--txt3);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:underline}
+.switch-user button:hover{color:var(--txt2)}
+
+/* CUSTOM INPUT */
+.custom-input-wrap{margin-top:12px;display:none}
+.custom-input-wrap.visible{display:block}
+.custom-textarea{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--card2);color:var(--txt);font-family:inherit;font-size:14px;outline:none;resize:vertical;min-height:80px;transition:.2s}
+.custom-textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+.custom-textarea::placeholder{color:var(--txt3)}
+.custom-submit{margin-top:8px;padding:9px 18px;border-radius:6px;border:none;background:var(--blue);color:#fff;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.custom-submit:hover{background:var(--blue2)}
+
+/* FEEDBACK */
+.feedback-wrap{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px}
+.feedback-label{font-size:13px;color:var(--txt2)}
+.feedback-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:9px 16px;font-size:14px;cursor:pointer;transition:.2s;color:var(--txt2);display:flex;align-items:center;gap:6px}
+.feedback-btn:hover{border-color:var(--blue);background:var(--blue-glow)}
+.feedback-btn.selected-up{border-color:var(--green);background:rgba(34,197,94,0.15);color:var(--green)}
+.feedback-btn.selected-down{border-color:#ef4444;background:rgba(239,68,68,0.15);color:#ef4444}
+.feedback-btn:disabled{cursor:default}
+.feedback-thanks{font-size:13px;color:var(--txt2);margin-top:8px;text-align:center;display:none}
+
+/* FACEBOOK BUTTON */
+.fb-btn{background:none;border:1px solid #1877f2;border-radius:6px;padding:9px 16px;cursor:pointer;transition:.2s;color:#1877f2;font-family:inherit;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;margin:0 auto}
+.fb-btn:hover{background:rgba(24,119,242,0.1)}
+.fb-btn:disabled{opacity:0.5;cursor:default}
+.fb-btn.success{border-color:var(--green);color:var(--green)}
+.fb-status{font-size:12px;margin-top:6px;text-align:center;display:none}
+.fb-status.success{color:var(--green);display:block}
+.fb-status.error{color:#ef4444;display:block}
+
+@media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
+</style>
+</head>
+<body>
+
+<!-- EMAIL GATE -->
+<div class="email-gate" id="emailGate">
+  <div class="email-gate-title">Access Your Dashboard</div>
+  <div class="email-gate-sub">Enter your work email to access your creative generator.</div>
+  <div class="email-input-wrap">
+    <input type="email" class="email-field" id="emailField" placeholder="you@yourcompany.com"/>
+    <div class="email-error" id="emailError">Please enter a valid email address</div>
+    <button class="email-submit" id="emailSubmit">Access Creative Generator →</button>
+  </div>
+</div>
+
+<!-- AGENT PENDING -->
+<div class="agent-pending" id="agentPending">
+  <div class="agent-pending-icon">⚙️</div>
+  <div class="agent-pending-title">Your Agent is Being Configured</div>
+  <div class="agent-pending-sub">We're setting up your personalised creative workspace. You'll be notified by the RMGS team once your dashboard is ready.</div>
+  <div class="agent-pending-email">Logged in as: <span id="agentPendingEmail"></span></div>
+  <button class="switch-btn" onclick="resetUser()">Switch Account</button>
+</div>
+
+<!-- CHAT -->
+<section class="chat-section" id="chatSection">
+  <div id="chat" class="chat-msgs"></div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallerySection">
+  <div class="gallery-hdr">
+    <div>
+      <h2 class="gallery-heading">Your Creatives</h2>
+      <div class="gallery-user-tag" id="galleryUserTag"></div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-tab active" data-f="all">All</button>
+      <button class="filter-tab" data-f="portrait">Portrait 9:16</button>
+      <button class="filter-tab" data-f="square">Square 1:1</button>
+    </div>
+  </div>
+  <div id="gallery" class="gallery-grid"></div>
+  <div class="switch-user"><button onclick="resetUser()">Not you? Switch account</button></div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <button class="modal-close" id="modalClose">&times;</button>
+  <div class="modal-inner">
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-info" id="modalInfo"></div>
+    <button class="modal-dl" id="modalDl" onclick="downloadImage()">Download Image</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+// SPINPALS GAMES
+const SPINPALS_GAMES={"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"}],"Slots":[{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-juan","name":"Big Juan"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"snoop-dog-dollars","name":"Snoop Dogg Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"dog-house","name":"The Dog House"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"}]};
+const SPINPALS_TOP=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
+const SPINPALS_OFFERS=[{id:'s1',title:'6 SC FREE + 60K GC FREE + Daily FREE Spins',description:'New player welcome bonus'},{id:'s2',title:'GC 400K + FREE SC 35 + 50 FREE SPINS',description:'Premium signup offer'},{id:'s3',title:'25 FREE SC + 250K GC on First Purchase',description:'First purchase bonus'},{id:'s4',title:'Daily Login Bonus: Up to 10 SC FREE',description:'Daily rewards program'},{id:'s5',title:'Refer a Friend: Get 20 SC + 100K GC',description:'Referral program'},{id:'s6',title:'Weekend Special: Double GC on All Purchases',description:'Weekend promotion'},{id:'s7',title:'VIP Exclusive: 100 SC + 1M GC Package',description:'VIP tier reward'}];
+
+// BETEWIN GAMES
+const BETEWIN_TOP=['Gates of Olympus','Sweet Bonanza','Aviator','Football - Premier League','Football - Champions League','Lightning Roulette','Big Bass Bonanza','Crazy Time'];
+const BETEWIN_GAMES={'Top Sports':[{id:'fp',name:'Football - Premier League'},{id:'fuc',name:'Football - Champions League'},{id:'fll',name:'Football - La Liga'},{id:'fsa',name:'Football - Serie A'},{id:'fbu',name:'Football - Bundesliga'},{id:'nba',name:'Basketball - NBA'},{id:'eur',name:'Basketball - EuroLeague'},{id:'atp',name:'Tennis - ATP Tour'},{id:'ipl',name:'Cricket - IPL'},{id:'cs2',name:'Esports - CS2'},{id:'d2',name:'Esports - Dota 2'}],'Slots':[{id:'go',name:'Gates of Olympus'},{id:'sb',name:'Sweet Bonanza'},{id:'bbb',name:'Big Bass Bonanza'},{id:'dh',name:'The Dog House'},{id:'sp',name:'Starlight Princess'},{id:'sr',name:'Sugar Rush'},{id:'bod',name:'Book of Dead'},{id:'wg',name:'Wolf Gold'},{id:'st',name:'Starburst'},{id:'re',name:'Reactoonz'},{id:'fj',name:'Fire Joker'},{id:'gq',name:"Gonzo's Quest"}],'Live Casino':[{id:'lr',name:'Lightning Roulette'},{id:'ct',name:'Crazy Time'},{id:'lbj',name:'Live Blackjack'},{id:'spb',name:'Speed Baccarat'},{id:'dc',name:'Dream Catcher'},{id:'ml',name:'Monopoly Live'},{id:'dt',name:'Dragon Tiger'}],'Crash Games':[{id:'av',name:'Aviator'},{id:'jx',name:'JetX'},{id:'cc',name:'Cash or Crash'}]};
+const BETEWIN_OFFERS=[{id:'bw1',title:'100% First Deposit Bonus up to $150',description:'Sports welcome bonus for new players'},{id:'bw2',title:'Casino Welcome Package up to $1,750 + 150 Free Spins',description:'First four deposits casino bonus'},{id:'bw3',title:'Weekly Sports Cashback 3%',description:'Get 3% back on weekly sports losses'},{id:'bw4',title:'Free Bet on Champions League',description:'Activate freebets for Champions League bets'},{id:'bw5',title:'VIP Cashback Program',description:'8-tier VIP system with increasing cashback rewards'},{id:'bw6',title:'30 Free Spins on First Deposit',description:'Casino free spins on signup'}];
+
+// BANKOBET GAMES
+const BANKOBET_TOP=['Football - Süper Lig','Football - Champions League','Live Blackjack','Lightning Roulette','Aviator','Sweet Bonanza','Basketball - EuroLeague','Crazy Time'];
+const BANKOBET_GAMES={'Top Sports':[{id:'fsl',name:'Football - Süper Lig'},{id:'fuc',name:'Football - Champions League'},{id:'fel',name:'Football - Europa League'},{id:'fpl',name:'Football - Premier League'},{id:'bel',name:'Basketball - EuroLeague'},{id:'bsl',name:'Basketball - BSL (Turkey)'},{id:'tatp',name:'Tennis - ATP Tour'},{id:'vol',name:'Volleyball - European Championships'},{id:'cs2',name:'Esports - CS2'},{id:'lol',name:'Esports - League of Legends'}],'Slots':[{id:'sb',name:'Sweet Bonanza'},{id:'go',name:'Gates of Olympus'},{id:'av',name:'Aviator'},{id:'bbb',name:'Big Bass Bonanza'},{id:'bod',name:'Book of Dead'},{id:'re',name:'Reactoonz'},{id:'st',name:'Starburst'},{id:'wg',name:'Wolf Gold'},{id:'fj',name:'Fire Joker'},{id:'dod',name:'Doom of Dead'}],'Live Casino':[{id:'lr',name:'Lightning Roulette'},{id:'ct',name:'Crazy Time'},{id:'lbj',name:'Live Blackjack'},{id:'lb',name:'Live Baccarat'},{id:'lp',name:"Live Poker - Texas Hold'em"},{id:'dt',name:'Dragon Tiger'},{id:'spr',name:'Speed Roulette'}],'Table Games':[{id:'cbj',name:'Classic Blackjack'},{id:'er',name:'European Roulette'},{id:'ar',name:'American Roulette'},{id:'bac',name:'Baccarat'},{id:'tcp',name:'Three Card Poker'}]};
+const BANKOBET_OFFERS=[{id:'bb1',title:'%100 İlk Yatırım Bonusu – 5.000 TRY\'ye kadar',description:'Yeni oyuncu hoş geldin bonusu'},{id:'bb2',title:'Casino Hoş Geldin Paketi – 3.000 TRY + 200 Ücretsiz Dönüş',description:'İlk yatırıma özel casino paketi'},{id:'bb3',title:'Haftalık Spor Kayıp İadesi – %15\'e kadar',description:'Haftalık spor kayıplarınızın %15\'i iade edilir, max 1.500 TRY'},{id:'bb4',title:'Aylık Casino Kayıp İadesi – %20\'ye kadar',description:'Aylık 2.500 TRY\'ye kadar geri ödeme'},{id:'bb5',title:'Günlük 50 Ücretsiz Dönüş',description:'150 TRY üzeri yatırımlarda geçerli'},{id:'bb6',title:'Kombine Bahislerde %30 Oran Artışı',description:'Kombine kuponlarınızda kazancınızı artırın'},{id:'bb7',title:'Yeni Oyunculara €20 Ücretsiz Bahis',description:'Spor bahisleri için ücretsiz başlangıç bonusu'}];
+
+// WEBHOOKS
+const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
+const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
+const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
+const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
+const FAL_MODEL='fal-ai/flux-pro';
+const GITHUB_TOKEN='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';
+const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
+const DAILY_LIMIT=10;
+
+// ============================================================
+// STATE
+// ============================================================
+let state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
+let galleryData=[];
+let currentUserEmail=null;
+
+// Helper: is this a Mario flow?
+function isMarioFlow(){
+  return state.client==='mario';
+}
+
+// Helper: get correct webhook
+function getWebhook(){
+  return isMarioFlow()?MARIO_WEBHOOK:SPINPALS_WEBHOOK;
+}
+
+// Helper: get correct games
+function getGames(){
+  if(!isMarioFlow()) return {top:SPINPALS_TOP, all:SPINPALS_GAMES};
+  if(state.platform==='betewin') return {top:BETEWIN_TOP, all:BETEWIN_GAMES};
+  return {top:BANKOBET_TOP, all:BANKOBET_GAMES};
+}
+
+// Helper: get correct offers
+function getOffers(){
+  if(!isMarioFlow()) return SPINPALS_OFFERS;
+  if(state.platform==='betewin') return BETEWIN_OFFERS;
+  return BANKOBET_OFFERS;
+}
+
+const chatEl=document.getElementById('chat');
+const galleryEl=document.getElementById('gallery');
+const modal=document.getElementById('modal');
+
+// ============================================================
+// EMAIL GATE
+// ============================================================
+function isValidEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
+document.getElementById('emailSubmit').onclick=function(){
+  const email=document.getElementById('emailField').value.trim().toLowerCase();
+  const errEl=document.getElementById('emailError');
+  const fieldEl=document.getElementById('emailField');
+  if(!isValidEmail(email)){fieldEl.classList.add('error');errEl.style.display='block';return;}
+  fieldEl.classList.remove('error');errEl.style.display='none';
+  activateDashboard(email);
+};
+document.getElementById('emailField').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('emailSubmit').click();});
+
+function activateDashboard(email){
+  currentUserEmail=email;
+  document.getElementById('emailGate').style.display='none';
+  const isSpinPals=email.endsWith('@spinpals.com');
+  const isMario=email.endsWith('@mario.com');
+  const isRmgs=email.endsWith('@rmgs.online');
+  if(isSpinPals||isMario||isRmgs){
+    document.getElementById('chatSection').style.display='block';
+    document.getElementById('gallerySection').style.display='block';
+    document.getElementById('galleryUserTag').textContent=email;
+    fetchGallery().then(()=>renderGallery());
+    startChat();
+  } else {
+    document.getElementById('agentPending').style.display='block';
+    document.getElementById('agentPendingEmail').textContent=email;
+  }
+}
+
+function resetUser(){
+  currentUserEmail=null;
+  state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
+  document.getElementById('emailGate').style.display='block';
+  document.getElementById('chatSection').style.display='none';
+  document.getElementById('gallerySection').style.display='none';
+  document.getElementById('agentPending').style.display='none';
+  document.getElementById('emailField').value='';
+  chatEl.innerHTML='';galleryEl.innerHTML='';
+}
+
+// ============================================================
+// GALLERY
+// ============================================================
+async function fetchGallery(){
+  try{const r=await fetch(GALLERY_URL+Date.now());if(r.ok){galleryData=await r.json();return galleryData}}catch(e){}
+  return galleryData;
+}
+
+function renderGallery(filter='all'){
+  galleryEl.innerHTML='';
+  let items=galleryData.filter(c=>c.image_url&&c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail);
+  if(filter!=='all')items=items.filter(c=>c.format===filter);
+  if(!items.length){galleryEl.innerHTML='<div class="gallery-empty">No creatives yet. Generate your first ad above.</div>';return;}
+  items.forEach(c=>{
+    const card=document.createElement('div');card.className='gallery-card';
+    card.innerHTML='<div class="gallery-thumb" style="background-image:url('+c.image_url+')"><div class="gallery-overlay"><div class="gallery-name">'+c.game_name+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div></div></div>';
+    card.onclick=()=>openModal(c);galleryEl.appendChild(card);
+  });
+}
+
+document.querySelectorAll('.filter-tab').forEach(tab=>{
+  tab.onclick=()=>{document.querySelectorAll('.filter-tab').forEach(t=>t.className='filter-tab');tab.className='filter-tab active';renderGallery(tab.dataset.f);};
+});
+
+// ============================================================
+// DAILY LIMIT
+// ============================================================
+function getTodayKey(email){return 'gen_count_'+email+'_'+new Date().toISOString().split('T')[0];}
+function getGenerationCount(email){return parseInt(localStorage.getItem(getTodayKey(email))||'0',10);}
+function incrementGenerationCount(email){localStorage.setItem(getTodayKey(email),getGenerationCount(email)+1);}
+function hasReachedDailyLimit(email){return getGenerationCount(email)>=DAILY_LIMIT;}
+
+// ============================================================
+// WEBHOOK
+// ============================================================
+async function triggerWebhook(data,url){
+  try{await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+}
+
+// ============================================================
+// CHAT HELPERS
+// ============================================================
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
+
+function msg(html,type='bot'){
+  const d=document.createElement('div');
+  d.className='bubble '+(type==='user'?'user':'bot');
+  d.innerHTML=html;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight;return d;
+}
+
+function lockButtons(container){
+  container.querySelectorAll('button,.offer-card').forEach(el=>{el.style.pointerEvents='none';el.style.opacity='0.4';});
+}
+
+// ============================================================
+// FLOW - startChat
+// ============================================================
+async function startChat(){
+  chatEl.innerHTML='';
+  state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.body.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  try{window.parent.scrollTo({top:0,behavior:'smooth'});}catch(e){}
+  await delay(200);
+
+  // RMGS.ONLINE: show big client selector first
+  if(currentUserEmail.endsWith('@rmgs.online')){
+    showRmgsClientSelector();
+    return;
+  }
+
+  // SPINPALS or MARIO: set client automatically
+  if(currentUserEmail.endsWith('@spinpals.com')){
+    state.client='spinpals';
+    showStartButtons();
+  } else if(currentUserEmail.endsWith('@mario.com')){
+    state.client='mario';
+    stepPlatform();
+  }
+}
+
+// ============================================================
+// RMGS CLIENT SELECTOR (only for rmgs.online)
+// ============================================================
+function showRmgsClientSelector(){
+  const wrap=document.createElement('div');
+  wrap.style.cssText='text-align:center;padding:30px 20px;';
+  const title=document.createElement('div');
+  title.style.cssText='font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;';
+  title.textContent='Who are we creating for?';
+  const sub=document.createElement('div');
+  sub.style.cssText='font-size:14px;color:var(--txt2);margin-bottom:28px;';
+  sub.textContent='Select a client to get started.';
+  const w=document.createElement('div');
+  w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
+
+  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)']].forEach(([val,label])=>{
+    const b=document.createElement('button');
+    b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
+    b.textContent=label;
+    b.onmouseover=()=>{if(!b.dataset.selected){b.style.borderColor='var(--blue)';b.style.color='var(--blue)';b.style.background='var(--blue-glow)';}};
+    b.onmouseout=()=>{if(!b.dataset.selected){b.style.borderColor='var(--border)';b.style.color='var(--txt)';b.style.background='var(--card)';}};
+    b.onclick=()=>{
+      if(b.dataset.selected)return;
+      b.dataset.selected='1';
+      w.querySelectorAll('button').forEach(x=>{x.style.pointerEvents='none';x.style.opacity='0.4';});
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.client=val;
+      chatEl.innerHTML='';
+      msg(label,'user');
+      if(val==='spinpals'){
+        state.platform=null;
+        showStartButtons();
+      } else {
+        stepPlatform();
+      }
+    };
+    w.appendChild(b);
+  });
+  wrap.appendChild(title);wrap.appendChild(sub);wrap.appendChild(w);
+  chatEl.appendChild(wrap);
+}
+
+// ============================================================
+// SHOW START BUTTONS (Let's go / Quick Generate)
+// ============================================================
+async function showStartButtons(){
+  await delay(250);
+  const m=msg('Ready to generate your next ad creative?');
+  const btnWrap=document.createElement('div');btnWrap.style.cssText='margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;';
+  const btn=document.createElement('button');btn.className='opt-btn opt-blue';btn.textContent="Let's go →";
+  btn.onclick=()=>{if(btn.disabled)return;btn.disabled=true;btn.style.opacity='0.5';quickBtn.disabled=true;quickBtn.style.opacity='0.5';stepFormat();};
+  btnWrap.appendChild(btn);
+  const quickBtn=document.createElement('button');quickBtn.className='opt-btn';quickBtn.textContent='⚡ Quick Generate';
+  quickBtn.onclick=()=>{if(quickBtn.disabled)return;quickBtn.disabled=true;quickBtn.style.opacity='0.5';btn.disabled=true;btn.style.opacity='0.5';doQuickGenerate();};
+  btnWrap.appendChild(quickBtn);
+  m.appendChild(btnWrap);
+}
+
+// ============================================================
+// STEP: PLATFORM (Mario only)
+// ============================================================
+async function stepPlatform(){
+  await delay(250);
+  const m=msg('Which <span class="accent">platform</span> are we creating for?');
+  const w=document.createElement('div');w.className='opt-group';
+  [['betewin','Betewin'],['bankobet','Bankobet']].forEach(([val,label])=>{
+    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    b.onclick=()=>{
+      if(b.disabled)return;
+      lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.platform=val;msg(label,'user');showStartButtons();
+    };w.appendChild(b);
+  });m.appendChild(w);
+}
+
+// ============================================================
+// STEP: FORMAT
+// ============================================================
+async function stepFormat(){
+  msg("Let's go →",'user');await delay(250);
+  const m=msg('What <span class="accent">format</span> do you need?');
+  const w=document.createElement('div');w.className='opt-group';
+  [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']].forEach(([val,label])=>{
+    const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
+    b.onclick=()=>{
+      if(b.disabled)return;lockButtons(w);
+      b.style.opacity='1';b.style.borderColor='var(--blue)';b.style.color='var(--blue)';
+      state.format=val;msg(label,'user');stepStyle();
+    };w.appendChild(b);
+  });m.appendChild(w);
+}
+
+// ============================================================
+// STEP: STYLE
+// ============================================================
+async function stepStyle(){
+  await delay(250);
+  const m=msg('What <span class="accent">creative style</span> do you want?');
+  const w=document.createElement('div');w.className='opt-group';
+
+  const bClassic=document.createElement('button');bClassic.className='opt-btn';bClassic.textContent='Classic';
+  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');stepGame();};
+  w.appendChild(bClassic);
+
+  const bText=document.createElement('button');bText.className='opt-btn';bText.textContent='Text Only';
+  bText.onclick=()=>{if(bText.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bText.style.opacity='1';bText.style.borderColor='var(--blue)';bText.style.color='var(--blue)';state.style='Text Only';state.customInstructions=null;state.game='N/A';msg('Text Only','user');stepOffer();};
+  w.appendChild(bText);
+
+  const bRealistic=document.createElement('button');bRealistic.className='opt-btn';bRealistic.textContent='Realistic';
+  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');stepGame();};
+  w.appendChild(bRealistic);
+
+  const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
+  customBtn.onclick=()=>{if(customBtn.disabled)return;customWrap.classList.toggle('visible');customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';};
+  w.appendChild(customBtn);
+  m.appendChild(w);
+
+  const customWrap=document.createElement('div');customWrap.className='custom-input-wrap';
+  const textarea=document.createElement('textarea');textarea.className='custom-textarea';
+  textarea.placeholder='Describe exactly what you want...';
+  const submitBtn=document.createElement('button');submitBtn.className='custom-submit';submitBtn.textContent='Use This Style →';
+  submitBtn.onclick=()=>{
+    const val=textarea.value.trim();if(!val)return;
+    lockButtons(w);customBtn.style.opacity='1';
+    state.style='Custom';state.customInstructions=val;
+    msg('Custom: '+val,'user');stepGame();
+  };
+  customWrap.appendChild(textarea);customWrap.appendChild(submitBtn);
+  m.appendChild(customWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ============================================================
+// STEP: GAME
+// ============================================================
+async function stepGame(){
+  await delay(250);
+  const m=msg('Which <span class="accent">game</span> should we feature?');
+  const sel=document.createElement('div');sel.className='game-sel';
+  const wrap=document.createElement('div');wrap.className='game-dropdown-wrap';
+  const selected=document.createElement('div');selected.className='game-dropdown-selected';
+  selected.innerHTML='<span class="selected-text">Select a game...</span><svg class="game-dropdown-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
+  const list=document.createElement('div');list.className='game-dropdown-list';
+
+  selected.onclick=()=>{selected.classList.toggle('open');list.classList.toggle('open');};
+  document.addEventListener('click',function closeDD(e){if(!wrap.contains(e.target)){selected.classList.remove('open');list.classList.remove('open');document.removeEventListener('click',closeDD);}});
+
+  function addGroup(label,games,isTop){
+    const gl=document.createElement('div');gl.className='game-dropdown-group-label';
+    if(isTop){gl.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="var(--blue)" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'+label;}
+    else{gl.textContent=label;}
+    list.appendChild(gl);
+    games.forEach(name=>{
+      const item=document.createElement('div');item.className='game-dropdown-item';item.textContent=name;
+      item.onclick=()=>{
+        if(item.dataset.selected)return;item.dataset.selected='1';
+        selected.querySelector('.selected-text').textContent=name;
+        selected.style.pointerEvents='none';selected.style.opacity='0.7';
+        list.classList.remove('open');selected.classList.remove('open');
+        state.game=name;msg(name,'user');stepOffer();
+      };
+      list.appendChild(item);
+    });
+  }
+
+  // No Specific Game option (shown for Custom style only)
+  if(state.style==='Custom'){
+    const noGameItem=document.createElement('div');noGameItem.className='game-dropdown-item';
+    noGameItem.style.cssText='border-bottom:1px solid var(--border);color:var(--txt2);font-weight:600;display:flex;align-items:center;gap:8px;';
+    noGameItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>No Specific Game';
+    noGameItem.onclick=()=>{
+      if(noGameItem.dataset.selected)return;noGameItem.dataset.selected='1';
+      selected.querySelector('.selected-text').textContent='No Specific Game';
+      selected.style.pointerEvents='none';selected.style.opacity='0.7';
+      list.classList.remove('open');selected.classList.remove('open');
+      state.game='N/A';msg('No Specific Game','user');stepOffer();
+    };
+    list.appendChild(noGameItem);
+  }
+
+  // Random game item
+  const randItem=document.createElement('div');randItem.className='game-dropdown-item';
+  randItem.style.cssText='border-bottom:1px solid var(--blue);color:var(--blue);font-weight:600;display:flex;align-items:center;gap:8px;';
+  randItem.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>Random Game';
+  randItem.onclick=()=>{
+    const {top,all}=getGames();
+    const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+    const pick=allNames[Math.floor(Math.random()*allNames.length)];
+    selected.querySelector('.selected-text').textContent=pick;
+    selected.style.pointerEvents='none';selected.style.opacity='0.7';
+    list.classList.remove('open');selected.classList.remove('open');
+    state.game=pick;msg(pick,'user');stepOffer();
+  };
+  list.appendChild(randItem);
+
+  // Use getGames() helper - automatically uses correct client's games
+  const {top,all}=getGames();
+  addGroup('Top Performing',top,true);
+  Object.keys(all).sort().forEach(cat=>addGroup(cat,all[cat].map(g=>g.name),false));
+
+  wrap.appendChild(selected);wrap.appendChild(list);
+  sel.appendChild(wrap);m.appendChild(sel);
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ============================================================
+// STEP: OFFER
+// ============================================================
+async function stepOffer(){
+  await delay(250);
+  const m=msg('Which <span class="accent">offer</span> should we feature?');
+  const w=document.createElement('div');w.className='offer-list';
+  // Use getOffers() helper - automatically uses correct client's offers
+  getOffers().forEach(o=>{
+    const card=document.createElement('div');card.className='offer-card';
+    card.innerHTML='<div class="offer-title">'+o.title+'</div><div class="offer-desc">'+o.description+'</div>';
+    card.onclick=()=>{
+      if(card.dataset.selected)return;card.dataset.selected='1';
+      lockButtons(w);card.style.opacity='1';card.style.borderColor='var(--blue)';
+      state.offer=o.title;msg(o.title,'user');stepSummary();
+    };w.appendChild(card);
+  });
+  m.appendChild(w);chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ============================================================
+// STEP: SUMMARY
+// ============================================================
+async function stepSummary(){
+  await delay(250);
+  const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
+  const gameRow=state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
+  const customRow=state.customInstructions?'<div class="summary-row"><span class="summary-label">Instructions</span>'+state.customInstructions+'</div>':'';
+  const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
+    platformRow+
+    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div>'+
+    gameRow+
+    '<div class="summary-row"><span class="summary-label">Offer</span>'+state.offer+'</div>'+
+    customRow+'</div>');
+  const acts=document.createElement('div');acts.className='summary-actions';
+  const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
+  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate();};acts.appendChild(gen);
+  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
+  acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+}
+
+// ============================================================
+// QUICK GENERATE
+// ============================================================
+async function doQuickGenerate(){
+  // For mario without platform selected yet, pick one randomly
+  if(isMarioFlow()&&!state.platform){
+    state.platform=Math.random()>0.5?'betewin':'bankobet';
+  }
+
+  const formats=['portrait','square','both'];
+  const styles=['Classic','Realistic'];
+  const {top,all}=getGames();
+  const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  const offers=getOffers();
+
+  const randFormat=formats[Math.floor(Math.random()*formats.length)];
+  const randStyle=styles[Math.floor(Math.random()*styles.length)];
+  const randGame=allNames[Math.floor(Math.random()*allNames.length)];
+  const randOffer=offers[Math.floor(Math.random()*offers.length)];
+
+  state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
+
+  const fmtLabel=randFormat==='portrait'?'Portrait (9:16)':randFormat==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
+  msg('⚡ Quick Generate','user');
+  await delay(250);
+  msg('<div class="summary-card"><div class="summary-title">Quick Generate — Selected For You</div>'+
+    platformRow+
+    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+randStyle+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Offer</span>'+randOffer.title+'</div></div>');
+  await delay(400);
+
+  // Check daily limit
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
+  }
+
+  await fetchGallery();
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  await triggerWebhook(payload,getWebhook());
+  incrementGenerationCount(currentUserEmail);
+
+  // Run fal.ai in parallel - don't await, let it complete independently
+  let falImageUrl=null;
+  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
+
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
+  }
+
+  let found=null;
+  while(!found&&!stopped){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
+    }
+  }
+  clearInterval(timerInterval);
+  // Wait for fal.ai to finish if it hasn't already (it's usually done long before Twin)
+  await falPromise;
+  if(found)showResult(loadMsg,found,falImageUrl);
+}
+
+// ============================================================
+// GENERATE
+// ============================================================
+async function doGenerate(){
+  msg('Generate Ad →','user');await delay(250);
+
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
+  }
+
+  await fetchGallery();
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  if(state.customInstructions)payload.custom_instructions=state.customInstructions;
+  await triggerWebhook(payload,getWebhook());
+  incrementGenerationCount(currentUserEmail);
+
+  // Run fal.ai in parallel - fires immediately alongside Twin
+  let falImageUrl=null;
+  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
+
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.appendChild(stopBtn2);
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  const stopBtn2=document.createElement('button');
+  stopBtn2.style.cssText=stopBtn.style.cssText;
+  stopBtn2.textContent='Stop Generation';
+  stopBtn2.onmouseover=()=>{stopBtn2.style.background='rgba(239,68,68,0.1)';};
+  stopBtn2.onmouseout=()=>{stopBtn2.style.background='transparent';};
+  stopBtn2.onclick=stopBtn.onclick;
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
+  }
+
+  let found=null;
+  while(!found&&!stopped){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
+    }
+  }
+  clearInterval(timerInterval);
+  await falPromise;
+  if(found)showResult(loadMsg,found,falImageUrl);
+}
+
+// ============================================================
+// FAL.AI PROMPT BUILDER
+// ============================================================
+function buildFalPrompt(){
+  const platform=state.platform;
+  const game=state.game&&state.game!=='N/A'?state.game:null;
+  const offer=state.offer;
+  const style=state.style;
+  const custom=state.customInstructions;
+
+  let brandName='SpinPals';
+  let brandContext='online social casino platform';
+  let language='English';
+
+  if(platform==='betewin'){brandName='Betewin';brandContext='international sports betting and casino platform';}
+  else if(platform==='bankobet'){brandName='Bankobet';brandContext='Turkish sports betting and casino platform';language='Turkish';}
+
+  const aspectRatio=state.format==='portrait'?'9:16 vertical portrait':'1:1 square';
+
+  let styleGuide='';
+  if(style==='Classic') styleGuide='Bold, vibrant casino advertising aesthetic. Dynamic composition, high energy, professional ad design.';
+  else if(style==='Realistic') styleGuide='Cinematic photorealistic style. Dramatic lighting, high detail, film poster quality.';
+  else if(style==='Text Only') styleGuide='Bold typographic design. Massive impactful text as hero element. Vibrant gradient background. Minimal imagery.';
+  else if(style==='Custom'&&custom) styleGuide=custom;
+
+  let gameContext='';
+  if(game){
+    if(game.includes('Football')||game.includes('Soccer')||game.includes('Lig')||game.includes('League')||game.includes('Champions')){
+      gameContext='Dynamic football/soccer action photography. Stadium atmosphere, crowd energy, ball in motion.';
+    } else if(game.includes('Basketball')){
+      gameContext='High energy basketball action. Court atmosphere, athletic movement, dramatic lighting.';
+    } else if(game.includes('Tennis')){
+      gameContext='Tennis action shot. Court perspective, athletic movement, competitive energy.';
+    } else if(game.includes('Aviator')||game.includes('Crash')||game.includes('JetX')){
+      gameContext='Dynamic crash game visual. Rocket or plane ascending against dramatic sky. Multiplier energy.';
+    } else if(game.includes('Roulette')){
+      gameContext='Spinning roulette wheel close up. Casino atmosphere, dramatic lighting, luxury feel.';
+    } else if(game.includes('Blackjack')){
+      gameContext='Casino blackjack table. Cards spread, chips, dramatic lighting, luxury casino atmosphere.';
+    } else if(game.includes('Baccarat')){
+      gameContext='Elegant baccarat table. Sophisticated casino atmosphere, high stakes feel.';
+    } else if(game.includes('Crazy Time')){
+      gameContext='Colorful carnival wheel game show. Bright lights, excitement, big win energy.';
+    } else {
+      gameContext='Vibrant slot game visual inspired by '+game+'. Bold colors, exciting symbols, winning energy.';
+    }
+  }
+
+  const prompt=`You are a senior art director at a world-class gambling advertising agency. Create a ${aspectRatio} social media ad creative that looks like it was produced by a 00/hour design team. This must be photorealistic, visually stunning, and completely professional.
+
+VISUAL CONCEPT:
+${game?gameContext:'Dynamic, high-energy casino or sports betting atmosphere. Luxury, excitement, winning energy.'}
+
+OFFER TO DISPLAY:
+The following offer text must appear large, bold, and perfectly legible in the creative: "${offer}"
+
+STYLE:
+${styleGuide}
+
+ABSOLUTE RULES - violating any of these is unacceptable:
+1. ZERO brand names, logos, platform names, or company names anywhere in the image
+2. CTA button must contain ONLY the words PLAY NOW or CLAIM BONUS - absolutely no arrows, chevrons, icons, badges, or any symbols anywhere near or on the button
+3. Disclaimer text at the very bottom must read EXACTLY: "18+ | Play Responsibly | T&Cs Apply" - this text must be small but perfectly sharp, crisp, and 100% legible
+4. Every single word, number, and character in the entire image must be perfectly legible, correctly spelled, and razor sharp - zero blurry text, zero distorted letters, zero gibberish, zero placeholder text
+5. No QR codes, no random icons, no unidentified symbols, no watermarks anywhere
+6. The offer text "${offer}" must be the dominant headline - large, bold, impossible to miss
+7. Composition must feel like a premium Facebook or Instagram ad - not a stock photo, not a generic template
+8. Lighting must be dramatic and cinematic - deep shadows, bright highlights, rich color contrast
+9. The image must feel exciting, high-stakes, and aspirational
+
+${language==='Turkish'?'LANGUAGE: Every single word in this image must be in Turkish. CTA button must say HEMEN OYNA or BONUSU AL. Disclaimer must say: 18+ | Sorumlu Oynayın | Şartlar Geçerlidir':'LANGUAGE: All text in English only.'}`;
+
+  return prompt;
+}
+
+// ============================================================
+// FAL.AI GENERATION
+// ============================================================
+async function generateWithFal(){
+  const prompt=buildFalPrompt();
+  const isPortrait=state.format==='portrait';
+  const imageSize=isPortrait?{width:720,height:1280}:{width:1024,height:1024};
+
+  try{
+    // Submit job
+    const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
+      method:'POST',
+      headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'5',output_format:'jpeg'})
+    });
+    const submitData=await submitRes.json();
+    const requestId=submitData.request_id;
+    if(!requestId)throw new Error('No request ID');
+
+    // Poll for result
+    let result=null;
+    let attempts=0;
+    while(!result&&attempts<30){
+      await new Promise(r=>setTimeout(r,3000));
+      const statusRes=await fetch('https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId,{
+        headers:{'Authorization':'Key '+FAL_KEY}
+      });
+      const statusData=await statusRes.json();
+      if(statusData.status==='COMPLETED'||statusData.images){
+        result=statusData;break;
+      }
+      if(statusData.status==='FAILED')throw new Error('Generation failed');
+      attempts++;
+    }
+
+    if(result&&result.images&&result.images[0]){
+      return result.images[0].url;
+    }
+    throw new Error('No image returned');
+  }catch(e){
+    console.error('fal.ai error:',e);
+    return null;
+  }
+}
+
+// ============================================================
+// SAVE FAL IMAGE TO GALLERY
+// ============================================================
+async function saveFalToGallery(imageUrl){
+  try{
+    // Fetch current gallery.json
+    const shaRes=await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    });
+    const shaData=await shaRes.json();
+    const sha=shaData.sha;
+    const currentContent=JSON.parse(atob(shaData.content.replace(/
+/g,'')));
+
+    // Add new fal entry
+    const newEntry={
+      id:'fal-'+Date.now(),
+      game_name:state.game||'N/A',
+      format:state.format,
+      offer_text:state.offer,
+      style:state.style+(state.customInstructions?' (Custom)':''),
+      platform:state.platform||'spinpals',
+      user_email:currentUserEmail,
+      image_url:imageUrl,
+      created_at:new Date().toISOString(),
+      source:'fal'
+    };
+    currentContent.unshift(newEntry);
+
+    // Save back to GitHub
+    await fetch('https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json',{
+      method:'PUT',
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:'Add fal.ai creative for '+currentUserEmail,
+        content:btoa(unescape(encodeURIComponent(JSON.stringify(currentContent,null,2)))),
+        sha:sha
+      })
+    });
+    // Update local gallery data
+    galleryData.unshift(newEntry);
+    renderGallery();
+  }catch(e){console.error('Failed to save fal image to gallery:',e);}
+}
+
+// ============================================================
+// SHOW RESULT
+// ============================================================
+function makeDownloadBtn(imageUrl, gameName, label){
+  const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent=label||'Download Image';
+  dlBtn.onclick=async()=>{
+    try{
+      dlBtn.textContent='Downloading...';dlBtn.disabled=true;
+      const res=await fetch(imageUrl);
+      const blob=await res.blob();
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      const ext=imageUrl.includes('.png')?'.png':'.jpg';
+      a.href=url;a.download=(gameName||'creative').replace(/[^a-z0-9]/gi,'-')+ext;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      dlBtn.textContent='Downloaded ✓';
+    }catch(e){
+      dlBtn.disabled=false;dlBtn.textContent=label||'Download Image';
+      window.open(imageUrl,'_blank');
+    }
+  };
+  return dlBtn;
+}
+
+function showResult(loadMsg,found,falImageUrl){
+  const container=loadMsg.querySelector('.loading');
+  const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
+  const formatLabel=found.format==='portrait'?'9:16':'1:1';
+
+  if(container){
+    if(falImageUrl){
+      // Two creatives side by side
+      container.innerHTML='<div class="result-box"><div class="result-title">Your Creatives Are Ready</div><div class="result-text" style="margin-bottom:16px;"><span style="color:var(--blue);font-weight:600">'+gameName+'</span> · '+formatLabel+'</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">'+
+        '<div><div style="font-size:11px;color:var(--txt3);text-align:center;margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Version 1</div><img class="result-img" src="'+found.image_url+'" style="margin:0;width:100%;" alt="creative 1"></div>'+
+        '<div><div style="font-size:11px;color:var(--txt3);text-align:center;margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Version 2</div><img class="result-img" src="'+falImageUrl+'" style="margin:0;width:100%;" alt="creative 2"></div>'+
+        '</div></div>';
+    } else {
+      container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div><div class="result-text"><span style="color:var(--blue);font-weight:600">'+gameName+'</span> · '+formatLabel+'</div><img class="result-img" src="'+found.image_url+'" alt="ad"></div>';
+    }
+  }
+
+  const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
+  if(falImageUrl){
+    const dl1=makeDownloadBtn(found.image_url,gameName,'Download Version 1');
+    const dl2=makeDownloadBtn(falImageUrl,gameName,'Download Version 2');
+    acts.appendChild(dl1);acts.appendChild(dl2);
+  } else {
+    acts.appendChild(makeDownloadBtn(found.image_url,gameName,'Download Image'));
+  }
+  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
+
+  // Feedback
+  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
+  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
+  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
+  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
+  thumbsUp.onclick=async()=>{if(thumbsUp.disabled)return;thumbsUp.classList.add('selected-up');thumbsDown.disabled=true;thumbsUp.disabled=true;thankMsg.style.display='block';await sendFeedback('positive',found);};
+  thumbsDown.onclick=async()=>{if(thumbsDown.disabled)return;thumbsDown.classList.add('selected-down');thumbsUp.disabled=true;thumbsDown.disabled=true;thankMsg.style.display='block';await sendFeedback('negative',found);};
+  feedbackWrap.appendChild(feedbackLabel);feedbackWrap.appendChild(thumbsUp);feedbackWrap.appendChild(thumbsDown);
+
+  // Facebook upload card with instructions
+  const fbWrap=document.createElement('div');
+  fbWrap.style.cssText='margin-top:16px;border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--card2);';
+  const fbTitle=document.createElement('div');
+  fbTitle.style.cssText='font-size:11px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;';
+  fbTitle.textContent='Add to Facebook Media Library';
+  const fbSteps=document.createElement('div');fbSteps.style.cssText='display:flex;flex-direction:column;gap:8px;margin-bottom:12px;';
+  [['1','Download your image using the button above'],['2','Click Open Media Library below — it opens your Ads Manager'],['3','Click Add Images and upload the file you just downloaded']].forEach(([num,text])=>{
+    const step=document.createElement('div');step.style.cssText='display:flex;gap:8px;align-items:center;';
+    step.innerHTML='<span style="min-width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+num+'</span><span style="font-size:13px;color:var(--txt2);">'+text+'</span>';
+    fbSteps.appendChild(step);
+  });
+  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
+  fbBtn.style.cssText='width:100%;justify-content:center;margin:0;';
+  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Open Media Library';
+  fbBtn.onclick=()=>openFacebookMediaLibrary(fbBtn);
+  fbWrap.appendChild(fbTitle);fbWrap.appendChild(fbSteps);fbWrap.appendChild(fbBtn);
+
+  loadMsg.appendChild(feedbackWrap);
+  loadMsg.appendChild(thankMsg);
+  loadMsg.appendChild(acts);
+  loadMsg.appendChild(fbWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
+  renderGallery();
+}
+
+// ============================================================
+// FEEDBACK
+// ============================================================
+async function sendFeedback(feedback,imageData){
+  try{await fetch(getWebhook(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'creative_feedback',feedback:feedback,game_name:imageData.game_name,format:imageData.format,style:imageData.style,offer_text:imageData.offer_text,image_url:imageData.image_url,user_email:currentUserEmail}),mode:'no-cors'});}catch(e){}
+}
+
+// ============================================================
+// FACEBOOK MEDIA LIBRARY
+// ============================================================
+function openFacebookMediaLibrary(btn){
+  // Route to correct ad account based on client
+  const isMario=isMarioFlow();
+  if(isMario){
+    // Mario ad account not yet configured
+    btn.style.borderColor='var(--txt3)';btn.style.color='var(--txt3)';
+    btn.disabled=true;
+    btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Facebook Media Library Being Configured';
+    return;
+  }
+  // SpinPals - open directly in SpinPals ad account
+  window.open('https://adsmanager.facebook.com/adsmanager/manage/images?act=2178254872545632','_blank');
+  btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Opened — upload your image there';
+  btn.style.borderColor='var(--green)';btn.style.color='var(--green)';
+  btn.disabled=true;
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function downloadImage(){
+  const img=document.getElementById('modalImg');
+  if(!img.src)return;
+  fetch(img.src).then(r=>r.blob()).then(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const ext=img.src.includes('.png')?'.png':'.jpg';
+    const title=document.getElementById('modalTitle').textContent||'creative';
+    a.href=url;a.download=title.replace(/[^a-z0-9]/gi,'-')+ext;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }).catch(()=>window.open(img.src,'_blank'));
+}
+
+function openModal(c){
+  document.getElementById('modalImg').src=c.image_url;
+  document.getElementById('modalTitle').textContent=c.game_name;
+  document.getElementById('modalInfo').textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
+  document.getElementById('modalDl').href=c.image_url;
+  modal.className='modal active';document.body.style.overflow='hidden';
+}
+function closeModal(){modal.className='modal';document.body.style.overflow='';}
+document.getElementById('modalClose').onclick=closeModal;
+modal.onclick=e=>{if(e.target===modal)closeModal();};
+document.onkeydown=e=>{if(e.key==='Escape')closeModal();};
+</script>
+</body>
+</html>
