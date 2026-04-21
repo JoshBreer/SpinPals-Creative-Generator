@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776788986A1B2",
+    "game_name": "Buffalo King Megaways",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/91/743fe4b1288871e9cc47ef8068b9f2d57b20dd7811008f300a192a66270cde.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T163319Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=834cc023c64748fb37cd22f47ee35f320d797c751c51b9c9d6495c66fc2f2c68",
+    "created_at": "2026-04-21 16:29:46"
+  },
+  {
+    "id": "cr-1776788986C3D4",
+    "game_name": "Buffalo King Megaways",
+    "format": "square",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f0/1f76794450adfe3b9459427ea2acd5c14e071474e58e664a461ac70043a6e0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T163343Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=872aed786bf2f7d3f9d2551db88864e9c75d4ba9b6734ec9109e7e466eccdb62",
+    "created_at": "2026-04-21 16:29:46"
+  },
+  {
     "id": "cr-1776788226C808",
     "game_name": "King of the Sky",
     "format": "square",
