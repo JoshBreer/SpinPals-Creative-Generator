@@ -759,7 +759,7 @@ async function doQuickGenerate(){
   }
 
   await fetchGallery();
-  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal').map(c=>c.id||(c.image_url.split('?')[0])));
   const snapCount=snapKeys.size;
   const startTs=Date.now();
 
@@ -820,7 +820,7 @@ async function doQuickGenerate(){
     while(!found2&&!stopped){
       await delay(7000);
       const fresh=await fetchGallery();
-      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
         const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
@@ -857,7 +857,8 @@ async function doGenerate(){
   }
 
   await fetchGallery();
-  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url).map(c=>c.id||(c.image_url.split('?')[0])));
+  // Only count Twin entries in snapshot — exclude fal entries to prevent collision
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal').map(c=>c.id||(c.image_url.split('?')[0])));
   const snapCount=snapKeys.size;
   const startTs=Date.now();
 
@@ -927,7 +928,7 @@ async function doGenerate(){
     while(!found2&&!stopped){
       await delay(7000);
       const fresh=await fetchGallery();
-      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
         const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
@@ -940,7 +941,7 @@ async function doGenerate(){
   while(!found&&!stopped){
     await delay(7000);
     const fresh=await fetchGallery();
-    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
       const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
       if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
@@ -1188,59 +1189,27 @@ async function pushFalEntryToGithub(newEntry){
 // Strategy: canvas draw (bypasses CORS for displayed images) → fetch blob → proxy blob
 // Never uses window.open — always triggers a real file download
 // ============================================================
-async function downloadBlob(imageUrl, filename){
-  const isTwinUrl=imageUrl.includes('your-objectstorage.com')||imageUrl.includes('X-Amz-Signature');
-  const isFalUrl=imageUrl.includes('fal.media')||imageUrl.includes('fal.run');
+async function downloadBlob(imageUrl){
+  // Try a fetch helper — checks blob size to detect proxy error pages
+  const tryFetch=async(url,opts)=>{
+    const r=await fetch(url,opts||{});
+    if(!r.ok)throw new Error(r.status);
+    const b=await r.blob();
+    if(b.size<500)throw new Error('blob too small');
+    return b;
+  };
 
-  // FAL images: direct fetch works (open CORS CDN)
-  if(isFalUrl){
-    try{
-      const r=await fetch(imageUrl,{mode:'cors'});
-      if(r.ok)return await r.blob();
-    }catch(e){}
-  }
+  // 1. Direct fetch with cors — works for fal.ai (open CDN)
+  try{return await tryFetch(imageUrl,{mode:'cors'});}catch(e){}
 
-  // Twin/S3 signed URLs: canvas draw works because the img is already authenticated
-  // by the browser's cookie/session — no crossOrigin attr needed
-  if(isTwinUrl){
-    const canvasBlob=await new Promise(resolve=>{
-      const img=new Image();
-      // NO crossOrigin attr — signed S3 URLs reject CORS preflight requests
-      img.onload=()=>{
-        try{
-          const c=document.createElement('canvas');
-          c.width=img.naturalWidth||img.width;
-          c.height=img.naturalHeight||img.height;
-          const ctx=c.getContext('2d');
-          ctx.drawImage(img,0,0);
-          c.toBlob(b=>resolve(b),'image/jpeg',0.97);
-        }catch(e){
-          // Canvas tainted — S3 blocks cross-origin canvas reads, fall through
-          resolve(null);
-        }
-      };
-      img.onerror=()=>resolve(null);
-      img.src=imageUrl;
-    });
-    if(canvasBlob)return canvasBlob;
+  // 2. allorigins — server-side proxy, works for S3 signed URLs and anything else
+  try{return await tryFetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));}catch(e){}
 
-    // Canvas tainted — use allorigins server-side proxy (fetches from server, avoids CORS)
-    try{
-      const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
-      if(r.ok){const b=await r.blob();if(b.size>1000)return b;}
-    }catch(e){}
+  // 3. corsproxy.io fallback
+  try{return await tryFetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));}catch(e){}
 
-    // corsproxy fallback
-    try{
-      const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
-      if(r.ok){const b=await r.blob();if(b.size>1000)return b;}
-    }catch(e){}
-  }
-
-  // Generic fallback chain for any other URL type
-  try{const r=await fetch(imageUrl,{mode:'cors'});if(r.ok)return await r.blob();}catch(e){}
-  try{const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));if(r.ok){const b=await r.blob();if(b.size>1000)return b;}}catch(e){}
-  try{const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));if(r.ok){const b=await r.blob();if(b.size>1000)return b;}}catch(e){}
+  // 4. cors.sh fallback
+  try{return await tryFetch('https://cors.sh/'+imageUrl,{'headers':{'x-cors-api-key':'temp_demo'}});}catch(e){}
 
   return null;
 }
