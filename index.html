@@ -1033,10 +1033,10 @@ async function generateWithFal(){
         headers:{'Authorization':'Key '+FAL_KEY}
       });
       const statusData=await statusRes.json();
-      console.log('fal poll status:',statusData.status);
-      if(statusData.status==='COMPLETED'||statusData.images||statusData.image){
-        result=statusData;break;
-      }
+      console.log('fal poll status:',statusData.status,'has images:',!!(statusData.images||statusData.image));
+      // fal returns result directly when complete - status may be undefined
+      if(statusData.images||statusData.image){result=statusData;break;}
+      if(statusData.status==='COMPLETED'){result=statusData;break;}
       if(statusData.status==='FAILED'){console.error('fal failed:',statusData);throw new Error('Generation failed');}
       attempts++;
     }
@@ -1063,12 +1063,8 @@ async function generateWithFal(){
 // ============================================================
 async function saveFalToGallery(imageUrl){
   try{
+    // Add to local gallery display immediately
     const newEntry={id:"fal-"+Date.now(),game_name:state.game||"N/A",format:state.format,offer_text:state.offer,style:state.style,platform:state.platform||"spinpals",user_email:currentUserEmail,image_url:imageUrl,created_at:new Date().toISOString(),source:"fal"};
-    const r=await fetch("https://api.github.com/repos/"+GITHUB_REPO+"/contents/gallery.json",{headers:{"Authorization":"token "+GITHUB_TOKEN,"Accept":"application/vnd.github.v3+json"}});
-    const d=await r.json();
-    const arr=JSON.parse(atob(d.content.replace(/\s/g,"")));
-    arr.unshift(newEntry);
-    await fetch("https://api.github.com/repos/"+GITHUB_REPO+"/contents/gallery.json",{method:"PUT",headers:{"Authorization":"token "+GITHUB_TOKEN,"Accept":"application/vnd.github.v3+json","Content-Type":"application/json"},body:JSON.stringify({message:"fal creative",content:btoa(unescape(encodeURIComponent(JSON.stringify(arr,null,2)))),sha:d.sha})});
     galleryData.unshift(newEntry);
     renderGallery();
   }catch(e){console.error("fal save failed",e);}
@@ -1191,6 +1187,40 @@ function openFacebookMediaLibrary(btn){
 }
 
 // ============================================================
+// STATS
+function renderStats(){
+  const allItems=galleryData.filter(c=>c.user_email&&c.image_url);
+  const byUser={};
+  allItems.forEach(c=>{
+    const u=c.user_email.trim().toLowerCase();
+    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,lastDate:null};
+    byUser[u].total++;
+    if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
+    if(u.endsWith('@mario.com'))byUser[u].mario++;
+    const d=new Date(c.created_at);
+    if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
+  });
+  const totalAll=allItems.length;
+  const spTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@spinpals.com')).length;
+  const marioTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@mario.com')).length;
+  const uniqueUsers=Object.keys(byUser).length;
+  const grid=document.getElementById('statsGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
+    grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
+  });
+  const tbody=document.getElementById('statsBody');
+  if(!tbody)return;
+  tbody.innerHTML='';
+  Object.entries(byUser).sort(function(a,b){return b[1].total-a[1].total;}).forEach(function(pair){
+    const email=pair[0];const data=pair[1];
+    const name=email.split('@')[0];
+    const last=data.lastDate?data.lastDate.toLocaleDateString():'Never';
+    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+last+'</td></tr>';
+  });
+}
+
 // MODAL
 // ============================================================
 function downloadImage(){
