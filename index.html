@@ -1092,11 +1092,46 @@ function showResult(loadMsg,found){
     images.forEach(({url,label})=>{grid.appendChild(makeImageCard(url,label,gameName));});
     container.querySelector('.result-box').appendChild(grid);
   }
-  const acts=document.createElement('div');acts.className='summary-actions';
-  const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
-  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate();};acts.appendChild(gen);
-  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
-  acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+
+  // Generate Another button
+  const acts=document.createElement('div');acts.className='summary-actions';acts.style.cssText='justify-content:center;margin-top:16px;';
+  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;
+  acts.appendChild(anotherBtn);
+
+  // Thumbs up/down feedback
+  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
+  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
+  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
+  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
+  thumbsUp.onclick=async()=>{if(thumbsUp.disabled)return;thumbsUp.classList.add('selected-up');thumbsDown.disabled=true;thumbsUp.disabled=true;thankMsg.style.display='block';await sendFeedback('positive',found);};
+  thumbsDown.onclick=async()=>{if(thumbsDown.disabled)return;thumbsDown.classList.add('selected-down');thumbsUp.disabled=true;thumbsDown.disabled=true;thankMsg.style.display='block';await sendFeedback('negative',found);};
+  feedbackWrap.appendChild(feedbackLabel);feedbackWrap.appendChild(thumbsUp);feedbackWrap.appendChild(thumbsDown);
+
+  // Facebook media library card
+  const fbWrap=document.createElement('div');
+  fbWrap.style.cssText='margin-top:16px;border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--card2);';
+  const fbTitle=document.createElement('div');
+  fbTitle.style.cssText='font-size:11px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;';
+  fbTitle.textContent='Add to Facebook Media Library';
+  const fbSteps=document.createElement('div');fbSteps.style.cssText='display:flex;flex-direction:column;gap:8px;margin-bottom:12px;';
+  [['1','Download your image using the button above'],['2','Click Open Media Library below — it opens your Ads Manager'],['3','Click Add Images and upload the file you just downloaded']].forEach(([num,text])=>{
+    const step=document.createElement('div');step.style.cssText='display:flex;gap:8px;align-items:center;';
+    step.innerHTML='<span style="min-width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+num+'</span><span style="font-size:13px;color:var(--txt2);">'+text+'</span>';
+    fbSteps.appendChild(step);
+  });
+  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
+  fbBtn.style.cssText='width:100%;justify-content:center;margin:0;';
+  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Open Media Library';
+  fbBtn.onclick=()=>openFacebookMediaLibrary(fbBtn);
+  fbWrap.appendChild(fbTitle);fbWrap.appendChild(fbSteps);fbWrap.appendChild(fbBtn);
+
+  loadMsg.appendChild(feedbackWrap);
+  loadMsg.appendChild(thankMsg);
+  loadMsg.appendChild(acts);
+  loadMsg.appendChild(fbWrap);
+  chatEl.scrollTop=chatEl.scrollHeight;
+  renderGallery();
 }
 
 // ============================================================
