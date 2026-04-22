@@ -1338,25 +1338,43 @@ function renderStats(){
 
 // MODAL
 // ============================================================
-function downloadImage(){
+async function downloadImage(){
   const img=document.getElementById('modalImg');
-  if(!img.src)return;
-  fetch(img.src).then(r=>r.blob()).then(blob=>{
-    const url=URL.createObjectURL(blob);
+  if(!img.src||img.src===window.location.href)return;
+  const btn=document.getElementById('modalDl');
+  const origText=btn.textContent;
+  btn.textContent='Downloading...';btn.disabled=true;
+  const imageUrl=img.src;
+  const filename=(document.getElementById('modalTitle').textContent||'creative').replace(/[^a-z0-9]/gi,'-');
+  const tryFetch=async(url)=>{const r=await fetch(url,{mode:'cors'});if(!r.ok)throw new Error('failed');return r.blob();};
+  let blob=null;
+  try{blob=await tryFetch(imageUrl);}catch(e1){
+    try{blob=await tryFetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));}catch(e2){
+      try{blob=await tryFetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));}catch(e3){
+        const a=document.createElement('a');
+        a.href=imageUrl;a.download=filename+'.jpg';a.target='_self';
+        document.body.appendChild(a);a.click();document.body.removeChild(a);
+        btn.textContent=origText;btn.disabled=false;
+        return;
+      }
+    }
+  }
+  if(blob){
+    const ext=blob.type.includes('png')?'.png':'.jpg';
+    const blobUrl=URL.createObjectURL(blob);
     const a=document.createElement('a');
-    const ext=img.src.includes('.png')?'.png':'.jpg';
-    const title=document.getElementById('modalTitle').textContent||'creative';
-    a.href=url;a.download=title.replace(/[^a-z0-9]/gi,'-')+ext;
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }).catch(()=>window.open(img.src,'_blank'));
+    a.href=blobUrl;a.download=filename+ext;
+    document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},1000);
+    btn.textContent='Downloaded ✓';
+    setTimeout(()=>{btn.textContent=origText;btn.disabled=false;},2500);
+  }
 }
 
 function openModal(c){
   document.getElementById('modalImg').src=c.image_url;
   document.getElementById('modalTitle').textContent=c.game_name;
   document.getElementById('modalInfo').textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
-  document.getElementById('modalDl').href=c.image_url;
   // Move modal to top of body so it always appears at top of page
   document.body.insertBefore(modal,document.body.firstChild);
   modal.className='modal active';
