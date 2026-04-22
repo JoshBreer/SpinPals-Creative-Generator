@@ -1127,7 +1127,7 @@ async function generateWithFal(){
 // ============================================================
 // SAVE FAL IMAGE TO GALLERY
 // ============================================================
-async function saveFalToGallery(imageUrl,format){
+function saveFalToGallery(imageUrl,format){
   try{
     const fmt=format||state.format;
     const newEntry={
@@ -1142,42 +1142,9 @@ async function saveFalToGallery(imageUrl,format){
       created_at:new Date().toISOString().replace('T',' ').substring(0,19),
       source:"fal"
     };
-    // Update local gallery immediately so it shows now
     galleryData.unshift(newEntry);
     renderGallery();
-    // Persist to GitHub so it survives page refresh
-    await pushFalEntryToGithub(newEntry);
   }catch(e){console.error("fal save failed",e);}
-}
-
-async function pushFalEntryToGithub(newEntry){
-  try{
-    // Step 1: get current file SHA and content
-    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
-    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
-    if(!getRes.ok)throw new Error('GitHub GET failed: '+getRes.status);
-    const fileData=await getRes.json();
-    const sha=fileData.sha;
-    // Decode existing gallery
-    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
-    // Prepend new entry
-    existing.unshift(newEntry);
-    // Step 2: push updated file
-    const putRes=await fetch(apiUrl,{
-      method:'PUT',
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify({
-        message:'Add fal.ai creative: '+newEntry.game_name+' ('+newEntry.format+')',
-        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
-        sha:sha
-      })
-    });
-    if(!putRes.ok){const e=await putRes.json();throw new Error('GitHub PUT failed: '+JSON.stringify(e));}
-    console.log('FAL entry saved to GitHub gallery ✓');
-  }catch(e){
-    console.error('Failed to save fal entry to GitHub:',e);
-    // Non-fatal — image is still shown in local gallery for this session
-  }
 }
 
 // ============================================================
