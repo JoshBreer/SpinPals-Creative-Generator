@@ -1008,43 +1008,25 @@ function buildFalPrompt(targetFormat){
   else if(style==='Custom'&&custom) styleNote=custom;
 
   // The prompt is structured as a professional creative brief with STRICT TEXT RULES
-  const prompt=`Professional casino advertising creative. ${isPortrait?'Tall vertical 9:16 mobile format':'Square 1:1 social media format'}. Agency production quality.
+  const prompt=`A premium ${isPortrait?'9:16 vertical portrait':'1:1 square'} casino advertisement. High production value. Photorealistic quality.
 
-BACKGROUND:
-${bg}
-${styleNote}
-STRICT RULE: No logos. No brand names. No watermarks. No slot machine reels. No game UI. Background is PURELY atmospheric.
+VISUAL BACKGROUND: ${bg} Style: ${styleNote}
+Rules: No logos. No brand names. No watermarks. No slot machine reels. No game UI elements.
 
-═══════════════════════════════
-MANDATORY TEXT — COPY EXACTLY
-═══════════════════════════════
+TEXT ELEMENTS - RENDER ALL THREE EXACTLY AS WRITTEN:
 
-ELEMENT 1 — MAIN HEADLINE:
-Exact text: "${headlineText}"
-Style: Very large bold text. White with gold outline. Dominant. Top portion of image.
-Rule: These words ONLY. Do not change, add, or remove any word.
+1. HEADLINE TEXT (large, top of image, bold white letters with gold outline):
+"${headlineText}"
 
-ELEMENT 2 — CALL TO ACTION BUTTON:
-Exact text: "${ctaText}"
-Style: Solid bright green rounded button (#22c55e). Bold white text inside. Real button appearance with shadow.
-Position: Lower center of image.
-Rule: The button must say EXACTLY "${ctaText}". Nothing else. Not "Step to" anything. Not "Get" anything. EXACTLY "${ctaText}".
+2. CTA BUTTON (bright green #22c55e rounded button, lower center):
+Button text: ${ctaText}
+Important: The button must say exactly "${ctaText}" - nothing else, no other words.
 
-ELEMENT 3 — LEGAL DISCLAIMER:
-Exact text: "${disclaimerText}"
-Style: Small crisp white text on a dark semi-transparent bar at the very bottom edge.
-Rule: Must say EXACTLY "${disclaimerText}". No other legal text. No fake website URLs. No made-up terms. EXACTLY these words.
+3. DISCLAIMER BAR (pinned to very bottom, full width, dark semi-transparent background, small white text):
+"${disclaimerText}"
+Important: Use exactly these words. No fake URLs. No made-up legal text. Exactly: "${disclaimerText}"
 
-═══════════════════════════════
-ABSOLUTE PROHIBITIONS
-═══════════════════════════════
-- DO NOT invent any text beyond the 3 elements above
-- DO NOT add website URLs, domain names, or fake legal copy
-- DO NOT put any text on the CTA button except "${ctaText}"
-- DO NOT repeat the headline text in other parts of the image
-- DO NOT add percentage signs, dollar amounts, or numbers that are not in the headline text
-- DO NOT add any icons, badges, seals, or decorative text elements
-- Every single letter must be razor sharp and perfectly legible`;
+RULES: Only these 3 text elements. No other text anywhere. No extra words on the button. No invented legal copy. All text must be sharp and legible.`;
 
   return prompt;
 }
@@ -1062,7 +1044,7 @@ async function falSubmitAndPoll(aspectRatio,targetFormat){
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
     method:'POST',
     headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'2',output_format:'jpeg'})
+    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg'})
   });
   const submitText=await submitRes.text();
   console.log('FAL SUBMIT STATUS:',submitRes.status,'BODY:',submitText.substring(0,400));
@@ -1243,7 +1225,7 @@ function makeImageCard(url, label, gameName){
   dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
   const img=document.createElement('img');
   img.alt=label;
-  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;';
+  img.style.cssText='width:100%;border-radius:6px;object-fit:contain;display:block;background:#000;';
   img.onerror=()=>{
     img.style.display='none';
     const errDiv=document.createElement('div');
