@@ -275,8 +275,6 @@ const BANKOBET_OFFERS=[{id:'bb1',title:'%100 İlk Yatırım Bonusu – 5.000 TRY
 const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
-const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
-const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
@@ -779,9 +777,6 @@ async function doQuickGenerate(){
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
-  // Run fal.ai in parallel immediately — raw promise, await result directly later
-  const falPromise=generateWithFal().catch(e=>{console.error('fal top-level error:',e);return null;});
-
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
   stopBtn.onclick=()=>{
@@ -814,15 +809,7 @@ async function doQuickGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){
-      clearInterval(ti2);
-      const falResult=await falPromise;
-      if(falResult){
-        if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
-        else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
-      }
-      showResult(loadMsg,found2,falResult);
-    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
   }
 
   let found=null;
@@ -836,12 +823,7 @@ async function doQuickGenerate(){
     }
   }
   clearInterval(timerInterval);
-  const falResult=await falPromise;
-  if(falResult){
-    if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
-    else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
-  }
-  if(found)showResult(loadMsg,found,falResult);
+  if(found)showResult(loadMsg,found);
 }
 
 // ============================================================
@@ -877,9 +859,6 @@ async function doGenerate(){
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
-
-  // Run fal.ai in parallel immediately — stored as raw promise so we can await the result directly
-  const falPromise=generateWithFal().catch(e=>{console.error('fal top-level error:',e);return null;});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -921,15 +900,7 @@ async function doGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){
-      clearInterval(ti2);
-      const falResult=await falPromise;
-      if(falResult){
-        if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
-        else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
-      }
-      showResult(loadMsg,found2,falResult);
-    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
   }
 
   let found=null;
@@ -943,196 +914,12 @@ async function doGenerate(){
     }
   }
   clearInterval(timerInterval);
-  const falResult=await falPromise;
-  if(falResult){
-    if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
-    else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
-  }
-  if(found)showResult(loadMsg,found,falResult);
+  if(found)showResult(loadMsg,found);
 }
 
 // ============================================================
-// FAL.AI PROMPT BUILDER
-// ============================================================
-function buildFalPrompt(targetFormat){
-  const platform=state.platform;
-  const game=state.game&&state.game!=='N/A'?state.game:null;
-  const offer=state.offer;
-  const style=state.style;
-  const custom=state.customInstructions;
-  const fmt=targetFormat||state.format;
-  const isTurkish=platform==='bankobet';
-
-  // These three text strings are FIXED — the model must render them verbatim
-  const headlineText=offer;
-  const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
-  const disclaimerText=isTurkish?'18+ | Sorumlu Oynayın | Şartlar ve Koşullar Geçerlidir':'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
-
-  const isPortrait=fmt==='portrait';
-
-  // Background atmosphere based on game
-  let bg='Luxury casino atmosphere. Deep emerald greens, rich golds. Dramatic cinematic lighting. Scattered casino chips and playing cards.';
-  if(game){
-    const g=game.toLowerCase();
-    if(g.includes('football')||g.includes('soccer')||g.includes('lig')||g.includes('league')||g.includes('champions')){
-      bg='Dramatic football stadium at night. Floodlit green pitch from aerial view. Crowd atmosphere. Golden light rays. No players or faces visible.';
-    } else if(g.includes('basketball')){
-      bg='Basketball court with dramatic overhead spotlights. Hardwood floor. Golden light rays. No players.';
-    } else if(g.includes('aviator')||g.includes('jetx')||g.includes('crash')){
-      bg='Sleek modern aircraft ascending against a dark dramatic sky. Speed lines. Blue and gold light trails.';
-    } else if(g.includes('roulette')){
-      bg='Spinning roulette wheel extreme close up. Deep red and black. Gold rim. Dramatic side lighting. Motion blur on wheel.';
-    } else if(g.includes('blackjack')){
-      bg='Casino blackjack table. Green velvet. Playing cards spread perfectly. Gold and black chips stacked high. Dramatic moody lighting.';
-    } else if(g.includes('baccarat')){
-      bg='Elegant baccarat table. Green velvet. Scattered cards. Black and gold chips. Sophisticated moody lighting.';
-    } else if(g.includes('crazy time')){
-      bg='Giant colorful carnival money wheel. Confetti explosion. Rainbow spotlights. Pure excitement energy.';
-    } else if(g.includes('sweet bonanza')){
-      bg='Cascading colorful candy and tropical fruits explosion. Vibrant pinks, purples, greens. Sparkling sugar crystals.';
-    } else if(g.includes('gates of olympus')){
-      bg='Ancient Greek temple columns. Golden divine light rays breaking through storm clouds. Lightning. Deep purple sky. Scattered gemstones.';
-    } else if(g.includes('big bass')){
-      bg='Dramatic underwater scene. Golden shimmer. Fish silhouettes. Treasure coins sinking through deep blue-green water.';
-    } else if(g.includes('wolf gold')){
-      bg='Moonlit canyon. Full moon glowing intensely. Wolf silhouette on ridge. Gold dust in moonbeams. Purple and gold atmosphere.';
-    } else {
-      bg='Rich dramatic casino atmosphere inspired by '+game+'. Deep jewel tones. Cinematic lighting. Gold coins. No logos, no text, no game UI.';
-    }
-  }
-
-  let styleNote='Bold vibrant colors. Cinematic lighting. High contrast. Professional ad quality.';
-  if(style==='Classic') styleNote='Bold vibrant casino aesthetic. Deep greens and golds. High energy. Professional.';
-  else if(style==='Realistic') styleNote='Cinematic photorealistic. Dramatic moody lighting. Film poster quality.';
-  else if(style==='Text Only') styleNote='Typographic poster. Bold text as hero. Dark gradient background.';
-  else if(style==='Custom'&&custom) styleNote=custom;
-
-  // The prompt is structured as a professional creative brief with STRICT TEXT RULES
-  const prompt=`A premium ${isPortrait?'9:16 vertical portrait':'1:1 square'} casino advertisement. High production value. Photorealistic quality.
-
-VISUAL BACKGROUND: ${bg} Style: ${styleNote}
-Rules: No logos. No brand names. No watermarks. No slot machine reels. No game UI elements.
-
-TEXT ELEMENTS - RENDER ALL THREE EXACTLY AS WRITTEN:
-
-1. HEADLINE TEXT (large, top of image, bold white letters with gold outline):
-"${headlineText}"
-
-2. CTA BUTTON (bright green #22c55e rounded button, lower center):
-Button text: ${ctaText}
-Important: The button must say exactly "${ctaText}" - nothing else, no other words.
-
-3. DISCLAIMER BAR (pinned to very bottom, full width, dark semi-transparent background, small white text):
-"${disclaimerText}"
-Important: Use exactly these words. No fake URLs. No made-up legal text. Exactly: "${disclaimerText}"
-
-RULES: Only these 3 text elements. No other text anywhere. No extra words on the button. No invented legal copy. All text must be sharp and legible.`;
-
-  return prompt;
-}
 
 
-// ============================================================
-// FAL.AI GENERATION
-// ============================================================
-async function falSubmitAndPoll(aspectRatio,targetFormat){
-  const prompt=buildFalPrompt(targetFormat);
-
-  // STEP 1: Submit to fal queue
-  // v1.1-ultra only accepts: prompt, aspect_ratio, num_images, output_format, safety_tolerance, seed
-  // guidance_scale / num_inference_steps are NOT supported and cause silent failures
-  const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
-    method:'POST',
-    headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg'})
-  });
-  const submitText=await submitRes.text();
-  console.log('FAL SUBMIT STATUS:',submitRes.status,'BODY:',submitText.substring(0,400));
-  if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status+' '+submitText.substring(0,200));
-  const submitData=JSON.parse(submitText);
-  const requestId=submitData.request_id;
-  if(!requestId)throw new Error('No request_id from fal. Response: '+submitText.substring(0,200));
-
-  // STEP 2: Poll status using the status_url returned by submit — NOT constructed from model name
-  // The submit response gives us the exact correct URLs to use
-  const statusUrl=submitData.status_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId+'/status');
-  const responseUrl=submitData.response_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId);
-  console.log('FAL STATUS URL:',statusUrl);
-  let attempts=0;
-  while(attempts<60){
-    await new Promise(r=>setTimeout(r,4000));
-    attempts++;
-    const statusRes=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-    if(!statusRes.ok){console.log('FAL STATUS attempt '+attempts+': HTTP '+statusRes.status);continue;}
-    const statusData=await statusRes.json();
-    console.log('FAL STATUS attempt '+attempts+':',statusData.status);
-    if(statusData.status==='FAILED')throw new Error('fal generation failed');
-    if(statusData.status==='COMPLETED')break;
-  }
-
-  // STEP 3: Fetch result using response_url from submit response
-  console.log('FAL RESULT URL:',responseUrl);
-  const resultRes=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-  if(!resultRes.ok)throw new Error('fal result fetch failed: '+resultRes.status);
-  const result=await resultRes.json();
-  console.log('FAL RESULT FULL:',JSON.stringify(result).substring(0,500));
-
-  // Extract image URL — flux-pro returns { images: [{url, ...}] }
-  if(result.images&&result.images.length>0){
-    const img=result.images[0];
-    const url=typeof img==='string'?img:img.url;
-    if(url){console.log('FAL URL EXTRACTED:',url);return url;}
-  }
-  if(result.image){
-    const url=typeof result.image==='string'?result.image:result.image.url;
-    if(url){console.log('FAL URL EXTRACTED:',url);return url;}
-  }
-  throw new Error('Could not extract image URL from fal result: '+JSON.stringify(result).substring(0,200));
-}
-
-async function generateWithFal(){
-  const isBoth=state.format==='both';
-  if(isBoth){
-    const portraitPromise=falSubmitAndPoll('9:16','portrait')
-      .then(url=>{console.log('FAL PORTRAIT OK:',url);return url;})
-      .catch(e=>{console.error('FAL PORTRAIT FAILED:',e);return null;});
-    const squarePromise=falSubmitAndPoll('1:1','square')
-      .then(url=>{console.log('FAL SQUARE OK:',url);return url;})
-      .catch(e=>{console.error('FAL SQUARE FAILED:',e);return null;});
-    const [portraitUrl,squareUrl]=await Promise.all([portraitPromise,squarePromise]);
-    if(portraitUrl||squareUrl)return {portrait:portraitUrl,square:squareUrl,both:true};
-    return null;
-  } else {
-    try{
-      const ar=state.format==='portrait'?'9:16':'1:1';
-      const url=await falSubmitAndPoll(ar,state.format);
-      return {url,both:false};
-    }catch(e){console.error('fal.ai error:',e);return null;}
-  }
-}
-
-// ============================================================
-// SAVE FAL IMAGE TO GALLERY
-// ============================================================
-function saveFalToGallery(imageUrl,format){
-  try{
-    const fmt=format||state.format;
-    const newEntry={
-      id:"fal-"+Date.now().toString(16).toUpperCase(),
-      game_name:state.game||"N/A",
-      format:fmt,
-      offer_text:state.offer,
-      style:state.style,
-      platform:state.platform||"spinpals",
-      user_email:currentUserEmail,
-      image_url:imageUrl,
-      created_at:new Date().toISOString().replace('T',' ').substring(0,19),
-      source:"fal"
-    };
-    galleryData.unshift(newEntry);
-    renderGallery();
-  }catch(e){console.error("fal save failed",e);}
-}
 
 // ============================================================
 // SHOW RESULT
@@ -1238,22 +1025,18 @@ function makeImageCard(url, label, gameName){
   return wrap;
 }
 
-function showResult(loadMsg,found,falResult){
+function showResult(loadMsg,found){
   const container=loadMsg.querySelector('.loading');
-  // Break result bubble out of narrow chat width so images display properly
+  // Break result bubble out of narrow chat width so image displays properly
   loadMsg.style.cssText='max-width:100%;width:100%;align-self:stretch;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;';
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
   const isBoth=state.format==='both';
-  // Robust fal check: falResult must be an object with at least one valid URL
-  const hasFalBoth=falResult&&falResult.both===true&&falResult.portrait&&falResult.square;
-  const hasFalSingle=falResult&&!falResult.both&&(falResult.url||falResult.portrait);
 
-  // Build image grid
+  // Build image grid — Twin images only
   const images=[];
   if(isBoth){
-    // Version 1: from Twin (found = portrait, look for matching square in gallery by recency)
-    images.push({url:found.image_url,label:'Portrait 9:16 · V1'});
-    // Look for a second Twin image generated in this same session (different URL, same user, within 10 min)
+    images.push({url:found.image_url,label:'Portrait 9:16'});
+    // Look for matching square Twin image from same session
     const sessionStart=Date.now()-600000;
     const twinSquare=galleryData.find(c=>
       c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
@@ -1262,75 +1045,333 @@ function showResult(loadMsg,found,falResult){
       new Date(c.created_at).getTime()>=sessionStart&&
       (c.format==='square'||c.format==='both')
     );
-    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1 · V1'});
-    // Version 2: from fal.ai (portrait + square generated in parallel)
-    if(hasFalBoth){
-      images.push({url:falResult.portrait,label:'Portrait 9:16 · V2'});
-      images.push({url:falResult.square,label:'Square 1:1 · V2'});
-    } else if(hasFalSingle){
-      const falUrl=falResult.url||falResult.portrait;
-      images.push({url:falUrl,label:'V2'});
-    }
+    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1'});
   } else {
-    images.push({url:found.image_url,label:'V1 · Twin'});
-    if(hasFalSingle){
-      const falUrl=falResult.url||falResult.portrait;
-      images.push({url:falUrl,label:'V2 · fal.ai'});
-    }
-    // If fal failed, show an explicit error card so V2 slot is never silently missing
-    else if(!falResult){
-      images.push({url:null,label:'V2 · fal.ai — failed'});
-    }
+    images.push({url:found.image_url,label:found.format==='portrait'?'Portrait 9:16':'Square 1:1'});
   }
 
   if(container){
-    const cols=images.length>=3?'1fr 1fr':images.length===2?'1fr 1fr':'1fr';
-    container.innerHTML='<div class="result-box"><div class="result-title">'+(images.length>1?'Your Creatives Are Ready':'Ad Ready')+'</div><div class="result-text" style="margin-bottom:16px;"><span style="color:var(--blue);font-weight:600">'+gameName+'</span></div></div>';
+    const cols=images.length===2?'1fr 1fr':'1fr';
+    container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready!</div><div class="result-text" style="margin-bottom:16px;"><span style="color:var(--blue);font-weight:600">'+gameName+'</span></div></div>';
     const grid=document.createElement('div');
     grid.style.cssText='display:grid;grid-template-columns:'+cols+';gap:14px;margin-top:8px;';
-    images.forEach(({url,label})=>{
-      grid.appendChild(makeImageCard(url,label,gameName));
-    });
+    images.forEach(({url,label})=>{grid.appendChild(makeImageCard(url,label,gameName));});
     container.querySelector('.result-box').appendChild(grid);
   }
+  const acts=document.createElement('div');acts.className='summary-actions';
+  const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
+  gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate();};acts.appendChild(gen);
+  const reset=document.createElement('button');reset.className='text-btn';reset.textContent='Start over';reset.onclick=startChat;
+  acts.appendChild(reset);m.appendChild(acts);chatEl.scrollTop=chatEl.scrollHeight;
+}
 
-  const acts=document.createElement('div');acts.className='summary-actions';acts.style.cssText='justify-content:center;margin-top:16px;';
-  const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
+// ============================================================
+// QUICK GENERATE
+// ============================================================
+async function doQuickGenerate(){
+  // For mario without platform selected yet, pick one randomly
+  if(isMarioFlow()&&!state.platform){
+    state.platform=Math.random()>0.5?'betewin':'bankobet';
+  }
 
-  // Feedback
-  const feedbackWrap=document.createElement('div');feedbackWrap.className='feedback-wrap';
-  const feedbackLabel=document.createElement('span');feedbackLabel.className='feedback-label';feedbackLabel.textContent='Rate this creative:';
-  const thumbsUp=document.createElement('button');thumbsUp.className='feedback-btn';thumbsUp.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
-  const thumbsDown=document.createElement('button');thumbsDown.className='feedback-btn';thumbsDown.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>';
-  const thankMsg=document.createElement('div');thankMsg.className='feedback-thanks';thankMsg.textContent='Thanks for your feedback!';
-  thumbsUp.onclick=async()=>{if(thumbsUp.disabled)return;thumbsUp.classList.add('selected-up');thumbsDown.disabled=true;thumbsUp.disabled=true;thankMsg.style.display='block';await sendFeedback('positive',found);};
-  thumbsDown.onclick=async()=>{if(thumbsDown.disabled)return;thumbsDown.classList.add('selected-down');thumbsUp.disabled=true;thumbsDown.disabled=true;thankMsg.style.display='block';await sendFeedback('negative',found);};
-  feedbackWrap.appendChild(feedbackLabel);feedbackWrap.appendChild(thumbsUp);feedbackWrap.appendChild(thumbsDown);
+  const formats=['portrait','square','both'];
+  const styles=['Classic','Realistic'];
+  const {top,all}=getGames();
+  const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  const offers=getOffers();
 
-  // Facebook upload card with instructions
-  const fbWrap=document.createElement('div');
-  fbWrap.style.cssText='margin-top:16px;border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--card2);';
-  const fbTitle=document.createElement('div');
-  fbTitle.style.cssText='font-size:11px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;';
-  fbTitle.textContent='Add to Facebook Media Library';
-  const fbSteps=document.createElement('div');fbSteps.style.cssText='display:flex;flex-direction:column;gap:8px;margin-bottom:12px;';
-  [['1','Download your image using the button above'],['2','Click Open Media Library below — it opens your Ads Manager'],['3','Click Add Images and upload the file you just downloaded']].forEach(([num,text])=>{
-    const step=document.createElement('div');step.style.cssText='display:flex;gap:8px;align-items:center;';
-    step.innerHTML='<span style="min-width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+num+'</span><span style="font-size:13px;color:var(--txt2);">'+text+'</span>';
-    fbSteps.appendChild(step);
-  });
-  const fbBtn=document.createElement('button');fbBtn.className='fb-btn';
-  fbBtn.style.cssText='width:100%;justify-content:center;margin:0;';
-  fbBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="#1877f2" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Open Media Library';
-  fbBtn.onclick=()=>openFacebookMediaLibrary(fbBtn);
-  fbWrap.appendChild(fbTitle);fbWrap.appendChild(fbSteps);fbWrap.appendChild(fbBtn);
+  const randFormat=formats[Math.floor(Math.random()*formats.length)];
+  const randStyle=styles[Math.floor(Math.random()*styles.length)];
+  const randGame=allNames[Math.floor(Math.random()*allNames.length)];
+  const randOffer=offers[Math.floor(Math.random()*offers.length)];
 
-  loadMsg.appendChild(feedbackWrap);
-  loadMsg.appendChild(thankMsg);
-  loadMsg.appendChild(acts);
-  loadMsg.appendChild(fbWrap);
-  chatEl.scrollTop=chatEl.scrollHeight;
-  renderGallery();
+  state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
+
+  const fmtLabel=randFormat==='portrait'?'Portrait (9:16)':randFormat==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
+  const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
+  msg('⚡ Quick Generate','user');
+  await delay(250);
+  msg('<div class="summary-card"><div class="summary-title">Quick Generate — Selected For You</div>'+
+    platformRow+
+    '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Style</span>'+randStyle+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>'+
+    '<div class="summary-row"><span class="summary-label">Offer</span>'+randOffer.title+'</div></div>');
+  await delay(400);
+
+  // Check daily limit
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
+  }
+
+  await fetchGallery();
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal').map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  await triggerWebhook(payload,getWebhook());
+  incrementGenerationCount(currentUserEmail);
+
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+  }
+
+  let found=null;
+  while(!found&&!stopped){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
+    }
+  }
+  clearInterval(timerInterval);
+  if(found)showResult(loadMsg,found);
+}
+
+// ============================================================
+// GENERATE
+// ============================================================
+async function doGenerate(){
+  msg('Generate Ad →','user');await delay(250);
+
+  if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
+    msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
+  }
+
+  await fetchGallery();
+  // Only count Twin entries in snapshot — exclude fal entries to prevent collision
+  const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal').map(c=>c.id||(c.image_url.split('?')[0])));
+  const snapCount=snapKeys.size;
+  const startTs=Date.now();
+
+  let stopped=false;
+  const loadDiv=document.createElement('div');loadDiv.className='loading';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  const stopBtn=document.createElement('button');
+  stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
+  stopBtn.textContent='Stop Generation';
+  stopBtn.onmouseover=()=>{stopBtn.style.background='rgba(239,68,68,0.1)';};
+  stopBtn.onmouseout=()=>{stopBtn.style.background='transparent';};
+  loadDiv.appendChild(stopBtn);
+  const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+  chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  if(state.customInstructions)payload.custom_instructions=state.customInstructions;
+  await triggerWebhook(payload,getWebhook());
+  incrementGenerationCount(currentUserEmail);
+
+  const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+
+  stopBtn.onclick=()=>{
+    stopped=true;
+    clearInterval(timerInterval);
+    loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏸</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:16px">Generation Stopped</div></div>';
+    const resumeWrap=document.createElement('div');resumeWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px;';
+    const resumeBtn=document.createElement('button');resumeBtn.className='opt-btn opt-blue';resumeBtn.textContent='Continue Waiting';
+    const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
+    resumeBtn.onclick=()=>{
+      stopped=false;
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.appendChild(stopBtn2);
+      resumePolling();
+    };
+    newBtn.onclick=()=>startChat();
+    resumeWrap.appendChild(resumeBtn);resumeWrap.appendChild(newBtn);
+    loadDiv.appendChild(resumeWrap);
+    chatEl.scrollTop=chatEl.scrollHeight;
+  };
+
+  const stopBtn2=document.createElement('button');
+  stopBtn2.style.cssText=stopBtn.style.cssText;
+  stopBtn2.textContent='Stop Generation';
+  stopBtn2.onmouseover=()=>{stopBtn2.style.background='rgba(239,68,68,0.1)';};
+  stopBtn2.onmouseout=()=>{stopBtn2.style.background='transparent';};
+  stopBtn2.onclick=stopBtn.onclick;
+
+  async function resumePolling(){
+    const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    let found2=null;
+    while(!found2&&!stopped){
+      await delay(7000);
+      const fresh=await fetchGallery();
+      const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
+      if(freshItems.length>snapCount){
+        const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+        if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
+      }
+    }
+    if(found2){clearInterval(ti2);showResult(loadMsg,found2);}
+  }
+
+  let found=null;
+  while(!found&&!stopped){
+    await delay(7000);
+    const fresh=await fetchGallery();
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
+    if(freshItems.length>snapCount){
+      const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
+      if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
+    }
+  }
+  clearInterval(timerInterval);
+  if(found)showResult(loadMsg,found);
+}
+
+// ============================================================
+
+
+
+// ============================================================
+// SHOW RESULT
+// ============================================================
+// ============================================================
+// CORE DOWNLOAD UTILITY — works inside Wix iframes
+// Strategy: canvas draw (bypasses CORS for displayed images) → fetch blob → proxy blob
+// Never uses window.open — always triggers a real file download
+// ============================================================
+async function downloadBlob(imageUrl){
+  // For S3 signed URLs and fal CDN URLs, the only reliable approach
+  // inside a Wix iframe is a server-side proxy that fetches the image
+  // on the server and returns raw bytes — bypassing all CORS restrictions.
+
+  const isImage=b=>b.size>5000&&(b.type.startsWith('image/')||b.type==='application/octet-stream');
+
+  // 1. Direct fetch — works for fal.ai which has open CORS headers
+  try{
+    const r=await fetch(imageUrl,{mode:'cors'});
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
+
+  // 2. corsproxy.io — server fetches the URL, returns raw bytes
+  try{
+    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
+
+  // 3. allorigins — another server-side proxy
+  try{
+    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
+
+  // 4. images.weserv.nl — image proxy specifically designed for this use case
+  const wsUrl='https://images.weserv.nl/?url='+encodeURIComponent(imageUrl)+'&output=jpg';
+  try{
+    const r=await fetch(wsUrl);
+    if(r.ok){const b=await r.blob();if(b.size>5000)return b;}
+  }catch(e){}
+
+  return null;
+}
+
+function triggerBlobDownload(blob, filename){
+  const ext=blob.type&&blob.type.includes('png')?'.png':'.jpg';
+  const blobUrl=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=blobUrl;
+  a.download=filename+ext;
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},2000);
+}
+
+function makeDownloadBtn(imageUrl, gameName, label){
+  const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent=label||'Download Image';
+  dlBtn.onclick=async()=>{
+    dlBtn.textContent='Downloading...';dlBtn.disabled=true;
+    const filename=(gameName||'creative').replace(/[^a-z0-9]/gi,'-');
+    const blob=await downloadBlob(imageUrl,filename);
+    if(blob){
+      triggerBlobDownload(blob,filename);
+      dlBtn.textContent='Downloaded ✓';
+      setTimeout(()=>{dlBtn.textContent=label||'Download Image';dlBtn.disabled=false;},2500);
+    }else{
+      dlBtn.textContent='Download Failed';
+      dlBtn.disabled=false;
+    }
+  };
+  return dlBtn;
+}
+
+function makeImageCard(url, label, gameName){
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:flex;flex-direction:column;gap:8px;';
+  const lbl=document.createElement('div');
+  lbl.style.cssText='font-size:10px;font-weight:700;color:var(--txt3);text-align:center;letter-spacing:1.5px;text-transform:uppercase;';
+  lbl.textContent=label;
+  // Handle null URL — fal failed
+  if(!url){
+    const errDiv=document.createElement('div');
+    errDiv.style.cssText='padding:30px 20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
+    errDiv.textContent='Version 2 generation failed. Check console for details.';
+    wrap.appendChild(lbl);wrap.appendChild(errDiv);
+    return wrap;
+  }
+  const dl=makeDownloadBtn(url,gameName,'\u2193 Download');
+  dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
+  const img=document.createElement('img');
+  img.alt=label;
+  img.style.cssText='width:100%;border-radius:6px;object-fit:contain;display:block;background:#000;';
+  img.onerror=()=>{
+    img.style.display='none';
+    const errDiv=document.createElement('div');
+    errDiv.style.cssText='padding:20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
+    errDiv.textContent='Image failed to load.';
+    wrap.insertBefore(errDiv,dl);
+  };
+  img.src=url;
+  wrap.appendChild(lbl);wrap.appendChild(img);wrap.appendChild(dl);
+  return wrap;
 }
 
 // ============================================================
