@@ -954,78 +954,96 @@ async function doGenerate(){
 // ============================================================
 // FAL.AI PROMPT BUILDER
 // ============================================================
-function buildFalPrompt(){
+function buildFalPrompt(targetFormat){
   const platform=state.platform;
   const game=state.game&&state.game!=='N/A'?state.game:null;
   const offer=state.offer;
   const style=state.style;
   const custom=state.customInstructions;
+  // targetFormat overrides state.format so portrait and square each get the right prompt
+  const fmt=targetFormat||state.format;
 
-  let brandName='SpinPals';
-  let brandContext='online social casino platform';
   let language='English';
+  if(platform==='bankobet'){language='Turkish';}
 
-  if(platform==='betewin'){brandName='Betewin';brandContext='international sports betting and casino platform';}
-  else if(platform==='bankobet'){brandName='Bankobet';brandContext='Turkish sports betting and casino platform';language='Turkish';}
-
-  const aspectRatio=state.format==='portrait'?'9:16 vertical portrait':'1:1 square';
+  const aspectRatio=fmt==='portrait'?'9:16 vertical portrait (1080x1920px)':'1:1 square (1080x1080px)';
+  const layoutNote=fmt==='portrait'
+    ?'Tall vertical layout. Place offer text in the upper third. Game visual fills middle. CTA button and disclaimer at bottom.'
+    :'Square layout. Offer text centered prominently. Game visual behind or beside. CTA button and disclaimer at bottom.';
 
   let styleGuide='';
   if(style==='Classic') styleGuide='Bold, vibrant casino advertising aesthetic. Dynamic composition, high energy, professional ad design.';
   else if(style==='Realistic') styleGuide='Cinematic photorealistic style. Dramatic lighting, high detail, film poster quality.';
-  else if(style==='Text Only') styleGuide='Bold typographic design. Massive impactful text as hero element. Vibrant gradient background. Minimal imagery.';
+  else if(style==='Text Only') styleGuide='Bold typographic design. Massive impactful text as the hero element. Vibrant gradient background. Minimal imagery, let the text dominate.';
   else if(style==='Custom'&&custom) styleGuide=custom;
+  else styleGuide='Bold vibrant casino ad aesthetic.';
 
-  let gameContext='';
+  let gameVisual='';
   if(game){
     if(game.includes('Football')||game.includes('Soccer')||game.includes('Lig')||game.includes('League')||game.includes('Champions')){
-      gameContext='Dynamic football/soccer action photography. Stadium atmosphere, crowd energy, ball in motion.';
+      gameVisual='Background: dynamic football stadium atmosphere, green pitch, crowd, dramatic floodlights. NO player faces.';
     } else if(game.includes('Basketball')){
-      gameContext='High energy basketball action. Court atmosphere, athletic movement, dramatic lighting.';
+      gameVisual='Background: basketball court atmosphere, dramatic lighting, energy and motion blur.';
     } else if(game.includes('Tennis')){
-      gameContext='Tennis action shot. Court perspective, athletic movement, competitive energy.';
+      gameVisual='Background: tennis court perspective, dramatic lighting, athletic energy.';
     } else if(game.includes('Aviator')||game.includes('Crash')||game.includes('JetX')){
-      gameContext='Dynamic crash game visual. Rocket or plane ascending against dramatic sky. Multiplier energy.';
+      gameVisual='Background: sleek aircraft or rocket ascending against a dramatic dark sky with multiplier energy.';
     } else if(game.includes('Roulette')){
-      gameContext='Spinning roulette wheel close up. Casino atmosphere, dramatic lighting, luxury feel.';
+      gameVisual='Background: close-up of a spinning roulette wheel, casino atmosphere, dramatic lighting, luxury feel.';
     } else if(game.includes('Blackjack')){
-      gameContext='Casino blackjack table. Cards spread, chips, dramatic lighting, luxury casino atmosphere.';
+      gameVisual='Background: casino blackjack table with cards and chips, dramatic moody lighting.';
     } else if(game.includes('Baccarat')){
-      gameContext='Elegant baccarat table. Sophisticated casino atmosphere, high stakes feel.';
+      gameVisual='Background: elegant baccarat table, sophisticated casino atmosphere, high-stakes luxury feel.';
     } else if(game.includes('Crazy Time')){
-      gameContext='Colorful carnival wheel game show. Bright lights, excitement, big win energy.';
+      gameVisual='Background: colorful carnival wheel game show atmosphere, bright lights, confetti, excitement.';
     } else {
-      gameContext='Vibrant slot game visual inspired by '+game+'. Bold colors, exciting symbols, winning energy.';
+      gameVisual='Background: vivid atmospheric scene inspired by the world of '+game+'. Rich colors, dramatic lighting, casino energy. Pure atmosphere — NO slot machine reels, NO game UI, NO game title text.';
     }
+  } else {
+    gameVisual='Background: dramatic luxury casino atmosphere. Deep rich colors, cinematic lighting.';
   }
 
-  const prompt=`You are a senior art director at a top-tier gambling advertising agency creating a ${aspectRatio} social media ad. Your output must look like it cost $5,000 to produce.
+  const offerDisplay=language==='Turkish'?offer:offer;
+  const ctaText=language==='Turkish'?'HEMEN OYNA':'CLAIM NOW';
+  const disclaimerText=language==='Turkish'?'18+ | Sorumlu Oynayın | Şartlar Geçerlidir':'18+ | Play Responsibly | T&Cs Apply';
 
-VISUAL:
-${game ? gameContext : 'Dramatic casino atmosphere. Luxury, high energy, cinematic lighting.'}
+  const prompt=`A premium ${aspectRatio} casino advertisement image. Professional ad agency quality. $10,000 production value.
 
-LAYOUT RULES - FOLLOW EXACTLY:
-- The offer text must appear ONCE and ONCE ONLY as the dominant headline
-- Offer text to display: "${offer}"
-- Do NOT repeat the offer text anywhere else in the image
-- Do NOT add any secondary text block that echoes the offer
-- One clean CTA button only: use "CLAIM NOW" or "PLAY NOW" - no arrows, no icons
-- At the very bottom in tiny but PERFECTLY SHARP and LEGIBLE text: "18+ | Play Responsibly | T&Cs Apply"
-- The disclaimer must be readable - white text on dark background, crisp, no blur
-- NO brand names, NO logos, NO platform names anywhere
-- NO random icons, badges, watermarks, or QR codes
-- NO gibberish or unreadable text anywhere in the image
+═══ MANDATORY TEXT ELEMENTS — ALL MUST APPEAR ═══
 
-QUALITY REQUIREMENTS:
-- Photorealistic, cinematic quality - like a Hollywood film poster meets premium casino ad
-- Deep rich colors, dramatic lighting, high contrast
-- Every element razor sharp and in focus
-- Typography must be bold, clean, and professional - zero distortion
-- Background must be rich and atmospheric, not flat
+1. OFFER HEADLINE (most important element):
+   Text: "${offerDisplay}"
+   Style: Bold, large, highly legible. White or bright gold text. Drop shadow for readability.
+   Position: Upper portion of the image, centered. This is the HERO text. Make it MASSIVE and IMPOSSIBLE TO MISS.
 
-${language === 'Turkish' ? 'ALL TEXT IN TURKISH. CTA: HEMEN OYNA. Disclaimer: 18+ | Sorumlu Oynayın | Şartlar Geçerlidir' : 'All text in English.'}
+2. CTA BUTTON:
+   Text: "${ctaText}"
+   Style: Solid green or gold rounded button. Bold white text inside. Clean, no icons, no arrows.
+   Position: Lower section, centered.
 
-STYLE: ${styleGuide}\`;`;
+3. LEGAL DISCLAIMER (mandatory — do NOT omit):
+   Text: "${disclaimerText}"
+   Style: Small but CRISP and LEGIBLE. White text on a semi-transparent dark bar that spans the full width.
+   Position: Very bottom of the image, pinned to the bottom edge.
+
+═══ VISUAL BACKGROUND ═══
+${gameVisual}
+${layoutNote}
+Style direction: ${styleGuide}
+
+═══ ABSOLUTE PROHIBITIONS — NEVER INCLUDE ═══
+- NO logos of any kind — no game logos, no brand logos, no platform logos, no watermarks
+- NO brand names, no platform names (SpinPals, Betewin, Bankobet, etc.)
+- NO slot machine reels, NO game UI elements, NO game title text rendered anywhere
+- NO repeated text — each text element appears EXACTLY ONCE
+- NO QR codes, NO badges, NO fake award seals
+- NO illegible or distorted text anywhere
+- NO extra text beyond the 3 mandatory elements above
+
+═══ QUALITY MANDATE ═══
+- Every text element must be razor-sharp, zero blur, perfectly legible
+- Cinematic lighting, deep rich colors, high contrast
+- Professional gambling advertisement — looks like it ran in a major campaign`;
 
   return prompt;
 }
@@ -1033,8 +1051,8 @@ STYLE: ${styleGuide}\`;`;
 // ============================================================
 // FAL.AI GENERATION
 // ============================================================
-async function falSubmitAndPoll(imageSize){
-  const prompt=buildFalPrompt();
+async function falSubmitAndPoll(imageSize,targetFormat){
+  const prompt=buildFalPrompt(targetFormat);
 
   // STEP 1: Submit to fal queue
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
@@ -1084,24 +1102,31 @@ async function falSubmitAndPoll(imageSize){
 }
 
 async function generateWithFal(){
-  try{
-    const isBoth=state.format==='both';
-    if(isBoth){
-      // Generate both portrait and square in parallel
-      const [portraitUrl,squareUrl]=await Promise.all([
-        falSubmitAndPoll({width:720,height:1280}),
-        falSubmitAndPoll({width:1024,height:1024})
-      ]);
+  const isBoth=state.format==='both';
+  if(isBoth){
+    // Run portrait and square independently — failure in one must NOT kill the other
+    const portraitPromise=falSubmitAndPoll({width:720,height:1280},'portrait')
+      .then(url=>{console.log('FAL PORTRAIT OK:',url);return url;})
+      .catch(e=>{console.error('FAL PORTRAIT FAILED:',e);return null;});
+    const squarePromise=falSubmitAndPoll({width:1024,height:1024},'square')
+      .then(url=>{console.log('FAL SQUARE OK:',url);return url;})
+      .catch(e=>{console.error('FAL SQUARE FAILED:',e);return null;});
+    const [portraitUrl,squareUrl]=await Promise.all([portraitPromise,squarePromise]);
+    // Return whatever succeeded — partial results are still useful
+    if(portraitUrl||squareUrl){
       return {portrait:portraitUrl,square:squareUrl,both:true};
-    } else {
+    }
+    return null;
+  } else {
+    try{
       const isPortrait=state.format==='portrait';
       const imageSize=isPortrait?{width:720,height:1280}:{width:1024,height:1024};
-      const url=await falSubmitAndPoll(imageSize);
+      const url=await falSubmitAndPoll(imageSize,state.format);
       return {url,both:false};
+    }catch(e){
+      console.error('fal.ai error:',e);
+      return null;
     }
-  }catch(e){
-    console.error('fal.ai error:',e);
-    return null;
   }
 }
 
@@ -1120,49 +1145,78 @@ async function saveFalToGallery(imageUrl,format){
 // ============================================================
 // SHOW RESULT
 // ============================================================
+// ============================================================
+// CORE DOWNLOAD UTILITY — works inside Wix iframes
+// Strategy: canvas draw (bypasses CORS for displayed images) → fetch blob → proxy blob
+// Never uses window.open — always triggers a real file download
+// ============================================================
+async function downloadBlob(imageUrl, filename){
+  // Strategy 1: draw the image onto a canvas and export as blob
+  // This works because the image is already loaded/displayed — no CORS fetch needed
+  const canvasBlob=await new Promise(resolve=>{
+    const img=new Image();
+    img.onload=()=>{
+      try{
+        const c=document.createElement('canvas');
+        c.width=img.naturalWidth||img.width;
+        c.height=img.naturalHeight||img.height;
+        const ctx=c.getContext('2d');
+        ctx.drawImage(img,0,0);
+        c.toBlob(b=>resolve(b),'image/jpeg',0.97);
+      }catch(e){resolve(null);}
+    };
+    img.onerror=()=>resolve(null);
+    img.crossOrigin='anonymous';
+    img.src=imageUrl+'?dl='+ Date.now(); // cache-bust to trigger crossOrigin revalidation
+  });
+  if(canvasBlob)return canvasBlob;
+
+  // Strategy 2: direct cors fetch
+  try{
+    const r=await fetch(imageUrl,{mode:'cors'});
+    if(r.ok)return await r.blob();
+  }catch(e){}
+
+  // Strategy 3: corsproxy
+  try{
+    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
+    if(r.ok)return await r.blob();
+  }catch(e){}
+
+  // Strategy 4: allorigins
+  try{
+    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
+    if(r.ok)return await r.blob();
+  }catch(e){}
+
+  return null;
+}
+
+function triggerBlobDownload(blob, filename){
+  const ext=blob.type&&blob.type.includes('png')?'.png':'.jpg';
+  const blobUrl=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=blobUrl;
+  a.download=filename+ext;
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},2000);
+}
+
 function makeDownloadBtn(imageUrl, gameName, label){
   const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent=label||'Download Image';
   dlBtn.onclick=async()=>{
     dlBtn.textContent='Downloading...';dlBtn.disabled=true;
     const filename=(gameName||'creative').replace(/[^a-z0-9]/gi,'-');
-    // Strategy 1: direct fetch (works when CORS is open, e.g. fal CDN)
-    const tryFetch=async(url)=>{
-      const res=await fetch(url,{mode:'cors'});
-      if(!res.ok)throw new Error('fetch failed');
-      return res.blob();
-    };
-    // Strategy 2: cors-anywhere proxy
-    const tryProxy=async()=>{
-      const res=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
-      if(!res.ok)throw new Error('proxy failed');
-      return res.blob();
-    };
-    // Strategy 3: allorigins proxy
-    const tryAltProxy=async()=>{
-      const res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
-      if(!res.ok)throw new Error('alt proxy failed');
-      return res.blob();
-    };
-    let blob=null;
-    try{blob=await tryFetch(imageUrl);}catch(e1){
-      try{blob=await tryProxy();}catch(e2){
-        try{blob=await tryAltProxy();}catch(e3){
-          // Final fallback: open in new tab so user can save manually
-          window.open(imageUrl,'_blank');
-          dlBtn.textContent='Opened in new tab ↗';
-          dlBtn.disabled=false;
-          return;
-        }
-      }
-    }
+    const blob=await downloadBlob(imageUrl,filename);
     if(blob){
-      const ext=blob.type.includes('png')?'.png':'.jpg';
-      const blobUrl=URL.createObjectURL(blob);
-      const a=document.createElement('a');
-      a.href=blobUrl;a.download=filename+ext;
-      document.body.appendChild(a);a.click();
-      setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},1000);
+      triggerBlobDownload(blob,filename);
       dlBtn.textContent='Downloaded ✓';
+      setTimeout(()=>{dlBtn.textContent=label||'Download Image';dlBtn.disabled=false;},2500);
+    }else{
+      dlBtn.textContent='Download Failed';
+      dlBtn.disabled=false;
     }
   };
   return dlBtn;
@@ -1352,28 +1406,14 @@ async function downloadImage(){
   btn.textContent='Downloading...';btn.disabled=true;
   const imageUrl=img.src;
   const filename=(document.getElementById('modalTitle').textContent||'creative').replace(/[^a-z0-9]/gi,'-');
-  const tryFetch=async(url)=>{const r=await fetch(url,{mode:'cors'});if(!r.ok)throw new Error('failed');return r.blob();};
-  let blob=null;
-  try{blob=await tryFetch(imageUrl);}catch(e1){
-    try{blob=await tryFetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));}catch(e2){
-      try{blob=await tryFetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));}catch(e3){
-        const a=document.createElement('a');
-        a.href=imageUrl;a.download=filename+'.jpg';a.target='_self';
-        document.body.appendChild(a);a.click();document.body.removeChild(a);
-        btn.textContent=origText;btn.disabled=false;
-        return;
-      }
-    }
-  }
+  const blob=await downloadBlob(imageUrl,filename);
   if(blob){
-    const ext=blob.type.includes('png')?'.png':'.jpg';
-    const blobUrl=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=blobUrl;a.download=filename+ext;
-    document.body.appendChild(a);a.click();
-    setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},1000);
+    triggerBlobDownload(blob,filename);
     btn.textContent='Downloaded ✓';
     setTimeout(()=>{btn.textContent=origText;btn.disabled=false;},2500);
+  }else{
+    btn.textContent='Download Failed';
+    btn.disabled=false;
   }
 }
 
