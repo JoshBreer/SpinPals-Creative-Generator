@@ -126,12 +126,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .gallery-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--txt3);font-size:15px}
 
 /* MODAL */
-.modal{display:none;position:absolute;top:0;left:0;width:100%;min-height:100%;background:rgba(0,0,0,.97);z-index:1000;padding:16px}
+.modal{display:none;position:absolute;top:0;left:0;width:100%;min-height:100%;background:rgba(0,0,0,.97);z-index:2000;padding:16px 16px 40px}
 .modal.active{display:block}
-.modal-inner{max-width:440px;width:100%;text-align:center;margin:0 auto;padding-top:48px}
-.modal-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:22px;cursor:pointer;z-index:1001;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
-.modal-close:hover{background:rgba(255,255,255,.2)}
-.modal-img{max-width:100%;max-height:50vh;border-radius:var(--r);object-fit:contain}
+.modal-inner{max-width:440px;width:100%;text-align:center;margin:0 auto;padding-top:44px}
+.modal-close{position:fixed;top:12px;right:12px;background:rgba(30,30,30,.95);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:22px;cursor:pointer;z-index:2001;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
+.modal-close:hover{background:rgba(255,255,255,.15)}
+.modal-img{max-width:100%;max-height:52vh;border-radius:var(--r);object-fit:contain}
 .modal-title{font-size:20px;font-weight:700;color:var(--white);margin-top:14px}
 .modal-info{font-size:13px;color:var(--txt2);margin-top:4px}
 .modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;border:none}
@@ -171,6 +171,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .fb-status.error{color:#ef4444;display:block}
 
 @media(max-width:600px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.filter-bar{flex-wrap:wrap}.bubble{max-width:95%}}
+/* STATS */
+.stats-section{max-width:900px;margin:0 auto 40px;padding:0 16px;display:none}
+.stats-heading{font-size:18px;font-weight:700;color:var(--white);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.stat-number{font-size:28px;font-weight:700;color:var(--blue)}
+.stat-label{font-size:12px;color:var(--txt2);margin-top:2px}
+.stats-table{width:100%;border-collapse:collapse;font-size:14px}
+.stats-table th{text-align:left;padding:8px 12px;color:var(--txt2);font-size:11px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
+.stats-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--txt)}
+.stats-table tr:last-child td{border-bottom:none}
+.stats-table tr:hover td{background:var(--card2)}
 </style>
 </head>
 <body>
@@ -215,6 +227,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   </div>
   <div id="gallery" class="gallery-grid"></div>
   <div class="switch-user"><button onclick="resetUser()">Not you? Switch account</button></div>
+</section>
+
+<!-- STATS (rmgs.online only) -->
+<section class="stats-section" id="statsSection">
+  <div class="stats-heading">Team Generation Stats</div>
+  <div class="stats-grid" id="statsGrid"></div>
+  <table class="stats-table">
+    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>Last Generated</th></tr></thead>
+    <tbody id="statsBody"></tbody>
+  </table>
 </section>
 
 <!-- MODAL -->
@@ -319,7 +341,13 @@ function activateDashboard(email){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
-    fetchGallery().then(()=>renderGallery());
+    fetchGallery().then(()=>{
+      renderGallery();
+      if(email.endsWith('@rmgs.online')){
+        document.getElementById('statsSection').style.display='block';
+        renderStats();
+      }
+    });
     startChat();
   } else {
     document.getElementById('agentPending').style.display='block';
@@ -406,11 +434,15 @@ function lockButtons(container){
 async function startChat(){
   chatEl.innerHTML='';
   state={client:null,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
-  try{window.scrollTo(0,0);}catch(e){}
-  try{document.body.scrollTop=0;}catch(e){}
-  try{document.documentElement.scrollTop=0;}catch(e){}
-  try{window.parent.postMessage({type:'scrollTop'},'*');}catch(e){}
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
   chatEl.scrollTop=0;
+  // scrollIntoView works reliably inside iframes
+  setTimeout(()=>{
+    const chatSection=document.getElementById('chatSection');
+    if(chatSection)chatSection.scrollIntoView({behavior:'smooth',block:'start'});
+  },50);
   await delay(200);
 
   // RMGS.ONLINE: show big client selector first
@@ -1180,7 +1212,13 @@ function openModal(c){
   document.getElementById('modalTitle').textContent=c.game_name;
   document.getElementById('modalInfo').textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
   document.getElementById('modalDl').href=c.image_url;
-  modal.className='modal active';window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;modal.scrollTop=0;
+  // Move modal to top of body so it always appears at top of page
+  document.body.insertBefore(modal,document.body.firstChild);
+  modal.className='modal active';
+  modal.scrollIntoView({behavior:'instant',block:'start'});
+  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
 }
 function closeModal(){modal.className='modal';}
 document.getElementById('modalClose').onclick=closeModal;
