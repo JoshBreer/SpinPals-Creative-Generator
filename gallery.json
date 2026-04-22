@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776894503055Fp",
+    "game_name": "Live Blackjack",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9a/79cd4623b9d1d014416cc92cc799e61dce46e6f2d60d7827f785788a27fdc4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T214901Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3356880ac935475a915c645f9218c31f0aa91cc434ac40b5d23a26a8f8f92d6d",
+    "created_at": "2026-04-22 21:48:23"
+  },
+  {
+    "id": "cr-17768945032CE7s",
+    "game_name": "Live Blackjack",
+    "format": "square",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0b/49bd4247426cdd370ed8872af6c732d445f449df308e911f306c0f2aca4863.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T214924Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03023b2e36942a475c6fe835f194df73caa4b08ef63f6ef5ca64ba30ed73a22b",
+    "created_at": "2026-04-22 21:48:23"
+  },
+  {
     "id": "cr-1776893980F7B9",
     "game_name": "Multihand Blackjack",
     "format": "portrait",
