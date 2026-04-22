@@ -1159,8 +1159,7 @@ async function pushFalEntryToGithub(newEntry){
     const fileData=await getRes.json();
     const sha=fileData.sha;
     // Decode existing gallery
-    const existing=JSON.parse(atob(fileData.content.replace(/
-/g,'')));
+    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
     // Prepend new entry
     existing.unshift(newEntry);
     // Step 2: push updated file
