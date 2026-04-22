@@ -234,7 +234,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   <div class="stats-heading">Team Generation Stats</div>
   <div class="stats-grid" id="statsGrid"></div>
   <table class="stats-table">
-    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>Last Generated</th></tr></thead>
+    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Last Generated</th></tr></thead>
     <tbody id="statsBody"></tbody>
   </table>
 </section>
@@ -271,9 +271,32 @@ const BANKOBET_TOP=['Football - Süper Lig','Football - Champions League','Live 
 const BANKOBET_GAMES={'Top Sports':[{id:'fsl',name:'Football - Süper Lig'},{id:'fuc',name:'Football - Champions League'},{id:'fel',name:'Football - Europa League'},{id:'fpl',name:'Football - Premier League'},{id:'bel',name:'Basketball - EuroLeague'},{id:'bsl',name:'Basketball - BSL (Turkey)'},{id:'tatp',name:'Tennis - ATP Tour'},{id:'vol',name:'Volleyball - European Championships'},{id:'cs2',name:'Esports - CS2'},{id:'lol',name:'Esports - League of Legends'}],'Slots':[{id:'sb',name:'Sweet Bonanza'},{id:'go',name:'Gates of Olympus'},{id:'av',name:'Aviator'},{id:'bbb',name:'Big Bass Bonanza'},{id:'bod',name:'Book of Dead'},{id:'re',name:'Reactoonz'},{id:'st',name:'Starburst'},{id:'wg',name:'Wolf Gold'},{id:'fj',name:'Fire Joker'},{id:'dod',name:'Doom of Dead'}],'Live Casino':[{id:'lr',name:'Lightning Roulette'},{id:'ct',name:'Crazy Time'},{id:'lbj',name:'Live Blackjack'},{id:'lb',name:'Live Baccarat'},{id:'lp',name:"Live Poker - Texas Hold'em"},{id:'dt',name:'Dragon Tiger'},{id:'spr',name:'Speed Roulette'}],'Table Games':[{id:'cbj',name:'Classic Blackjack'},{id:'er',name:'European Roulette'},{id:'ar',name:'American Roulette'},{id:'bac',name:'Baccarat'},{id:'tcp',name:'Three Card Poker'}]};
 const BANKOBET_OFFERS=[{id:'bb1',title:'%100 İlk Yatırım Bonusu – 5.000 TRY\'ye kadar',description:'Yeni oyuncu hoş geldin bonusu'},{id:'bb2',title:'Casino Hoş Geldin Paketi – 3.000 TRY + 200 Ücretsiz Dönüş',description:'İlk yatırıma özel casino paketi'},{id:'bb3',title:'Haftalık Spor Kayıp İadesi – %15\'e kadar',description:'Haftalık spor kayıplarınızın %15\'i iade edilir, max 1.500 TRY'},{id:'bb4',title:'Aylık Casino Kayıp İadesi – %20\'ye kadar',description:'Aylık 2.500 TRY\'ye kadar geri ödeme'},{id:'bb5',title:'Günlük 50 Ücretsiz Dönüş',description:'150 TRY üzeri yatırımlarda geçerli'},{id:'bb6',title:'Kombine Bahislerde %30 Oran Artışı',description:'Kombine kuponlarınızda kazancınızı artırın'},{id:'bb7',title:'Yeni Oyunculara €20 Ücretsiz Bahis',description:'Spor bahisleri için ücretsiz başlangıç bonusu'}];
 
+// WANNAPARLAY SPORTS & CONTESTS
+const WANNAPARLAY_SPORTS={
+  'NFL':[{id:'nfl-spread',name:'NFL — Spread Picks'},{id:'nfl-ml',name:'NFL — Moneyline'},{id:'nfl-props',name:'NFL — Player Props'},{id:'nfl-total',name:'NFL — Over/Under Totals'}],
+  'NBA':[{id:'nba-spread',name:'NBA — Spread Picks'},{id:'nba-ml',name:'NBA — Moneyline'},{id:'nba-props',name:'NBA — Player Props'},{id:'nba-total',name:'NBA — Over/Under Totals'}],
+  'MLB':[{id:'mlb-ml',name:'MLB — Moneyline'},{id:'mlb-props',name:'MLB — Player Props'},{id:'mlb-total',name:'MLB — Over/Under Totals'}],
+  'NHL':[{id:'nhl-ml',name:'NHL — Moneyline'},{id:'nhl-props',name:'NHL — Player Props'},{id:'nhl-total',name:'NHL — Over/Under Totals'}],
+  'MLS':[{id:'mls-ml',name:'MLS Soccer — Moneyline'},{id:'mls-total',name:'MLS Soccer — Over/Under'}],
+  'College':[{id:'cfb',name:'College Football (CFB)'},{id:'cbb',name:'College Basketball (CBB)'}],
+  'WNBA':[{id:'wnba-props',name:'WNBA — Player Props'},{id:'wnba-ml',name:'WNBA — Moneyline'}]
+};
+const WANNAPARLAY_TOP=['NFL — Player Props','NBA — Player Props','MLB — Player Props','NHL — Player Props','NFL — Spread Picks','NBA — Spread Picks','The Main Event','Parlay Royale'];
+const WANNAPARLAY_OFFERS=[
+  {id:'wp1',title:'100% Deposit Match up to $250',description:'New user welcome bonus — double your first deposit'},
+  {id:'wp2',title:'FREE Daily Entry — Play Every Day',description:'Free contest entry every single day, all 50 states'},
+  {id:'wp3',title:'Win Up to 1,000x Your Money',description:'Stack legs and multiply your entry up to 1000x'},
+  {id:'wp4',title:'The Main Event — $2 Entry, Win $2,000',description:'Flagship daily contest — 3+ legs, huge prizes'},
+  {id:'wp5',title:'Parlay Royale — $50 Entry, $1,000 Prize',description:'High stakes winner-take-all contest'},
+  {id:'wp6',title:'Hot Shot Hero — $10 Entry, $1,000 Prize',description:'NBA player props contest, 70-point target'},
+  {id:'wp7',title:'Refer a Friend — Earn up to $1,369 Cash',description:'Referral program — build your network and earn real cash'},
+  {id:'wp8',title:'Pick 2 — Start Small, Win Big',description:'Entry-level contest — just 2 picks to get started'}
+];
+
 // WEBHOOKS
 const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
+const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
@@ -286,27 +309,30 @@ let state={client:null,platform:null,format:null,style:null,game:null,offer:null
 let galleryData=[];
 let currentUserEmail=null;
 
-// Helper: is this a Mario flow?
-function isMarioFlow(){
-  return state.client==='mario';
-}
+// Helper: client checks
+function isMarioFlow(){return state.client==='mario';}
+function isWannaFlow(){return state.client==='wannaparlay';}
 
 // Helper: get correct webhook
 function getWebhook(){
-  return isMarioFlow()?MARIO_WEBHOOK:SPINPALS_WEBHOOK;
+  if(isMarioFlow())return MARIO_WEBHOOK;
+  if(isWannaFlow())return WANNAPARLAY_WEBHOOK;
+  return SPINPALS_WEBHOOK;
 }
 
-// Helper: get correct games
+// Helper: get correct games/sports
 function getGames(){
-  if(!isMarioFlow()) return {top:SPINPALS_TOP, all:SPINPALS_GAMES};
-  if(state.platform==='betewin') return {top:BETEWIN_TOP, all:BETEWIN_GAMES};
-  return {top:BANKOBET_TOP, all:BANKOBET_GAMES};
+  if(isWannaFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
+  if(!isMarioFlow())return {top:SPINPALS_TOP,all:SPINPALS_GAMES};
+  if(state.platform==='betewin')return {top:BETEWIN_TOP,all:BETEWIN_GAMES};
+  return {top:BANKOBET_TOP,all:BANKOBET_GAMES};
 }
 
 // Helper: get correct offers
 function getOffers(){
-  if(!isMarioFlow()) return SPINPALS_OFFERS;
-  if(state.platform==='betewin') return BETEWIN_OFFERS;
+  if(isWannaFlow())return WANNAPARLAY_OFFERS;
+  if(!isMarioFlow())return SPINPALS_OFFERS;
+  if(state.platform==='betewin')return BETEWIN_OFFERS;
   return BANKOBET_OFFERS;
 }
 
@@ -335,7 +361,8 @@ function activateDashboard(email){
   const isSpinPals=email.endsWith('@spinpals.com');
   const isMario=email.endsWith('@mario.com');
   const isRmgs=email.endsWith('@rmgs.online');
-  if(isSpinPals||isMario||isRmgs){
+  const isWanna=email.endsWith('@wannaparlay.com');
+  if(isSpinPals||isMario||isRmgs||isWanna){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
@@ -449,13 +476,16 @@ async function startChat(){
     return;
   }
 
-  // SPINPALS or MARIO: set client automatically
+  // Auto-route by email domain
   if(currentUserEmail.endsWith('@spinpals.com')){
     state.client='spinpals';
     showStartButtons();
   } else if(currentUserEmail.endsWith('@mario.com')){
     state.client='mario';
     stepPlatform();
+  } else if(currentUserEmail.endsWith('@wannaparlay.com')){
+    state.client='wannaparlay';
+    showStartButtons();
   }
 }
 
@@ -474,7 +504,7 @@ function showRmgsClientSelector(){
   const w=document.createElement('div');
   w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
 
-  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)']].forEach(([val,label])=>{
+  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)'],['wannaparlay','WannaParlay']].forEach(([val,label])=>{
     const b=document.createElement('button');
     b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
     b.textContent=label;
@@ -489,6 +519,9 @@ function showRmgsClientSelector(){
       chatEl.innerHTML='';
       msg(label,'user');
       if(val==='spinpals'){
+        state.platform=null;
+        showStartButtons();
+      } else if(val==='wannaparlay'){
         state.platform=null;
         showStartButtons();
       } else {
@@ -605,7 +638,8 @@ async function stepStyle(){
 // ============================================================
 async function stepGame(){
   await delay(250);
-  const m=msg('Which <span class="accent">game</span> should we feature?');
+  const label=isWannaFlow()?'sport / contest':'game';
+  const m=msg('Which <span class="accent">'+label+'</span> should we feature?');
   const sel=document.createElement('div');sel.className='game-sel';
   const wrap=document.createElement('div');wrap.className='game-dropdown-wrap';
   const selected=document.createElement('div');selected.className='game-dropdown-selected';
@@ -1408,10 +1442,11 @@ function renderStats(){
   const byUser={};
   allItems.forEach(c=>{
     const u=c.user_email.trim().toLowerCase();
-    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,lastDate:null};
+    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,lastDate:null};
     byUser[u].total++;
     if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
     if(u.endsWith('@mario.com'))byUser[u].mario++;
+    if(u.endsWith('@wannaparlay.com'))byUser[u].wanna++;
     const d=new Date(c.created_at);
     if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
   });
@@ -1422,7 +1457,8 @@ function renderStats(){
   const grid=document.getElementById('statsGrid');
   if(!grid)return;
   grid.innerHTML='';
-  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
+  const wannaTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@wannaparlay.com')).length;
+  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:wannaTotal,l:'WannaParlay Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
     grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
   });
   const tbody=document.getElementById('statsBody');
@@ -1432,7 +1468,7 @@ function renderStats(){
     const email=pair[0];const data=pair[1];
     const name=email.split('@')[0];
     const last=data.lastDate?data.lastDate.toLocaleDateString():'Never';
-    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+last+'</td></tr>';
+    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+last+'</td></tr>';
   });
 }
 
