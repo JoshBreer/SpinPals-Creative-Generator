@@ -781,7 +781,7 @@ async function doQuickGenerate(){
 
   // Run fal.ai in parallel - don't await, let it complete independently
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
+  const falPromise=generateWithFal().then(result=>{falImageUrl=result;if(result&&result.url)saveFalToGallery(result.url);else if(result&&result.portrait)saveFalToGallery(result.portrait);}).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -869,7 +869,7 @@ async function doGenerate(){
 
   // Run fal.ai in parallel - fires immediately alongside Twin
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(url=>{falImageUrl=url;if(url)saveFalToGallery(url);}).catch(()=>{});
+  const falPromise=generateWithFal().then(result=>{falImageUrl=result;if(result&&result.url)saveFalToGallery(result.url);else if(result&&result.portrait)saveFalToGallery(result.portrait);}).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -1011,51 +1011,47 @@ STYLE: ${styleGuide}\`;`;
 // ============================================================
 // FAL.AI GENERATION
 // ============================================================
-async function generateWithFal(){
+async function falSubmitAndPoll(imageSize){
   const prompt=buildFalPrompt();
-  const isPortrait=state.format==='portrait';
-  const imageSize=isPortrait?{width:720,height:1280}:{width:1024,height:1024};
+  const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
+    method:'POST',
+    headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
+    body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'6',output_format:'jpeg',guidance_scale:7.5,num_inference_steps:28})
+  });
+  const submitData=await submitRes.json();
+  const requestId=submitData.request_id;
+  if(!requestId)throw new Error('No request ID');
 
+  let result=null;let attempts=0;
+  while(!result&&attempts<40){
+    await new Promise(r=>setTimeout(r,3000));
+    const statusRes=await fetch('https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId,{headers:{'Authorization':'Key '+FAL_KEY}});
+    const statusData=await statusRes.json();
+    if(statusData.images||statusData.image||statusData.status==='COMPLETED'){result=statusData;break;}
+    if(statusData.status==='FAILED')throw new Error('fal generation failed');
+    attempts++;
+  }
+  if(result&&result.images&&result.images[0])return result.images[0].url||result.images[0];
+  if(result&&result.image)return result.image.url||result.image;
+  throw new Error('No image in response');
+}
+
+async function generateWithFal(){
   try{
-    // Submit job
-    const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
-      method:'POST',
-      headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'6',output_format:'jpeg',guidance_scale:7.5,num_inference_steps:28})
-    });
-    const submitData=await submitRes.json();
-    console.log('fal submit response:',JSON.stringify(submitData));
-    const requestId=submitData.request_id;
-    if(!requestId){console.error('fal no request_id, full response:',submitData);throw new Error('No request ID: '+JSON.stringify(submitData));}
-
-    // Poll for result
-    let result=null;
-    let attempts=0;
-    while(!result&&attempts<30){
-      await new Promise(r=>setTimeout(r,3000));
-      const statusRes=await fetch('https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId,{
-        headers:{'Authorization':'Key '+FAL_KEY}
-      });
-      const statusData=await statusRes.json();
-      console.log('fal poll status:',statusData.status,'has images:',!!(statusData.images||statusData.image));
-      // fal returns result directly when complete - status may be undefined
-      if(statusData.images||statusData.image){result=statusData;break;}
-      if(statusData.status==='COMPLETED'){result=statusData;break;}
-      if(statusData.status==='FAILED'){console.error('fal failed:',statusData);throw new Error('Generation failed');}
-      attempts++;
+    const isBoth=state.format==='both';
+    if(isBoth){
+      // Generate both portrait and square in parallel
+      const [portraitUrl,squareUrl]=await Promise.all([
+        falSubmitAndPoll({width:720,height:1280}),
+        falSubmitAndPoll({width:1024,height:1024})
+      ]);
+      return {portrait:portraitUrl,square:squareUrl,both:true};
+    } else {
+      const isPortrait=state.format==='portrait';
+      const imageSize=isPortrait?{width:720,height:1280}:{width:1024,height:1024};
+      const url=await falSubmitAndPoll(imageSize);
+      return {url,both:false};
     }
-
-    console.log('fal result structure:',JSON.stringify(result).substring(0,300));
-    if(result&&result.images&&result.images[0]&&result.images[0].url){
-      return result.images[0].url;
-    }
-    if(result&&result.image&&result.image.url){
-      return result.image.url;
-    }
-    if(result&&result.images&&result.images[0]&&typeof result.images[0]==='string'){
-      return result.images[0];
-    }
-    throw new Error('No image returned. Structure: '+JSON.stringify(result).substring(0,200));
   }catch(e){
     console.error('fal.ai error:',e);
     return null;
@@ -1105,32 +1101,57 @@ function makeDownloadBtn(imageUrl, gameName, label){
   return dlBtn;
 }
 
-function showResult(loadMsg,found,falImageUrl){
+function makeImageCard(url, label, gameName){
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:flex;flex-direction:column;gap:8px;';
+  const lbl=document.createElement('div');
+  lbl.style.cssText='font-size:10px;font-weight:700;color:var(--txt3);text-align:center;letter-spacing:1.5px;text-transform:uppercase;';
+  lbl.textContent=label;
+  const img=document.createElement('img');
+  img.src=url;img.alt=label;
+  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;';
+  img.onerror=()=>{wrap.style.display='none';};
+  const dl=makeDownloadBtn(url,gameName,'↓ Download');
+  dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
+  wrap.appendChild(lbl);wrap.appendChild(img);wrap.appendChild(dl);
+  return wrap;
+}
+
+function showResult(loadMsg,found,falResult){
   const container=loadMsg.querySelector('.loading');
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
-  const formatLabel=found.format==='portrait'?'9:16':'1:1';
+  const isBoth=state.format==='both';
+  const hasFal=falResult&&(falResult.url||falResult.portrait||falResult.both);
+
+  // Build image grid
+  const images=[];
+  if(isBoth){
+    // Twin produces 2 images for both - get portrait and square from gallery
+    images.push({url:found.image_url,label:'Portrait 9:16 · Version 1'});
+    // Check gallery for second twin image (square)
+    const twinSquare=galleryData.find(c=>c.user_email===currentUserEmail&&c.image_url&&c.image_url!==found.image_url&&c.id&&c.id!==found.id&&new Date(c.created_at)>=new Date(Date.now()-300000));
+    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1 · Version 1'});
+    if(hasFal&&falResult.portrait)images.push({url:falResult.portrait,label:'Portrait 9:16 · Version 2'});
+    if(hasFal&&falResult.square)images.push({url:falResult.square,label:'Square 1:1 · Version 2'});
+    if(hasFal&&falResult.url)images.push({url:falResult.url,label:'Version 2'});
+  } else {
+    images.push({url:found.image_url,label:'Version 1'});
+    if(hasFal&&falResult.url)images.push({url:falResult.url,label:'Version 2'});
+    else if(hasFal&&falResult.portrait)images.push({url:falResult.portrait,label:'Version 2'});
+  }
 
   if(container){
-    if(falImageUrl){
-      // Two creatives side by side
-      container.innerHTML='<div class="result-box"><div class="result-title">Your Creatives Are Ready</div><div class="result-text" style="margin-bottom:16px;"><span style="color:var(--blue);font-weight:600">'+gameName+'</span> · '+formatLabel+'</div>'+
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">'+
-        '<div><div style="font-size:11px;color:var(--txt3);text-align:center;margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Version 1</div><img class="result-img" src="'+found.image_url+'" style="margin:0;width:100%;" alt="creative 1"></div>'+
-        '<div><div style="font-size:11px;color:var(--txt3);text-align:center;margin-bottom:6px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Version 2</div><img class="result-img" src="'+falImageUrl+'" style="margin:0;width:100%;" alt="creative 2"></div>'+
-        '</div></div>';
-    } else {
-      container.innerHTML='<div class="result-box"><div class="result-title">Ad Ready</div><div class="result-text"><span style="color:var(--blue);font-weight:600">'+gameName+'</span> · '+formatLabel+'</div><img class="result-img" src="'+found.image_url+'" alt="ad"></div>';
-    }
+    const cols=images.length>=3?'1fr 1fr':images.length===2?'1fr 1fr':'1fr';
+    container.innerHTML='<div class="result-box"><div class="result-title">'+(images.length>1?'Your Creatives Are Ready':'Ad Ready')+'</div><div class="result-text" style="margin-bottom:16px;"><span style="color:var(--blue);font-weight:600">'+gameName+'</span></div></div>';
+    const grid=document.createElement('div');
+    grid.style.cssText='display:grid;grid-template-columns:'+cols+';gap:14px;margin-top:8px;';
+    images.forEach(({url,label})=>{
+      grid.appendChild(makeImageCard(url,label,gameName));
+    });
+    container.querySelector('.result-box').appendChild(grid);
   }
 
-  const acts=document.createElement('div');acts.className='summary-actions';acts.style.justifyContent='center';
-  if(falImageUrl){
-    const dl1=makeDownloadBtn(found.image_url,gameName,'Download Version 1');
-    const dl2=makeDownloadBtn(falImageUrl,gameName,'Download Version 2');
-    acts.appendChild(dl1);acts.appendChild(dl2);
-  } else {
-    acts.appendChild(makeDownloadBtn(found.image_url,gameName,'Download Image'));
-  }
+  const acts=document.createElement('div');acts.className='summary-actions';acts.style.cssText='justify-content:center;margin-top:16px;';
   const anotherBtn=document.createElement('button');anotherBtn.className='opt-btn';anotherBtn.textContent='Generate Another';anotherBtn.onclick=startChat;acts.appendChild(anotherBtn);
 
   // Feedback
