@@ -1035,45 +1035,52 @@ STYLE: ${styleGuide}\`;`;
 // ============================================================
 async function falSubmitAndPoll(imageSize){
   const prompt=buildFalPrompt();
-  // Submit to queue
+
+  // STEP 1: Submit to fal queue
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
     method:'POST',
     headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
     body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'6',output_format:'jpeg',guidance_scale:7.5,num_inference_steps:28})
   });
+  if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
   const submitData=await submitRes.json();
-  if(!submitData.request_id)throw new Error('No request ID');
-  
-  // Use the response_url from submit response to poll
-  const responseUrl=submitData.response_url||('https://queue.fal.run/'+FAL_MODEL+'/requests/'+submitData.request_id);
-  
-  let result=null;let attempts=0;
-  while(!result&&attempts<50){
+  console.log('FAL SUBMIT:',JSON.stringify(submitData).substring(0,300));
+  const requestId=submitData.request_id;
+  if(!requestId)throw new Error('No request_id from fal');
+
+  // STEP 2: Poll status endpoint until COMPLETED
+  const statusUrl='https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId+'/status';
+  let attempts=0;
+  while(attempts<60){
     await new Promise(r=>setTimeout(r,4000));
-    const statusRes=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+    attempts++;
+    const statusRes=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+    if(!statusRes.ok)continue;
     const statusData=await statusRes.json();
-    // fal returns the result directly in the response when complete
-    if(statusData.images&&statusData.images.length>0){result=statusData;break;}
-    if(statusData.image){result=statusData;break;}
-    if(statusData.status==='COMPLETED'&&statusData.output){result=statusData.output;break;}
+    console.log('FAL STATUS attempt '+attempts+':',statusData.status);
     if(statusData.status==='FAILED')throw new Error('fal generation failed');
-    // status IN_QUEUE or IN_PROGRESS - keep polling
+    if(statusData.status==='COMPLETED')break;
+    // IN_QUEUE or IN_PROGRESS — keep waiting
   }
-  if(!result)throw new Error('Timed out waiting for fal result');
+
+  // STEP 3: Fetch the actual result
+  const resultUrl='https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId;
+  const resultRes=await fetch(resultUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+  if(!resultRes.ok)throw new Error('fal result fetch failed: '+resultRes.status);
+  const result=await resultRes.json();
   console.log('FAL RESULT FULL:',JSON.stringify(result).substring(0,500));
-  
-  // Extract URL from various response shapes
-  if(result.images&&result.images[0]){
-    const url=typeof result.images[0]==='string'?result.images[0]:result.images[0].url;
-    console.log('FAL URL EXTRACTED:',url);
-    return url;
+
+  // Extract image URL — flux-pro returns { images: [{url, ...}] }
+  if(result.images&&result.images.length>0){
+    const img=result.images[0];
+    const url=typeof img==='string'?img:img.url;
+    if(url){console.log('FAL URL EXTRACTED:',url);return url;}
   }
   if(result.image){
     const url=typeof result.image==='string'?result.image:result.image.url;
-    console.log('FAL URL EXTRACTED:',url);
-    return url;
+    if(url){console.log('FAL URL EXTRACTED:',url);return url;}
   }
-  throw new Error('Could not extract image URL from fal response');
+  throw new Error('Could not extract image URL from fal result: '+JSON.stringify(result).substring(0,200));
 }
 
 async function generateWithFal(){
@@ -1167,20 +1174,19 @@ function makeImageCard(url, label, gameName){
   const lbl=document.createElement('div');
   lbl.style.cssText='font-size:10px;font-weight:700;color:var(--txt3);text-align:center;letter-spacing:1.5px;text-transform:uppercase;';
   lbl.textContent=label;
+  const dl=makeDownloadBtn(url,gameName,'\u2193 Download');
+  dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
   const img=document.createElement('img');
-  img.src=url;img.alt=label;
-  img.crossOrigin='anonymous';
-  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;cursor:pointer;';
-  img.onclick=()=>window.open(url,'_blank');
+  img.alt=label;
+  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;';
   img.onerror=()=>{
     img.style.display='none';
     const errDiv=document.createElement('div');
     errDiv.style.cssText='padding:20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
-    errDiv.innerHTML='Image failed to load.<br><a href="'+url+'" target="_blank" style="color:var(--blue);text-decoration:underline;">Open directly ↗</a>';
+    errDiv.textContent='Image failed to load.';
     wrap.insertBefore(errDiv,dl);
   };
-  const dl=makeDownloadBtn(url,gameName,'↓ Download');
-  dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
+  img.src=url;
   wrap.appendChild(lbl);wrap.appendChild(img);wrap.appendChild(dl);
   return wrap;
 }
