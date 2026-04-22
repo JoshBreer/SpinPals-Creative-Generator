@@ -962,88 +962,89 @@ function buildFalPrompt(targetFormat){
   const custom=state.customInstructions;
   const fmt=targetFormat||state.format;
   const isTurkish=platform==='bankobet';
+
+  // These three text strings are FIXED — the model must render them verbatim
+  const headlineText=offer;
   const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
-  const disclaimerText=isTurkish?'18+ Sorumlu Oynayın T&C Geçerlidir':'18+ Play Responsibly T&Cs Apply';
+  const disclaimerText=isTurkish?'18+ | Sorumlu Oynayın | Şartlar ve Koşullar Geçerlidir':'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
 
-  // Layout description per format
   const isPortrait=fmt==='portrait';
-  const formatDesc=isPortrait
-    ?'tall vertical 9:16 portrait format (like a phone screen)'
-    :'square 1:1 format';
-  const layoutDesc=isPortrait
-    ?'Top 30%: offer headline text. Middle 40%: atmospheric game visual. Bottom 20%: large green CTA button. Bottom 5%: disclaimer bar.'
-    :'Top 25%: offer headline text in a decorative banner/box. Center 50%: atmospheric game visual. Bottom 15%: large green CTA button. Bottom 5%: disclaimer bar.';
 
-  // Style direction
-  let styleDesc='Bold vibrant casino ad. Rich jewel-tone colors. Dramatic volumetric lighting. Cinematic depth of field.';
-  if(style==='Classic') styleDesc='Bold vibrant casino ad aesthetic. Deep greens and golds. Dramatic lighting. High energy professional ad design.';
-  else if(style==='Realistic') styleDesc='Cinematic photorealistic quality. Dramatic moody lighting. Film poster meets luxury brand ad.';
-  else if(style==='Text Only') styleDesc='Typographic poster design. Bold text dominates. Dark rich gradient background. Minimal objects.';
-  else if(style==='Custom'&&custom) styleDesc=custom;
-
-  // Game-specific background atmosphere — pure atmosphere, no UI, no logos
-  let bgDesc='Dramatic luxury casino atmosphere. Deep emerald green and rich gold tones. Elegant casino chips and playing cards scattered beautifully. Cinematic spotlight lighting.';
+  // Background atmosphere based on game
+  let bg='Luxury casino atmosphere. Deep emerald greens, rich golds. Dramatic cinematic lighting. Scattered casino chips and playing cards.';
   if(game){
     const g=game.toLowerCase();
     if(g.includes('football')||g.includes('soccer')||g.includes('lig')||g.includes('league')||g.includes('champions')){
-      bgDesc='Stadium floodlights illuminating a vivid green pitch at night. Dramatic aerial perspective. Golden light rays through stadium atmosphere. No players, no faces.';
+      bg='Dramatic football stadium at night. Floodlit green pitch from aerial view. Crowd atmosphere. Golden light rays. No players or faces visible.';
     } else if(g.includes('basketball')){
-      bgDesc='Basketball court hardwood floor with dramatic overhead spotlights. Golden light rays. Court lines glowing. High energy atmosphere.';
+      bg='Basketball court with dramatic overhead spotlights. Hardwood floor. Golden light rays. No players.';
     } else if(g.includes('aviator')||g.includes('jetx')||g.includes('crash')){
-      bgDesc='Sleek jet plane silhouette ascending steeply against a deep blue-black sky filled with light streaks. Multiplier energy. Speed lines.';
+      bg='Sleek modern aircraft ascending against a dark dramatic sky. Speed lines. Blue and gold light trails.';
     } else if(g.includes('roulette')){
-      bgDesc='Extreme close-up of a spinning roulette wheel. Deep red and black. Dramatic rim lighting. Gold accents. Motion blur on the wheel.';
+      bg='Spinning roulette wheel extreme close up. Deep red and black. Gold rim. Dramatic side lighting. Motion blur on wheel.';
     } else if(g.includes('blackjack')){
-      bgDesc='Casino blackjack table covered in deep green velvet. Playing cards fanned out perfectly. Gold and black casino chips stacked high. Dramatic under-table lighting glow.';
+      bg='Casino blackjack table. Green velvet. Playing cards spread perfectly. Gold and black chips stacked high. Dramatic moody lighting.';
     } else if(g.includes('baccarat')){
-      bgDesc='Elegant baccarat table with deep green velvet. Scattered playing cards. Black and gold chips. Moody sophisticated lighting. Luxury casino atmosphere.';
+      bg='Elegant baccarat table. Green velvet. Scattered cards. Black and gold chips. Sophisticated moody lighting.';
     } else if(g.includes('crazy time')){
-      bgDesc='Giant colorful carnival money wheel with confetti explosion. Rainbow spotlights. Pure excitement energy. Bold colors.';
+      bg='Giant colorful carnival money wheel. Confetti explosion. Rainbow spotlights. Pure excitement energy.';
     } else if(g.includes('sweet bonanza')){
-      bgDesc='Cascading colorful candy and fruits explosion. Vibrant pinks, purples, greens. Sparkling sugar crystals catching light. Playful yet premium feel.';
+      bg='Cascading colorful candy and tropical fruits explosion. Vibrant pinks, purples, greens. Sparkling sugar crystals.';
     } else if(g.includes('gates of olympus')){
-      bgDesc='Ancient Greek temple columns with golden light rays breaking through clouds. Divine atmosphere. Thunder and lightning in deep purple sky. Scattered gemstones.';
+      bg='Ancient Greek temple columns. Golden divine light rays breaking through storm clouds. Lightning. Deep purple sky. Scattered gemstones.';
     } else if(g.includes('big bass')){
-      bgDesc='Dramatic underwater scene with golden shimmer. Fish silhouettes. Treasure coins sinking. Deep blue-green water with light rays from above.';
+      bg='Dramatic underwater scene. Golden shimmer. Fish silhouettes. Treasure coins sinking through deep blue-green water.';
     } else if(g.includes('wolf gold')){
-      bgDesc='Moonlit canyon landscape. Full moon glowing intensely. Wolf silhouette. Gold dust floating in moonbeams. Rich purple and gold atmosphere.';
-    } else if(g.includes('dog house')){
-      bgDesc='Playful colourful doghouse setting with gold coins raining down. Bright greens and reds. Fun yet high-energy.';
+      bg='Moonlit canyon. Full moon glowing intensely. Wolf silhouette on ridge. Gold dust in moonbeams. Purple and gold atmosphere.';
     } else {
-      bgDesc='Rich atmospheric casino scene inspired by the mood of '+game+'. Deep jewel tones. Dramatic cinematic lighting. Scattered gold coins and casino elements. No text, no logos, no game UI.';
+      bg='Rich dramatic casino atmosphere inspired by '+game+'. Deep jewel tones. Cinematic lighting. Gold coins. No logos, no text, no game UI.';
     }
   }
 
-  // CRITICAL: Construct the prompt with exact text rendering instructions
-  // flux-pro/v1.1-ultra has strong typography — we must be hyper-specific
-  const prompt = `A professional casino advertisement in ${formatDesc}. Ultra-high quality. Studio production value.
+  let styleNote='Bold vibrant colors. Cinematic lighting. High contrast. Professional ad quality.';
+  if(style==='Classic') styleNote='Bold vibrant casino aesthetic. Deep greens and golds. High energy. Professional.';
+  else if(style==='Realistic') styleNote='Cinematic photorealistic. Dramatic moody lighting. Film poster quality.';
+  else if(style==='Text Only') styleNote='Typographic poster. Bold text as hero. Dark gradient background.';
+  else if(style==='Custom'&&custom) styleNote=custom;
 
-BACKGROUND VISUAL:
-${bgDesc}
-${styleDesc}
-Do NOT include any logos, brand names, mascots, slot machine reels, game UI elements, or watermarks anywhere.
+  // The prompt is structured as a professional creative brief with STRICT TEXT RULES
+  const prompt=`Professional casino advertising creative. ${isPortrait?'Tall vertical 9:16 mobile format':'Square 1:1 social media format'}. Agency production quality.
 
-TEXT LAYOUT — RENDER EXACTLY AS SPECIFIED:
-ZONE 1 — HEADLINE (top of image, most prominent element):
-Render this exact text in large bold white letters with gold outline and soft drop shadow: "${offer}"
-Text must fill the width. Use clean sans-serif font. White fill, gold stroke. Perfectly sharp. No distortion.
+BACKGROUND:
+${bg}
+${styleNote}
+STRICT RULE: No logos. No brand names. No watermarks. No slot machine reels. No game UI. Background is PURELY atmospheric.
 
-ZONE 2 — CTA BUTTON (lower middle area):
-A solid rounded rectangle button in bright green (#22c55e). Inside the button in large bold white text: "${ctaText}"
-Button must look like a real clickable UI button with subtle gradient and shadow.
+═══════════════════════════════
+MANDATORY TEXT — COPY EXACTLY
+═══════════════════════════════
 
-ZONE 3 — DISCLAIMER (pinned to very bottom edge, full width):
-A semi-transparent dark bar (#000000 at 70% opacity) spanning the full width at the very bottom.
-Inside this bar in small but PERFECTLY LEGIBLE white text (minimum 14px equivalent): "${disclaimerText}"
-This disclaimer MUST be present. Do not omit it. Do not blur it.
+ELEMENT 1 — MAIN HEADLINE:
+Exact text: "${headlineText}"
+Style: Very large bold text. White with gold outline. Dominant. Top portion of image.
+Rule: These words ONLY. Do not change, add, or remove any word.
 
-ABSOLUTE RULES — NEVER VIOLATE:
-- Render ONLY the 3 text elements above. Zero additional text anywhere.
-- No fake URLs, no made-up website addresses, no extra legal text
-- No slot machine reels, no game title text, no brand logos
-- No random icons, stars, badges, or decorative symbols near text
-- The offer text must appear EXACTLY ONCE — do not repeat or paraphrase it
-- All text must be crisp, sharp, and fully legible — no motion blur on text`;
+ELEMENT 2 — CALL TO ACTION BUTTON:
+Exact text: "${ctaText}"
+Style: Solid bright green rounded button (#22c55e). Bold white text inside. Real button appearance with shadow.
+Position: Lower center of image.
+Rule: The button must say EXACTLY "${ctaText}". Nothing else. Not "Step to" anything. Not "Get" anything. EXACTLY "${ctaText}".
+
+ELEMENT 3 — LEGAL DISCLAIMER:
+Exact text: "${disclaimerText}"
+Style: Small crisp white text on a dark semi-transparent bar at the very bottom edge.
+Rule: Must say EXACTLY "${disclaimerText}". No other legal text. No fake website URLs. No made-up terms. EXACTLY these words.
+
+═══════════════════════════════
+ABSOLUTE PROHIBITIONS
+═══════════════════════════════
+- DO NOT invent any text beyond the 3 elements above
+- DO NOT add website URLs, domain names, or fake legal copy
+- DO NOT put any text on the CTA button except "${ctaText}"
+- DO NOT repeat the headline text in other parts of the image
+- DO NOT add percentage signs, dollar amounts, or numbers that are not in the headline text
+- DO NOT add any icons, badges, seals, or decorative text elements
+- Every single letter must be razor sharp and perfectly legible`;
 
   return prompt;
 }
