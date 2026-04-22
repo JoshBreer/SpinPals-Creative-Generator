@@ -126,12 +126,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 .gallery-empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--txt3);font-size:15px}
 
 /* MODAL */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.96);z-index:1000;justify-content:flex-start;align-items:center;padding:16px;overflow-y:auto}
-.modal.active{display:flex}
-.modal-inner{max-width:480px;width:100%;text-align:center;margin:auto;padding:20px 0}
-.modal-close{position:fixed;top:12px;right:12px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:22px;cursor:pointer;z-index:1001;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
-.modal-close:hover{background:rgba(255,255,255,.1)}
-.modal-img{max-width:100%;max-height:55vh;border-radius:var(--r);object-fit:contain}
+.modal{display:none;position:absolute;top:0;left:0;width:100%;min-height:100%;background:rgba(0,0,0,.97);z-index:1000;padding:16px}
+.modal.active{display:block}
+.modal-inner{max-width:440px;width:100%;text-align:center;margin:0 auto;padding-top:48px}
+.modal-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:22px;cursor:pointer;z-index:1001;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:.2s}
+.modal-close:hover{background:rgba(255,255,255,.2)}
+.modal-img{max-width:100%;max-height:50vh;border-radius:var(--r);object-fit:contain}
 .modal-title{font-size:20px;font-weight:700;color:var(--white);margin-top:14px}
 .modal-info{font-size:13px;color:var(--txt2);margin-top:4px}
 .modal-dl{display:inline-block;margin-top:14px;padding:10px 28px;border-radius:6px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s;border:none}
@@ -1180,9 +1180,9 @@ function openModal(c){
   document.getElementById('modalTitle').textContent=c.game_name;
   document.getElementById('modalInfo').textContent=(c.format==='portrait'?'Portrait 9:16':'Square 1:1')+' · '+(c.style||'')+' · '+(c.offer_text||'');
   document.getElementById('modalDl').href=c.image_url;
-  modal.className='modal active';document.body.style.overflow='hidden';modal.scrollTop=0;window.scrollTo(0,0);try{document.documentElement.scrollTop=0;}catch(e){}
+  modal.className='modal active';window.scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;modal.scrollTop=0;
 }
-function closeModal(){modal.className='modal';document.body.style.overflow='';}
+function closeModal(){modal.className='modal';}
 document.getElementById('modalClose').onclick=closeModal;
 modal.onclick=e=>{if(e.target===modal)closeModal();};
 document.onkeydown=e=>{if(e.key==='Escape')closeModal();};
