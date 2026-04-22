@@ -276,7 +276,7 @@ const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
-const FAL_MODEL='fal-ai/flux-pro';
+const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
@@ -960,105 +960,106 @@ function buildFalPrompt(targetFormat){
   const offer=state.offer;
   const style=state.style;
   const custom=state.customInstructions;
-  // targetFormat overrides state.format so portrait and square each get the right prompt
   const fmt=targetFormat||state.format;
+  const isTurkish=platform==='bankobet';
+  const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
+  const disclaimerText=isTurkish?'18+ Sorumlu Oynayın T&C Geçerlidir':'18+ Play Responsibly T&Cs Apply';
 
-  let language='English';
-  if(platform==='bankobet'){language='Turkish';}
+  // Layout description per format
+  const isPortrait=fmt==='portrait';
+  const formatDesc=isPortrait
+    ?'tall vertical 9:16 portrait format (like a phone screen)'
+    :'square 1:1 format';
+  const layoutDesc=isPortrait
+    ?'Top 30%: offer headline text. Middle 40%: atmospheric game visual. Bottom 20%: large green CTA button. Bottom 5%: disclaimer bar.'
+    :'Top 25%: offer headline text in a decorative banner/box. Center 50%: atmospheric game visual. Bottom 15%: large green CTA button. Bottom 5%: disclaimer bar.';
 
-  const aspectRatio=fmt==='portrait'?'9:16 vertical portrait (1080x1920px)':'1:1 square (1080x1080px)';
-  const layoutNote=fmt==='portrait'
-    ?'Tall vertical layout. Place offer text in the upper third. Game visual fills middle. CTA button and disclaimer at bottom.'
-    :'Square layout. Offer text centered prominently. Game visual behind or beside. CTA button and disclaimer at bottom.';
+  // Style direction
+  let styleDesc='Bold vibrant casino ad. Rich jewel-tone colors. Dramatic volumetric lighting. Cinematic depth of field.';
+  if(style==='Classic') styleDesc='Bold vibrant casino ad aesthetic. Deep greens and golds. Dramatic lighting. High energy professional ad design.';
+  else if(style==='Realistic') styleDesc='Cinematic photorealistic quality. Dramatic moody lighting. Film poster meets luxury brand ad.';
+  else if(style==='Text Only') styleDesc='Typographic poster design. Bold text dominates. Dark rich gradient background. Minimal objects.';
+  else if(style==='Custom'&&custom) styleDesc=custom;
 
-  let styleGuide='';
-  if(style==='Classic') styleGuide='Bold, vibrant casino advertising aesthetic. Dynamic composition, high energy, professional ad design.';
-  else if(style==='Realistic') styleGuide='Cinematic photorealistic style. Dramatic lighting, high detail, film poster quality.';
-  else if(style==='Text Only') styleGuide='Bold typographic design. Massive impactful text as the hero element. Vibrant gradient background. Minimal imagery, let the text dominate.';
-  else if(style==='Custom'&&custom) styleGuide=custom;
-  else styleGuide='Bold vibrant casino ad aesthetic.';
-
-  let gameVisual='';
+  // Game-specific background atmosphere — pure atmosphere, no UI, no logos
+  let bgDesc='Dramatic luxury casino atmosphere. Deep emerald green and rich gold tones. Elegant casino chips and playing cards scattered beautifully. Cinematic spotlight lighting.';
   if(game){
-    if(game.includes('Football')||game.includes('Soccer')||game.includes('Lig')||game.includes('League')||game.includes('Champions')){
-      gameVisual='Background: dynamic football stadium atmosphere, green pitch, crowd, dramatic floodlights. NO player faces.';
-    } else if(game.includes('Basketball')){
-      gameVisual='Background: basketball court atmosphere, dramatic lighting, energy and motion blur.';
-    } else if(game.includes('Tennis')){
-      gameVisual='Background: tennis court perspective, dramatic lighting, athletic energy.';
-    } else if(game.includes('Aviator')||game.includes('Crash')||game.includes('JetX')){
-      gameVisual='Background: sleek aircraft or rocket ascending against a dramatic dark sky with multiplier energy.';
-    } else if(game.includes('Roulette')){
-      gameVisual='Background: close-up of a spinning roulette wheel, casino atmosphere, dramatic lighting, luxury feel.';
-    } else if(game.includes('Blackjack')){
-      gameVisual='Background: casino blackjack table with cards and chips, dramatic moody lighting.';
-    } else if(game.includes('Baccarat')){
-      gameVisual='Background: elegant baccarat table, sophisticated casino atmosphere, high-stakes luxury feel.';
-    } else if(game.includes('Crazy Time')){
-      gameVisual='Background: colorful carnival wheel game show atmosphere, bright lights, confetti, excitement.';
+    const g=game.toLowerCase();
+    if(g.includes('football')||g.includes('soccer')||g.includes('lig')||g.includes('league')||g.includes('champions')){
+      bgDesc='Stadium floodlights illuminating a vivid green pitch at night. Dramatic aerial perspective. Golden light rays through stadium atmosphere. No players, no faces.';
+    } else if(g.includes('basketball')){
+      bgDesc='Basketball court hardwood floor with dramatic overhead spotlights. Golden light rays. Court lines glowing. High energy atmosphere.';
+    } else if(g.includes('aviator')||g.includes('jetx')||g.includes('crash')){
+      bgDesc='Sleek jet plane silhouette ascending steeply against a deep blue-black sky filled with light streaks. Multiplier energy. Speed lines.';
+    } else if(g.includes('roulette')){
+      bgDesc='Extreme close-up of a spinning roulette wheel. Deep red and black. Dramatic rim lighting. Gold accents. Motion blur on the wheel.';
+    } else if(g.includes('blackjack')){
+      bgDesc='Casino blackjack table covered in deep green velvet. Playing cards fanned out perfectly. Gold and black casino chips stacked high. Dramatic under-table lighting glow.';
+    } else if(g.includes('baccarat')){
+      bgDesc='Elegant baccarat table with deep green velvet. Scattered playing cards. Black and gold chips. Moody sophisticated lighting. Luxury casino atmosphere.';
+    } else if(g.includes('crazy time')){
+      bgDesc='Giant colorful carnival money wheel with confetti explosion. Rainbow spotlights. Pure excitement energy. Bold colors.';
+    } else if(g.includes('sweet bonanza')){
+      bgDesc='Cascading colorful candy and fruits explosion. Vibrant pinks, purples, greens. Sparkling sugar crystals catching light. Playful yet premium feel.';
+    } else if(g.includes('gates of olympus')){
+      bgDesc='Ancient Greek temple columns with golden light rays breaking through clouds. Divine atmosphere. Thunder and lightning in deep purple sky. Scattered gemstones.';
+    } else if(g.includes('big bass')){
+      bgDesc='Dramatic underwater scene with golden shimmer. Fish silhouettes. Treasure coins sinking. Deep blue-green water with light rays from above.';
+    } else if(g.includes('wolf gold')){
+      bgDesc='Moonlit canyon landscape. Full moon glowing intensely. Wolf silhouette. Gold dust floating in moonbeams. Rich purple and gold atmosphere.';
+    } else if(g.includes('dog house')){
+      bgDesc='Playful colourful doghouse setting with gold coins raining down. Bright greens and reds. Fun yet high-energy.';
     } else {
-      gameVisual='Background: vivid atmospheric scene inspired by the world of '+game+'. Rich colors, dramatic lighting, casino energy. Pure atmosphere — NO slot machine reels, NO game UI, NO game title text.';
+      bgDesc='Rich atmospheric casino scene inspired by the mood of '+game+'. Deep jewel tones. Dramatic cinematic lighting. Scattered gold coins and casino elements. No text, no logos, no game UI.';
     }
-  } else {
-    gameVisual='Background: dramatic luxury casino atmosphere. Deep rich colors, cinematic lighting.';
   }
 
-  const offerDisplay=language==='Turkish'?offer:offer;
-  const ctaText=language==='Turkish'?'HEMEN OYNA':'CLAIM NOW';
-  const disclaimerText=language==='Turkish'?'18+ | Sorumlu Oynayın | Şartlar Geçerlidir':'18+ | Play Responsibly | T&Cs Apply';
+  // CRITICAL: Construct the prompt with exact text rendering instructions
+  // flux-pro/v1.1-ultra has strong typography — we must be hyper-specific
+  const prompt = `A professional casino advertisement in ${formatDesc}. Ultra-high quality. Studio production value.
 
-  const prompt=`A premium ${aspectRatio} casino advertisement image. Professional ad agency quality. $10,000 production value.
+BACKGROUND VISUAL:
+${bgDesc}
+${styleDesc}
+Do NOT include any logos, brand names, mascots, slot machine reels, game UI elements, or watermarks anywhere.
 
-═══ MANDATORY TEXT ELEMENTS — ALL MUST APPEAR ═══
+TEXT LAYOUT — RENDER EXACTLY AS SPECIFIED:
+ZONE 1 — HEADLINE (top of image, most prominent element):
+Render this exact text in large bold white letters with gold outline and soft drop shadow: "${offer}"
+Text must fill the width. Use clean sans-serif font. White fill, gold stroke. Perfectly sharp. No distortion.
 
-1. OFFER HEADLINE (most important element):
-   Text: "${offerDisplay}"
-   Style: Bold, large, highly legible. White or bright gold text. Drop shadow for readability.
-   Position: Upper portion of the image, centered. This is the HERO text. Make it MASSIVE and IMPOSSIBLE TO MISS.
+ZONE 2 — CTA BUTTON (lower middle area):
+A solid rounded rectangle button in bright green (#22c55e). Inside the button in large bold white text: "${ctaText}"
+Button must look like a real clickable UI button with subtle gradient and shadow.
 
-2. CTA BUTTON:
-   Text: "${ctaText}"
-   Style: Solid green or gold rounded button. Bold white text inside. Clean, no icons, no arrows.
-   Position: Lower section, centered.
+ZONE 3 — DISCLAIMER (pinned to very bottom edge, full width):
+A semi-transparent dark bar (#000000 at 70% opacity) spanning the full width at the very bottom.
+Inside this bar in small but PERFECTLY LEGIBLE white text (minimum 14px equivalent): "${disclaimerText}"
+This disclaimer MUST be present. Do not omit it. Do not blur it.
 
-3. LEGAL DISCLAIMER (mandatory — do NOT omit):
-   Text: "${disclaimerText}"
-   Style: Small but CRISP and LEGIBLE. White text on a semi-transparent dark bar that spans the full width.
-   Position: Very bottom of the image, pinned to the bottom edge.
-
-═══ VISUAL BACKGROUND ═══
-${gameVisual}
-${layoutNote}
-Style direction: ${styleGuide}
-
-═══ ABSOLUTE PROHIBITIONS — NEVER INCLUDE ═══
-- NO logos of any kind — no game logos, no brand logos, no platform logos, no watermarks
-- NO brand names, no platform names (SpinPals, Betewin, Bankobet, etc.)
-- NO slot machine reels, NO game UI elements, NO game title text rendered anywhere
-- NO repeated text — each text element appears EXACTLY ONCE
-- NO QR codes, NO badges, NO fake award seals
-- NO illegible or distorted text anywhere
-- NO extra text beyond the 3 mandatory elements above
-
-═══ QUALITY MANDATE ═══
-- Every text element must be razor-sharp, zero blur, perfectly legible
-- Cinematic lighting, deep rich colors, high contrast
-- Professional gambling advertisement — looks like it ran in a major campaign`;
+ABSOLUTE RULES — NEVER VIOLATE:
+- Render ONLY the 3 text elements above. Zero additional text anywhere.
+- No fake URLs, no made-up website addresses, no extra legal text
+- No slot machine reels, no game title text, no brand logos
+- No random icons, stars, badges, or decorative symbols near text
+- The offer text must appear EXACTLY ONCE — do not repeat or paraphrase it
+- All text must be crisp, sharp, and fully legible — no motion blur on text`;
 
   return prompt;
 }
 
+
 // ============================================================
 // FAL.AI GENERATION
 // ============================================================
-async function falSubmitAndPoll(imageSize,targetFormat){
+async function falSubmitAndPoll(aspectRatio,targetFormat){
   const prompt=buildFalPrompt(targetFormat);
 
   // STEP 1: Submit to fal queue
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
     method:'POST',
     headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'6',output_format:'jpeg',guidance_scale:7.5,num_inference_steps:28})
+    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'5',output_format:'jpeg',guidance_scale:4.5,num_inference_steps:40,enhance_prompt:false})
   });
   if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
   const submitData=await submitRes.json();
@@ -1104,29 +1105,21 @@ async function falSubmitAndPoll(imageSize,targetFormat){
 async function generateWithFal(){
   const isBoth=state.format==='both';
   if(isBoth){
-    // Run portrait and square independently — failure in one must NOT kill the other
-    const portraitPromise=falSubmitAndPoll({width:720,height:1280},'portrait')
+    const portraitPromise=falSubmitAndPoll('9:16','portrait')
       .then(url=>{console.log('FAL PORTRAIT OK:',url);return url;})
       .catch(e=>{console.error('FAL PORTRAIT FAILED:',e);return null;});
-    const squarePromise=falSubmitAndPoll({width:1024,height:1024},'square')
+    const squarePromise=falSubmitAndPoll('1:1','square')
       .then(url=>{console.log('FAL SQUARE OK:',url);return url;})
       .catch(e=>{console.error('FAL SQUARE FAILED:',e);return null;});
     const [portraitUrl,squareUrl]=await Promise.all([portraitPromise,squarePromise]);
-    // Return whatever succeeded — partial results are still useful
-    if(portraitUrl||squareUrl){
-      return {portrait:portraitUrl,square:squareUrl,both:true};
-    }
+    if(portraitUrl||squareUrl)return {portrait:portraitUrl,square:squareUrl,both:true};
     return null;
   } else {
     try{
-      const isPortrait=state.format==='portrait';
-      const imageSize=isPortrait?{width:720,height:1280}:{width:1024,height:1024};
-      const url=await falSubmitAndPoll(imageSize,state.format);
+      const ar=state.format==='portrait'?'9:16':'1:1';
+      const url=await falSubmitAndPoll(ar,state.format);
       return {url,both:false};
-    }catch(e){
-      console.error('fal.ai error:',e);
-      return null;
-    }
+    }catch(e){console.error('fal.ai error:',e);return null;}
   }
 }
 
@@ -1151,43 +1144,58 @@ async function saveFalToGallery(imageUrl,format){
 // Never uses window.open — always triggers a real file download
 // ============================================================
 async function downloadBlob(imageUrl, filename){
-  // Strategy 1: draw the image onto a canvas and export as blob
-  // This works because the image is already loaded/displayed — no CORS fetch needed
-  const canvasBlob=await new Promise(resolve=>{
-    const img=new Image();
-    img.onload=()=>{
-      try{
-        const c=document.createElement('canvas');
-        c.width=img.naturalWidth||img.width;
-        c.height=img.naturalHeight||img.height;
-        const ctx=c.getContext('2d');
-        ctx.drawImage(img,0,0);
-        c.toBlob(b=>resolve(b),'image/jpeg',0.97);
-      }catch(e){resolve(null);}
-    };
-    img.onerror=()=>resolve(null);
-    img.crossOrigin='anonymous';
-    img.src=imageUrl+'?dl='+ Date.now(); // cache-bust to trigger crossOrigin revalidation
-  });
-  if(canvasBlob)return canvasBlob;
+  const isTwinUrl=imageUrl.includes('your-objectstorage.com')||imageUrl.includes('X-Amz-Signature');
+  const isFalUrl=imageUrl.includes('fal.media')||imageUrl.includes('fal.run');
 
-  // Strategy 2: direct cors fetch
-  try{
-    const r=await fetch(imageUrl,{mode:'cors'});
-    if(r.ok)return await r.blob();
-  }catch(e){}
+  // FAL images: direct fetch works (open CORS CDN)
+  if(isFalUrl){
+    try{
+      const r=await fetch(imageUrl,{mode:'cors'});
+      if(r.ok)return await r.blob();
+    }catch(e){}
+  }
 
-  // Strategy 3: corsproxy
-  try{
-    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
-    if(r.ok)return await r.blob();
-  }catch(e){}
+  // Twin/S3 signed URLs: canvas draw works because the img is already authenticated
+  // by the browser's cookie/session — no crossOrigin attr needed
+  if(isTwinUrl){
+    const canvasBlob=await new Promise(resolve=>{
+      const img=new Image();
+      // NO crossOrigin attr — signed S3 URLs reject CORS preflight requests
+      img.onload=()=>{
+        try{
+          const c=document.createElement('canvas');
+          c.width=img.naturalWidth||img.width;
+          c.height=img.naturalHeight||img.height;
+          const ctx=c.getContext('2d');
+          ctx.drawImage(img,0,0);
+          c.toBlob(b=>resolve(b),'image/jpeg',0.97);
+        }catch(e){
+          // Canvas tainted — S3 blocks cross-origin canvas reads, fall through
+          resolve(null);
+        }
+      };
+      img.onerror=()=>resolve(null);
+      img.src=imageUrl;
+    });
+    if(canvasBlob)return canvasBlob;
 
-  // Strategy 4: allorigins
-  try{
-    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
-    if(r.ok)return await r.blob();
-  }catch(e){}
+    // Canvas tainted — use allorigins server-side proxy (fetches from server, avoids CORS)
+    try{
+      const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
+      if(r.ok){const b=await r.blob();if(b.size>1000)return b;}
+    }catch(e){}
+
+    // corsproxy fallback
+    try{
+      const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
+      if(r.ok){const b=await r.blob();if(b.size>1000)return b;}
+    }catch(e){}
+  }
+
+  // Generic fallback chain for any other URL type
+  try{const r=await fetch(imageUrl,{mode:'cors'});if(r.ok)return await r.blob();}catch(e){}
+  try{const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));if(r.ok){const b=await r.blob();if(b.size>1000)return b;}}catch(e){}
+  try{const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));if(r.ok){const b=await r.blob();if(b.size>1000)return b;}}catch(e){}
 
   return null;
 }
