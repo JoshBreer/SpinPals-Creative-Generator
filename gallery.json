@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17768893832685",
+    "game_name": "Multihand Blackjack",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/03/6ff175e2b899ac61d4fe4531353bf60499bd3033d14ebf40ef3a30a2e98813.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T202352Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f98e325ecc9c86f5b070ff8d02ef2af64a439e53e6088665c3c8201a5f22d183",
+    "created_at": "2026-04-22 20:23:03"
+  },
+  {
+    "id": "cr-1776889383sqC853",
+    "game_name": "Multihand Blackjack",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/70/e95e714ffd94f7d5ed4a5a29e5c6dcfae81e356a927b9571ca3086eb10e1da.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T202413Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=048615a979c1faeba5d7dcbf2bcc77934a70f3088d5394dd7169bd3296de52e5",
+    "created_at": "2026-04-22 20:23:03"
+  },
+  {
     "id": "cr-17768830288165",
     "game_name": "Aztec Gems",
     "format": "portrait",
