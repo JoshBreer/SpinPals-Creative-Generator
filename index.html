@@ -779,20 +779,8 @@ async function doQuickGenerate(){
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
-  // Run fal.ai in parallel - don't await, let it complete independently
-  let falImageUrl=null;
-  const falPromise=generateWithFal().then(result=>{
-    falImageUrl=result;
-    if(result){
-      if(result.both){
-        if(result.portrait)saveFalToGallery(result.portrait,'portrait');
-        if(result.square)saveFalToGallery(result.square,'square');
-      } else {
-        const u=result.url||result.portrait;
-        if(u)saveFalToGallery(u,state.format);
-      }
-    }
-  }).catch(()=>{});
+  // Run fal.ai in parallel immediately — raw promise, await result directly later
+  const falPromise=generateWithFal().catch(e=>{console.error('fal top-level error:',e);return null;});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -826,23 +814,34 @@ async function doQuickGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
+    if(found2){
+      clearInterval(ti2);
+      const falResult=await falPromise;
+      if(falResult){
+        if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
+        else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
+      }
+      showResult(loadMsg,found2,falResult);
+    }
   }
 
   let found=null;
   while(!found&&!stopped){
     await delay(7000);
     const fresh=await fetchGallery();
-    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url);
+    const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
       const newItems=freshItems.filter(c=>!snapKeys.has(c.id||(c.image_url.split('?')[0])));
       if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found=newItems[0];}
     }
   }
   clearInterval(timerInterval);
-  // Wait for fal.ai to finish if it hasn't already (it's usually done long before Twin)
-  await falPromise;
-  if(found)showResult(loadMsg,found,falImageUrl);
+  const falResult=await falPromise;
+  if(falResult){
+    if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
+    else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
+  }
+  if(found)showResult(loadMsg,found,falResult);
 }
 
 // ============================================================
@@ -879,20 +878,8 @@ async function doGenerate(){
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
-  // Run fal.ai in parallel - fires immediately alongside Twin
-  let falImageUrl=null;
-  const falPromise=generateWithFal().then(result=>{
-    falImageUrl=result;
-    if(result){
-      if(result.both){
-        if(result.portrait)saveFalToGallery(result.portrait,'portrait');
-        if(result.square)saveFalToGallery(result.square,'square');
-      } else {
-        const u=result.url||result.portrait;
-        if(u)saveFalToGallery(u,state.format);
-      }
-    }
-  }).catch(()=>{});
+  // Run fal.ai in parallel immediately — stored as raw promise so we can await the result directly
+  const falPromise=generateWithFal().catch(e=>{console.error('fal top-level error:',e);return null;});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -934,7 +921,15 @@ async function doGenerate(){
         if(newItems.length>0){newItems.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));found2=newItems[0];}
       }
     }
-    if(found2){clearInterval(ti2);await falPromise;showResult(loadMsg,found2,falImageUrl);}
+    if(found2){
+      clearInterval(ti2);
+      const falResult=await falPromise;
+      if(falResult){
+        if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
+        else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
+      }
+      showResult(loadMsg,found2,falResult);
+    }
   }
 
   let found=null;
@@ -948,8 +943,12 @@ async function doGenerate(){
     }
   }
   clearInterval(timerInterval);
-  await falPromise;
-  if(found)showResult(loadMsg,found,falImageUrl);
+  const falResult=await falPromise;
+  if(falResult){
+    if(falResult.both){if(falResult.portrait)saveFalToGallery(falResult.portrait,'portrait');if(falResult.square)saveFalToGallery(falResult.square,'square');}
+    else{const u=falResult.url||falResult.portrait;if(u)saveFalToGallery(u,state.format);}
+  }
+  if(found)showResult(loadMsg,found,falResult);
 }
 
 // ============================================================
@@ -1156,26 +1155,36 @@ function saveFalToGallery(imageUrl,format){
 // Never uses window.open — always triggers a real file download
 // ============================================================
 async function downloadBlob(imageUrl){
-  // Try a fetch helper — checks blob size to detect proxy error pages
-  const tryFetch=async(url,opts)=>{
-    const r=await fetch(url,opts||{});
-    if(!r.ok)throw new Error(r.status);
-    const b=await r.blob();
-    if(b.size<500)throw new Error('blob too small');
-    return b;
-  };
+  // For S3 signed URLs and fal CDN URLs, the only reliable approach
+  // inside a Wix iframe is a server-side proxy that fetches the image
+  // on the server and returns raw bytes — bypassing all CORS restrictions.
 
-  // 1. Direct fetch with cors — works for fal.ai (open CDN)
-  try{return await tryFetch(imageUrl,{mode:'cors'});}catch(e){}
+  const isImage=b=>b.size>5000&&(b.type.startsWith('image/')||b.type==='application/octet-stream');
 
-  // 2. allorigins — server-side proxy, works for S3 signed URLs and anything else
-  try{return await tryFetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));}catch(e){}
+  // 1. Direct fetch — works for fal.ai which has open CORS headers
+  try{
+    const r=await fetch(imageUrl,{mode:'cors'});
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
 
-  // 3. corsproxy.io fallback
-  try{return await tryFetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));}catch(e){}
+  // 2. corsproxy.io — server fetches the URL, returns raw bytes
+  try{
+    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
 
-  // 4. cors.sh fallback
-  try{return await tryFetch('https://cors.sh/'+imageUrl,{'headers':{'x-cors-api-key':'temp_demo'}});}catch(e){}
+  // 3. allorigins — another server-side proxy
+  try{
+    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
+    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
+  }catch(e){}
+
+  // 4. images.weserv.nl — image proxy specifically designed for this use case
+  const wsUrl='https://images.weserv.nl/?url='+encodeURIComponent(imageUrl)+'&output=jpg';
+  try{
+    const r=await fetch(wsUrl);
+    if(r.ok){const b=await r.blob();if(b.size>5000)return b;}
+  }catch(e){}
 
   return null;
 }
