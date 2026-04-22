@@ -781,7 +781,18 @@ async function doQuickGenerate(){
 
   // Run fal.ai in parallel - don't await, let it complete independently
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(result=>{falImageUrl=result;if(result&&result.url)saveFalToGallery(result.url);else if(result&&result.portrait)saveFalToGallery(result.portrait);}).catch(()=>{});
+  const falPromise=generateWithFal().then(result=>{
+    falImageUrl=result;
+    if(result){
+      if(result.both){
+        if(result.portrait)saveFalToGallery(result.portrait,'portrait');
+        if(result.square)saveFalToGallery(result.square,'square');
+      } else {
+        const u=result.url||result.portrait;
+        if(u)saveFalToGallery(u,state.format);
+      }
+    }
+  }).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -869,7 +880,18 @@ async function doGenerate(){
 
   // Run fal.ai in parallel - fires immediately alongside Twin
   let falImageUrl=null;
-  const falPromise=generateWithFal().then(result=>{falImageUrl=result;if(result&&result.url)saveFalToGallery(result.url);else if(result&&result.portrait)saveFalToGallery(result.portrait);}).catch(()=>{});
+  const falPromise=generateWithFal().then(result=>{
+    falImageUrl=result;
+    if(result){
+      if(result.both){
+        if(result.portrait)saveFalToGallery(result.portrait,'portrait');
+        if(result.square)saveFalToGallery(result.square,'square');
+      } else {
+        const u=result.url||result.portrait;
+        if(u)saveFalToGallery(u,state.format);
+      }
+    }
+  }).catch(()=>{});
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
 
@@ -1079,14 +1101,14 @@ async function generateWithFal(){
 // ============================================================
 // SAVE FAL IMAGE TO GALLERY
 // ============================================================
-async function saveFalToGallery(imageUrl){
+async function saveFalToGallery(imageUrl,format){
   try{
-    // Add to local gallery display immediately
-    const newEntry={id:"fal-"+Date.now(),game_name:state.game||"N/A",format:state.format,offer_text:state.offer,style:state.style,platform:state.platform||"spinpals",user_email:currentUserEmail,image_url:imageUrl,created_at:new Date().toISOString(),source:"fal"};
+    const fmt=format||state.format;
+    const newEntry={id:"fal-"+Date.now(),game_name:state.game||"N/A",format:fmt,offer_text:state.offer,style:state.style,platform:state.platform||"spinpals",user_email:currentUserEmail,image_url:imageUrl,created_at:new Date().toISOString(),source:"fal"};
     galleryData.unshift(newEntry);
     renderGallery();
   }catch(e){console.error("fal save failed",e);}
-};
+}
 
 // ============================================================
 // SHOW RESULT
@@ -1095,25 +1117,45 @@ function makeDownloadBtn(imageUrl, gameName, label){
   const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent=label||'Download Image';
   dlBtn.onclick=async()=>{
     dlBtn.textContent='Downloading...';dlBtn.disabled=true;
-    try{
-      // Route through CORS proxy to force blob download
-      const proxyUrl='https://corsproxy.io/?'+encodeURIComponent(imageUrl);
-      const res=await fetch(proxyUrl);
+    const filename=(gameName||'creative').replace(/[^a-z0-9]/gi,'-');
+    // Strategy 1: direct fetch (works when CORS is open, e.g. fal CDN)
+    const tryFetch=async(url)=>{
+      const res=await fetch(url,{mode:'cors'});
+      if(!res.ok)throw new Error('fetch failed');
+      return res.blob();
+    };
+    // Strategy 2: cors-anywhere proxy
+    const tryProxy=async()=>{
+      const res=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
       if(!res.ok)throw new Error('proxy failed');
-      const blob=await res.blob();
+      return res.blob();
+    };
+    // Strategy 3: allorigins proxy
+    const tryAltProxy=async()=>{
+      const res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
+      if(!res.ok)throw new Error('alt proxy failed');
+      return res.blob();
+    };
+    let blob=null;
+    try{blob=await tryFetch(imageUrl);}catch(e1){
+      try{blob=await tryProxy();}catch(e2){
+        try{blob=await tryAltProxy();}catch(e3){
+          // Final fallback: open in new tab so user can save manually
+          window.open(imageUrl,'_blank');
+          dlBtn.textContent='Opened in new tab ↗';
+          dlBtn.disabled=false;
+          return;
+        }
+      }
+    }
+    if(blob){
+      const ext=blob.type.includes('png')?'.png':'.jpg';
       const blobUrl=URL.createObjectURL(blob);
       const a=document.createElement('a');
-      const ext=blob.type.includes('png')?'.png':'.jpg';
-      a.href=blobUrl;
-      a.download=(gameName||'creative').replace(/[^a-z0-9]/gi,'-')+ext;
-      document.body.appendChild(a);
-      a.click();
+      a.href=blobUrl;a.download=filename+ext;
+      document.body.appendChild(a);a.click();
       setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},1000);
       dlBtn.textContent='Downloaded ✓';
-    }catch(e){
-      dlBtn.textContent='Download Image';
-      dlBtn.disabled=false;
-      console.error('Download failed:',e);
     }
   };
   return dlBtn;
@@ -1127,8 +1169,16 @@ function makeImageCard(url, label, gameName){
   lbl.textContent=label;
   const img=document.createElement('img');
   img.src=url;img.alt=label;
-  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;';
-  img.onerror=()=>{wrap.style.display='none';};
+  img.crossOrigin='anonymous';
+  img.style.cssText='width:100%;border-radius:6px;object-fit:cover;display:block;cursor:pointer;';
+  img.onclick=()=>window.open(url,'_blank');
+  img.onerror=()=>{
+    img.style.display='none';
+    const errDiv=document.createElement('div');
+    errDiv.style.cssText='padding:20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
+    errDiv.innerHTML='Image failed to load.<br><a href="'+url+'" target="_blank" style="color:var(--blue);text-decoration:underline;">Open directly ↗</a>';
+    wrap.insertBefore(errDiv,dl);
+  };
   const dl=makeDownloadBtn(url,gameName,'↓ Download');
   dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
   wrap.appendChild(lbl);wrap.appendChild(img);wrap.appendChild(dl);
@@ -1139,23 +1189,39 @@ function showResult(loadMsg,found,falResult){
   const container=loadMsg.querySelector('.loading');
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
   const isBoth=state.format==='both';
-  const hasFal=falResult&&(falResult.url||falResult.portrait||falResult.both);
+  // Robust fal check: falResult must be an object with at least one valid URL
+  const hasFalBoth=falResult&&falResult.both===true&&falResult.portrait&&falResult.square;
+  const hasFalSingle=falResult&&!falResult.both&&(falResult.url||falResult.portrait);
 
   // Build image grid
   const images=[];
   if(isBoth){
-    // Twin produces 2 images for both - get portrait and square from gallery
-    images.push({url:found.image_url,label:'Portrait 9:16 · Version 1'});
-    // Check gallery for second twin image (square)
-    const twinSquare=galleryData.find(c=>c.user_email===currentUserEmail&&c.image_url&&c.image_url!==found.image_url&&c.id&&c.id!==found.id&&new Date(c.created_at)>=new Date(Date.now()-300000));
-    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1 · Version 1'});
-    if(hasFal&&falResult.portrait)images.push({url:falResult.portrait,label:'Portrait 9:16 · Version 2'});
-    if(hasFal&&falResult.square)images.push({url:falResult.square,label:'Square 1:1 · Version 2'});
-    if(hasFal&&falResult.url)images.push({url:falResult.url,label:'Version 2'});
+    // Version 1: from Twin (found = portrait, look for matching square in gallery by recency)
+    images.push({url:found.image_url,label:'Portrait 9:16 · V1'});
+    // Look for a second Twin image generated in this same session (different URL, same user, within 10 min)
+    const sessionStart=Date.now()-600000;
+    const twinSquare=galleryData.find(c=>
+      c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
+      c.image_url&&c.image_url!==found.image_url&&
+      c.id!==found.id&&
+      new Date(c.created_at).getTime()>=sessionStart&&
+      (c.format==='square'||c.format==='both')
+    );
+    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1 · V1'});
+    // Version 2: from fal.ai (portrait + square generated in parallel)
+    if(hasFalBoth){
+      images.push({url:falResult.portrait,label:'Portrait 9:16 · V2'});
+      images.push({url:falResult.square,label:'Square 1:1 · V2'});
+    } else if(hasFalSingle){
+      const falUrl=falResult.url||falResult.portrait;
+      images.push({url:falUrl,label:'V2'});
+    }
   } else {
-    images.push({url:found.image_url,label:'Version 1'});
-    if(hasFal&&falResult.url)images.push({url:falResult.url,label:'Version 2'});
-    else if(hasFal&&falResult.portrait)images.push({url:falResult.portrait,label:'Version 2'});
+    images.push({url:found.image_url,label:'V1'});
+    if(hasFalSingle){
+      const falUrl=falResult.url||falResult.portrait;
+      images.push({url:falUrl,label:'V2 · fal.ai'});
+    }
   }
 
   if(container){
