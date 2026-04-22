@@ -1056,35 +1056,40 @@ async function falSubmitAndPoll(aspectRatio,targetFormat){
   const prompt=buildFalPrompt(targetFormat);
 
   // STEP 1: Submit to fal queue
+  // v1.1-ultra only accepts: prompt, aspect_ratio, num_images, output_format, safety_tolerance, seed
+  // guidance_scale / num_inference_steps are NOT supported and cause silent failures
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
     method:'POST',
     headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'5',output_format:'jpeg',guidance_scale:4.5,num_inference_steps:40,enhance_prompt:false})
+    body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'2',output_format:'jpeg'})
   });
-  if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
-  const submitData=await submitRes.json();
-  console.log('FAL SUBMIT:',JSON.stringify(submitData).substring(0,300));
+  const submitText=await submitRes.text();
+  console.log('FAL SUBMIT STATUS:',submitRes.status,'BODY:',submitText.substring(0,400));
+  if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status+' '+submitText.substring(0,200));
+  const submitData=JSON.parse(submitText);
   const requestId=submitData.request_id;
-  if(!requestId)throw new Error('No request_id from fal');
+  if(!requestId)throw new Error('No request_id from fal. Response: '+submitText.substring(0,200));
 
-  // STEP 2: Poll status endpoint until COMPLETED
-  const statusUrl='https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId+'/status';
+  // STEP 2: Poll status using the status_url returned by submit — NOT constructed from model name
+  // The submit response gives us the exact correct URLs to use
+  const statusUrl=submitData.status_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId+'/status');
+  const responseUrl=submitData.response_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId);
+  console.log('FAL STATUS URL:',statusUrl);
   let attempts=0;
   while(attempts<60){
     await new Promise(r=>setTimeout(r,4000));
     attempts++;
     const statusRes=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-    if(!statusRes.ok)continue;
+    if(!statusRes.ok){console.log('FAL STATUS attempt '+attempts+': HTTP '+statusRes.status);continue;}
     const statusData=await statusRes.json();
     console.log('FAL STATUS attempt '+attempts+':',statusData.status);
     if(statusData.status==='FAILED')throw new Error('fal generation failed');
     if(statusData.status==='COMPLETED')break;
-    // IN_QUEUE or IN_PROGRESS — keep waiting
   }
 
-  // STEP 3: Fetch the actual result
-  const resultUrl='https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId;
-  const resultRes=await fetch(resultUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+  // STEP 3: Fetch result using response_url from submit response
+  console.log('FAL RESULT URL:',responseUrl);
+  const resultRes=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
   if(!resultRes.ok)throw new Error('fal result fetch failed: '+resultRes.status);
   const result=await resultRes.json();
   console.log('FAL RESULT FULL:',JSON.stringify(result).substring(0,500));
@@ -1225,6 +1230,14 @@ function makeImageCard(url, label, gameName){
   const lbl=document.createElement('div');
   lbl.style.cssText='font-size:10px;font-weight:700;color:var(--txt3);text-align:center;letter-spacing:1.5px;text-transform:uppercase;';
   lbl.textContent=label;
+  // Handle null URL — fal failed
+  if(!url){
+    const errDiv=document.createElement('div');
+    errDiv.style.cssText='padding:30px 20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
+    errDiv.textContent='Version 2 generation failed. Check console for details.';
+    wrap.appendChild(lbl);wrap.appendChild(errDiv);
+    return wrap;
+  }
   const dl=makeDownloadBtn(url,gameName,'\u2193 Download');
   dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
   const img=document.createElement('img');
@@ -1244,6 +1257,8 @@ function makeImageCard(url, label, gameName){
 
 function showResult(loadMsg,found,falResult){
   const container=loadMsg.querySelector('.loading');
+  // Break result bubble out of narrow chat width so images display properly
+  loadMsg.style.cssText='max-width:100%;width:100%;align-self:stretch;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;';
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
   const isBoth=state.format==='both';
   // Robust fal check: falResult must be an object with at least one valid URL
@@ -1274,10 +1289,14 @@ function showResult(loadMsg,found,falResult){
       images.push({url:falUrl,label:'V2'});
     }
   } else {
-    images.push({url:found.image_url,label:'V1'});
+    images.push({url:found.image_url,label:'V1 · Twin'});
     if(hasFalSingle){
       const falUrl=falResult.url||falResult.portrait;
       images.push({url:falUrl,label:'V2 · fal.ai'});
+    }
+    // If fal failed, show an explicit error card so V2 slot is never silently missing
+    else if(!falResult){
+      images.push({url:null,label:'V2 · fal.ai — failed'});
     }
   }
 
