@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1776893980F7B9",
+    "game_name": "Multihand Blackjack",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/25/ef60fbf88d7632814bd287773aa7be4321ab1dd0c8b48c5b01d1cc3ced8a0d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T214021Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3afbe2b26761e29456873cd7c4e297692f792736972ec40e7c4de8776c4e11e0",
+    "created_at": "2026-04-22 21:39:40"
+  },
+  {
     "id": "cr-177689215889A9",
     "game_name": "Three Card Poker",
     "format": "portrait",
@@ -1128,15 +1138,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "Football - Champions League",
-    "format": "square",
-    "offer_text": "100% First Deposit Bonus up to $150",
-    "style": "Realistic",
-    "platform": "betewin",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c7/b1208a50abcb2c9d5f1ad36940198c69255bf44e6d9e22f46cc07f51d3806c.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T212439Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=2096e6c05ee0d76b174b6999675660d0dbe6280b0c935816987a474335f7860c",
-    "created_at": "2026-04-22T21:25:31.531Z"
   }
 ]
