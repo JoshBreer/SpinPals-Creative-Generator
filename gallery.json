@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17768907253082",
+    "game_name": "Multihand Blackjack",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c1/023eb33824bd78a6c482a21bccf75888b9ad22e8aa7c9bb1e4ef7a607f7ea7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T204602Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=75543f72b28f00cd95609c719e68c7dabe839dce1cad1ad5204f4fcebccd487c",
+    "created_at": "2026-04-22 20:45:25"
+  },
+  {
     "id": "cr-17768893832685",
     "game_name": "Multihand Blackjack",
     "format": "portrait",
