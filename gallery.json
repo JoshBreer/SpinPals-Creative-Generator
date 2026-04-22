@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17768987526890",
+    "game_name": "Magic Journey",
+    "format": "portrait",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ce/8b5dda56a530f6e637d39784ce0194cfbfbf4d623008593a30794716dbb47b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T225949Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=39a2fbbe0d0c42c65f26e43278bf988d59b7c98b887b041f548872b043b2c3c2",
+    "created_at": "2026-04-22 22:59:12"
+  },
+  {
     "id": "cr-1776897757017B",
     "game_name": "Hot Pepper",
     "format": "portrait",
