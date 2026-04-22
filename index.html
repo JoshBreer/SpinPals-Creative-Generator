@@ -1013,27 +1013,45 @@ STYLE: ${styleGuide}\`;`;
 // ============================================================
 async function falSubmitAndPoll(imageSize){
   const prompt=buildFalPrompt();
+  // Submit to queue
   const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
     method:'POST',
     headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
     body:JSON.stringify({prompt,image_size:imageSize,num_images:1,safety_tolerance:'6',output_format:'jpeg',guidance_scale:7.5,num_inference_steps:28})
   });
   const submitData=await submitRes.json();
-  const requestId=submitData.request_id;
-  if(!requestId)throw new Error('No request ID');
-
+  if(!submitData.request_id)throw new Error('No request ID');
+  
+  // Use the response_url from submit response to poll
+  const responseUrl=submitData.response_url||('https://queue.fal.run/'+FAL_MODEL+'/requests/'+submitData.request_id);
+  
   let result=null;let attempts=0;
-  while(!result&&attempts<40){
-    await new Promise(r=>setTimeout(r,3000));
-    const statusRes=await fetch('https://queue.fal.run/'+FAL_MODEL+'/requests/'+requestId,{headers:{'Authorization':'Key '+FAL_KEY}});
+  while(!result&&attempts<50){
+    await new Promise(r=>setTimeout(r,4000));
+    const statusRes=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
     const statusData=await statusRes.json();
-    if(statusData.images||statusData.image||statusData.status==='COMPLETED'){result=statusData;break;}
+    // fal returns the result directly in the response when complete
+    if(statusData.images&&statusData.images.length>0){result=statusData;break;}
+    if(statusData.image){result=statusData;break;}
+    if(statusData.status==='COMPLETED'&&statusData.output){result=statusData.output;break;}
     if(statusData.status==='FAILED')throw new Error('fal generation failed');
-    attempts++;
+    // status IN_QUEUE or IN_PROGRESS - keep polling
   }
-  if(result&&result.images&&result.images[0])return result.images[0].url||result.images[0];
-  if(result&&result.image)return result.image.url||result.image;
-  throw new Error('No image in response');
+  if(!result)throw new Error('Timed out waiting for fal result');
+  console.log('FAL RESULT FULL:',JSON.stringify(result).substring(0,500));
+  
+  // Extract URL from various response shapes
+  if(result.images&&result.images[0]){
+    const url=typeof result.images[0]==='string'?result.images[0]:result.images[0].url;
+    console.log('FAL URL EXTRACTED:',url);
+    return url;
+  }
+  if(result.image){
+    const url=typeof result.image==='string'?result.image:result.image.url;
+    console.log('FAL URL EXTRACTED:',url);
+    return url;
+  }
+  throw new Error('Could not extract image URL from fal response');
 }
 
 async function generateWithFal(){
