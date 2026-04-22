@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17768830288165",
+    "game_name": "Aztec Gems",
+    "format": "portrait",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b0/5eb8cfbb0f6e58da3720e5bdc063449b4a794e0d26a9d1ff9420049876c363.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T183748Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=328ec05f036dbf682b3aee395cca9b9d1d849983414eb79641e113cb9e898c6f",
+    "created_at": "2026-04-22 18:37:08"
+  },
+  {
+    "id": "cr-1776883028SQA15E",
+    "game_name": "Aztec Gems",
+    "format": "square",
+    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/df/5cfcbc2bd7fb163e4c00062b5d3bfa110dd125f0525616bb183172f46013f3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T183810Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=159cb198df22ecf2f1bdcebffd5b588305de83c1450fc8d7a0d448380e484778",
+    "created_at": "2026-04-22 18:37:08"
+  },
+  {
     "id": "cr-1776882283D763p",
     "game_name": "Sweet Bonanza",
     "format": "portrait",
