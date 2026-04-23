@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776987856C4C5",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/41/25507374656e22e533c3fdb7a75c00f96887d6fa72c18b2a93590fb629b262.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T234502Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3d88bbee7e4079085c19ca93d959dc7afabd0068455f43e25417bb3a490aaa88",
+    "created_at": "2026-04-23 23:44:16"
+  },
+  {
+    "id": "cr-1776987856BFD2",
+    "game_name": "N/A",
+    "format": "square",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/8e/a5c93afe15a73b99dc64940131ecd1ce61366a4eb7bdf08e205ce2776caa49.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T234526Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7a93e346a09558349e5e854c8f2a9cdfc9367841a159c9db7cf980a42b5bdea1",
+    "created_at": "2026-04-23 23:44:16"
+  },
+  {
     "id": "cr-1776987457140Bp",
     "game_name": "Plinko",
     "format": "portrait",
