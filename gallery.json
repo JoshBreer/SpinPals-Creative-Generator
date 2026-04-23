@@ -1,5 +1,27 @@
 [
   {
+    "id": "wp-1776902636310-p",
+    "platform": "wannaparlay",
+    "game_name": "MLB â Over/Under Totals",
+    "format": "portrait",
+    "offer_text": "Pick 2 â Start Small, Win Big",
+    "style": "Realistic",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d2/fd720d4bffcc53b7d7dfcdf3858c80c55e9a86b43ad3774320c13cfee5de43.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T000318Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e6a7c1606957e9e13630b6dae6e85cf6aaf8bdf19483ecfb808b12ef209b8c98",
+    "created_at": "2026-04-23T00:03:56Z"
+  },
+  {
+    "id": "wp-1776902636310-s",
+    "platform": "wannaparlay",
+    "game_name": "MLB â Over/Under Totals",
+    "format": "square",
+    "offer_text": "Pick 2 â Start Small, Win Big",
+    "style": "Realistic",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/6f/173da8b0b21e23e49a765acd14f88a26206e2b5571604d9b8515dc58fb3bd5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T000336Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=417f4ec2b634cfb32e8f8b7490caf6ebe74d60f5a73d8d64f498e975bc554be4",
+    "created_at": "2026-04-23T00:03:56Z"
+  },
+  {
     "id": "wp-1776901266283-p",
     "platform": "wannaparlay",
     "game_name": "NFL â Moneyline",
