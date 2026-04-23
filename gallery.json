@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1776971816C787p",
+    "game_name": "Hot Fiesta",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ad/1df48d3ebe3b55ece28be8b36fc0963f6e6f0c8461640e8b7c688877d99d22.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T191759Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d039ad9336346d6d6bc751922fab712eedac52bf9b3bcac9ec463c980ca4abe3",
+    "created_at": "2026-04-23 19:16:56"
+  },
+  {
+    "id": "cr-1776971816DE95s",
+    "game_name": "Hot Fiesta",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ec/3fdf12135a79b9925aa297a6452a61cf80a43e65a78291a31780d4c53d4d2c.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T191734Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=786b9407ccf6d3101ec52256c937335825939dc62c662907883b6618768a12dc",
+    "created_at": "2026-04-23 19:16:56"
+  },
+  {
     "id": "cr-17769679760F13",
     "game_name": "Coins of Leprechaun",
     "format": "portrait",
