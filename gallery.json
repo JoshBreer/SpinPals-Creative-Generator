@@ -1352,11 +1352,21 @@
   {
     "game_name": "Aviator",
     "format": "square",
-    "offer_text": "Casino HoÅ Geldin Paketi â 3.000 TRY + 200 Ãcretsiz DÃ¶nÃ¼Å",
+    "offer_text": "Casino HoÃÂ Geldin Paketi Ã¢ÂÂ 3.000 TRY + 200 ÃÂcretsiz DÃÂ¶nÃÂ¼ÃÂ",
     "style": "Realistic",
     "platform": "bankobet",
     "user_email": "cristiano@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1b/a0e4feac62c04414d267d6147d6a9ece3fa0e5b356d496eb438a1a4e08114b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T235159Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fd3805f4053e80a6fc43f56edaa2fc9f3168a135b17f97c2a71b0331c0986a78",
     "created_at": "2026-04-23T23:52:00Z"
+  },
+  {
+    "game_name": "Aviator",
+    "format": "portrait",
+    "offer_text": "Casino HoÅ Geldin Paketi â 3.000 TRY + 200 Ãcretsiz DÃ¶nÃ¼Å",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "cristiano@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/17/311d2cd4fa28fe0d1fa573eea36c0ae861af072de1bd5b8376e8091122f695.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T235741Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4d4391634f29906b5d4f708727fb48b53bb25adfaeadca546de8b87636c2be94",
+    "created_at": "2026-04-23T23:58:00Z"
   }
 ]
