@@ -1,5 +1,38 @@
 [
   {
+    "id": "wp-1777050406127-mu",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "square",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Matchup Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7d/0cbefdfc7129a29a68c506317a8a7114c79e37ca98403579a76a933e20fc36.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T170407Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9594cbae97dfa6f1d1406bac73a4741758953d53fa56bb69d2e2915ccd50f3b0",
+    "created_at": "2026-04-24T17:07:00Z"
+  },
+  {
+    "id": "wp-1777050406128-cp",
+    "platform": "wannaparlay",
+    "game_name": "Deposit Bonus",
+    "format": "portrait",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Coupon",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/26/d6f7032fc3496a3b1bf39a398e4de22836ca6fb89a7829e46976f57befacda.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T170433Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d6e5b849068a02d4f9fa76221fb8edb82f12fe6075e2ab15b3c377a2e7087252",
+    "created_at": "2026-04-24T17:07:00Z"
+  },
+  {
+    "id": "wp-1777050406129-cs",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "square",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Classic",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/aa/6c77270749170f6f85b00bc171c333853aaae0c626234b6c0218dad02fe250.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T170453Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=cf1a1b9733fa36a743439d8fa1aa00318e135d4ef4e57fde7e2d740859820ce5",
+    "created_at": "2026-04-24T17:07:00Z"
+  },
+  {
     "id": "wp-1777049623960-m",
     "platform": "wannaparlay",
     "game_name": "Parlay Royale",
