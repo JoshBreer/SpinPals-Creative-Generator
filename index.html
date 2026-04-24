@@ -787,14 +787,13 @@ async function stepSummary(){
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
   const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
   const gameRow=state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
-  const customRow=state.customInstructions?'<div class="summary-row"><span class="summary-label">Instructions</span>'+state.customInstructions+'</div>':'';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
     platformRow+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
     '<div class="summary-row"><span class="summary-label">Style</span>'+state.style+'</div>'+
     gameRow+
     '<div class="summary-row"><span class="summary-label">Offer</span>'+state.offer+'</div>'+
-    customRow+'</div>');
+    '</div>');
   const acts=document.createElement('div');acts.className='summary-actions';
   const gen=document.createElement('button');gen.className='opt-btn opt-blue';gen.innerHTML='Generate Ad →';
   gen.onclick=()=>{if(gen.disabled)return;gen.disabled=true;gen.style.opacity='0.5';doGenerate();};acts.appendChild(gen);
