@@ -1,5 +1,16 @@
 [
   {
+    "id": "wp-1777053760208-m",
+    "platform": "wannaparlay",
+    "game_name": "NBA â Spread Picks",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Map Style",
+    "format": "portrait",
+    "user_email": "josh@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/50/76de2252841a26c389525ff0e14b5106fc7fd80910949f97736f0731388556.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T180152Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=83630c7ed1906e834707ef059b2ee57af67ed710bfd2ae7de939066839bad9fc",
+    "created_at": "2026-04-24T18:02:40Z"
+  },
+  {
     "id": "wp-1777053332145-m",
     "platform": "wannaparlay",
     "game_name": "Parlay Royale",
