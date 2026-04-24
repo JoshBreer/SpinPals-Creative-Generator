@@ -1,5 +1,16 @@
 [
   {
+    "id": "wp-1777051056829-mu",
+    "platform": "wannaparlay",
+    "game_name": "MLB â Player Props",
+    "offer_text": "Turn $4 Into $4,000",
+    "style": "Matchup",
+    "format": "portrait",
+    "user_email": "josh@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/33/32c6075ffc4783209d9322836e37debcf0be4624aee2447605c6357a09514b.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T171636Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4c775c1e876b8e1addd14f76edf71d2d44c3b51b1a4752cd159ab92fa7b4bcca",
+    "created_at": "2026-04-24T17:17:36Z"
+  },
+  {
     "id": "wp-1777050406127-mu",
     "platform": "wannaparlay",
     "game_name": "NBA",
@@ -57,7 +68,7 @@
   {
     "id": "wp-1777048627548-p",
     "platform": "wannaparlay",
-    "game_name": "NBA â Spread Picks",
+    "game_name": "NBA Ã¢ÂÂ Spread Picks",
     "format": "portrait",
     "offer_text": "100% Deposit Match up to $250",
     "style": "Classic",
