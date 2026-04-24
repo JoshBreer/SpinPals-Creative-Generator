@@ -283,14 +283,16 @@ const WANNAPARLAY_SPORTS={
 };
 const WANNAPARLAY_TOP=['NFL — Player Props','NBA — Player Props','MLB — Player Props','NHL — Player Props','NFL — Spread Picks','NBA — Spread Picks','The Main Event','Parlay Royale'];
 const WANNAPARLAY_OFFERS=[
-  {id:'wp1',title:'100% Deposit Match up to $250',description:'New user welcome bonus — double your first deposit'},
-  {id:'wp2',title:'FREE Daily Entry — Play Every Day',description:'Free contest entry every single day, all 50 states'},
-  {id:'wp3',title:'Win Up to 1,000x Your Money',description:'Stack legs and multiply your entry up to 1000x'},
-  {id:'wp4',title:'The Main Event — $2 Entry, Win $2,000',description:'Flagship daily contest — 3+ legs, huge prizes'},
-  {id:'wp5',title:'Parlay Royale — $50 Entry, $1,000 Prize',description:'High stakes winner-take-all contest'},
-  {id:'wp6',title:'Hot Shot Hero — $10 Entry, $1,000 Prize',description:'NBA player props contest, 70-point target'},
-  {id:'wp7',title:'Refer a Friend — Earn up to $1,369 Cash',description:'Referral program — build your network and earn real cash'},
-  {id:'wp8',title:'Pick 2 — Start Small, Win Big',description:'Entry-level contest — just 2 picks to get started'}
+  {id:'wp1',title:'100% Deposit Match Up To $250',description:'Sign up today and double your first deposit — up to $250 free'},
+  {id:'wp2',title:'Turn $4 Into $4,000',description:'Stack your parlay legs and win 1000x your money'},
+  {id:'wp3',title:'Win Up to 1,000x Your Money',description:'The biggest parlay payouts anywhere — low risk, high reward'},
+  {id:'wp4',title:'The Main Event — $2 Entry, Win $2,000',description:'Top 10 places all pay out $1,000 in our flagship daily contest'},
+  {id:'wp5',title:'Parlay Royale — $50 Entry, $1,000 Prize',description:'High stakes winner-take-all contest for serious players'},
+  {id:'wp6',title:'FREE Daily Entry — Available in 23 States',description:'Free contest entry every single day, no purchase needed'},
+  {id:'wp7',title:'Spreads, Moneylines & Player Props',description:'The only DFS app where you can pick all three — not just props'},
+  {id:'wp8',title:'Compete Against Real People',description:'You are playing against real sports fans — biggest payouts anywhere'},
+  {id:'wp9',title:'Turn Your Sports Knowledge Into Cash',description:'The biggest parlay payouts in fantasy sports — sharks and bettors welcome'},
+  {id:'wp10',title:'Play in 23 States',description:'Available across 23 US states — check if your state is included'}
 ];
 
 // WEBHOOKS
@@ -612,6 +614,17 @@ async function stepStyle(){
   const bRealistic=document.createElement('button');bRealistic.className='opt-btn';bRealistic.textContent='Realistic';
   bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');stepGame();};
   w.appendChild(bRealistic);
+
+  // WannaParlay-only styles
+  if(isWannaFlow()){
+    const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
+    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='US map showing 23 highlighted states where WannaParlay is available. Deep purple background. Bold offer text at top. PLAY IN 23 STATES visual. Premium WannaParlay brand feel. Gold CTA button.';msg('Map Style','user');stepGame();};
+    w.appendChild(bMap);
+
+    const bMatchup=document.createElement('button');bMatchup.className='opt-btn';bMatchup.textContent='Matchup Style 🏆';
+    bMatchup.onclick=()=>{if(bMatchup.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMatchup.style.opacity='1';bMatchup.style.borderColor='var(--blue)';bMatchup.style.color='var(--blue)';state.style='Matchup';state.customInstructions='Real sports matchup card style. Dark purple background. 2-3 upcoming game matchup cards with gold borders showing real teams playing this week. Real player photo cutouts on each side with their jersey numbers. Team logos in the center of each card. Dates above each card. Bold urgency headline at top. WannaParlay gold logo at bottom. Extremely high production value — like a premium sports broadcast graphic.';msg('Matchup Style','user');stepGame();};
+    w.appendChild(bMatchup);
+  }
 
   const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
   customBtn.onclick=()=>{if(customBtn.disabled)return;customWrap.classList.toggle('visible');customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';};
