@@ -1,5 +1,87 @@
 [
   {
+    "id": "wp-1777057728782-mu",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "square",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Matchup Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/45/9040bbca64a7fc86862b430c0cd4c968d40f1c0e88df7ae07e6c4a90e25a7f.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T190733Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b9ebc615e81b051e2bf4724b162e397180fda3837522b44dc756b252681e63df",
+    "created_at": "2026-04-24T19:08:50Z",
+    "verification_manifest": {
+      "matchups": [
+        {
+          "away": "Cleveland Cavaliers",
+          "date": "APR 25",
+          "date_venue_source": "ESPN/SI/CBS/Wikipedia confirm Apr 25 1:00 PM ET CLE @ TOR at Scotiabank Arena (Game 4, Eastern Conference First Round)",
+          "home": "Toronto Raptors",
+          "id": "M1",
+          "lines": {
+            "moneyline": null,
+            "source": "No published lines for Apr 25; CBS/Action Network/Bookies have prior-game lines only",
+            "spread": null,
+            "total": null
+          },
+          "pick_card_render": "PARLAY PICK (generic fallback, no number â line unverified)",
+          "players": [
+            {
+              "name": "Donovan Mitchell",
+              "number": 45,
+              "source": "Wikipedia/ESPN/SI/Rotowire confirm currently on Cavaliers, not traded; jersey #45",
+              "team": "Cleveland Cavaliers"
+            },
+            {
+              "name": "Scottie Barnes",
+              "number": 4,
+              "source": "Wikipedia/ESPN confirm currently on Raptors via 5yr/$225M extension through 2029-30; jersey #4; 2x All-Star 2026",
+              "team": "Toronto Raptors"
+            }
+          ],
+          "venue": "Scotiabank Arena, Toronto"
+        },
+        {
+          "away": "Houston Rockets",
+          "date": "APR 25",
+          "date_venue_source": "ESPN/SI/CBS confirm Apr 25 8:00 PM ET HOU @ LAL at Crypto.com Arena (Western Conference First Round)",
+          "home": "Los Angeles Lakers",
+          "id": "M2",
+          "lines": {
+            "moneyline": null,
+            "source": "No published lines for Apr 25; CBS/Action Network/Bookies have prior-game lines only",
+            "spread": null,
+            "total": null
+          },
+          "pick_card_render": "PARLAY PICK (generic fallback, no number â line unverified)",
+          "players": [
+            {
+              "name": "LeBron James",
+              "number": 23,
+              "source": "ESPN/Wikipedia/StatMuse confirm currently on Lakers, not traded; jersey #23; 2025-26: 20.9 PPG, 7.2 APG",
+              "team": "Los Angeles Lakers"
+            },
+            {
+              "name": "Alperen ÅengÃ¼n",
+              "number": 28,
+              "source": "ESPN/StatMuse confirm currently on Rockets, not traded; jersey #28; 2025-26: 20.4 PPG, 8.9 RPG",
+              "team": "Houston Rockets"
+            }
+          ],
+          "venue": "Crypto.com Arena, Los Angeles"
+        }
+      ],
+      "sufficiency_gate": {
+        "each_has_confirmed_date": true,
+        "each_has_confirmed_venue": true,
+        "each_has_two_confirmed_players": true,
+        "lines_handling": "Both matchups fall back to generic PARLAY PICK label per protocol (lines for Apr 25 not published)",
+        "matchups_required": 2,
+        "matchups_verified": 2,
+        "passes": true
+      }
+    }
+  },
+  {
     "id": "wp-1777056370600-mu",
     "platform": "wannaparlay",
     "game_name": "NBA â Player Props",
