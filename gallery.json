@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17770436441536",
+    "game_name": "Fruit Party",
+    "format": "portrait",
+    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
+    "style": "Custom",
+    "user_email": "dragan@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/88/b6d6dfbed30aec631fe815a1fe8dbc5ff6231d4c0d088406b923ec2824b450.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T151426Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c18e23bcc7a1cad3fa5253fc95ab4e6f37e35942c1794f034f1f0a4272424b91",
+    "created_at": "2026-04-24 15:14:04"
+  },
+  {
     "id": "cr-1776988224plnkp1",
     "game_name": "N/A",
     "format": "portrait",
@@ -1348,25 +1358,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "Aviator",
-    "format": "square",
-    "offer_text": "Casino HoÃÂ Geldin Paketi Ã¢ÂÂ 3.000 TRY + 200 ÃÂcretsiz DÃÂ¶nÃÂ¼ÃÂ",
-    "style": "Realistic",
-    "platform": "bankobet",
-    "user_email": "cristiano@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1b/a0e4feac62c04414d267d6147d6a9ece3fa0e5b356d496eb438a1a4e08114b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T235159Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fd3805f4053e80a6fc43f56edaa2fc9f3168a135b17f97c2a71b0331c0986a78",
-    "created_at": "2026-04-23T23:52:00Z"
-  },
-  {
-    "game_name": "Aviator",
-    "format": "portrait",
-    "offer_text": "Casino HoÅ Geldin Paketi â 3.000 TRY + 200 Ãcretsiz DÃ¶nÃ¼Å",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "cristiano@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/17/311d2cd4fa28fe0d1fa573eea36c0ae861af072de1bd5b8376e8091122f695.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260423%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260423T235741Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4d4391634f29906b5d4f708727fb48b53bb25adfaeadca546de8b87636c2be94",
-    "created_at": "2026-04-23T23:58:00Z"
   }
 ]
