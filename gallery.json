@@ -1,5 +1,27 @@
 [
   {
+    "id": "wp-1777049623960-m",
+    "platform": "wannaparlay",
+    "game_name": "Parlay Royale",
+    "format": "square",
+    "offer_text": "Available in 23 States",
+    "style": "Map Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c7/949a2e2d4b3abd5fea748e8cb1d1f713948bfec4c3136519429e321d59d6d9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T165202Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=72396f972e8d4512ce86462f7d5c6abaffb45e9a374d3547d82c27a2a029d250",
+    "created_at": "2026-04-24T16:54:00Z"
+  },
+  {
+    "id": "wp-1777049623961-p",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "portrait",
+    "offer_text": "Turn $4 Into $4,000",
+    "style": "Realistic",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fc/86cb495af58e42b60584fb6052e7aeed728aa0b29bb405db7b2ef527581cf8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260424%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260424T165222Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1e797485007ee40a9f81f3b672401f6071ba6d8eb4e6a5374badcecafe8b7489",
+    "created_at": "2026-04-24T16:54:00Z"
+  },
+  {
     "id": "wp-1777048627548-p",
     "platform": "wannaparlay",
     "game_name": "NBA â Spread Picks",
