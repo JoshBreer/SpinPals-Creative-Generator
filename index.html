@@ -813,6 +813,29 @@ async function stepSummary(){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns WannaParlay sports currently in season based on current month
+function getCurrentSeasonSports(){
+  const month=new Date().getMonth()+1; // 1-12
+  const inSeason=[];
+  // NFL: Sept(9) - Feb(2) including playoffs
+  if(month>=9||month<=2) inSeason.push('NFL');
+  // NBA: Oct(10) - June(6) including playoffs
+  if(month>=10||month<=6) inSeason.push('NBA');
+  // MLB: March(3) - Oct(10)
+  if(month>=3&&month<=10) inSeason.push('MLB');
+  // NHL: Oct(10) - June(6) including playoffs
+  if(month>=10||month<=6) inSeason.push('NHL');
+  // MLS: Feb(2) - Nov(11)
+  if(month>=2&&month<=11) inSeason.push('MLS');
+  // College Football: Aug(8) - Jan(1)
+  if(month>=8||month===1) inSeason.push('College');
+  // WNBA: May(5) - Oct(10)
+  if(month>=5&&month<=10) inSeason.push('WNBA');
+  // Always fall back to NBA+MLB+NHL if nothing matched
+  if(inSeason.length===0) inSeason.push('NBA','MLB','NHL');
+  return inSeason;
+}
+
 async function doQuickGenerate(){
   // For mario without platform selected yet, pick one randomly
   if(isMarioFlow()&&!state.platform){
@@ -822,8 +845,19 @@ async function doQuickGenerate(){
   const formats=['portrait','square','both'];
   const styles=['Classic','Realistic'];
   const {top,all}=getGames();
-  const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
   const offers=getOffers();
+
+  // For WannaParlay: only pick from sports currently in season
+  let allNames=[];
+  if(isWannaFlow()){
+    const seasonalSports=getCurrentSeasonSports();
+    seasonalSports.forEach(sport=>{
+      if(all[sport])all[sport].forEach(g=>allNames.push(g.name));
+    });
+    if(allNames.length===0)Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  } else {
+    Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  }
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
   const randStyle=styles[Math.floor(Math.random()*styles.length)];
@@ -1178,6 +1212,29 @@ function showResult(loadMsg,found){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns WannaParlay sports currently in season based on current month
+function getCurrentSeasonSports(){
+  const month=new Date().getMonth()+1; // 1-12
+  const inSeason=[];
+  // NFL: Sept(9) - Feb(2) including playoffs
+  if(month>=9||month<=2) inSeason.push('NFL');
+  // NBA: Oct(10) - June(6) including playoffs
+  if(month>=10||month<=6) inSeason.push('NBA');
+  // MLB: March(3) - Oct(10)
+  if(month>=3&&month<=10) inSeason.push('MLB');
+  // NHL: Oct(10) - June(6) including playoffs
+  if(month>=10||month<=6) inSeason.push('NHL');
+  // MLS: Feb(2) - Nov(11)
+  if(month>=2&&month<=11) inSeason.push('MLS');
+  // College Football: Aug(8) - Jan(1)
+  if(month>=8||month===1) inSeason.push('College');
+  // WNBA: May(5) - Oct(10)
+  if(month>=5&&month<=10) inSeason.push('WNBA');
+  // Always fall back to NBA+MLB+NHL if nothing matched
+  if(inSeason.length===0) inSeason.push('NBA','MLB','NHL');
+  return inSeason;
+}
+
 async function doQuickGenerate(){
   // For mario without platform selected yet, pick one randomly
   if(isMarioFlow()&&!state.platform){
@@ -1187,8 +1244,19 @@ async function doQuickGenerate(){
   const formats=['portrait','square','both'];
   const styles=['Classic','Realistic'];
   const {top,all}=getGames();
-  const allNames=[];Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
   const offers=getOffers();
+
+  // For WannaParlay: only pick from sports currently in season
+  let allNames=[];
+  if(isWannaFlow()){
+    const seasonalSports=getCurrentSeasonSports();
+    seasonalSports.forEach(sport=>{
+      if(all[sport])all[sport].forEach(g=>allNames.push(g.name));
+    });
+    if(allNames.length===0)Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  } else {
+    Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
+  }
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
   const randStyle=styles[Math.floor(Math.random()*styles.length)];
