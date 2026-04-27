@@ -1,5 +1,39 @@
 [
   {
+    "id": "wp-1777314167708-cs",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "square",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Classic",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f9/76f03a019f396865065526e83d8f330a03d2f9d246b2a590e948cc747a44e0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T181903Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=430fca6d0dfa06ff247d5b668bcb7e6634ed12ca2ce5e151fed7a0d0677043f3",
+    "created_at": "2026-04-27T18:22:30Z",
+    "audit": {
+      "universal": {
+        "realistic_athlete_or_no_athlete": true,
+        "lighting_consistent": true,
+        "cta_looks_pressable": true
+      },
+      "logo_8check": {
+        "logo_present": true,
+        "logo_text_correct": true,
+        "logo_pirate_centered": true,
+        "logo_pirate_present": true,
+        "logo_words_balanced": true,
+        "logo_color_correct": true,
+        "logo_size_in_range": true,
+        "logo_placement_correct": true
+      },
+      "placeholder_token_present": false,
+      "real_ip_violations": false,
+      "disclaimer_count": 1,
+      "disclaimer_full_width": true,
+      "quality_pass": true,
+      "overall": "PASS"
+    }
+  },
+  {
     "id": "wp-1777313754342-p",
     "platform": "wannaparlay",
     "game_name": "NBA â Player Props",
