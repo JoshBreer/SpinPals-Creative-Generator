@@ -1,5 +1,126 @@
 [
   {
+    "id": "wp-1777322600393-en",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "portrait",
+    "offer_text": "Win Up to 1,000x Your Money",
+    "style": "Electric",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_electric_nba_apr27_final.png",
+    "created_at": "2026-04-27T20:42:30Z",
+    "audit": {
+      "composite_step_executed": true,
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "path": "Option B (kinetic 3D sport icons)"
+      },
+      "overlay_5check": {
+        "mascot_overlay_present": true,
+        "mascot_overlay_correct_size": true,
+        "mascot_overlay_placement_correct": true,
+        "mascot_overlay_tint_legible": true,
+        "no_rendered_logo_present": true,
+        "all_pass": true
+      },
+      "overlay_geometry": {
+        "base_dims": "768x1376",
+        "overlay_width_px": 307,
+        "overlay_pct": 39.97,
+        "overlay_inset_px": 68,
+        "inset_pct": 4.94
+      },
+      "auto_tint": {
+        "path": "DARK",
+        "bg_luminance": 0.0444,
+        "mascot_color": "native white/off-white",
+        "wcag_contrast": 17.00588330167723
+      },
+      "electric_audit": {
+        "electric_palette_correct": true,
+        "background_observed": "deep navy/near-black",
+        "electric_lightning_present": true,
+        "electric_lightning_count": 3,
+        "electric_headline_dominant": true,
+        "electric_icons_present": true,
+        "all_pass": true
+      },
+      "offer_text_exact": true,
+      "cta_label": "JOIN NOW",
+      "cta_color": "electric green",
+      "cta_looks_pressable": true,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "quality_pass": true,
+      "regen_used": 1,
+      "regen_reason": "First render had 1 lightning bolt; regen with explicit 2nd-bolt correction â 3 distinct bolts on regen",
+      "overall": "PASS"
+    }
+  },
+  {
+    "id": "wp-1777322600394-es",
+    "platform": "wannaparlay",
+    "game_name": "Generic",
+    "format": "square",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Electric",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_electric_sq_apr27_final.png",
+    "created_at": "2026-04-27T20:42:30Z",
+    "audit": {
+      "composite_step_executed": true,
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "path": "Option B (kinetic 3D sport icons)"
+      },
+      "overlay_5check": {
+        "mascot_overlay_present": true,
+        "mascot_overlay_correct_size": true,
+        "mascot_overlay_placement_correct": true,
+        "mascot_overlay_tint_legible": true,
+        "no_rendered_logo_present": true,
+        "all_pass": true
+      },
+      "overlay_geometry": {
+        "base_dims": "1024x1024",
+        "overlay_width_px": 409,
+        "overlay_pct": 39.94,
+        "overlay_inset_px": 51,
+        "inset_pct": 4.98
+      },
+      "auto_tint": {
+        "path": "DARK",
+        "bg_luminance": 0.0987,
+        "mascot_color": "native white/off-white",
+        "wcag_contrast": 15.21629159036213
+      },
+      "electric_audit": {
+        "electric_palette_correct": true,
+        "background_observed": "deep navy/near-black",
+        "electric_lightning_present": true,
+        "electric_lightning_count": 3,
+        "electric_headline_dominant": true,
+        "electric_icons_present": true,
+        "all_pass": true
+      },
+      "offer_text_exact": true,
+      "cta_label": "JOIN NOW",
+      "cta_color": "electric green",
+      "cta_looks_pressable": true,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "quality_pass": true,
+      "regen_used": 0,
+      "overall": "PASS"
+    }
+  },
+  {
     "id": "wp-1777321254234-mu",
     "platform": "wannaparlay",
     "game_name": "MLB",
