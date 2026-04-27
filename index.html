@@ -633,6 +633,10 @@ async function stepStyle(){
     const bMatchup=document.createElement('button');bMatchup.className='opt-btn';bMatchup.textContent='Matchup Style 🏆';
     bMatchup.onclick=()=>{if(bMatchup.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMatchup.style.opacity='1';bMatchup.style.borderColor='var(--blue)';bMatchup.style.color='var(--blue)';state.style='Matchup';state.customInstructions='Real sports matchup card style. Dark purple background. 2-3 upcoming game matchup cards with gold borders showing real teams playing this week. Real player photo cutouts on each side with their jersey numbers. Team logos in the center of each card. Dates above each card. Bold urgency headline at top. WannaParlay gold logo at bottom. Extremely high production value — like a premium sports broadcast graphic.';msg('Matchup Style','user');stepGame();};
     w.appendChild(bMatchup);
+
+    const bElectric=document.createElement('button');bElectric.className='opt-btn';bElectric.textContent='Electric ⚡';
+    bElectric.onclick=()=>{if(bElectric.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bElectric.style.opacity='1';bElectric.style.borderColor='var(--blue)';bElectric.style.color='var(--blue)';state.style='Electric';state.customInstructions='Dark navy background (#0A0E2A). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. WannaParlay logo in white and gold at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.';msg('Electric ⚡','user');stepGame();};
+    w.appendChild(bElectric);
   }
 
   const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
