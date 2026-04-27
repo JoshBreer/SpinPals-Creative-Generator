@@ -1,5 +1,19 @@
 [
   {
+    "id": "wp-1777328887690-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "The Main Event â $4 Entry, Win $4,000",
+    "style": "Realistic",
+    "user_email": "cuneyt@rmgs.online",
+    "format": "portrait",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b9/3ac8146d1f7ea8513506959e1ca5583fd9372d23cc8a70e544c872d406ac5f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T222438Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a1019f9a30360a94475187de52fa052a6ad5ecaf9992d730ddfe6dbbe973a688",
+    "created_at": "2026-04-27T22:28:07Z",
+    "composite_step_executed": true,
+    "disclaimer_variant": "social",
+    "notes": "Retired copy '$2 Entry, Win $2,000' auto-upgraded to canonical '$4 Entry, Win $4,000'. Mascot overlay composited (DARK path, native white). Lint: clean first pass. Audit: all checks passed."
+  },
+  {
     "id": "cr-177732688612A2p",
     "game_name": "Starlight Princess",
     "format": "portrait",
