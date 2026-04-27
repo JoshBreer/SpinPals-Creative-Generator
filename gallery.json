@@ -1,5 +1,46 @@
 [
   {
+    "id": "wp-1777317847582-p",
+    "platform": "wannaparlay",
+    "game_name": "WNBA â Moneyline",
+    "offer_text": "Win Up to 1,000x Your Money",
+    "style": "Classic",
+    "format": "portrait",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/13/fafe4e2970ceaa72f48c7fa3a142cee8b7e80cba29000aee7722e04cc87921.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T192257Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fe3889cd45a85184221aa5fc8d05ba38210cfbf62c80e3d5c372d7fea5ca4932",
+    "created_at": "2026-04-27T19:24:07Z",
+    "audit": {
+      "disclaimer_variant": "social",
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "realistic_athlete_correct_jersey": true,
+        "player": "A'ja Wilson",
+        "team": "Las Vegas Aces",
+        "jersey": "22"
+      },
+      "logo_8check": {
+        "logo_present": true,
+        "logo_text_correct": true,
+        "logo_mascot_left_of_wordmark": true,
+        "logo_mascot_present": true,
+        "logo_typography_correct": true,
+        "logo_color_correct": true,
+        "logo_size_in_range": true,
+        "logo_placement_correct": true
+      },
+      "universal": {
+        "realistic_athlete_or_no_athlete": true,
+        "lighting_consistent": true,
+        "cta_looks_pressable": true
+      },
+      "chips": {
+        "placeholder_token_present": false,
+        "chip_text_exact": true
+      }
+    }
+  },
+  {
     "id": "wp-1777317797416-rp",
     "platform": "wannaparlay",
     "game_name": "NFL",
