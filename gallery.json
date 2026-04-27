@@ -1,5 +1,152 @@
 [
   {
+    "id": "wp-1777321254234-mu",
+    "platform": "wannaparlay",
+    "game_name": "MLB",
+    "format": "portrait",
+    "offer_text": "Win Up to 1,000x Your Money",
+    "style": "Matchup Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_mlb_matchup_apr28_final.png",
+    "created_at": "2026-04-27T20:20:30Z",
+    "verification_manifest": {
+      "matchups": [
+        {
+          "away": "St. Louis Cardinals",
+          "date": "APR 28",
+          "home": "Pittsburgh Pirates",
+          "id": "M1",
+          "pick_chips": [
+            {
+              "note": "no published K-prop line for Apr 28",
+              "number": "30",
+              "player": "SKENES",
+              "stat": "STRIKEOUTS O/U",
+              "team": "PIRATES",
+              "team_color": "yellow",
+              "type": "fallback_3zone",
+              "value": null
+            }
+          ],
+          "players": [
+            {
+              "name": "Paul Skenes",
+              "number": 30,
+              "position": "SP",
+              "source": "MLB.com Pirates / ESPN / Wikipedia confirm Skenes #30 starting pitcher (number changed to 30 on Apr 16 2026 per MLB.com), 4-1 2.48 ERA in 2026, no trades",
+              "team": "Pittsburgh Pirates"
+            }
+          ],
+          "venue": "PNC Park, Pittsburgh PA"
+        },
+        {
+          "away": "Tampa Bay Rays",
+          "date": "APR 28",
+          "home": "Cleveland Guardians",
+          "id": "M2",
+          "pick_chips": [
+            {
+              "note": "no published prop line for Apr 28",
+              "number": "11",
+              "player": "RAMÃREZ",
+              "stat": "TOTAL BASES O/U",
+              "team": "GUARDIANS",
+              "team_color": "red",
+              "type": "fallback_3zone",
+              "value": null
+            }
+          ],
+          "players": [
+            {
+              "name": "JosÃ© RamÃ­rez",
+              "number": 11,
+              "position": "3B",
+              "source": "awaybackgone.com / sportingnews.com confirm RamÃ­rez currently on Guardians, jersey #11, cornerstone third baseman, no trades",
+              "team": "Cleveland Guardians"
+            }
+          ],
+          "venue": "Progressive Field, Cleveland OH"
+        }
+      ],
+      "sufficiency_gate": {
+        "lines_handling": "0 verified lines (no published Apr 28 lines), 2 fallback 3-zone chips with PARLAY PICK corner tags",
+        "matchups_verified": 2,
+        "passes": true,
+        "players_total": 2
+      }
+    },
+    "audit": {
+      "composite_step_executed": true,
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "realistic_athlete_correct_jersey": true,
+        "path": "Option A"
+      },
+      "overlay_5check": {
+        "mascot_overlay_present": true,
+        "mascot_overlay_correct_size": true,
+        "mascot_overlay_placement_correct": true,
+        "mascot_overlay_tint_legible": true,
+        "no_rendered_logo_present": true,
+        "all_pass": true
+      },
+      "overlay_geometry": {
+        "asset_preflight_passed": true,
+        "auto_tint_path": "DARK",
+        "base_dimensions": "768x1376",
+        "bg_luminance": 0.0830688,
+        "composite_step_executed": true,
+        "inset_pct": 4.94,
+        "mascot_color": "native white/off-white (no tint)",
+        "output_file": "/agent/generated/wp_mlb_matchup_apr28_final.png",
+        "output_size_bytes": 1531883,
+        "overlay_inset_px": 68,
+        "overlay_pct": 39.97,
+        "overlay_width_px": 307,
+        "overlay_zone_avg_color_after_composite": "srgb(106,87,173)",
+        "png_header_verified": true,
+        "wcag_contrast_estimate": 16.037042904674166
+      },
+      "chip_4zone_audit": {
+        "card1": {
+          "zone1_correct": true,
+          "zone1_observed": "SKENES + #30",
+          "zone2_correct": true,
+          "zone2_observed": "STRIKEOUTS O/U",
+          "zone3_state": "absent (fallback) â small PARLAY PICK corner tag present",
+          "zone4_correct": true,
+          "zone4_observed": "PIRATES + yellow dot",
+          "zones_separated": true,
+          "no_old_dominant_parlay_pick": true
+        },
+        "card2": {
+          "zone1_correct": true,
+          "zone1_observed": "RAMÃREZ + #11",
+          "zone2_correct": true,
+          "zone2_observed": "TOTAL BASES O/U",
+          "zone3_state": "absent (fallback) â small PARLAY PICK corner tag present",
+          "zone4_correct": true,
+          "zone4_observed": "GUARDIANS + red dot",
+          "zones_separated": true,
+          "no_old_dominant_parlay_pick": true
+        },
+        "all_pass": true
+      },
+      "top_15_percent_clean": true,
+      "no_rendered_logo_present": true,
+      "realistic_athlete_correct_jersey": true,
+      "cta_looks_pressable": true,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "quality_pass": true,
+      "regen_used": 0,
+      "overall": "PASS",
+      "notes": "Both pick chips in 4-zone fallback mode (no published Apr 28 lines); verified-line value pill path could not be exercised this run because no Apr 28 lines are publicly reported. Fallback path validated cleanly with all chip-zone audit checks passing."
+    }
+  },
+  {
     "id": "wp-1777320438680-p",
     "platform": "wannaparlay",
     "game_name": "MLB â Moneyline",
