@@ -1,5 +1,190 @@
 [
   {
+    "id": "wp-1777319687850-mu",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "square",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Matchup Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_nba_matchup_apr27_final.png",
+    "created_at": "2026-04-27T19:54:30Z",
+    "verification_manifest": {
+      "matchups": [
+        {
+          "away": "Detroit Pistons",
+          "date": "APR 27",
+          "home": "Orlando Magic",
+          "id": "M1",
+          "pick_chips": [
+            {
+              "source": "Bleacher Nation Apr 25 confirms Pistons -2.5",
+              "type": "team_spread",
+              "value": "PISTONS -2.5"
+            },
+            {
+              "type": "generic_fallback",
+              "value": "PARLAY PICK"
+            }
+          ],
+          "players": [
+            {
+              "name": "Paolo Banchero",
+              "number": 5,
+              "source": "Fox Sports/ESPN/CBS confirm Banchero #5 on Magic, 22.2/8.4/5.2 leading team scorer, no trades",
+              "team": "Orlando Magic"
+            }
+          ],
+          "series_context": "Game 4 First Round",
+          "venue": "Kia Center, Orlando FL"
+        },
+        {
+          "away": "Minnesota Timberwolves",
+          "date": "APR 27",
+          "home": "Denver Nuggets",
+          "id": "M2",
+          "pick_chips": [
+            {
+              "source": "No published lines confirmed for Wolves vs Nuggets Apr 27",
+              "type": "generic_fallback",
+              "value": "PARLAY PICK"
+            },
+            {
+              "type": "generic_fallback",
+              "value": "PARLAY PICK"
+            }
+          ],
+          "players": [
+            {
+              "name": "Nikola JokiÄ",
+              "number": 15,
+              "source": "NBA.com/Fanatics/team store confirm #15; Game 4 stats 24/15/9 confirm active",
+              "team": "Denver Nuggets"
+            },
+            {
+              "name": "Anthony Edwards",
+              "number": 5,
+              "source": "NBA Wolves official sources confirm #5",
+              "team": "Minnesota Timberwolves"
+            }
+          ],
+          "series_context": "Game 5 First Round",
+          "venue": "Ball Arena, Denver CO"
+        }
+      ],
+      "sufficiency_gate": {
+        "lines_handling": "1 verified spread (PISTONS -2.5), 3 generic-fallback chips",
+        "matchups_verified": 2,
+        "passes": true,
+        "players_total": 3
+      }
+    },
+    "audit": {
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "realistic_athlete_correct_jersey": true,
+        "path": "Option A"
+      },
+      "overlay_5check": {
+        "mascot_overlay_present": true,
+        "mascot_overlay_correct_size": true,
+        "mascot_overlay_placement_correct": true,
+        "mascot_overlay_tint_legible": true,
+        "no_rendered_logo_present": true,
+        "all_pass": true
+      },
+      "overlay_geometry": {
+        "overlay_width_px": 409,
+        "image_width_px": 1024,
+        "overlay_pct": 39.94,
+        "overlay_inset_px": 51,
+        "image_height_px": 1024,
+        "inset_pct": 4.98
+      },
+      "auto_tint": {
+        "path": "DARK",
+        "bg_luminance": 0.069,
+        "mascot_color": "native white/off-white",
+        "contrast_ratio": 16.12
+      },
+      "chip_text_exact": true,
+      "chips": {
+        "card1_chip1": "PISTONS -2.5",
+        "card1_chip2": "PARLAY PICK",
+        "card2_chip1": "PARLAY PICK",
+        "card2_chip2": "PARLAY PICK"
+      },
+      "lighting_consistent": true,
+      "cta_looks_pressable": true,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "manifest_match": true,
+      "drift": "no drift",
+      "quality_pass": true,
+      "regen_used": 0,
+      "overall": "PASS"
+    }
+  },
+  {
+    "id": "wp-1777319687851-cp",
+    "platform": "wannaparlay",
+    "game_name": "Deposit Bonus",
+    "format": "portrait",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Coupon",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_coupon_deposit_apr27_final.png",
+    "created_at": "2026-04-27T19:54:30Z",
+    "audit": {
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "kinetic_object": "perforated coupon",
+        "path": "Option B"
+      },
+      "overlay_5check": {
+        "mascot_overlay_present": true,
+        "mascot_overlay_correct_size": true,
+        "mascot_overlay_placement_correct": true,
+        "mascot_overlay_tint_legible": true,
+        "no_rendered_logo_present": true,
+        "all_pass": true
+      },
+      "overlay_geometry": {
+        "overlay_width_px": 307,
+        "image_width_px": 768,
+        "overlay_pct": 39.97,
+        "overlay_inset_px": 68,
+        "image_height_px": 1376,
+        "inset_pct": 4.94
+      },
+      "auto_tint": {
+        "path": "LIGHT",
+        "bg_luminance": 0.762,
+        "mascot_color": "#3B0F5E (deep brand purple)",
+        "observed_overlay_avg": "rgb(59,15,94)",
+        "target": "#3B0F5E",
+        "contrast_ratio": 8.39
+      },
+      "coupon_perforated": true,
+      "offer_text_exact": true,
+      "cta_text": "CLAIM OFFER NOW",
+      "cta_looks_pressable": true,
+      "sports_equipment_present": true,
+      "lighting_consistent": true,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "quality_pass": true,
+      "regen_used": 0,
+      "overall": "PASS"
+    }
+  },
+  {
     "id": "wp-1777317847582-p",
     "platform": "wannaparlay",
     "game_name": "WNBA â Moneyline",
