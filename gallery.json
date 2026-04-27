@@ -1,5 +1,121 @@
 [
   {
+    "id": "wp-1777314923237-mu",
+    "platform": "wannaparlay",
+    "game_name": "NHL",
+    "format": "square",
+    "offer_text": "Win Up to 1,000x Your Money",
+    "style": "Matchup Style",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1c/4ad61ff96d39d9b177348749158dd7df60352596236e50768aff02a3229c89.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T183406Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=327bcfd87b7d6b660f2c8ddc40090e79a3363f3782582415b0530c8db8eb8a96",
+    "created_at": "2026-04-27T18:34:30Z",
+    "verification_manifest": {
+      "matchups": [
+        {
+          "away": "Boston Bruins",
+          "date": "APR 28",
+          "home": "Buffalo Sabres",
+          "id": "M1",
+          "players": [
+            {
+              "name": "David Pastrnak",
+              "number": 88,
+              "source": "NHL.com Bruins sweater registry confirms #88 since 2014; NHL.com Bruins roster Apr 27 confirms #88 active",
+              "team": "Boston Bruins"
+            },
+            {
+              "name": "Rasmus Dahlin",
+              "number": 26,
+              "source": "NHL.com Sabres news (sabres-rasmus-dahlin-jersey-number-299268968) confirms #26; buffalohockeybeat.com / Wikipedia 2025-26 Sabres also confirm",
+              "team": "Buffalo Sabres"
+            }
+          ],
+          "prop_chips": [
+            {
+              "category": "GOALS O/U 0.5",
+              "player": "Pastrnak",
+              "source": "Covers.com Apr 27 2026 update: o0.5 +180 (verified real prop line)"
+            },
+            {
+              "category": "PARLAY PICK (generic)",
+              "player": "Dahlin",
+              "source": "No published prop lines confirmed for Dahlin Apr 28"
+            }
+          ],
+          "series_context": "Game 5 First Round (Buffalo leads 3-1)",
+          "venue": "KeyBank Center, Buffalo NY"
+        },
+        {
+          "away": "Anaheim Ducks",
+          "date": "APR 28",
+          "home": "Edmonton Oilers",
+          "id": "M2",
+          "players": [
+            {
+              "name": "Connor McDavid",
+              "number": 97,
+              "source": "ESPN/NHL.com confirm McDavid #97 active in 2026 playoffs (4 pts over 2 games in series, power-play goal Apr 26 Game 4); CBSSports player page confirms current Oilers center captain",
+              "team": "Edmonton Oilers"
+            },
+            {
+              "name": "Leo Carlsson",
+              "number": 91,
+              "source": "ESPN player profile + NHL.com Ducks player page confirm Carlsson C #91 in 2025-26 (corrected from cards-era #29 references); 26 pts / 11 G / 16 GP early-season breakout",
+              "team": "Anaheim Ducks"
+            }
+          ],
+          "prop_chips": [
+            {
+              "category": "PARLAY PICK (generic)",
+              "player": "McDavid",
+              "source": "No published prop lines confirmed for McDavid Apr 28 in this search pass"
+            },
+            {
+              "category": "PARLAY PICK (generic)",
+              "player": "Carlsson",
+              "source": "No published prop lines confirmed for Carlsson Apr 28"
+            }
+          ],
+          "series_context": "Game 5 First Round (Anaheim leads 3-1)",
+          "venue": "Rogers Place, Edmonton AB"
+        }
+      ],
+      "sufficiency_gate": {
+        "dates_venues_verified": true,
+        "lines_handling": "1 verified line (Pastrnak Goals O/U 0.5), 3 generic-fallback chips",
+        "matchups_verified": 2,
+        "passes": true,
+        "players_per_matchup_verified": true
+      }
+    },
+    "audit": {
+      "universal": {
+        "realistic_athlete_or_no_athlete": true,
+        "lighting_consistent": true,
+        "cta_looks_pressable": true
+      },
+      "logo_8check_all_pass": true,
+      "logo_observed_text": "WANNA PARLAY",
+      "chip_text_exact": true,
+      "chip_texts": {
+        "card1_chip1": "PASTRNAK Â· GOALS O/U 0.5",
+        "card1_chip2": "PARLAY PICK",
+        "card2_chip1": "PARLAY PICK",
+        "card2_chip2": "PARLAY PICK"
+      },
+      "placeholder_token_present": false,
+      "banned_words_present": false,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "players_verified_jerseys": true,
+      "manifest_match": true,
+      "quality_pass": true,
+      "regen_used": 1,
+      "regen_reason": "First render: card1_chip1 typography drift OâG and 5âS; regen with explicit chip-typography correction cleared the drift",
+      "overall": "PASS"
+    }
+  },
+  {
     "id": "wp-1777314167708-cs",
     "platform": "wannaparlay",
     "game_name": "NBA",
