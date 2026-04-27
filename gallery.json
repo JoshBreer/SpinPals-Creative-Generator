@@ -1,5 +1,16 @@
 [
   {
+    "id": "wp-1777306462739-s",
+    "platform": "wannaparlay",
+    "game_name": "NHL â Moneyline",
+    "offer_text": "Compete Against Real People",
+    "style": "Realistic",
+    "format": "square",
+    "user_email": "josh@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ce/45aa998422b067c5a777c7dbed29fe40c294e540613907e731e8b67c988397.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T161332Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=95f5900110560a573ed155ee518e2da83739cc59ee68fcc1544afd27590f4687",
+    "created_at": "2026-04-27T16:14:22Z"
+  },
+  {
     "id": "cr-177730551278CCp",
     "game_name": "Mines",
     "format": "portrait",
