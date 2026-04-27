@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-177730551278CCp",
+    "game_name": "Mines",
+    "format": "portrait",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ef/4ec137dfdce5788c11daa94d16c5cd5e95e46ef182d1c364ccaf3d841e94da.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T155923Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7501170bbf19dd68976ca5fbbf6609bfb5f8778b11ba2724c4575516ce0f3f92",
+    "created_at": "2026-04-27 15:58:32"
+  },
+  {
+    "id": "cr-17773055129FC7s",
+    "game_name": "Mines",
+    "format": "square",
+    "offer_text": "25 FREE SC + 250K GC on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1f/5423bc5cd15399ce96da3ddf81ca1f01c597fb0a0d719d9f6595d1f0abd671.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T155947Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3d08be5a009062110c48d129972ec3415a32d5f2173d4e2cdf4a2dc496cbee78",
+    "created_at": "2026-04-27 15:58:32"
+  },
+  {
     "id": "cr-1777304909A1B2",
     "game_name": "Mines",
     "format": "portrait",
