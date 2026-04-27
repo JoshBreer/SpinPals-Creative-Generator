@@ -2,7 +2,7 @@
   {
     "id": "wp-1777306820579-mu",
     "platform": "wannaparlay",
-    "game_name": "NHL â Player Props",
+    "game_name": "NHL Ã¢ÂÂ Player Props",
     "offer_text": "100% Deposit Match Up To $250",
     "style": "Matchup",
     "format": "portrait",
@@ -13,7 +13,7 @@
   {
     "id": "wp-1777306462739-s",
     "platform": "wannaparlay",
-    "game_name": "NHL â Moneyline",
+    "game_name": "NHL Ã¢ÂÂ Moneyline",
     "offer_text": "Compete Against Real People",
     "style": "Realistic",
     "format": "square",
@@ -1430,5 +1430,25 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
+  },
+  {
+    "game_name": "Volleyball - European Championships",
+    "format": "portrait",
+    "offer_text": "AylÄ±k Casino KayÄ±p Ä°adesi â %20'ye kadar",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/16/1a7f7e337742e4be8446d0f2a44fe4c8c3c7481df2f56e9940541468156b6f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T164801Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9f840c2b44de0082df6faa62048c5832205c8e1dc2eba229927fb9daed959992",
+    "created_at": "2026-04-27T16:50:34.345Z"
+  },
+  {
+    "game_name": "Volleyball - European Championships",
+    "format": "square",
+    "offer_text": "AylÄ±k Casino KayÄ±p Ä°adesi â %20'ye kadar",
+    "style": "Classic",
+    "platform": "bankobet",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d8/e91171ed891806939f4ca8c9d03572ae4c1c38d5bc5d886a94e7fe75a442e6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T164824Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=09186ec7df024d9f28c30774d5d4d32fe630a8f6afd0fadd2c5b41f95968371a",
+    "created_at": "2026-04-27T16:50:34.345Z"
   }
 ]
