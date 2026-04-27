@@ -613,7 +613,7 @@ async function stepStyle(){
   const w=document.createElement('div');w.className='opt-group';
 
   const bClassic=document.createElement('button');bClassic.className='opt-btn';bClassic.textContent='Classic';
-  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');stepGame();};
+  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
   w.appendChild(bClassic);
 
   const bText=document.createElement('button');bText.className='opt-btn';bText.textContent='Text Only';
@@ -621,21 +621,21 @@ async function stepStyle(){
   w.appendChild(bText);
 
   const bRealistic=document.createElement('button');bRealistic.className='opt-btn';bRealistic.textContent='Realistic';
-  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');stepGame();};
+  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
   w.appendChild(bRealistic);
 
   // WannaParlay-only styles
   if(isWannaFlow()){
     const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
-    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='US map showing 23 highlighted states where WannaParlay is available. Deep purple background. Bold offer text at top. PLAY IN 23 STATES visual. Premium WannaParlay brand feel. Gold CTA button.';msg('Map Style','user');stepGame();};
+    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='US map showing 23 highlighted states where WannaParlay is available. Deep purple background. Bold offer text at top. PLAY IN 23 STATES visual. Premium WannaParlay brand feel. Gold CTA button.';msg('Map Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMap);
 
     const bMatchup=document.createElement('button');bMatchup.className='opt-btn';bMatchup.textContent='Matchup Style 🏆';
-    bMatchup.onclick=()=>{if(bMatchup.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMatchup.style.opacity='1';bMatchup.style.borderColor='var(--blue)';bMatchup.style.color='var(--blue)';state.style='Matchup';state.customInstructions='Real sports matchup card style. Dark purple background. 2-3 upcoming game matchup cards with gold borders showing real teams playing this week. Real player photo cutouts on each side with their jersey numbers. Team logos in the center of each card. Dates above each card. Bold urgency headline at top. WannaParlay gold logo at bottom. Extremely high production value — like a premium sports broadcast graphic.';msg('Matchup Style','user');stepGame();};
+    bMatchup.onclick=()=>{if(bMatchup.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMatchup.style.opacity='1';bMatchup.style.borderColor='var(--blue)';bMatchup.style.color='var(--blue)';state.style='Matchup';state.customInstructions='Real sports matchup card style. Dark purple background. 2-3 upcoming game matchup cards with gold borders showing real teams playing this week. Real player photo cutouts on each side with their jersey numbers. Team logos in the center of each card. Dates above each card. Bold urgency headline at top. WannaParlay gold logo at bottom. Extremely high production value — like a premium sports broadcast graphic.';msg('Matchup Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMatchup);
 
     const bElectric=document.createElement('button');bElectric.className='opt-btn';bElectric.textContent='Electric ⚡';
-    bElectric.onclick=()=>{if(bElectric.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bElectric.style.opacity='1';bElectric.style.borderColor='var(--blue)';bElectric.style.color='var(--blue)';state.style='Electric';state.customInstructions='Dark navy background (#0A0E2A). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. WannaParlay logo in white and gold at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.';msg('Electric ⚡','user');stepGame();};
+    bElectric.onclick=()=>{if(bElectric.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bElectric.style.opacity='1';bElectric.style.borderColor='var(--blue)';bElectric.style.color='var(--blue)';state.style='Electric';state.customInstructions='Dark navy background (#0A0E2A). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. WannaParlay logo in white and gold at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.';msg('Electric ⚡','user');state.game='N/A';stepOffer();};
     w.appendChild(bElectric);
   }
 
@@ -652,7 +652,7 @@ async function stepStyle(){
     const val=textarea.value.trim();if(!val)return;
     lockButtons(w);customBtn.style.opacity='1';
     state.style='Custom';state.customInstructions=val;
-    msg('Custom: '+val,'user');stepGame();
+    msg('Custom: '+val,'user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}
   };
   customWrap.appendChild(textarea);customWrap.appendChild(submitBtn);
   m.appendChild(customWrap);
@@ -799,7 +799,7 @@ async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
   const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
-  const gameRow=state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
+  const gameRow=(!isWannaFlow())&&state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
     platformRow+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
@@ -851,21 +851,16 @@ async function doQuickGenerate(){
   const {top,all}=getGames();
   const offers=getOffers();
 
-  // For WannaParlay: only pick from sports currently in season
+  // WannaParlay: no sport selection — just pick style and offer
   let allNames=[];
-  if(isWannaFlow()){
-    const seasonalSports=getCurrentSeasonSports();
-    seasonalSports.forEach(sport=>{
-      if(all[sport])all[sport].forEach(g=>allNames.push(g.name));
-    });
-    if(allNames.length===0)Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
-  } else {
+  if(!isWannaFlow()){
     Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
   }
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
-  const randStyle=styles[Math.floor(Math.random()*styles.length)];
-  const randGame=allNames[Math.floor(Math.random()*allNames.length)];
+  const wannaStyles=['Classic','Realistic','Electric','Map'];
+  const randStyle=isWannaFlow()?wannaStyles[Math.floor(Math.random()*wannaStyles.length)]:styles[Math.floor(Math.random()*styles.length)];
+  const randGame=isWannaFlow()?'N/A':allNames[Math.floor(Math.random()*allNames.length)];
   const randOffer=offers[Math.floor(Math.random()*offers.length)];
 
   state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
@@ -1250,21 +1245,16 @@ async function doQuickGenerate(){
   const {top,all}=getGames();
   const offers=getOffers();
 
-  // For WannaParlay: only pick from sports currently in season
+  // WannaParlay: no sport selection — just pick style and offer
   let allNames=[];
-  if(isWannaFlow()){
-    const seasonalSports=getCurrentSeasonSports();
-    seasonalSports.forEach(sport=>{
-      if(all[sport])all[sport].forEach(g=>allNames.push(g.name));
-    });
-    if(allNames.length===0)Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
-  } else {
+  if(!isWannaFlow()){
     Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
   }
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
-  const randStyle=styles[Math.floor(Math.random()*styles.length)];
-  const randGame=allNames[Math.floor(Math.random()*allNames.length)];
+  const wannaStyles=['Classic','Realistic','Electric','Map'];
+  const randStyle=isWannaFlow()?wannaStyles[Math.floor(Math.random()*wannaStyles.length)]:styles[Math.floor(Math.random()*styles.length)];
+  const randGame=isWannaFlow()?'N/A':allNames[Math.floor(Math.random()*allNames.length)];
   const randOffer=offers[Math.floor(Math.random()*offers.length)];
 
   state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
