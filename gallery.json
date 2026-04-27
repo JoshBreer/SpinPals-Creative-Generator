@@ -1,5 +1,16 @@
 [
   {
+    "id": "wp-1777313754342-p",
+    "platform": "wannaparlay",
+    "game_name": "NBA â Player Props",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Realistic",
+    "format": "portrait",
+    "user_email": "josh@wannaparlay.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a4/fd6406b2e500a429e2a5b412ffad506f26d828699f8dcbe76a43600eae3b00.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T181443Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=535980124b184eeb3bdb494475fce1204cb0bf234df56524a403cae84c72c880",
+    "created_at": "2026-04-27T18:15:54Z"
+  },
+  {
     "id": "wp-1777312361423-p",
     "platform": "wannaparlay",
     "game_name": "NHL â Player Props",
