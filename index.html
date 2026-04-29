@@ -843,6 +843,13 @@ async function stepSummary(){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns loading subtext based on client and style
+function getLoadingSubtext(){
+  if((isWannaFlow()||isThrillzzFlow())&&state.style==='Matchup')
+    return 'Pulling live matchups, rosters & odds — this takes a little longer';
+  return 'Your creative is being crafted';
+}
+
 // Returns estimated generation time based on client and style
 function getEstTime(){
   if((isWannaFlow()||isThrillzzFlow())&&state.style==='Matchup')return '4–7 minutes';
@@ -1246,35 +1253,14 @@ function showResult(loadMsg,found){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns loading subtext based on client and style
+
+
 // Returns estimated generation time based on client and style
-function getEstTime(){
-  if((isWannaFlow()||isThrillzzFlow())&&state.style==='Matchup')return '4–7 minutes';
-  if(isWannaFlow()||isThrillzzFlow())return '4–7 minutes';
-  return '3–5 minutes';
-}
+
 
 // Returns WannaParlay sports currently in season based on current month
-function getCurrentSeasonSports(){
-  const month=new Date().getMonth()+1; // 1-12
-  const inSeason=[];
-  // NFL: Sept(9) - Feb(2) including playoffs
-  if(month>=9||month<=2) inSeason.push('NFL');
-  // NBA: Oct(10) - June(6) including playoffs
-  if(month>=10||month<=6) inSeason.push('NBA');
-  // MLB: March(3) - Oct(10)
-  if(month>=3&&month<=10) inSeason.push('MLB');
-  // NHL: Oct(10) - June(6) including playoffs
-  if(month>=10||month<=6) inSeason.push('NHL');
-  // MLS: Feb(2) - Nov(11)
-  if(month>=2&&month<=11) inSeason.push('MLS');
-  // College Football: Aug(8) - Jan(1)
-  if(month>=8||month===1) inSeason.push('College');
-  // WNBA: May(5) - Oct(10)
-  if(month>=5&&month<=10) inSeason.push('WNBA');
-  // Always fall back to NBA+MLB+NHL if nothing matched
-  if(inSeason.length===0) inSeason.push('NBA','MLB','NHL');
-  return inSeason;
-}
+
 
 
 // ============================================================
@@ -1293,101 +1279,13 @@ function getCurrentSeasonSports(){
 // Strategy: canvas draw (bypasses CORS for displayed images) → fetch blob → proxy blob
 // Never uses window.open — always triggers a real file download
 // ============================================================
-async function downloadBlob(imageUrl){
-  // For S3 signed URLs and fal CDN URLs, the only reliable approach
-  // inside a Wix iframe is a server-side proxy that fetches the image
-  // on the server and returns raw bytes — bypassing all CORS restrictions.
 
-  const isImage=b=>b.size>5000&&(b.type.startsWith('image/')||b.type==='application/octet-stream');
 
-  // 1. Direct fetch — works for fal.ai which has open CORS headers
-  try{
-    const r=await fetch(imageUrl,{mode:'cors'});
-    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
-  }catch(e){}
 
-  // 2. corsproxy.io — server fetches the URL, returns raw bytes
-  try{
-    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(imageUrl));
-    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
-  }catch(e){}
 
-  // 3. allorigins — another server-side proxy
-  try{
-    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(imageUrl));
-    if(r.ok){const b=await r.blob();if(isImage(b))return b;}
-  }catch(e){}
 
-  // 4. images.weserv.nl — image proxy specifically designed for this use case
-  const wsUrl='https://images.weserv.nl/?url='+encodeURIComponent(imageUrl)+'&output=jpg';
-  try{
-    const r=await fetch(wsUrl);
-    if(r.ok){const b=await r.blob();if(b.size>5000)return b;}
-  }catch(e){}
 
-  return null;
-}
 
-function triggerBlobDownload(blob, filename){
-  const ext=blob.type&&blob.type.includes('png')?'.png':'.jpg';
-  const blobUrl=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=blobUrl;
-  a.download=filename+ext;
-  a.style.display='none';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(()=>{URL.revokeObjectURL(blobUrl);document.body.removeChild(a);},2000);
-}
-
-function makeDownloadBtn(imageUrl, gameName, label){
-  const dlBtn=document.createElement('button');dlBtn.className='opt-btn opt-green';dlBtn.textContent=label||'Download Image';
-  dlBtn.onclick=async()=>{
-    dlBtn.textContent='Downloading...';dlBtn.disabled=true;
-    const filename=(gameName||'creative').replace(/[^a-z0-9]/gi,'-');
-    const blob=await downloadBlob(imageUrl,filename);
-    if(blob){
-      triggerBlobDownload(blob,filename);
-      dlBtn.textContent='Downloaded ✓';
-      setTimeout(()=>{dlBtn.textContent=label||'Download Image';dlBtn.disabled=false;},2500);
-    }else{
-      dlBtn.textContent='Download Failed';
-      dlBtn.disabled=false;
-    }
-  };
-  return dlBtn;
-}
-
-function makeImageCard(url, label, gameName){
-  const wrap=document.createElement('div');
-  wrap.style.cssText='display:flex;flex-direction:column;gap:8px;';
-  const lbl=document.createElement('div');
-  lbl.style.cssText='font-size:10px;font-weight:700;color:var(--txt3);text-align:center;letter-spacing:1.5px;text-transform:uppercase;';
-  lbl.textContent=label;
-  // Handle null URL — fal failed
-  if(!url){
-    const errDiv=document.createElement('div');
-    errDiv.style.cssText='padding:30px 20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
-    errDiv.textContent='Version 2 generation failed. Check console for details.';
-    wrap.appendChild(lbl);wrap.appendChild(errDiv);
-    return wrap;
-  }
-  const dl=makeDownloadBtn(url,gameName,'\u2193 Download');
-  dl.style.cssText='padding:8px;font-size:12px;width:100%;justify-content:center;border-radius:6px;';
-  const img=document.createElement('img');
-  img.alt=label;
-  img.style.cssText='width:100%;border-radius:6px;object-fit:contain;display:block;background:#000;';
-  img.onerror=()=>{
-    img.style.display='none';
-    const errDiv=document.createElement('div');
-    errDiv.style.cssText='padding:20px;text-align:center;background:var(--card2);border-radius:6px;color:var(--txt3);font-size:12px;border:1px dashed var(--border);';
-    errDiv.textContent='Image failed to load.';
-    wrap.insertBefore(errDiv,dl);
-  };
-  img.src=url;
-  wrap.appendChild(lbl);wrap.appendChild(img);wrap.appendChild(dl);
-  return wrap;
-}
 
 // ============================================================
 // FEEDBACK
