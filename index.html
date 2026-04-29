@@ -234,7 +234,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   <div class="stats-heading">Team Generation Stats</div>
   <div class="stats-grid" id="statsGrid"></div>
   <table class="stats-table">
-    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Last Generated</th></tr></thead>
+    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Thrillzz</th><th>Last Generated</th></tr></thead>
     <tbody id="statsBody"></tbody>
   </table>
 </section>
@@ -291,6 +291,17 @@ const WANNAPARLAY_SPORTS={
   'WNBA':[{id:'wnba-props',name:'WNBA — Player Props'},{id:'wnba-ml',name:'WNBA — Moneyline'}]
 };
 const WANNAPARLAY_TOP=['NFL — Player Props','NBA — Player Props','MLB — Player Props','NHL — Player Props','NFL — Spread Picks','NBA — Spread Picks','The Main Event','Parlay Royale'];
+const THRILLZZ_OFFERS=[
+  {id:'tz1',title:'FREE Welcome Bonus — Claim Your Thrillzz Coins',description:'Sign up free and instantly get your welcome bonus coins to start making picks'},
+  {id:'tz2',title:'400% Deposit Match',description:'Purchase coins and get a massive 400% match — maximum value on every deposit'},
+  {id:'tz3',title:'Play for FREE — No Purchase Necessary',description:'Make picks, climb leaderboards, and win real rewards completely free'},
+  {id:'tz4',title:'Daily Login Rewards',description:'Log in every day and earn free Thrillzz Coins just for showing up'},
+  {id:'tz5',title:'Win Real Cash Prizes',description:'Turn your sports knowledge into real cash — make correct picks and cash out'},
+  {id:'tz6',title:'Join a Squad — Compete With Friends',description:'Create your Squad, share picks, and compete for bragging rights'},
+  {id:'tz7',title:'Climb the Leaderboard',description:'Prove your sports knowledge and rise to the top — rewards await'},
+  {id:'tz8',title:'Available in 38 States',description:'One of the most widely available social sportsbooks in the US'}
+];
+
 const WANNAPARLAY_OFFERS=[
   {id:'wp1',title:'100% Deposit Match Up To $250',description:'Sign up today and double your first deposit — up to $250 free'},
   {id:'wp2',title:'Turn $4 Into $4,000',description:'Stack your parlay legs and win 1000x your money'},
@@ -308,6 +319,7 @@ const WANNAPARLAY_OFFERS=[
 const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1880bc506124/webhook';
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
+const THRILLZZ_WEBHOOK='THRILLZZ_WEBHOOK_URL_HERE';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
@@ -323,17 +335,20 @@ let currentUserEmail=null;
 // Helper: client checks
 function isMarioFlow(){return state.client==='mario';}
 function isWannaFlow(){return state.client==='wannaparlay';}
+function isThrillzzFlow(){return state.client==='thrillzz';}
+function isSportsFlow(){return isWannaFlow()||isThrillzzFlow();}
 
 // Helper: get correct webhook
 function getWebhook(){
   if(isMarioFlow())return MARIO_WEBHOOK;
   if(isWannaFlow())return WANNAPARLAY_WEBHOOK;
+  if(isThrillzzFlow())return THRILLZZ_WEBHOOK;
   return SPINPALS_WEBHOOK;
 }
 
 // Helper: get correct games/sports
 function getGames(){
-  if(isWannaFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
+  if(isWannaFlow()||isThrillzzFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
   if(!isMarioFlow())return {top:SPINPALS_TOP,all:SPINPALS_GAMES};
   if(state.platform==='betewin')return {top:BETEWIN_TOP,all:BETEWIN_GAMES};
   return {top:BANKOBET_TOP,all:BANKOBET_GAMES};
@@ -342,6 +357,7 @@ function getGames(){
 // Helper: get correct offers
 function getOffers(){
   if(isWannaFlow())return WANNAPARLAY_OFFERS;
+  if(isThrillzzFlow())return THRILLZZ_OFFERS;
   if(!isMarioFlow())return SPINPALS_OFFERS;
   if(state.platform==='betewin')return BETEWIN_OFFERS;
   return BANKOBET_OFFERS;
@@ -373,7 +389,8 @@ function activateDashboard(email){
   const isMario=email.endsWith('@mario.com');
   const isRmgs=email.endsWith('@rmgs.online');
   const isWanna=email.endsWith('@wanna.com');
-  if(isSpinPals||isMario||isRmgs||isWanna){
+  const isThrillzz=email.endsWith('@thrillzz.com');
+  if(isSpinPals||isMario||isRmgs||isWanna||isThrillzz){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
@@ -497,6 +514,9 @@ async function startChat(){
   } else if(currentUserEmail.endsWith('@wanna.com')){
     state.client='wannaparlay';
     showStartButtons();
+  } else if(currentUserEmail.endsWith('@thrillzz.com')){
+    state.client='thrillzz';
+    showStartButtons();
   }
 }
 
@@ -515,7 +535,7 @@ function showRmgsClientSelector(){
   const w=document.createElement('div');
   w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
 
-  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)'],['wannaparlay','Wanna Parlay']].forEach(([val,label])=>{
+  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)'],['wannaparlay','Wanna Parlay'],['thrillzz','Thrillzz']].forEach(([val,label])=>{
     const b=document.createElement('button');
     b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
     b.textContent=label;
@@ -533,6 +553,9 @@ function showRmgsClientSelector(){
         state.platform=null;
         showStartButtons();
       } else if(val==='wannaparlay'){
+        state.platform=null;
+        showStartButtons();
+      } else if(val==='thrillzz'){
         state.platform=null;
         showStartButtons();
       } else {
@@ -613,7 +636,7 @@ async function stepStyle(){
   const w=document.createElement('div');w.className='opt-group';
 
   const bClassic=document.createElement('button');bClassic.className='opt-btn';bClassic.textContent='Classic';
-  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
+  bClassic.onclick=()=>{if(bClassic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bClassic.style.opacity='1';bClassic.style.borderColor='var(--blue)';bClassic.style.color='var(--blue)';state.style='Classic';state.customInstructions=null;msg('Classic','user');if(isSportsFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
   w.appendChild(bClassic);
 
   const bText=document.createElement('button');bText.className='opt-btn';bText.textContent='Text Only';
@@ -621,11 +644,11 @@ async function stepStyle(){
   w.appendChild(bText);
 
   const bRealistic=document.createElement('button');bRealistic.className='opt-btn';bRealistic.textContent='Realistic';
-  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
+  bRealistic.onclick=()=>{if(bRealistic.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bRealistic.style.opacity='1';bRealistic.style.borderColor='var(--blue)';bRealistic.style.color='var(--blue)';state.style='Realistic';state.customInstructions=null;msg('Realistic','user');if(isSportsFlow()){state.game='N/A';stepOffer();}else{stepGame();}};
   w.appendChild(bRealistic);
 
-  // WannaParlay-only styles
-  if(isWannaFlow()){
+  // Sports client styles (WannaParlay + Thrillzz)
+  if(isSportsFlow()){
     const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
     bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='US map showing 23 highlighted states where WannaParlay is available. Deep purple background. Bold offer text at top. PLAY IN 23 STATES visual. Premium WannaParlay brand feel. Gold CTA button.';msg('Map Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMap);
@@ -635,7 +658,10 @@ async function stepStyle(){
     w.appendChild(bMatchup);
 
     const bElectric=document.createElement('button');bElectric.className='opt-btn';bElectric.textContent='Electric ⚡';
-    bElectric.onclick=()=>{if(bElectric.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bElectric.style.opacity='1';bElectric.style.borderColor='var(--blue)';bElectric.style.color='var(--blue)';state.style='Electric';state.customInstructions='Dark navy background (#0A0E2A). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. WannaParlay logo in white and gold at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.';msg('Electric ⚡','user');state.game='N/A';stepOffer();};
+    const electricInstructions=isThrillzzFlow()
+      ?'Electric blue background (#0A1628). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. THRILLZZ logo in electric blue and white at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.'
+      :'Dark navy background (#0A0E2A). Giant 3D extruded neon green and electric yellow headline text dominating 50-60% of image, slight diagonal tilt, deep drop shadow. Diagonal lightning bolt graphic elements slashing across background. Floating 3D sport icons (balls, trophies, stars, dice) scattered at edges with neon glow. Electric green rounded CTA button with outer glow halo. WannaParlay logo in white and gold at bottom center. Maximum energy — like a video game launch screen meets sports app campaign. Every element glows.';
+    bElectric.onclick=()=>{if(bElectric.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bElectric.style.opacity='1';bElectric.style.borderColor='var(--blue)';bElectric.style.color='var(--blue)';state.style='Electric';state.customInstructions=electricInstructions;msg('Electric ⚡','user');state.game='N/A';stepOffer();};
     w.appendChild(bElectric);
   }
 
@@ -652,7 +678,7 @@ async function stepStyle(){
     const val=textarea.value.trim();if(!val)return;
     lockButtons(w);customBtn.style.opacity='1';
     state.style='Custom';state.customInstructions=val;
-    msg('Custom: '+val,'user');if(isWannaFlow()){state.game='N/A';stepOffer();}else{stepGame();}
+    msg('Custom: '+val,'user');if(isSportsFlow()){state.game='N/A';stepOffer();}else{stepGame();}
   };
   customWrap.appendChild(textarea);customWrap.appendChild(submitBtn);
   m.appendChild(customWrap);
@@ -799,7 +825,7 @@ async function stepSummary(){
   await delay(250);
   const fmtLabel=state.format==='portrait'?'Portrait (9:16)':state.format==='square'?'Square (1:1)':'Both (9:16 + 1:1)';
   const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
-  const gameRow=(!isWannaFlow())&&state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
+  const gameRow=(!isSportsFlow())&&state.game&&state.game!=='N/A'?'<div class="summary-row"><span class="summary-label">Game</span>'+state.game+'</div>':'';
   const m=msg('<div class="summary-card"><div class="summary-title">Review Your Ad</div>'+
     platformRow+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
@@ -817,6 +843,13 @@ async function stepSummary(){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns estimated generation time based on client and style
+function getEstTime(){
+  if((isWannaFlow()||isThrillzzFlow())&&state.style==='Matchup')return '5–8 minutes';
+  if(isWannaFlow()||isThrillzzFlow())return '3–5 minutes';
+  return '3–5 minutes';
+}
+
 // Returns WannaParlay sports currently in season based on current month
 function getCurrentSeasonSports(){
   const month=new Date().getMonth()+1; // 1-12
@@ -890,7 +923,7 @@ async function doQuickGenerate(){
 
   let stopped=false;
   const loadDiv=document.createElement('div');loadDiv.className='loading';
-  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
   const stopBtn=document.createElement('button');
   stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
   stopBtn.textContent='Stop Generation';
@@ -915,7 +948,7 @@ async function doQuickGenerate(){
     const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
     resumeBtn.onclick=()=>{
       stopped=false;
-      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
       resumePolling();
     };
     newBtn.onclick=()=>startChat();
@@ -972,7 +1005,7 @@ async function doGenerate(){
 
   let stopped=false;
   const loadDiv=document.createElement('div');loadDiv.className='loading';
-  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
   const stopBtn=document.createElement('button');
   stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
   stopBtn.textContent='Stop Generation';
@@ -998,7 +1031,7 @@ async function doGenerate(){
     const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
     resumeBtn.onclick=()=>{
       stopped=false;
-      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
       loadDiv.appendChild(stopBtn2);
       resumePolling();
     };
@@ -1211,6 +1244,13 @@ function showResult(loadMsg,found){
 // ============================================================
 // QUICK GENERATE
 // ============================================================
+// Returns estimated generation time based on client and style
+function getEstTime(){
+  if((isWannaFlow()||isThrillzzFlow())&&state.style==='Matchup')return '5–8 minutes';
+  if(isWannaFlow()||isThrillzzFlow())return '3–5 minutes';
+  return '3–5 minutes';
+}
+
 // Returns WannaParlay sports currently in season based on current month
 function getCurrentSeasonSports(){
   const month=new Date().getMonth()+1; // 1-12
@@ -1284,7 +1324,7 @@ async function doQuickGenerate(){
 
   let stopped=false;
   const loadDiv=document.createElement('div');loadDiv.className='loading';
-  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
   const stopBtn=document.createElement('button');
   stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
   stopBtn.textContent='Stop Generation';
@@ -1309,7 +1349,7 @@ async function doQuickGenerate(){
     const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
     resumeBtn.onclick=()=>{
       stopped=false;
-      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
       resumePolling();
     };
     newBtn.onclick=()=>startChat();
@@ -1366,7 +1406,7 @@ async function doGenerate(){
 
   let stopped=false;
   const loadDiv=document.createElement('div');loadDiv.className='loading';
-  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(state.game&&state.game!=='N/A'?state.game:state.style)+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
   const stopBtn=document.createElement('button');
   stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
   stopBtn.textContent='Stop Generation';
@@ -1392,7 +1432,7 @@ async function doGenerate(){
     const newBtn=document.createElement('button');newBtn.className='opt-btn';newBtn.textContent='Generate New';
     resumeBtn.onclick=()=>{
       stopped=false;
-      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">Estimated time: 3–5 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Resuming generation...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
       loadDiv.appendChild(stopBtn2);
       resumePolling();
     };
@@ -1580,11 +1620,12 @@ function renderStats(){
   const byUser={};
   allItems.forEach(c=>{
     const u=c.user_email.trim().toLowerCase();
-    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,lastDate:null};
+    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,thrillzz:0,lastDate:null};
     byUser[u].total++;
     if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
     if(u.endsWith('@mario.com'))byUser[u].mario++;
     if(u.endsWith('@wanna.com'))byUser[u].wanna++;
+    if(u.endsWith('@thrillzz.com'))byUser[u].thrillzz++;
     const d=new Date(c.created_at);
     if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
   });
@@ -1596,7 +1637,8 @@ function renderStats(){
   if(!grid)return;
   grid.innerHTML='';
   const wannaTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@wanna.com')).length;
-  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:wannaTotal,l:'WannaParlay Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
+  const thrillzzTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@thrillzz.com')).length;
+  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:wannaTotal,l:'WannaParlay Creatives'},{n:thrillzzTotal,l:'Thrillzz Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
     grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
   });
   const tbody=document.getElementById('statsBody');
@@ -1606,7 +1648,7 @@ function renderStats(){
     const email=pair[0];const data=pair[1];
     const name=email.split('@')[0];
     const last=data.lastDate?data.lastDate.toLocaleDateString():'Never';
-    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+last+'</td></tr>';
+    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+(data.thrillzz||0)+'</td><td>'+last+'</td></tr>';
   });
 }
 
