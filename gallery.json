@@ -1,5 +1,48 @@
 [
   {
+    "id": "wp-1777488932322-real-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/6a/05f499461819ddcf7b72d72dd955ca1b849ce4941e04229f602dd44e77a1d3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T185401Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d83346d7c0759754a34992c7e337e29b4b286759d405a6f587f03f83c57eb790",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "6a/05f499461819ddcf7b72d72dd955ca1b849ce4941e04229f602dd44e77a1d3.jpg",
+    "created_at": "2026-04-29T18:55:32Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_looks_pressable": true,
+      "lighting_consistent": true,
+      "realistic_athlete_or_no_athlete": true,
+      "foreground_subject_present": true,
+      "foreground_subject_dominant": true,
+      "kinetic_object_present": true,
+      "kinetic_object_dominant": true,
+      "disclaimer_present": true,
+      "disclaimer_verbatim": true,
+      "disclaimer_count": 1,
+      "disclaimer_full_width": true,
+      "cta_disclaimer_gap_tight": true,
+      "cta_disclaimer_gap_pct": 2,
+      "offer_text_verbatim": true,
+      "offer_text_dominant": true,
+      "production_quality_high": true,
+      "background_midnight_blue": true,
+      "gap_resolved_via": "none_needed"
+    },
+    "variation_fingerprint": {
+      "player_or_kinetic": "football_spinning_flight",
+      "composition_position": "right third",
+      "background_color_label": "midnight_blue_with_gold_streaks",
+      "camera_angle": "low_angle_dramatic_upward",
+      "dominant_light": "dramatic_side_rim_blue_hour",
+      "typography_label": "italic_condensed_extruded_upper_third"
+    }
+  },
+  {
     "id": "wp-1777488853142-elec-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
