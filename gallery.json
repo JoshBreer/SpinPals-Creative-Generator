@@ -1934,5 +1934,19 @@
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/42/899287a20b0d983b855b93ba8f6968342976f993a3bacf49b72e12bce87261.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T210913Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aed9578d87ef6ce5bac2b8d97396092afb7dfd28e026d557f76517acbde94ebc",
     "created_at": "2026-04-29T21:10:45.803Z",
     "disclaimer_variant": "social"
+  },
+  {
+    "id": "thz-1777498622028-map-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "FREE Welcome Bonus — Claim Your Thrillzz Coins",
+    "style": "Map",
+    "user_email": "josh@thrillzz.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/e0/fb33d0e508462666fe8e181660a071541e9515cc0aaa91005e61a1f39c0616.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T213520Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5b9ac32527726459847e4f5010990fbb3b5396df5dc02dc79f6e42d078de75f5",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "e0/fb33d0e508462666fe8e181660a071541e9515cc0aaa91005e61a1f39c0616.jpg",
+    "created_at": "2026-04-29T21:37:02.028Z",
+    "disclaimer_variant": "social"
   }
 ]
