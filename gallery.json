@@ -1,5 +1,35 @@
 [
   {
+    "id": "cr-177750117287FB",
+    "game_name": "Three Card Poker",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/64/0afc80bdf29d6ad3f26b1de364e253419180c032b247407fc3b7c82f314fd7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T222022Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=378ba9ae2d9fe370137a7f0628227d6642d0402efff0826f60433fc8e2570717",
+    "created_at": "2026-04-29 22:19:32"
+  },
+  {
+    "id": "cr-1777501124392Cp",
+    "game_name": "Buffalo King Megaways",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/04/2384a7b438e34d6d74dc9be5df011f0bf84c78a1a80d1232cfb89834e8b70a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T222012Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e4287ce6c13947b852de48c32b7fe7bc5a2c1f85f30d1749dc3e1c13ec878c7e",
+    "created_at": "2026-04-29 22:18:44"
+  },
+  {
+    "id": "cr-1777501124FCE3s",
+    "game_name": "Buffalo King Megaways",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/30/a93403e326147f1ea43d7abf7a9d3ff02f892aa5fce7b8cfcbb02448b32c3a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T221939Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=57c472ebda5c31411f67757002d19f8663dae223caf0262127c39af717a47d3d",
+    "created_at": "2026-04-29 22:18:44"
+  },
+  {
     "id": "cr-1777500354B2C9",
     "game_name": "Buffalo King Megaways",
     "format": "square",
