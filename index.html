@@ -372,7 +372,7 @@ function activateDashboard(email){
   const isSpinPals=email.endsWith('@spinpals.com');
   const isMario=email.endsWith('@mario.com');
   const isRmgs=email.endsWith('@rmgs.online');
-  const isWanna=email.endsWith('@wannaparlay.com');
+  const isWanna=email.endsWith('@wanna.com');
   if(isSpinPals||isMario||isRmgs||isWanna){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
@@ -494,7 +494,7 @@ async function startChat(){
   } else if(currentUserEmail.endsWith('@mario.com')){
     state.client='mario';
     stepPlatform();
-  } else if(currentUserEmail.endsWith('@wannaparlay.com')){
+  } else if(currentUserEmail.endsWith('@wanna.com')){
     state.client='wannaparlay';
     showStartButtons();
   }
@@ -1584,7 +1584,7 @@ function renderStats(){
     byUser[u].total++;
     if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
     if(u.endsWith('@mario.com'))byUser[u].mario++;
-    if(u.endsWith('@wannaparlay.com'))byUser[u].wanna++;
+    if(u.endsWith('@wanna.com'))byUser[u].wanna++;
     const d=new Date(c.created_at);
     if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
   });
@@ -1595,7 +1595,7 @@ function renderStats(){
   const grid=document.getElementById('statsGrid');
   if(!grid)return;
   grid.innerHTML='';
-  const wannaTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@wannaparlay.com')).length;
+  const wannaTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@wanna.com')).length;
   [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:wannaTotal,l:'WannaParlay Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
     grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
   });
