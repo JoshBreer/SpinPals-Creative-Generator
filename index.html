@@ -999,7 +999,7 @@ async function doQuickGenerate(){
 // ============================================================
 async function doGenerate(){
   msg('Generate Ad →','user');await delay(250);
-
+  try{
   if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
     msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
     return;
@@ -1084,6 +1084,10 @@ async function doGenerate(){
   }
   clearInterval(timerInterval);
   if(found)showResult(loadMsg,found);
+  }catch(err){
+    console.error('doGenerate crash:',err);
+    msg('<div style="color:#ef4444;padding:10px 0;font-size:13px;">⚠️ Error: '+err.message+'<br><small style="color:var(--txt3)">Open browser console for details</small></div>');
+  }
 }
 
 // ============================================================
