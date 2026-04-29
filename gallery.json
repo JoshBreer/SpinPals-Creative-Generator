@@ -1,5 +1,45 @@
 [
   {
+    "id": "wp-1777488004733-rp",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d1/c6213929008ed326d0f96e892368ae0474ce21feb587b435f7ab447493f08e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T183758Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1b7b9756febf3f25eb247bb5cf8693693fd509ed3a218e5d61ecca5f8cf4b2df",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "d1/c6213929008ed326d0f96e892368ae0474ce21feb587b435f7ab447493f08e.jpg",
+    "created_at": "2026-04-29T18:40:04Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_pct": 2.5,
+      "cta_disclaimer_gap_tight": true,
+      "gap_resolved_via": null,
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "kinetic_object_present": true,
+        "kinetic_object_dominant": true
+      },
+      "universal": {
+        "realistic_athlete_or_no_athlete": true,
+        "lighting_consistent": true,
+        "cta_looks_pressable": true,
+        "offer_text_verbatim": true,
+        "banned_words_absent": true,
+        "disclaimer_present": true,
+        "disclaimer_count": 1,
+        "disclaimer_verbatim": true,
+        "disclaimer_bottom_strip": true,
+        "no_real_team_logos": true,
+        "production_quality_high": true
+      },
+      "passed": true
+    }
+  },
+  {
     "id": "wp-1777487123609-rp",
     "platform": "wannaparlay",
     "game_name": "N/A",
