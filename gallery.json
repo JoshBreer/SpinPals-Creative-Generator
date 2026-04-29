@@ -1,5 +1,29 @@
 [
   {
+    "id": "wp-1777479093596-cs",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "Turn Your Sports Knowledge Into Cash",
+    "style": "Classic",
+    "format": "portrait",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ba/c58b06a8eb50969b4f93c0da1ade6075151b5330469a691c8ceec99f2a4c27.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T160622Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a3ff59465dda821b015256a07a93a81d2e9ff59043f6e38d12b701f3297d6b72",
+    "composite_step_executed": true,
+    "created_at": "2026-04-29T16:11:33.596Z"
+  },
+  {
+    "id": "wp-1777479093596-ss",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "Turn Your Sports Knowledge Into Cash",
+    "style": "Classic",
+    "format": "square",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/13/d271047101891511704167c9d92a4d07ec3b4de0cb1b2d9f1bc2f6894de803.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T160646Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=717e4f712126e09d132b7b47cad7e21127d95176d27d60175060943fdaa76f2a",
+    "composite_step_executed": true,
+    "created_at": "2026-04-29T16:11:33.596Z"
+  },
+  {
     "id": "cr-17773975060470",
     "game_name": "N/A",
     "format": "portrait",
