@@ -1,5 +1,44 @@
 [
   {
+    "id": "wp-1777484123999-rp",
+    "platform": "wannaparlay",
+    "game_name": "NBA",
+    "format": "portrait",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Realistic",
+    "user_email": "buildtest@wannaparlay.com",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp_realistic_nba_apr29_final.jpg",
+    "created_at": "2026-04-29T17:35:00Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_pct": 2.5,
+      "cta_disclaimer_gap_tight": true,
+      "gap_resolved_via": "regen",
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "path": "Option B (kinetic basketball)"
+      },
+      "cta_label": "JOIN NOW",
+      "cta_color": "gold",
+      "cta_looks_pressable": true,
+      "lighting_consistent": true,
+      "offer_text_exact": true,
+      "real_ip_violations": false,
+      "disclaimer_count": 1,
+      "disclaimer_full_width_verbatim": true,
+      "banned_words_present": false,
+      "placeholder_token_present": false,
+      "quality_pass": true,
+      "regen_used": 1,
+      "regen_reason": "First render had cta_disclaimer_gap_pct ~11% (failed â¤3% rule); crop-stitch fallback attempted but aspect ratio drifted 11% (>2% tolerance) so fell through to regen-once; regen output gap_pct=2.5% PASS",
+      "crop_attempted": true,
+      "crop_skipped_reason": "aspect ratio drift 11.4% exceeded 2% tolerance",
+      "overall": "PASS"
+    }
+  },
+  {
     "id": "wp-1777482293086-mu",
     "platform": "wannaparlay",
     "game_name": "N/A",
