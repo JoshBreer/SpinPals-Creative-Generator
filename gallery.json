@@ -1,5 +1,41 @@
 [
   {
+    "id": "wp-1777487123609-rp",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/5c/cb41cc9cd966af1730ddc8559ffc4c77ebbb26d0940c91e1fee1b09df17f83.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T182356Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=178e75456bdd8c3a276bcda12bcf22dc497b560cdef1e3bf6629c88ee33d4733",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "5c/cb41cc9cd966af1730ddc8559ffc4c77ebbb26d0940c91e1fee1b09df17f83.png",
+    "created_at": "2026-04-29T18:25:23Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_pct": 2.5,
+      "cta_disclaimer_gap_tight": true,
+      "gap_resolved_via": "regen",
+      "original_gap_pct": 4.5,
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "path": "Option A (Shohei Ohtani, LA Dodgers #17, photoreal)"
+      },
+      "realistic_athlete_correct_jersey": true,
+      "player_verified": "Shohei Ohtani â LA Dodgers #17, confirmed current 2026",
+      "disclaimer_variant": "social",
+      "disclaimer_count": 1,
+      "banned_words_visible": false,
+      "lighting_consistent": true,
+      "cta_looks_pressable": true,
+      "cta_text": "JOIN NOW",
+      "offer_text_verbatim": true,
+      "overall_pass": true
+    }
+  },
+  {
     "id": "wp-1777486117889-rp",
     "platform": "wannaparlay",
     "game_name": "N/A",
