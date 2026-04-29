@@ -1,5 +1,29 @@
 [
   {
+    "id": "wp-1777481382775-mp",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Map",
+    "format": "portrait",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a6/0020cb930fff0a414b2eb48b35b44d04765ca307c40b0b70afd164aaf9bac3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T164404Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b20b33c8ad6c433fec0aff3ed49a47ec4af1d034b68add732f88a808e96338a5",
+    "composite_step_executed": true,
+    "created_at": "2026-04-29T16:49:42.775Z"
+  },
+  {
+    "id": "wp-1777481382775-ms",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Map",
+    "format": "square",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/20/d08dc7f1f0b84958ea11e135139b4c023de2eb1f47a6b63f0e504cb88c0097.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T164437Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8ab2e5e47cdf9668d5b107dd650db72f8f14b6de509d7e48ce630248a6dec938",
+    "composite_step_executed": true,
+    "created_at": "2026-04-29T16:49:42.775Z"
+  },
+  {
     "id": "wp-1777479093596-cs",
     "platform": "wannaparlay",
     "game_name": "N/A",
