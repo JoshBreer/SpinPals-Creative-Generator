@@ -455,7 +455,24 @@ function hasReachedDailyLimit(email){return getGenerationCount(email)>=DAILY_LIM
 // WEBHOOK
 // ============================================================
 async function triggerWebhook(data,url){
-  try{await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),mode:'no-cors'});return true;}catch(e){return false}
+  console.log('WEBHOOK FIRING TO:',url,'DATA:',JSON.stringify(data).substring(0,200));
+  // Try cors mode first (sends Content-Type correctly)
+  try{
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    console.log('WEBHOOK CORS STATUS:',r.status);
+    return true;
+  }catch(e){
+    console.log('WEBHOOK CORS FAILED:',e.message,', trying no-cors...');
+  }
+  // Fallback: no-cors (opaque response, no Content-Type header but request still fires)
+  try{
+    await fetch(url,{method:'POST',body:JSON.stringify(data),mode:'no-cors'});
+    console.log('WEBHOOK NO-CORS SENT');
+    return true;
+  }catch(e){
+    console.error('WEBHOOK BOTH FAILED:',e);
+    return false;
+  }
 }
 
 // ============================================================
