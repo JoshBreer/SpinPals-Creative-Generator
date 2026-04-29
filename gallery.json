@@ -1,5 +1,43 @@
 [
   {
+    "id": "wp-1777488380987-elec-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "100% Deposit Match Up To $250",
+    "style": "Electric",
+    "user_email": "josh@wanna.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4e/1b96a8161ed19cece5a060ba3ac6a20351afe36d0d5cffb76efe95e4e75889.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T184505Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=2a4465d3a00dd6d44618ab15ef7b287de2cdba4941c16f2cf79e8e63be701bb8",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "4e/1b96a8161ed19cece5a060ba3ac6a20351afe36d0d5cffb76efe95e4e75889.jpg",
+    "created_at": "2026-04-29T18:45:00Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "electric_palette_correct": true,
+      "electric_lightning_present": true,
+      "electric_headline_dominant": true,
+      "electric_icons_present": true,
+      "offer_text_verbatim": true,
+      "disclaimer_present_and_verbatim": true,
+      "disclaimer_count": 1,
+      "cta_looks_pressable": true,
+      "cta_disclaimer_gap_tight": true,
+      "cta_disclaimer_gap_pct": 3,
+      "gap_resolved_via": "regen",
+      "foreground": {
+        "foreground_subject_present": true,
+        "foreground_subject_dominant": true,
+        "kinetic_object_present": true,
+        "kinetic_object_dominant": true
+      },
+      "lighting_consistent": true,
+      "no_banned_words_visible": true,
+      "variation_distinct_from_prior": null,
+      "all_checks_pass": true
+    }
+  },
+  {
     "id": "wp-1777488004733-rp",
     "platform": "wannaparlay",
     "game_name": "N/A",
