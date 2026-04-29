@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-177750151750CA",
+    "game_name": "Hot Fiesta",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f7/0d17a81e6c40913e468d66b72016d4df9e3875d194fc4bbf0a4b8cc2dd1f5b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T222603Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=05e4a12fd67ef7d08cad5715bb3e0848ea47f29831bc6d496777b4d834325155",
+    "created_at": "2026-04-29 22:25:17"
+  },
+  {
     "id": "cr-177750117287FB",
     "game_name": "Three Card Poker",
     "format": "square",
