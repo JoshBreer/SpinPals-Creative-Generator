@@ -1948,5 +1948,19 @@
     "storage_key": "e0/fb33d0e508462666fe8e181660a071541e9515cc0aaa91005e61a1f39c0616.jpg",
     "created_at": "2026-04-29T21:37:02.028Z",
     "disclaimer_variant": "social"
+  },
+  {
+    "id": "thz-1777499355281-map-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "$100K Pick'em Contest",
+    "style": "Map",
+    "user_email": "josh@thrillzz.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/31/4dbd01f54bd7315463eecc316ea5e1ef17396c0d9ec300b5e15884e5b5d721.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T214758Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3ce0a91357302d054f44dc99749e9740726136e47b17f0ec9accde4dd6b3972d",
+    "storage_bucket": "cobb-artifacts-prod",
+    "storage_key": "31/4dbd01f54bd7315463eecc316ea5e1ef17396c0d9ec300b5e15884e5b5d721.jpg",
+    "created_at": "2026-04-29T21:49:15.281Z",
+    "disclaimer_variant": "social"
   }
 ]
