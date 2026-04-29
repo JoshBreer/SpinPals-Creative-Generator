@@ -1,17 +1,13 @@
 [
   {
-    "id": "wp-1777328887690-p",
-    "platform": "wannaparlay",
+    "id": "cr-17773975060470",
     "game_name": "N/A",
-    "offer_text": "The Main Event â $4 Entry, Win $4,000",
-    "style": "Realistic",
-    "user_email": "cuneyt@rmgs.online",
     "format": "portrait",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b9/3ac8146d1f7ea8513506959e1ca5583fd9372d23cc8a70e544c872d406ac5f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260427%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260427T222438Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a1019f9a30360a94475187de52fa052a6ad5ecaf9992d730ddfe6dbbe973a688",
-    "created_at": "2026-04-27T22:28:07Z",
-    "composite_step_executed": true,
-    "disclaimer_variant": "social",
-    "notes": "Retired copy '$2 Entry, Win $2,000' auto-upgraded to canonical '$4 Entry, Win $4,000'. Mascot overlay composited (DARK path, native white). Lint: clean first pass. Audit: all checks passed."
+    "offer_text": "none",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c1/30c6d97a483233386940def7d34fef951908973ec8d5bfcc2af94c070d90bf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T160601Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c728a4d00fc2e4c36cd4f31aaebeb6cb6b29e644b88578ffb5f7531bc63057a2",
+    "created_at": "2026-04-28 17:31:46"
   },
   {
     "id": "cr-177732688612A2p",
