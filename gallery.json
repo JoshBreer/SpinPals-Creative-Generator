@@ -1922,5 +1922,17 @@
     "created_at": "2026-04-29T20:57:43.153Z",
     "disclaimer_variant": "social",
     "notes": "offer_text \"none\" does not match any confirmed offer. Using verbatim as instructed. For Map style, headline will use \"PLAY FREE. WIN REAL.\" tagline since offer_text is \"none\". | custom_instructions reference 'WannaParlay' and '23 states' — this is a Thrillzz agent. Applying Thrillzz brand standards with the 38-state map template. The purple background and gold CTA from custom_instructions will be adapted to Thrillzz brand colors (dark navy + electric accents), but gold CTA will be honored as a style preference."
+  },
+  {
+    "id": "thz-1777497045803-map-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "none",
+    "style": "Custom",
+    "user_email": "josh@thrillzz.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/42/899287a20b0d983b855b93ba8f6968342976f993a3bacf49b72e12bce87261.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260429%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260429T210913Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aed9578d87ef6ce5bac2b8d97396092afb7dfd28e026d557f76517acbde94ebc",
+    "created_at": "2026-04-29T21:10:45.803Z",
+    "disclaimer_variant": "social"
   }
 ]
