@@ -933,7 +933,8 @@ async function doQuickGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  const qClientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:qClientPlatform};
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
@@ -1015,7 +1016,8 @@ async function doGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:clientPlatform};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
@@ -1334,7 +1336,8 @@ async function doQuickGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  const qClientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:qClientPlatform};
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
@@ -1416,7 +1419,8 @@ async function doGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:state.platform||'spinpals'};
+  const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:clientPlatform};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
