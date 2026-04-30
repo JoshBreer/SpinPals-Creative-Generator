@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1777566627snd2",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/28/d566cdaad64cff051388977f4f8839335eab893a396dc44c306c844ae73c4a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T163350Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=195f53232d343aa3968c822c39141da894e64f3fd15a912141d7f7965983b2aa",
+    "created_at": "2026-04-30 16:30:27"
+  },
+  {
+    "id": "cr-1777566624snd1",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/8b/1038871e7e58fa305ecfe986199c751b1be7ccc1681bfeef5c9442fc4a123e.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T163509Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9462a2bd7307ac1203995348c10ccaefbd99ae580f0c4ef7a054fd67656a26af",
+    "created_at": "2026-04-30 16:30:24"
+  },
+  {
     "id": "cr-1777565439C930p",
     "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
