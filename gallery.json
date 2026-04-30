@@ -1518,5 +1518,17 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
+  },
+  {
+    "id": "thz-1777512463738-realistic-s",
+    "platform": "thrillzz",
+    "game_name": "College Football (CFB)",
+    "format": "square",
+    "offer_text": "Win Real Cash Prizes",
+    "style": "Realistic",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/51/1541e7120a17205e474a34f7e18ad2ec31f25f283791fb2e4d08bf5776f61d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T012625Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=693d6d1c5373d4158f7de0fd29185a6415d7ea2dcb1eb95de7cdf157556ec06f",
+    "created_at": "2026-04-30T01:27:43.738Z",
+    "disclaimer_variant": "social"
   }
 ]
