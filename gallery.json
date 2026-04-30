@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1777578365A7B7",
+    "game_name": "Zeus vs Hades",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/6b/0b5cc29ae431cbd746d35b8f22f2f4dc4f157085291eeef23372a01d0f978a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T194724Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a4802864d7ebaa7bce4ae83256de9a48c044211025c864da148addd737d80a47",
+    "created_at": "2026-04-30 19:46:05"
+  },
+  {
+    "id": "cr-177757836248D1",
+    "game_name": "Zeus vs Hades",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7d/de2ac6ee4f02e88a567eee7a7085a96a03fa3e26eeed146cb371be9be421ac.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T194703Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=489bd61b5ceef358904c6b1d97804670f5906fb10a5ff64ec87ad62ca8dc7f4f",
+    "created_at": "2026-04-30 19:46:02"
+  },
+  {
     "id": "cr-1777567520C369",
     "game_name": "Hot Pepper",
     "format": "square",
