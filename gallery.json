@@ -1588,5 +1588,15 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
+  },
+  {
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "30 Free Spins on First Deposit",
+    "style": "Text Only",
+    "platform": "betewin",
+    "user_email": "buhan@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/63/f459dde51beea1aa4549fadf3dfc6c5105e307d816f7fa1e7e30f37bfbc16a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T202757Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=953aec146290e475cffff95e13228c107156d93c479602cfba60d45221186778",
+    "created_at": "2026-04-30T20:28:00Z"
   }
 ]
