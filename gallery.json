@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1777567520C369",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/2d/60ed1b0d40091da1171bfff3d4da7aebc3afcc5b38f5a724fb074f63d78fc1.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T164611Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7abcb86ba13c7a5b0e9f914e7d0062e8e8c420fabcb0ad9c71bf7c966aaa47c0",
+    "created_at": "2026-04-30 16:45:20"
+  },
+  {
     "id": "cr-1777566627snd2",
     "game_name": "Snoop Dogg Dollars",
     "format": "square",
