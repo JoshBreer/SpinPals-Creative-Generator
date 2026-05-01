@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1777645675LL01",
+    "game_name": "Lucky Lightning",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/5b/2c03e4cf452f069726b6238dd00d7d685ffd8d11da64bd80154404fead9176.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T144058Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=294c1d475bc831477f1e546e6a3adf2cd0a6fe1a2d45de7c5792358940dcb386",
+    "created_at": "2026-05-01 14:27:55"
+  },
+  {
+    "id": "cr-1777645675LL02",
+    "game_name": "Lucky Lightning",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f7/1d99c97af22864a24fa166a9e14d851a1bf9f064f1f8d24f9b0ace159e7835.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T144119Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=20aeaccfd641bae25545acb08d4cec1a5efca9a3d70999d2a6031711a0e1e6aa",
+    "created_at": "2026-05-01 14:27:55"
+  },
+  {
     "id": "cr-1777578365A7B7",
     "game_name": "Zeus vs Hades",
     "format": "square",
@@ -1588,25 +1608,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "game_name": "N/A",
-    "format": "portrait",
-    "offer_text": "30 Free Spins on First Deposit",
-    "style": "Text Only",
-    "platform": "betewin",
-    "user_email": "buhan@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/63/f459dde51beea1aa4549fadf3dfc6c5105e307d816f7fa1e7e30f37bfbc16a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260430%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260430T202757Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=953aec146290e475cffff95e13228c107156d93c479602cfba60d45221186778",
-    "created_at": "2026-04-30T20:28:00Z"
-  },
-  {
-    "game_name": "Sweet Bonanza",
-    "format": "portrait",
-    "offer_text": "Yatirim Bonusu - Papara ve Kripto",
-    "style": "Classic",
-    "platform": "bankobet",
-    "user_email": "buhan@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7a/c66caad7ed77569e403644be574d9f5a83b29413b61b395624b96ca96eea26.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T124543Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c2fac97885c33df23f7f5bd0bcdca6d12be2a6ed6b3061097b2ba623bc19faa1",
-    "created_at": "2026-05-01T12:46:00Z"
   }
 ]
