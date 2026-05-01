@@ -933,16 +933,17 @@ async function doQuickGenerate(){
   const {top,all}=getGames();
   const offers=getOffers();
 
-  // WannaParlay: no sport selection — just pick style and offer
+  // WannaParlay + Thrillzz: offer-driven, no sport/game selection
+  const isSports=isWannaFlow()||isThrillzzFlow();
   let allNames=[];
-  if(!isWannaFlow()){
+  if(!isSports){
     Object.values(all).forEach(cat=>cat.forEach(g=>allNames.push(g.name)));
   }
 
   const randFormat=formats[Math.floor(Math.random()*formats.length)];
-  const wannaStyles=['Classic','Realistic','Electric','Map'];
-  const randStyle=isWannaFlow()?wannaStyles[Math.floor(Math.random()*wannaStyles.length)]:styles[Math.floor(Math.random()*styles.length)];
-  const randGame=isWannaFlow()?'N/A':allNames[Math.floor(Math.random()*allNames.length)];
+  const sportsStyles=['Classic','Realistic','Electric','Map'];
+  const randStyle=isSports?sportsStyles[Math.floor(Math.random()*sportsStyles.length)]:styles[Math.floor(Math.random()*styles.length)];
+  const randGame=isSports?'N/A':allNames[Math.floor(Math.random()*allNames.length)];
   const randOffer=offers[Math.floor(Math.random()*offers.length)];
 
   state.format=randFormat;state.style=randStyle;state.game=randGame;state.offer=randOffer.title;state.customInstructions=null;
@@ -951,11 +952,13 @@ async function doQuickGenerate(){
   const platformRow=state.platform?'<div class="summary-row"><span class="summary-label">Platform</span>'+(state.platform==='betewin'?'Betewin':'Bankobet')+'</div>':'';
   msg('⚡ Quick Generate','user');
   await delay(250);
+  // Only show Game row for non-sports clients
+  const gameRowQG=isSports?'':'<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>';
   msg('<div class="summary-card"><div class="summary-title">Quick Generate — Selected For You</div>'+
     platformRow+
     '<div class="summary-row"><span class="summary-label">Format</span>'+fmtLabel+'</div>'+
     '<div class="summary-row"><span class="summary-label">Style</span>'+randStyle+'</div>'+
-    '<div class="summary-row"><span class="summary-label">Game</span>'+randGame+'</div>'+
+    gameRowQG+
     '<div class="summary-row"><span class="summary-label">Offer</span>'+randOffer.title+'</div></div>');
   await delay(400);
 
@@ -1011,7 +1014,7 @@ async function doQuickGenerate(){
     const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
     let found2=null;
     while(!found2&&!stopped){
-      await delay(5000);
+      await delay(8000);
       const fresh=await fetchGallery();
       const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
@@ -1033,7 +1036,7 @@ async function doQuickGenerate(){
       loadDiv.appendChild(nb);
       break;
     }
-    await delay(5000);
+    await delay(8000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
@@ -1112,7 +1115,7 @@ async function doGenerate(){
     const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
     let found2=null;
     while(!found2&&!stopped){
-      await delay(5000);
+      await delay(8000);
       const fresh=await fetchGallery();
       const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
@@ -1142,7 +1145,7 @@ async function doGenerate(){
       loadDiv.appendChild(retryWrap);
       break;
     }
-    await delay(5000);
+    await delay(8000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
