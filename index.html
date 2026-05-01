@@ -231,7 +231,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 
 <!-- STATS (rmgs.online only) -->
 <section class="stats-section" id="statsSection">
-  <div class="stats-heading">Team Generation Stats</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div class="stats-heading" style="margin-bottom:0;">Team Generation Stats</div>
+    <button id="statsRefreshBtn" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--card2);color:var(--txt2);font-family:inherit;font-size:12px;cursor:pointer;" onclick="renderStats()">↻ Refresh</button>
+  </div>
   <div class="stats-grid" id="statsGrid"></div>
   <table class="stats-table">
     <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Thrillzz</th><th>Last Generated</th></tr></thead>
@@ -454,7 +457,21 @@ function renderGallery(filter='all'){
     img.src=c.image_url;
     img.alt=c.game_name||'Creative';
     img.style.cssText='width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
-    img.onerror=()=>{thumb.style.background='var(--card2)';img.style.display='none';};
+    img.onerror=()=>{
+      // Try loading via proxy in case URL is expired or CORS blocked
+      if(!img.dataset.tried){
+        img.dataset.tried='1';
+        img.src='https://images.weserv.nl/?url='+encodeURIComponent(c.image_url)+'&output=jpg';
+      } else {
+        // Show expired indicator instead of blank gray
+        img.style.display='none';
+        const exp=document.createElement('div');
+        exp.style.cssText='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card2);color:var(--txt3);font-size:11px;text-align:center;padding:8px;gap:6px;';
+        exp.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Preview expired</span><a href="'+c.image_url+'" target="_blank" style="color:var(--blue);text-decoration:underline;font-size:10px;">Open original ↗</a>';
+        thumb.style.position='relative';
+        thumb.appendChild(exp);
+      }
+    };
     const overlay=document.createElement('div');overlay.className='gallery-overlay';
     overlay.innerHTML='<div class="gallery-name">'+(c.game_name||'Creative')+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div>';
     thumb.appendChild(img);thumb.appendChild(overlay);
@@ -1376,7 +1393,7 @@ async function renderStats(){
   const tbody=document.getElementById('statsBody');
   if(!grid||!tbody)return;
   grid.innerHTML='<div style="color:var(--txt3);font-size:13px;padding:10px;">Loading latest data...</div>';
-  tbody.innerHTML='';
+  tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--txt3);padding:12px;font-size:13px;">Fetching from GitHub...</td></tr>';
   await fetchGallery();
 
   // getPlatform MUST be defined before any forEach that uses it
@@ -1432,6 +1449,9 @@ async function renderStats(){
     const last=data.lastDate?data.lastDate.toLocaleDateString():'Never';
     tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+(data.thrillzz||0)+'</td><td>'+last+'</td></tr>';
   });
+  // Add refresh button
+  const refreshBtn=document.getElementById('statsRefreshBtn');
+  if(refreshBtn)refreshBtn.onclick=()=>renderStats();
 }
 
 // MODAL
