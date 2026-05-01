@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1777658549A1B2",
+    "game_name": "French Roulette",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0e/26eea45d9477fc81a5df446e8c633bebff674fe3e539196ae104a40cb96ef4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T181806Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=112a870b3ab35b29adee599af9b4d271110640ce1e93732b348469542b200e7f",
+    "created_at": "2026-05-01 18:02:29"
+  },
+  {
+    "id": "cr-1777658549C3D4",
+    "game_name": "French Roulette",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "josh@spinpals.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/13/6cd59ed400f272f0bc1d8da3731a7ef1fd996d6f3df0fd4e2b382a0a808d18.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T181828Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4d05f50354328c3d83a7f04767922015e8ef842374b9837fc79b0f7537356673",
+    "created_at": "2026-05-01 18:02:29"
+  },
+  {
     "id": "cr-1777650799A1B2",
     "game_name": "Lucky Lightning",
     "format": "portrait",
