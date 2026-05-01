@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1777650799A1B2",
+    "game_name": "Lucky Lightning",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/aa/1e551bfda9f97f709c3d039cd409b0aa2583ca4489726d3a8144df1ba968c8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T161051Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=83419386b63f823e06196a781c8056b9dd8308b1bf1713bbb4b659fb99dec0f1",
+    "created_at": "2026-05-01 15:53:19"
+  },
+  {
+    "id": "cr-1777650799C3D4",
+    "game_name": "Lucky Lightning",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ea/9a3a4f491fe857489247e2ccb7d38b9d44f4063c0c4ffd22af14eecd2505e7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260501%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260501T161111Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7ee51b95574d1a8abd6fa851312f52c5dc7fdae092c58d7210e4cb2037deef8e",
+    "created_at": "2026-05-01 15:53:19"
+  },
+  {
     "id": "cr-1777646846B305",
     "game_name": "Zeus vs Hades",
     "format": "square",
