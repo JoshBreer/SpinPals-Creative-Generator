@@ -398,7 +398,7 @@ function activateDashboard(email){
       renderGallery();
       if(email.endsWith('@rmgs.online')){
         document.getElementById('statsSection').style.display='block';
-        renderStats();
+        renderStats(); // async - fetches fresh data internally
       }
     });
     startChat();
@@ -969,7 +969,7 @@ async function doQuickGenerate(){
     const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
     let found2=null;
     while(!found2&&!stopped){
-      await delay(7000);
+      await delay(5000);
       const fresh=await fetchGallery();
       const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
@@ -981,8 +981,17 @@ async function doQuickGenerate(){
   }
 
   let found=null;
+  const maxWaitQ=15*60*1000;
   while(!found&&!stopped){
-    await delay(7000);
+    if(Date.now()-startTs>maxWaitQ){
+      clearInterval(timerInterval);
+      loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏱️</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Generation Timed Out</div><div style="font-size:14px;color:var(--txt2);margin-bottom:14px">This took longer than expected. Please try again.</div></div>';
+      const nb=document.createElement('button');nb.className='opt-btn';nb.textContent='Generate New';nb.onclick=()=>startChat();
+      nb.style.cssText='margin:12px auto;display:block;';
+      loadDiv.appendChild(nb);
+      break;
+    }
+    await delay(5000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
@@ -1061,7 +1070,7 @@ async function doGenerate(){
     const ti2=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
     let found2=null;
     while(!found2&&!stopped){
-      await delay(7000);
+      await delay(5000);
       const fresh=await fetchGallery();
       const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
       if(freshItems.length>snapCount){
@@ -1073,8 +1082,25 @@ async function doGenerate(){
   }
 
   let found=null;
+  const maxWait=15*60*1000; // 15 minute hard timeout
   while(!found&&!stopped){
-    await delay(7000);
+    if(Date.now()-startTs>maxWait){
+      clearInterval(timerInterval);
+      loadDiv.innerHTML='<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⏱️</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Generation Timed Out</div><div style="font-size:14px;color:var(--txt2);margin-bottom:14px">This took longer than expected. Your creative may still be processing.</div></div>';
+      const retryWrap=document.createElement('div');retryWrap.style.cssText='display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;';
+      const retryBtn=document.createElement('button');retryBtn.className='opt-btn opt-blue';retryBtn.textContent='Keep Waiting';
+      const newBtn2=document.createElement('button');newBtn2.className='opt-btn';newBtn2.textContent='Generate New';
+      retryBtn.onclick=()=>{
+        stopped=false;
+        loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Still checking...</div><div class="est-time">Almost there</div><div class="est-sub">Your creative should arrive shortly</div><div class="loading-elapsed" id="elapsed">'+Math.floor((Date.now()-startTs)/1000)+'s elapsed</div>';
+        resumePolling();
+      };
+      newBtn2.onclick=()=>startChat();
+      retryWrap.appendChild(retryBtn);retryWrap.appendChild(newBtn2);
+      loadDiv.appendChild(retryWrap);
+      break;
+    }
+    await delay(5000);
     const fresh=await fetchGallery();
     const freshItems=fresh.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal');
     if(freshItems.length>snapCount){
@@ -1320,35 +1346,53 @@ function openFacebookMediaLibrary(btn){
 
 // ============================================================
 // STATS
-function renderStats(){
+async function renderStats(){
+  // Always fetch fresh data from GitHub so stats are never stale
+  const grid=document.getElementById('statsGrid');
+  const tbody=document.getElementById('statsBody');
+  if(!grid||!tbody)return;
+  grid.innerHTML='<div style="color:var(--txt3);font-size:13px;padding:10px;">Loading latest data...</div>';
+  tbody.innerHTML='';
+  await fetchGallery();
+
   const allItems=galleryData.filter(c=>c.user_email&&c.image_url);
   const byUser={};
   allItems.forEach(c=>{
     const u=c.user_email.trim().toLowerCase();
     if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,thrillzz:0,lastDate:null};
     byUser[u].total++;
-    if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
-    if(u.endsWith('@mario.com'))byUser[u].mario++;
-    if(u.endsWith('@wanna.com'))byUser[u].wanna++;
-    if(u.endsWith('@thrillzz.com'))byUser[u].thrillzz++;
+
+    // Count by client platform field first (most accurate)
+    // Fall back to email domain for older entries that predate platform field
+    const platform=(c.platform||'').toLowerCase();
+    if(platform==='spinpals'||u.endsWith('@spinpals.com'))byUser[u].spinpals++;
+    else if(platform==='mario'||platform==='betewin'||platform==='bankobet'||u.endsWith('@mario.com'))byUser[u].mario++;
+    else if(platform==='wannaparlay'||u.endsWith('@wanna.com'))byUser[u].wanna++;
+    else if(platform==='thrillzz'||u.endsWith('@thrillzz.com'))byUser[u].thrillzz++;
+    else if(u.endsWith('@spinpals.com'))byUser[u].spinpals++;
+
     const d=new Date(c.created_at);
     if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
   });
+
   const totalAll=allItems.length;
-  const spTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@spinpals.com')).length;
-  const marioTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@mario.com')).length;
+  // Count by platform field + email domain for top-line numbers
+  const spTotal=allItems.filter(c=>{const p=(c.platform||'').toLowerCase();const e=(c.user_email||'').toLowerCase();return p==='spinpals'||(!p&&e.endsWith('@spinpals.com'));}).length;
+  const marioTotal=allItems.filter(c=>{const p=(c.platform||'').toLowerCase();const e=(c.user_email||'').toLowerCase();return p==='mario'||p==='betewin'||p==='bankobet'||(!p&&e.endsWith('@mario.com'));}).length;
+  const wannaTotal=allItems.filter(c=>{const p=(c.platform||'').toLowerCase();const e=(c.user_email||'').toLowerCase();return p==='wannaparlay'||(!p&&e.endsWith('@wanna.com'));}).length;
+  const thrillzzTotal=allItems.filter(c=>{const p=(c.platform||'').toLowerCase();const e=(c.user_email||'').toLowerCase();return p==='thrillzz'||(!p&&e.endsWith('@thrillzz.com'));}).length;
   const uniqueUsers=Object.keys(byUser).length;
-  const grid=document.getElementById('statsGrid');
-  if(!grid)return;
+
   grid.innerHTML='';
-  const wannaTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@wanna.com')).length;
-  const thrillzzTotal=allItems.filter(c=>c.user_email&&c.user_email.endsWith('@thrillzz.com')).length;
-  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals Creatives'},{n:marioTotal,l:'Mario Creatives'},{n:wannaTotal,l:'WannaParlay Creatives'},{n:thrillzzTotal,l:'Thrillzz Creatives'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
+  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals'},{n:marioTotal,l:'Mario'},{n:wannaTotal,l:'Wanna Parlay'},{n:thrillzzTotal,l:'Thrillzz'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
     grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
   });
-  const tbody=document.getElementById('statsBody');
-  if(!tbody)return;
+
   tbody.innerHTML='';
+  if(Object.keys(byUser).length===0){
+    tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--txt3);padding:20px;">No creatives found</td></tr>';
+    return;
+  }
   Object.entries(byUser).sort(function(a,b){return b[1].total-a[1].total;}).forEach(function(pair){
     const email=pair[0];const data=pair[1];
     const name=email.split('@')[0];
