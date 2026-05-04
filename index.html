@@ -1150,8 +1150,7 @@ async function doGenerate(){
     if(!falFallbackFired&&Date.now()-startTs>FAL_FALLBACK_DELAY){
       falFallbackFired=true;
       console.log('FAL FALLBACK: Twin silent for 6min, firing fal.ai backup...');
-      const elapsed=document.getElementById('elapsed');
-      if(elapsed)elapsed.parentElement.querySelector('.est-sub').textContent='Switching to backup generator...';
+      try{const subEl=loadDiv.querySelector('.est-sub')||loadDiv.querySelector('[id="elapsed"]');if(subEl)subEl.textContent='Switching to backup generator...';}catch(e){}
       falFallbackPromise=falFallbackGenerate();
       // If fal finishes before Twin, show its result immediately
       falFallbackPromise.then(falUrl=>{
