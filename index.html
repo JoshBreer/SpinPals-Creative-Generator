@@ -1243,8 +1243,8 @@ function buildFalFallbackPrompt(){
   const isTurkish=state.platform==='bankobet';
   const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
   const disclaimerText=isWannaFlow()||isThrillzzFlow()
-    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
-    :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
+    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
+    :'18+ | Play Responsibly | T&Cs Apply';
 
   const fmt=state.format==='both'?'portrait':state.format||'portrait';
   const aspectRatio=fmt==='portrait'?'9:16':'1:1';
@@ -1260,17 +1260,17 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  // Pick a specific real athlete based on sport context
+  // Sport balls floating on dark background — clean, simple, professional
   const sportCtx=(state.game||'').toLowerCase();
-  let athleteDesc='a photorealistic NFL quarterback in a green jersey in a throwing pose, stadium crowd behind him';
+  let athleteDesc='a football, basketball, and baseball floating in dramatic studio lighting against a dark purple gradient background. Clean, minimal, professional.';
   if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
-    athleteDesc='a photorealistic NBA player in a purple jersey mid-jump with a basketball, arena crowd behind him';
+    athleteDesc='a basketball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
   else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
-    athleteDesc='a photorealistic MLB batter in a white pinstripe jersey mid-swing, stadium behind him';
+    athleteDesc='a baseball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
   else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
-    athleteDesc='a photorealistic NHL hockey player in a white jersey skating hard with a stick, ice rink behind him';
+    athleteDesc='a hockey puck and stick on ice with dramatic lighting against a dark background. Clean, minimal, professional.';
   else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
-    athleteDesc='a photorealistic soccer player in a blue jersey kicking a ball, stadium behind him';
+    athleteDesc='a soccer ball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
 
   const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
 
@@ -1280,7 +1280,7 @@ EXACT LAYOUT FROM TOP TO BOTTOM:
 - Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
 - Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
 - Bottom 90-97%: plain dark strip
-- Bottom 97-100%: the text "${disclaimerText}" in white Arial font size 11pt on a dark background. This is the ONLY text in this zone. Exactly these words. Nothing else.
+- Bottom 97-100%: EXACTLY this one short line of tiny white text on a dark background, nothing else: "${disclaimerText}" — fit it on a single line, no wrapping, no second line.
 
 HARD RULES:
 - The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
@@ -1550,8 +1550,8 @@ function buildFalFallbackPrompt(){
   const isTurkish=state.platform==='bankobet';
   const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
   const disclaimerText=isWannaFlow()||isThrillzzFlow()
-    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
-    :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
+    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
+    :'18+ | Play Responsibly | T&Cs Apply';
 
   const fmt=state.format==='both'?'portrait':state.format||'portrait';
   const aspectRatio=fmt==='portrait'?'9:16':'1:1';
@@ -1567,17 +1567,17 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  // Pick a specific real athlete based on sport context
+  // Sport balls floating on dark background — clean, simple, professional
   const sportCtx=(state.game||'').toLowerCase();
-  let athleteDesc='a photorealistic NFL quarterback in a green jersey in a throwing pose, stadium crowd behind him';
+  let athleteDesc='a football, basketball, and baseball floating in dramatic studio lighting against a dark purple gradient background. Clean, minimal, professional.';
   if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
-    athleteDesc='a photorealistic NBA player in a purple jersey mid-jump with a basketball, arena crowd behind him';
+    athleteDesc='a basketball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
   else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
-    athleteDesc='a photorealistic MLB batter in a white pinstripe jersey mid-swing, stadium behind him';
+    athleteDesc='a baseball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
   else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
-    athleteDesc='a photorealistic NHL hockey player in a white jersey skating hard with a stick, ice rink behind him';
+    athleteDesc='a hockey puck and stick on ice with dramatic lighting against a dark background. Clean, minimal, professional.';
   else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
-    athleteDesc='a photorealistic soccer player in a blue jersey kicking a ball, stadium behind him';
+    athleteDesc='a soccer ball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
 
   const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
 
@@ -1587,7 +1587,7 @@ EXACT LAYOUT FROM TOP TO BOTTOM:
 - Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
 - Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
 - Bottom 90-97%: plain dark strip
-- Bottom 97-100%: the text "${disclaimerText}" in white Arial font size 11pt on a dark background. This is the ONLY text in this zone. Exactly these words. Nothing else.
+- Bottom 97-100%: EXACTLY this one short line of tiny white text on a dark background, nothing else: "${disclaimerText}" — fit it on a single line, no wrapping, no second line.
 
 HARD RULES:
 - The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
