@@ -1752,5 +1752,17 @@
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fd/fa2c40943b08fb95c8e37d72c7e0d9f51084a35ba80e397a654bd34ff98db3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260504%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260504T155839Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b891852a01726608814052a71ffaee79b4be66e56e1156bb0e96cff5d729e74d",
     "created_at": "2026-05-04T15:59:42.178Z",
     "disclaimer_variant": "social"
+  },
+  {
+    "id": "thz-1777910619901-207416-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "Daily Free Spin — Wheelzz of Thrillzz",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/08/8bc49bfec6474e4a394e43c1ba0f4fbab142150930edfc1fff8577660d0ed8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260504%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260504T160519Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=09c721f09a6ea7a0aada7239227fedd7a8a981189561b2f817b1dd58ad05d522",
+    "created_at": "2026-05-04T16:06:40.022Z",
+    "disclaimer_variant": "social"
   }
 ]
