@@ -1174,6 +1174,8 @@ async function doGenerate(){
           };
           galleryData.unshift(falEntry);
           showResult(loadMsg,falEntry);
+          // Save to GitHub gallery.json so it persists across page refreshes
+          saveFalEntryToGithub(falEntry);
         }
       }).catch(()=>{});
     }
@@ -1209,6 +1211,29 @@ async function doGenerate(){
   }
 }
 
+
+
+async function saveFalEntryToGithub(entry){
+  try{
+    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
+    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
+    if(!getRes.ok)throw new Error('GET failed');
+    const fileData=await getRes.json();
+    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
+    existing.unshift(entry);
+    const putRes=await fetch(apiUrl,{
+      method:'PUT',
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:'fal.ai fallback creative: '+entry.game_name,
+        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
+        sha:fileData.sha
+      })
+    });
+    if(putRes.ok)console.log('FAL FALLBACK: saved to gallery.json');
+    else console.error('FAL FALLBACK: gallery save failed',putRes.status);
+  }catch(e){console.error('FAL FALLBACK: gallery save error',e);}
+}
 
 // ============================================================
 // FAL.AI FALLBACK — fires only if Twin hasn't responded in 6min
@@ -1482,6 +1507,29 @@ function showResult(loadMsg,found){
 // GENERATE
 // ============================================================
 
+
+
+async function saveFalEntryToGithub(entry){
+  try{
+    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
+    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
+    if(!getRes.ok)throw new Error('GET failed');
+    const fileData=await getRes.json();
+    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
+    existing.unshift(entry);
+    const putRes=await fetch(apiUrl,{
+      method:'PUT',
+      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:'fal.ai fallback creative: '+entry.game_name,
+        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
+        sha:fileData.sha
+      })
+    });
+    if(putRes.ok)console.log('FAL FALLBACK: saved to gallery.json');
+    else console.error('FAL FALLBACK: gallery save failed',putRes.status);
+  }catch(e){console.error('FAL FALLBACK: gallery save error',e);}
+}
 
 // ============================================================
 // FAL.AI FALLBACK — fires only if Twin hasn't responded in 6min
