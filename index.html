@@ -1257,7 +1257,7 @@ function buildFalFallbackPrompt(){
     else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
       bgDesc+='A soccer ball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
     else
-      bgDesc+='A football, basketball, and baseball floating at different depths with dramatic lighting. Blurred stadium in background.';
+      bgDesc+='Three large sports balls (football, basketball, baseball) prominently filling the center of the image, each ball at least 300px in size, floating at different heights and depths with dramatic studio lighting. Blurred stadium crowd in background.';
   } else {
     if(style==='Electric'||isThrillzzFlow())
       bgDesc='Dark navy background (#0A0E28). Electric blue and neon green light rays. Lightning bolt energy streaks. No text.';
@@ -1302,22 +1302,41 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.fillRect(0,0,W,H*0.5);
 
       // OFFER TEXT — top section
-      const offerLines=offer.length>20?[offer.substring(0,offer.lastIndexOf(' ',20)),offer.substring(offer.lastIndexOf(' ',20)+1)]:[offer];
-      const fontSize=isPortrait?(offerLines.length>1?120:140):80;
-      ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+      // Smart line breaking — split offer into lines that fit within canvas
+      const words=offer.split(' ');
+      const maxFontSize=isPortrait?130:75;
+      ctx.font=`900 ${maxFontSize}px Impact, Arial Black, sans-serif`;
+      const offerLines=[];
+      let currentLine='';
+      words.forEach(word=>{
+        const test=currentLine?currentLine+' '+word:word;
+        if(ctx.measureText(test).width>W*0.92&&currentLine){
+          offerLines.push(currentLine);currentLine=word;
+        } else {currentLine=test;}
+      });
+      if(currentLine)offerLines.push(currentLine);
+      // Scale font down if still too wide
+      let fontSize=maxFontSize;
+      offerLines.forEach(line=>{
+        while(ctx.measureText(line).width>W*0.92&&fontSize>40){
+          fontSize-=4;
+          ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+        }
+      });
       ctx.textAlign='center';
-      // Gold text with dark shadow
       ctx.shadowColor='rgba(0,0,0,0.9)';
       ctx.shadowBlur=20;
       ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
-      const goldGrad=ctx.createLinearGradient(0,H*0.05,0,H*0.42);
+      const goldGrad=ctx.createLinearGradient(0,H*0.02,0,H*0.40);
       goldGrad.addColorStop(0,'#FFD700');
       goldGrad.addColorStop(0.5,'#FFA500');
       goldGrad.addColorStop(1,'#FFD700');
       ctx.fillStyle=goldGrad;
+      const lineHeight=fontSize+16;
+      const totalTextH=offerLines.length*lineHeight;
+      const startY=isPortrait?H*0.06:H*0.08;
       offerLines.forEach((line,i)=>{
-        const y=isPortrait?(H*0.12)+(i*(fontSize+20)):H*0.25+(i*(fontSize+10));
-        ctx.fillText(line,W/2,y);
+        ctx.fillText(line,W/2,startY+(i*lineHeight)+fontSize);
       });
 
       // CTA BUTTON — lower center
@@ -1640,7 +1659,7 @@ function buildFalFallbackPrompt(){
     else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
       bgDesc+='A soccer ball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
     else
-      bgDesc+='A football, basketball, and baseball floating at different depths with dramatic lighting. Blurred stadium in background.';
+      bgDesc+='Three large sports balls (football, basketball, baseball) prominently filling the center of the image, each ball at least 300px in size, floating at different heights and depths with dramatic studio lighting. Blurred stadium crowd in background.';
   } else {
     if(style==='Electric'||isThrillzzFlow())
       bgDesc='Dark navy background (#0A0E28). Electric blue and neon green light rays. Lightning bolt energy streaks. No text.';
@@ -1685,22 +1704,41 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.fillRect(0,0,W,H*0.5);
 
       // OFFER TEXT — top section
-      const offerLines=offer.length>20?[offer.substring(0,offer.lastIndexOf(' ',20)),offer.substring(offer.lastIndexOf(' ',20)+1)]:[offer];
-      const fontSize=isPortrait?(offerLines.length>1?120:140):80;
-      ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+      // Smart line breaking — split offer into lines that fit within canvas
+      const words=offer.split(' ');
+      const maxFontSize=isPortrait?130:75;
+      ctx.font=`900 ${maxFontSize}px Impact, Arial Black, sans-serif`;
+      const offerLines=[];
+      let currentLine='';
+      words.forEach(word=>{
+        const test=currentLine?currentLine+' '+word:word;
+        if(ctx.measureText(test).width>W*0.92&&currentLine){
+          offerLines.push(currentLine);currentLine=word;
+        } else {currentLine=test;}
+      });
+      if(currentLine)offerLines.push(currentLine);
+      // Scale font down if still too wide
+      let fontSize=maxFontSize;
+      offerLines.forEach(line=>{
+        while(ctx.measureText(line).width>W*0.92&&fontSize>40){
+          fontSize-=4;
+          ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+        }
+      });
       ctx.textAlign='center';
-      // Gold text with dark shadow
       ctx.shadowColor='rgba(0,0,0,0.9)';
       ctx.shadowBlur=20;
       ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
-      const goldGrad=ctx.createLinearGradient(0,H*0.05,0,H*0.42);
+      const goldGrad=ctx.createLinearGradient(0,H*0.02,0,H*0.40);
       goldGrad.addColorStop(0,'#FFD700');
       goldGrad.addColorStop(0.5,'#FFA500');
       goldGrad.addColorStop(1,'#FFD700');
       ctx.fillStyle=goldGrad;
+      const lineHeight=fontSize+16;
+      const totalTextH=offerLines.length*lineHeight;
+      const startY=isPortrait?H*0.06:H*0.08;
       offerLines.forEach((line,i)=>{
-        const y=isPortrait?(H*0.12)+(i*(fontSize+20)):H*0.25+(i*(fontSize+10));
-        ctx.fillText(line,W/2,y);
+        ctx.fillText(line,W/2,startY+(i*lineHeight)+fontSize);
       });
 
       // CTA BUTTON — lower center
