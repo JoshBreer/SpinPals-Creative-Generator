@@ -1698,5 +1698,17 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
+  },
+  {
+    "id": "thz-1777916054373-660066-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "Bet $10 Get $50 + Free Entry to $100K Pickem",
+    "style": "Realistic",
+    "user_email": "josh@thrillzz.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/a6/bd458d9cb90f32dd070dfe145b0396e0b382538f4a66a67af9d63082e952b5.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260504%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260504T174053Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=865364836bde95379574d04f25e03a897b176b837ff278691acfba20e9d49e34",
+    "created_at": "2026-05-04T17:41:50.099Z",
+    "disclaimer_variant": "social"
   }
 ]
