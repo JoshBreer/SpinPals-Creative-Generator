@@ -1,5 +1,48 @@
 [
   {
+    "id": "wp-1777921899576-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "The Main Event â $2 Entry, Win $2,000",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "format": "portrait",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-1777921899576-p.png",
+    "created_at": "2026-05-04T19:11:39.576Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_tight": true,
+      "cta_disclaimer_gap_pct": 2,
+      "no_banned_words_visible": true,
+      "disclaimer_exact_once": true,
+      "disclaimer_count": 1,
+      "cta_looks_pressable": true,
+      "lighting_consistent": true,
+      "realistic_one_player_only": true,
+      "realistic_no_stadium": true,
+      "realistic_player_verified": true,
+      "realistic_athlete_correct_jersey": true,
+      "realistic_verified_player": "LeBron James",
+      "realistic_verified_team": "Los Angeles Lakers",
+      "realistic_verified_jersey_number": "23",
+      "realistic_verification_source": "Wikipedia/ESPN confirmed: LeBron James, LA Lakers #23, active May 2026",
+      "foreground_subject_present": true,
+      "foreground_subject_dominant": true,
+      "overall_quality_15k": true,
+      "variation_distinct_from_prior": true,
+      "gallery_write_attempts": 1
+    },
+    "variation_fingerprint": {
+      "player_or_kinetic": "LeBron_James_Lakers_23",
+      "composition_position": "right third",
+      "background_color_label": "charcoal_with_purple_accents_atmospheric",
+      "camera_angle": "slam_dunk_attack_low_angle_dramatic",
+      "dominant_light": "golden_hour_warm_side_key_single_source",
+      "typography_label": "bold_extruded_three_d_gold_gradient_upper_half"
+    }
+  },
+  {
     "id": "wp-1777921009320-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
