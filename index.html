@@ -976,7 +976,7 @@ async function doQuickGenerate(){
 
   let stopped=false;
   const loadDiv=document.createElement('div');loadDiv.className='loading';
-  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randGame+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">'+ getLoadingSubtext() +'</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+  loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+(randGame&&randGame!=='N/A'?randGame:randStyle)+' ad...</div><div class="est-time">'+getEstTime()+'</div><div class="est-sub">'+ getLoadingSubtext() +'</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
   const stopBtn=document.createElement('button');
   stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;';
   stopBtn.textContent='Stop Generation';
@@ -1323,7 +1323,8 @@ function showResult(loadMsg,found){
   loadMsg.appendChild(thankMsg);
   loadMsg.appendChild(acts);
   chatEl.scrollTop=chatEl.scrollHeight;
-  renderGallery();
+  // Fresh fetch so gallery shows the new creative immediately without page reload
+  fetchGallery().then(()=>renderGallery());
 }
 
 // ============================================================
