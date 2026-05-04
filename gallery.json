@@ -1,5 +1,44 @@
 [
   {
+    "id": "wp-1777929608126-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "Turn $4 into $4,000",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "format": "portrait",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-1777929608126-p.png",
+    "created_at": "2026-05-04T21:20:08.000Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_tight": true,
+      "cta_disclaimer_gap_pct": 0.9,
+      "cta_looks_pressable": true,
+      "lighting_consistent": true,
+      "banned_words_visible": false,
+      "disclaimer_count": 1,
+      "disclaimer_verbatim": true,
+      "disclaimer_exactly_once": true,
+      "offer_text_verbatim": true,
+      "foreground_subject_present": true,
+      "foreground_subject_dominant": true,
+      "realistic_athlete_correct_jersey": true,
+      "realistic_one_player_only": true,
+      "realistic_no_stadium": true,
+      "realistic_player_verified": true,
+      "variation_distinct_axes": true,
+      "gap_resolved_via": "none_required",
+      "gallery_write_attempts": 1
+    },
+    "realistic_verification": {
+      "realistic_verified_player": "Kevin Durant",
+      "realistic_verified_team": "Houston Rockets",
+      "realistic_verified_jersey_number": "7",
+      "realistic_verification_source": "ESPN NBA player page + Wikipedia - traded to Houston Rockets July 2025, wears #7, 2026 All-Star selection"
+    }
+  },
+  {
     "id": "wp-1777928651176-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
@@ -20,7 +59,7 @@
       "disclaimer_count": 1,
       "disclaimer_verbatim_match": true,
       "disclaimer_full_width_bar": true,
-      "offer_text_correct_note": "ALL-CAPS rendering of 'Turn $4 into $4,000' â content correct, minor casing styling drift (logged only)",
+      "offer_text_correct_note": "ALL-CAPS rendering of 'Turn $4 into $4,000' Ã¢ÂÂ content correct, minor casing styling drift (logged only)",
       "foreground_subject_present": true,
       "foreground_subject_dominant": true,
       "realistic_athlete_correct_jersey": true,
@@ -196,7 +235,7 @@
     "id": "wp-1777921899576-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "The Main Event ÃÂ¢ÃÂÃÂ $2 Entry, Win $2,000",
+    "offer_text": "The Main Event ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $2 Entry, Win $2,000",
     "style": "Realistic",
     "user_email": "josh@wanna.com",
     "format": "portrait",
@@ -239,7 +278,7 @@
     "id": "wp-1777921009320-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "Parlay Royale ÃÂ¢ÃÂÃÂ $50 Entry, $1,000 Prize",
+    "offer_text": "Parlay Royale ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $50 Entry, $1,000 Prize",
     "style": "Electric",
     "user_email": "josh@wanna.com",
     "format": "portrait",
@@ -267,14 +306,14 @@
       "gallery_write_attempts": 1,
       "email_sent": false,
       "email_to": "josh@wanna.com",
-      "notes": "Regen-once applied for electric_palette correction. Lighting inconsistency was a false-positive from strict auditor ÃÂ¢ÃÂÃÂ commercial-standard lighting acceptable. Background confirmed navy with atmospheric accents only."
+      "notes": "Regen-once applied for electric_palette correction. Lighting inconsistency was a false-positive from strict auditor ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ commercial-standard lighting acceptable. Background confirmed navy with atmospheric accents only."
     }
   },
   {
     "id": "wp-1777921009320-s",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "Parlay Royale ÃÂ¢ÃÂÃÂ $50 Entry, $1,000 Prize",
+    "offer_text": "Parlay Royale ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ $50 Entry, $1,000 Prize",
     "style": "Electric",
     "user_email": "josh@wanna.com",
     "format": "square",
@@ -361,7 +400,7 @@
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-1777916803691-p.png",
     "created_at": "2026-05-04T17:46:25Z",
     "audit": {
-      "offer_text_verbatim_note": "ALL CAPS typographic rendering ÃÂ¢ÃÂÃÂ content correct",
+      "offer_text_verbatim_note": "ALL CAPS typographic rendering ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ content correct",
       "disclaimer_exact_once": true,
       "no_wannaparlay_brand_mark": true,
       "no_reserved_blank_zone": true,
@@ -382,10 +421,10 @@
       "gap_resolved_via": "none_needed"
     },
     "realistic_verification": {
-      "realistic_verified_player": "Nikola JokiÃÂÃÂ",
+      "realistic_verified_player": "Nikola JokiÃÂÃÂÃÂÃÂ",
       "realistic_verified_team": "Denver Nuggets",
       "realistic_verified_jersey_number": "15",
-      "realistic_verification_source": "cbssports.com + nbcsports.com ÃÂ¢ÃÂÃÂ confirmed current Nuggets, no trade as of May 2026"
+      "realistic_verification_source": "cbssports.com + nbcsports.com ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ confirmed current Nuggets, no trade as of May 2026"
     },
     "variation_fingerprint": "{\"player_or_kinetic\":\"Nikola_Jokic_Nuggets_15\",\"composition_position\":\"centered\",\"background_color_label\":\"deep_purple_atmospheric_gradient\",\"camera_angle\":\"studio_portrait_low_angle_upward_tilt\",\"dominant_light\":\"soft_diffused_backlight_purple_rim\",\"typography_label\":\"all_caps_bold_gold_metallic_upper_portion\"}"
   },
