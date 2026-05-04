@@ -1241,21 +1241,15 @@ function buildFalFallbackPrompt(){
 BACKGROUND: ${bg} Style: ${styleNote}
 No logos. No brand names. No watermarks.
 
-TEXT ELEMENTS — RENDER EXACTLY:
+EXACTLY THREE TEXT ELEMENTS — NO MORE, NO LESS:
 
-1. HEADLINE (large, bold, dominant, top of image):
-${offer?`"${offer}"`:'Bold energetic headline about winning'}
-Style: White or gold bold text. Drop shadow. Impossible to miss.
+1. HEADLINE at top: ${offer?`"${offer}"`:'Bold energetic headline'} — large bold gold/white text.
 
-2. CTA BUTTON (lower center, solid rounded button):
-Text: "${ctaText}"
-Style: Bright green (#22c55e) or gold rounded button. Bold white text.
+2. ONE single CTA button in the lower center: a solid rounded green button with the words "${ctaText}" inside it. ONE button only. Do not repeat this button anywhere else in the image.
 
-3. DISCLAIMER (very bottom, full width dark bar):
-"${disclaimerText}"
-Style: Small white text. Must be present. Exactly these words.
+3. ONE disclaimer line pinned to the very bottom edge: "${disclaimerText}" — small white text on a dark bar. Use EXACTLY these words, nothing else, no extra legal text below it.
 
-RULES: Only these 3 text elements. No fake URLs. No extra text. All text razor sharp.`;
+CRITICAL: There must be exactly ONE CTA button and exactly ONE disclaimer line. No duplicates of either.`;
   return {prompt, aspectRatio};
 }
 
@@ -1517,21 +1511,15 @@ function buildFalFallbackPrompt(){
 BACKGROUND: ${bg} Style: ${styleNote}
 No logos. No brand names. No watermarks.
 
-TEXT ELEMENTS — RENDER EXACTLY:
+EXACTLY THREE TEXT ELEMENTS — NO MORE, NO LESS:
 
-1. HEADLINE (large, bold, dominant, top of image):
-${offer?`"${offer}"`:'Bold energetic headline about winning'}
-Style: White or gold bold text. Drop shadow. Impossible to miss.
+1. HEADLINE at top: ${offer?`"${offer}"`:'Bold energetic headline'} — large bold gold/white text.
 
-2. CTA BUTTON (lower center, solid rounded button):
-Text: "${ctaText}"
-Style: Bright green (#22c55e) or gold rounded button. Bold white text.
+2. ONE single CTA button in the lower center: a solid rounded green button with the words "${ctaText}" inside it. ONE button only. Do not repeat this button anywhere else in the image.
 
-3. DISCLAIMER (very bottom, full width dark bar):
-"${disclaimerText}"
-Style: Small white text. Must be present. Exactly these words.
+3. ONE disclaimer line pinned to the very bottom edge: "${disclaimerText}" — small white text on a dark bar. Use EXACTLY these words, nothing else, no extra legal text below it.
 
-RULES: Only these 3 text elements. No fake URLs. No extra text. All text razor sharp.`;
+CRITICAL: There must be exactly ONE CTA button and exactly ONE disclaimer line. No duplicates of either.`;
   return {prompt, aspectRatio};
 }
 
