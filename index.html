@@ -1236,20 +1236,23 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  const prompt=`A premium ${aspectRatio} advertising creative. Agency production quality.
+  const prompt=`A premium ${aspectRatio} advertising creative. High production quality.
 
-BACKGROUND: ${bg} Style: ${styleNote}
-No logos. No brand names. No watermarks.
+BACKGROUND: ${bg} ${styleNote}
 
-EXACTLY THREE TEXT ELEMENTS — NO MORE, NO LESS:
+ABSOLUTE PROHIBITIONS — NEVER INCLUDE:
+- NO logos of any kind. NO brand icons. NO circular badges. NO emblems. NO watermarks. NO app icons. Nothing that looks like a logo anywhere in the image.
+- NO invented text. NO random words. NO placeholder copy. NO gibberish.
 
-1. HEADLINE at top: ${offer?`"${offer}"`:'Bold energetic headline'} — large bold gold/white text.
+EXACTLY THREE TEXT ELEMENTS ONLY:
 
-2. ONE single CTA button in the lower center: a solid rounded green button with the words "${ctaText}" inside it. ONE button only. Do not repeat this button anywhere else in the image.
+1. HEADLINE: ${offer?`"${offer}"`:'Bold energetic sports headline'} — large bold text, top of image. Nothing else above or below it.
 
-3. ONE disclaimer line pinned to the very bottom edge: "${disclaimerText}" — small white text on a dark bar. Use EXACTLY these words, nothing else, no extra legal text below it.
+2. CTA BUTTON: One single solid green rounded button in the lower center with ONLY the word "${ctaText}" inside it. One button. Once. Never repeated.
 
-CRITICAL: There must be exactly ONE CTA button and exactly ONE disclaimer line. No duplicates of either.`;
+3. DISCLAIMER: One single line of small white text at the very bottom: "${disclaimerText}" — exactly these words, one line only, nothing else underneath it.
+
+These are the ONLY three text elements. If you are about to add any other text — do not.`;
   return {prompt, aspectRatio};
 }
 
@@ -1506,20 +1509,23 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  const prompt=`A premium ${aspectRatio} advertising creative. Agency production quality.
+  const prompt=`A premium ${aspectRatio} advertising creative. High production quality.
 
-BACKGROUND: ${bg} Style: ${styleNote}
-No logos. No brand names. No watermarks.
+BACKGROUND: ${bg} ${styleNote}
 
-EXACTLY THREE TEXT ELEMENTS — NO MORE, NO LESS:
+ABSOLUTE PROHIBITIONS — NEVER INCLUDE:
+- NO logos of any kind. NO brand icons. NO circular badges. NO emblems. NO watermarks. NO app icons. Nothing that looks like a logo anywhere in the image.
+- NO invented text. NO random words. NO placeholder copy. NO gibberish.
 
-1. HEADLINE at top: ${offer?`"${offer}"`:'Bold energetic headline'} — large bold gold/white text.
+EXACTLY THREE TEXT ELEMENTS ONLY:
 
-2. ONE single CTA button in the lower center: a solid rounded green button with the words "${ctaText}" inside it. ONE button only. Do not repeat this button anywhere else in the image.
+1. HEADLINE: ${offer?`"${offer}"`:'Bold energetic sports headline'} — large bold text, top of image. Nothing else above or below it.
 
-3. ONE disclaimer line pinned to the very bottom edge: "${disclaimerText}" — small white text on a dark bar. Use EXACTLY these words, nothing else, no extra legal text below it.
+2. CTA BUTTON: One single solid green rounded button in the lower center with ONLY the word "${ctaText}" inside it. One button. Once. Never repeated.
 
-CRITICAL: There must be exactly ONE CTA button and exactly ONE disclaimer line. No duplicates of either.`;
+3. DISCLAIMER: One single line of small white text at the very bottom: "${disclaimerText}" — exactly these words, one line only, nothing else underneath it.
+
+These are the ONLY three text elements. If you are about to add any other text — do not.`;
   return {prompt, aspectRatio};
 }
 
