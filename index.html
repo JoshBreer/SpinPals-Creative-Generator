@@ -1260,23 +1260,34 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  const prompt=`A premium ${aspectRatio} advertising creative. High production quality.
+  // Pick a specific real athlete based on sport context
+  const sportCtx=(state.game||'').toLowerCase();
+  let athleteDesc='a photorealistic NFL quarterback in a green jersey in a throwing pose, stadium crowd behind him';
+  if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
+    athleteDesc='a photorealistic NBA player in a purple jersey mid-jump with a basketball, arena crowd behind him';
+  else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
+    athleteDesc='a photorealistic MLB batter in a white pinstripe jersey mid-swing, stadium behind him';
+  else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
+    athleteDesc='a photorealistic NHL hockey player in a white jersey skating hard with a stick, ice rink behind him';
+  else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
+    athleteDesc='a photorealistic soccer player in a blue jersey kicking a ball, stadium behind him';
 
-BACKGROUND: ${bg} ${styleNote}
+  const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
 
-ABSOLUTE PROHIBITIONS — NEVER INCLUDE:
-- NO logos of any kind. NO brand icons. NO circular badges. NO emblems. NO watermarks. NO app icons. Nothing that looks like a logo anywhere in the image.
-- NO invented text. NO random words. NO placeholder copy. NO gibberish.
+EXACT LAYOUT FROM TOP TO BOTTOM:
+- Top 10% of image: plain dark purple background, nothing here
+- Top 10-45%: the text "${offer?offer:'WIN BIG'}" rendered as large 3D bold gold letters with dark shadow, centered, easy to read, fills this zone completely
+- Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
+- Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
+- Bottom 90-97%: plain dark strip
+- Bottom 97-100%: the text "${disclaimerText}" in white Arial font size 11pt on a dark background. This is the ONLY text in this zone. Exactly these words. Nothing else.
 
-EXACTLY THREE TEXT ELEMENTS ONLY:
-
-1. HEADLINE: ${offer?`"${offer}"`:'Bold energetic sports headline'} — large bold text, top of image. Nothing else above or below it.
-
-2. CTA BUTTON: One single solid green rounded button in the lower center with ONLY the word "${ctaText}" inside it. One button. Once. Never repeated.
-
-3. DISCLAIMER: One single line of small white text at the very bottom: "${disclaimerText}" — exactly these words, one line only, nothing else underneath it.
-
-These are the ONLY three text elements. If you are about to add any other text — do not.`;
+HARD RULES:
+- The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
+- Do not add any text anywhere except the three specified zones above.
+- Do not add any logos, badges, icons, watermarks, or brand marks anywhere.
+- The offer text must be fully readable with high contrast against the background.
+- The disclaimer is one single line. Not two lines. Not three lines. One line.`;
   return {prompt, aspectRatio};
 }
 
@@ -1556,23 +1567,34 @@ function buildFalFallbackPrompt(){
   if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
   if(state.customInstructions) styleNote=state.customInstructions;
 
-  const prompt=`A premium ${aspectRatio} advertising creative. High production quality.
+  // Pick a specific real athlete based on sport context
+  const sportCtx=(state.game||'').toLowerCase();
+  let athleteDesc='a photorealistic NFL quarterback in a green jersey in a throwing pose, stadium crowd behind him';
+  if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
+    athleteDesc='a photorealistic NBA player in a purple jersey mid-jump with a basketball, arena crowd behind him';
+  else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
+    athleteDesc='a photorealistic MLB batter in a white pinstripe jersey mid-swing, stadium behind him';
+  else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
+    athleteDesc='a photorealistic NHL hockey player in a white jersey skating hard with a stick, ice rink behind him';
+  else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
+    athleteDesc='a photorealistic soccer player in a blue jersey kicking a ball, stadium behind him';
 
-BACKGROUND: ${bg} ${styleNote}
+  const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
 
-ABSOLUTE PROHIBITIONS — NEVER INCLUDE:
-- NO logos of any kind. NO brand icons. NO circular badges. NO emblems. NO watermarks. NO app icons. Nothing that looks like a logo anywhere in the image.
-- NO invented text. NO random words. NO placeholder copy. NO gibberish.
+EXACT LAYOUT FROM TOP TO BOTTOM:
+- Top 10% of image: plain dark purple background, nothing here
+- Top 10-45%: the text "${offer?offer:'WIN BIG'}" rendered as large 3D bold gold letters with dark shadow, centered, easy to read, fills this zone completely
+- Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
+- Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
+- Bottom 90-97%: plain dark strip
+- Bottom 97-100%: the text "${disclaimerText}" in white Arial font size 11pt on a dark background. This is the ONLY text in this zone. Exactly these words. Nothing else.
 
-EXACTLY THREE TEXT ELEMENTS ONLY:
-
-1. HEADLINE: ${offer?`"${offer}"`:'Bold energetic sports headline'} — large bold text, top of image. Nothing else above or below it.
-
-2. CTA BUTTON: One single solid green rounded button in the lower center with ONLY the word "${ctaText}" inside it. One button. Once. Never repeated.
-
-3. DISCLAIMER: One single line of small white text at the very bottom: "${disclaimerText}" — exactly these words, one line only, nothing else underneath it.
-
-These are the ONLY three text elements. If you are about to add any other text — do not.`;
+HARD RULES:
+- The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
+- Do not add any text anywhere except the three specified zones above.
+- Do not add any logos, badges, icons, watermarks, or brand marks anywhere.
+- The offer text must be fully readable with high contrast against the background.
+- The disclaimer is one single line. Not two lines. Not three lines. One line.`;
   return {prompt, aspectRatio};
 }
 
