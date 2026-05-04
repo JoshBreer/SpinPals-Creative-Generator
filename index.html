@@ -1175,6 +1175,18 @@ async function doGenerate(){
           showResult(loadMsg,falEntry);
           // Save to GitHub gallery.json so it persists across page refreshes
           saveFalEntryToGithub(falEntry);
+          // Notify Twin to send email to the user with the fal result
+          const emailPayload={
+            event:'creative_complete',
+            source:'fal',
+            image_url:falUrl,
+            offer_text:state.offer,
+            style:state.style,
+            format:falEntry.format,
+            platform:clientPlatform,
+            user_email:currentUserEmail
+          };
+          triggerWebhook(emailPayload,getWebhook());
         }
       }).catch(()=>{});
     }
