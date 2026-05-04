@@ -1236,59 +1236,131 @@ async function saveFalEntryToGithub(entry){
 
 // ============================================================
 // FAL.AI FALLBACK — fires only if Twin hasn't responded in 6min
+// Background-only generation + canvas text overlay
 // ============================================================
 function buildFalFallbackPrompt(){
-  const offer=state.offer&&state.offer!=='none'?state.offer:null;
-  const style=state.style||'Classic';
-  const isTurkish=state.platform==='bankobet';
-  const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
-  const disclaimerText=isWannaFlow()||isThrillzzFlow()
-    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
-    :'18+ | Play Responsibly | T&Cs Apply';
-
   const fmt=state.format==='both'?'portrait':state.format||'portrait';
   const aspectRatio=fmt==='portrait'?'9:16':'1:1';
-
-  let bg='Dramatic luxury casino atmosphere. Deep rich colors, cinematic lighting.';
-  if(isWannaFlow()) bg='Deep purple gradient background. Bold gold headline text. Sports energy.';
-  if(isThrillzzFlow()) bg='Dark navy background. Electric neon blue and yellow. Lightning bolt energy.';
-
-  let styleNote='Bold vibrant colors. Cinematic lighting. Professional ad quality.';
-  if(style==='Realistic') styleNote='Cinematic photorealistic. Dramatic moody lighting. One full-color athlete in action.';
-  if(style==='Classic') styleNote='Clean minimal layout. Bold offer text as hero. Simple background.';
-  if(style==='Electric') styleNote='Dark navy. Giant 3D neon headline. Lightning bolts. Maximum energy.';
-  if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
-  if(state.customInstructions) styleNote=state.customInstructions;
-
-  // Sport balls floating on dark background — clean, simple, professional
   const sportCtx=(state.game||'').toLowerCase();
-  let athleteDesc='a football, basketball, and baseball floating in dramatic studio lighting against a dark purple gradient background. Clean, minimal, professional.';
-  if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
-    athleteDesc='a basketball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
-  else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
-    athleteDesc='a baseball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
-  else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
-    athleteDesc='a hockey puck and stick on ice with dramatic lighting against a dark background. Clean, minimal, professional.';
-  else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
-    athleteDesc='a soccer ball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
+  const style=state.style||'Classic';
 
-  const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
+  // Background ONLY — no text instructions whatsoever
+  let bgDesc='Deep rich purple gradient background (#2D1060 to #0A0020). Dramatic cinematic studio lighting from above. ';
 
-EXACT LAYOUT FROM TOP TO BOTTOM:
-- Top 10% of image: plain dark purple background, nothing here
-- Top 10-45%: the text "${offer?offer:'WIN BIG'}" rendered as large 3D bold gold letters with dark shadow, centered, easy to read, fills this zone completely
-- Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
-- Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
-- Bottom 90-97%: plain dark strip
-- Bottom 97-100%: EXACTLY this one short line of tiny white text on a dark background, nothing else: "${disclaimerText}" — fit it on a single line, no wrapping, no second line.
+  if(isWannaFlow()||isThrillzzFlow()){
+    if(sportCtx.includes('nba')||sportCtx.includes('basketball'))
+      bgDesc+='A basketball floating in the center with dramatic rim lighting. Blurred arena crowd in background.';
+    else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
+      bgDesc+='A hockey puck on ice with frost particles catching dramatic side lighting. Dark rink atmosphere.';
+    else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
+      bgDesc+='A baseball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
+    else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
+      bgDesc+='A soccer ball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
+    else
+      bgDesc+='A football, basketball, and baseball floating at different depths with dramatic lighting. Blurred stadium in background.';
+  } else {
+    if(style==='Electric'||isThrillzzFlow())
+      bgDesc='Dark navy background (#0A0E28). Electric blue and neon green light rays. Lightning bolt energy streaks. No text.';
+    else
+      bgDesc+='Scattered golden casino chips and playing cards with dramatic side lighting. Rich casino atmosphere.';
+  }
 
-HARD RULES:
-- The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
-- Do not add any text anywhere except the three specified zones above.
-- Do not add any logos, badges, icons, watermarks, or brand marks anywhere.
-- The offer text must be fully readable with high contrast against the background.
-- The disclaimer is one single line. Not two lines. Not three lines. One line.`;
+  const prompt=`Pure atmospheric background image for a sports advertisement. ${aspectRatio} format. ${bgDesc} High production value. Cinematic lighting. NO TEXT anywhere in this image. NO logos. NO buttons. NO words. NO numbers. NO symbols. This is a background only — completely text-free.`;
   return {prompt, aspectRatio};
+}
+
+// Draw text overlay on top of fal background image using canvas
+async function compositeTextOnImage(bgImageUrl){
+  return new Promise((resolve)=>{
+    const fmt=state.format==='both'?'portrait':state.format||'portrait';
+    const isPortrait=fmt==='portrait';
+    const W=isPortrait?1080:1080;
+    const H=isPortrait?1920:1080;
+
+    const offer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
+    const isTurkish=state.platform==='bankobet';
+    const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
+    const disclaimer=isWannaFlow()||isThrillzzFlow()
+      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
+      :'18+ | Play Responsibly | T&Cs Apply';
+
+    const canvas=document.createElement('canvas');
+    canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext('2d');
+
+    const img=new Image();
+    img.crossOrigin='anonymous';
+    img.onload=()=>{
+      // Draw background
+      ctx.drawImage(img,0,0,W,H);
+
+      // Dark overlay on top 45% for text readability
+      const grad=ctx.createLinearGradient(0,0,0,H*0.5);
+      grad.addColorStop(0,'rgba(0,0,0,0.6)');
+      grad.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,0,W,H*0.5);
+
+      // OFFER TEXT — top section
+      const offerLines=offer.length>20?[offer.substring(0,offer.lastIndexOf(' ',20)),offer.substring(offer.lastIndexOf(' ',20)+1)]:[offer];
+      const fontSize=isPortrait?(offerLines.length>1?120:140):80;
+      ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+      ctx.textAlign='center';
+      // Gold text with dark shadow
+      ctx.shadowColor='rgba(0,0,0,0.9)';
+      ctx.shadowBlur=20;
+      ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
+      const goldGrad=ctx.createLinearGradient(0,H*0.05,0,H*0.42);
+      goldGrad.addColorStop(0,'#FFD700');
+      goldGrad.addColorStop(0.5,'#FFA500');
+      goldGrad.addColorStop(1,'#FFD700');
+      ctx.fillStyle=goldGrad;
+      offerLines.forEach((line,i)=>{
+        const y=isPortrait?(H*0.12)+(i*(fontSize+20)):H*0.25+(i*(fontSize+10));
+        ctx.fillText(line,W/2,y);
+      });
+
+      // CTA BUTTON — lower center
+      ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+      const btnW=isPortrait?500:400;const btnH=isPortrait?110:80;
+      const btnX=(W-btnW)/2;const btnY=isPortrait?H*0.76:H*0.72;
+      const btnR=btnH/2;
+      ctx.beginPath();
+      ctx.moveTo(btnX+btnR,btnY);
+      ctx.lineTo(btnX+btnW-btnR,btnY);
+      ctx.arcTo(btnX+btnW,btnY,btnX+btnW,btnY+btnH,btnR);
+      ctx.lineTo(btnX+btnW,btnY+btnH-btnR);
+      ctx.arcTo(btnX+btnW,btnY+btnH,btnX+btnW-btnR,btnY+btnH,btnR);
+      ctx.lineTo(btnX+btnR,btnY+btnH);
+      ctx.arcTo(btnX,btnY+btnH,btnX,btnY+btnH-btnR,btnR);
+      ctx.lineTo(btnX,btnY+btnR);
+      ctx.arcTo(btnX,btnY,btnX+btnR,btnY,btnR);
+      ctx.closePath();
+      const btnGrad=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
+      btnGrad.addColorStop(0,'#22c55e');
+      btnGrad.addColorStop(1,'#16a34a');
+      ctx.fillStyle=btnGrad;
+      ctx.fill();
+      // Button text
+      ctx.font=`800 ${isPortrait?52:40}px Impact, Arial Black, sans-serif`;
+      ctx.fillStyle='#ffffff';
+      ctx.textAlign='center';
+      ctx.fillText(ctaText,W/2,btnY+btnH*0.67);
+
+      // DISCLAIMER BAR — very bottom
+      const barH=isPortrait?60:50;
+      ctx.fillStyle='rgba(0,0,0,0.85)';
+      ctx.fillRect(0,H-barH,W,barH);
+      ctx.font=`400 ${isPortrait?26:22}px Arial, sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.85)';
+      ctx.textAlign='center';
+      ctx.fillText(disclaimer,W/2,H-barH/2+9);
+
+      resolve(canvas.toDataURL('image/jpeg',0.92));
+    };
+    img.onerror=()=>resolve(bgImageUrl); // fallback to raw bg if canvas fails
+    img.src=bgImageUrl;
+  });
 }
 
 async function falFallbackGenerate(){
@@ -1326,7 +1398,11 @@ async function falFallbackGenerate(){
     console.log('FAL FALLBACK RESULT:',JSON.stringify(result).substring(0,300));
     if(result.images&&result.images[0]){
       const img=result.images[0];
-      return typeof img==='string'?img:img.url;
+      const bgUrl=typeof img==='string'?img:img.url;
+      // Composite text overlay on top of background using canvas
+      console.log('FAL FALLBACK: compositing text overlay...');
+      const finalDataUrl=await compositeTextOnImage(bgUrl);
+      return finalDataUrl;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
@@ -1543,59 +1619,131 @@ async function saveFalEntryToGithub(entry){
 
 // ============================================================
 // FAL.AI FALLBACK — fires only if Twin hasn't responded in 6min
+// Background-only generation + canvas text overlay
 // ============================================================
 function buildFalFallbackPrompt(){
-  const offer=state.offer&&state.offer!=='none'?state.offer:null;
-  const style=state.style||'Classic';
-  const isTurkish=state.platform==='bankobet';
-  const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
-  const disclaimerText=isWannaFlow()||isThrillzzFlow()
-    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
-    :'18+ | Play Responsibly | T&Cs Apply';
-
   const fmt=state.format==='both'?'portrait':state.format||'portrait';
   const aspectRatio=fmt==='portrait'?'9:16':'1:1';
-
-  let bg='Dramatic luxury casino atmosphere. Deep rich colors, cinematic lighting.';
-  if(isWannaFlow()) bg='Deep purple gradient background. Bold gold headline text. Sports energy.';
-  if(isThrillzzFlow()) bg='Dark navy background. Electric neon blue and yellow. Lightning bolt energy.';
-
-  let styleNote='Bold vibrant colors. Cinematic lighting. Professional ad quality.';
-  if(style==='Realistic') styleNote='Cinematic photorealistic. Dramatic moody lighting. One full-color athlete in action.';
-  if(style==='Classic') styleNote='Clean minimal layout. Bold offer text as hero. Simple background.';
-  if(style==='Electric') styleNote='Dark navy. Giant 3D neon headline. Lightning bolts. Maximum energy.';
-  if(style==='Map') styleNote='US map with highlighted states. Offer text at top. Brand feel.';
-  if(state.customInstructions) styleNote=state.customInstructions;
-
-  // Sport balls floating on dark background — clean, simple, professional
   const sportCtx=(state.game||'').toLowerCase();
-  let athleteDesc='a football, basketball, and baseball floating in dramatic studio lighting against a dark purple gradient background. Clean, minimal, professional.';
-  if(sportCtx.includes('nba')||sportCtx.includes('basketball')||sportCtx.includes('wnba'))
-    athleteDesc='a basketball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
-  else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
-    athleteDesc='a baseball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
-  else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
-    athleteDesc='a hockey puck and stick on ice with dramatic lighting against a dark background. Clean, minimal, professional.';
-  else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
-    athleteDesc='a soccer ball floating in dramatic studio lighting against a dark purple gradient. Clean, minimal, professional.';
+  const style=state.style||'Classic';
 
-  const prompt=`Sports advertising photo composite, ${aspectRatio} vertical format.
+  // Background ONLY — no text instructions whatsoever
+  let bgDesc='Deep rich purple gradient background (#2D1060 to #0A0020). Dramatic cinematic studio lighting from above. ';
 
-EXACT LAYOUT FROM TOP TO BOTTOM:
-- Top 10% of image: plain dark purple background, nothing here
-- Top 10-45%: the text "${offer?offer:'WIN BIG'}" rendered as large 3D bold gold letters with dark shadow, centered, easy to read, fills this zone completely
-- Middle 45-80%: ${athleteDesc}. The athlete is a real human being with a real face and real uniform. NOT a cartoon. NOT a superhero. NOT a masked figure. A real sports athlete in correct uniform colors with visible jersey number. The athlete stands in front of the background which shows a blurred stadium or arena.
-- Bottom 80-90%: one single bright green pill-shaped button centered on screen. Inside the button in bold white capital letters: ${ctaText}. This button appears exactly once.
-- Bottom 90-97%: plain dark strip
-- Bottom 97-100%: EXACTLY this one short line of tiny white text on a dark background, nothing else: "${disclaimerText}" — fit it on a single line, no wrapping, no second line.
+  if(isWannaFlow()||isThrillzzFlow()){
+    if(sportCtx.includes('nba')||sportCtx.includes('basketball'))
+      bgDesc+='A basketball floating in the center with dramatic rim lighting. Blurred arena crowd in background.';
+    else if(sportCtx.includes('nhl')||sportCtx.includes('hockey'))
+      bgDesc+='A hockey puck on ice with frost particles catching dramatic side lighting. Dark rink atmosphere.';
+    else if(sportCtx.includes('mlb')||sportCtx.includes('baseball'))
+      bgDesc+='A baseball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
+    else if(sportCtx.includes('soccer')||sportCtx.includes('mls'))
+      bgDesc+='A soccer ball floating with dramatic studio lighting. Dark stadium atmosphere in background.';
+    else
+      bgDesc+='A football, basketball, and baseball floating at different depths with dramatic lighting. Blurred stadium in background.';
+  } else {
+    if(style==='Electric'||isThrillzzFlow())
+      bgDesc='Dark navy background (#0A0E28). Electric blue and neon green light rays. Lightning bolt energy streaks. No text.';
+    else
+      bgDesc+='Scattered golden casino chips and playing cards with dramatic side lighting. Rich casino atmosphere.';
+  }
 
-HARD RULES:
-- The athlete must look like a real human sports player. No masks, no superhero costumes, no helmets covering the full face unless sport-appropriate.
-- Do not add any text anywhere except the three specified zones above.
-- Do not add any logos, badges, icons, watermarks, or brand marks anywhere.
-- The offer text must be fully readable with high contrast against the background.
-- The disclaimer is one single line. Not two lines. Not three lines. One line.`;
+  const prompt=`Pure atmospheric background image for a sports advertisement. ${aspectRatio} format. ${bgDesc} High production value. Cinematic lighting. NO TEXT anywhere in this image. NO logos. NO buttons. NO words. NO numbers. NO symbols. This is a background only — completely text-free.`;
   return {prompt, aspectRatio};
+}
+
+// Draw text overlay on top of fal background image using canvas
+async function compositeTextOnImage(bgImageUrl){
+  return new Promise((resolve)=>{
+    const fmt=state.format==='both'?'portrait':state.format||'portrait';
+    const isPortrait=fmt==='portrait';
+    const W=isPortrait?1080:1080;
+    const H=isPortrait?1920:1080;
+
+    const offer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
+    const isTurkish=state.platform==='bankobet';
+    const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
+    const disclaimer=isWannaFlow()||isThrillzzFlow()
+      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
+      :'18+ | Play Responsibly | T&Cs Apply';
+
+    const canvas=document.createElement('canvas');
+    canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext('2d');
+
+    const img=new Image();
+    img.crossOrigin='anonymous';
+    img.onload=()=>{
+      // Draw background
+      ctx.drawImage(img,0,0,W,H);
+
+      // Dark overlay on top 45% for text readability
+      const grad=ctx.createLinearGradient(0,0,0,H*0.5);
+      grad.addColorStop(0,'rgba(0,0,0,0.6)');
+      grad.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,0,W,H*0.5);
+
+      // OFFER TEXT — top section
+      const offerLines=offer.length>20?[offer.substring(0,offer.lastIndexOf(' ',20)),offer.substring(offer.lastIndexOf(' ',20)+1)]:[offer];
+      const fontSize=isPortrait?(offerLines.length>1?120:140):80;
+      ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
+      ctx.textAlign='center';
+      // Gold text with dark shadow
+      ctx.shadowColor='rgba(0,0,0,0.9)';
+      ctx.shadowBlur=20;
+      ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
+      const goldGrad=ctx.createLinearGradient(0,H*0.05,0,H*0.42);
+      goldGrad.addColorStop(0,'#FFD700');
+      goldGrad.addColorStop(0.5,'#FFA500');
+      goldGrad.addColorStop(1,'#FFD700');
+      ctx.fillStyle=goldGrad;
+      offerLines.forEach((line,i)=>{
+        const y=isPortrait?(H*0.12)+(i*(fontSize+20)):H*0.25+(i*(fontSize+10));
+        ctx.fillText(line,W/2,y);
+      });
+
+      // CTA BUTTON — lower center
+      ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+      const btnW=isPortrait?500:400;const btnH=isPortrait?110:80;
+      const btnX=(W-btnW)/2;const btnY=isPortrait?H*0.76:H*0.72;
+      const btnR=btnH/2;
+      ctx.beginPath();
+      ctx.moveTo(btnX+btnR,btnY);
+      ctx.lineTo(btnX+btnW-btnR,btnY);
+      ctx.arcTo(btnX+btnW,btnY,btnX+btnW,btnY+btnH,btnR);
+      ctx.lineTo(btnX+btnW,btnY+btnH-btnR);
+      ctx.arcTo(btnX+btnW,btnY+btnH,btnX+btnW-btnR,btnY+btnH,btnR);
+      ctx.lineTo(btnX+btnR,btnY+btnH);
+      ctx.arcTo(btnX,btnY+btnH,btnX,btnY+btnH-btnR,btnR);
+      ctx.lineTo(btnX,btnY+btnR);
+      ctx.arcTo(btnX,btnY,btnX+btnR,btnY,btnR);
+      ctx.closePath();
+      const btnGrad=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
+      btnGrad.addColorStop(0,'#22c55e');
+      btnGrad.addColorStop(1,'#16a34a');
+      ctx.fillStyle=btnGrad;
+      ctx.fill();
+      // Button text
+      ctx.font=`800 ${isPortrait?52:40}px Impact, Arial Black, sans-serif`;
+      ctx.fillStyle='#ffffff';
+      ctx.textAlign='center';
+      ctx.fillText(ctaText,W/2,btnY+btnH*0.67);
+
+      // DISCLAIMER BAR — very bottom
+      const barH=isPortrait?60:50;
+      ctx.fillStyle='rgba(0,0,0,0.85)';
+      ctx.fillRect(0,H-barH,W,barH);
+      ctx.font=`400 ${isPortrait?26:22}px Arial, sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.85)';
+      ctx.textAlign='center';
+      ctx.fillText(disclaimer,W/2,H-barH/2+9);
+
+      resolve(canvas.toDataURL('image/jpeg',0.92));
+    };
+    img.onerror=()=>resolve(bgImageUrl); // fallback to raw bg if canvas fails
+    img.src=bgImageUrl;
+  });
 }
 
 async function falFallbackGenerate(){
@@ -1633,7 +1781,11 @@ async function falFallbackGenerate(){
     console.log('FAL FALLBACK RESULT:',JSON.stringify(result).substring(0,300));
     if(result.images&&result.images[0]){
       const img=result.images[0];
-      return typeof img==='string'?img:img.url;
+      const bgUrl=typeof img==='string'?img:img.url;
+      // Composite text overlay on top of background using canvas
+      console.log('FAL FALLBACK: compositing text overlay...');
+      const finalDataUrl=await compositeTextOnImage(bgUrl);
+      return finalDataUrl;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
