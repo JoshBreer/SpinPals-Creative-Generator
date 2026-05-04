@@ -1,5 +1,49 @@
 [
   {
+    "id": "wp-1777926056447-p",
+    "platform": "wannaparlay",
+    "game_name": "N/A",
+    "offer_text": "Play Smarter, Win Bigger",
+    "style": "Realistic",
+    "user_email": "josh@wanna.com",
+    "format": "portrait",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-1777926056447-p.png",
+    "created_at": "2026-05-04T20:20:56.447Z",
+    "audit": {
+      "no_wannaparlay_brand_mark": true,
+      "no_reserved_blank_zone": true,
+      "cta_disclaimer_gap_tight": true,
+      "cta_disclaimer_gap_pct": 2.5,
+      "cta_looks_pressable": true,
+      "lighting_consistent": true,
+      "banned_words_visible": false,
+      "disclaimer_count": 1,
+      "disclaimer_verbatim_match": true,
+      "disclaimer_full_width_bar": true,
+      "realistic_one_player_only": true,
+      "realistic_no_stadium": true,
+      "realistic_player_verified": true,
+      "realistic_athlete_correct_jersey": true,
+      "foreground_subject_present": true,
+      "foreground_subject_dominant": true,
+      "realistic_verified_player": "Stephen Curry",
+      "realistic_verified_team": "Golden State Warriors",
+      "realistic_verified_jersey_number": "30",
+      "realistic_verification_source": "CBSSports/Warriors.com confirmed: Stephen Curry, Golden State Warriors #30, still on team May 2026",
+      "overall_quality_rating": 9,
+      "gallery_write_attempts": 1,
+      "lint_result": "Prompt passed banned-word lint on first pass",
+      "variation_seed": {
+        "player_or_kinetic": "Stephen_Curry_Warriors_30",
+        "composition_position": "left third",
+        "background_color_label": "deep_purple_forest_green_atmospheric",
+        "camera_angle": "step_back_jumper_mid_air_side_angle",
+        "dominant_light": "dramatic_side_rim_lighting_blue_hour",
+        "typography_label": "italicized_condensed_neon_outline_gold_fill_upper_third"
+      }
+    }
+  },
+  {
     "id": "wp-1777924347315-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
@@ -47,7 +91,7 @@
     "id": "wp-1777921899576-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "The Main Event â $2 Entry, Win $2,000",
+    "offer_text": "The Main Event Ã¢ÂÂ $2 Entry, Win $2,000",
     "style": "Realistic",
     "user_email": "josh@wanna.com",
     "format": "portrait",
@@ -90,7 +134,7 @@
     "id": "wp-1777921009320-p",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "Parlay Royale â $50 Entry, $1,000 Prize",
+    "offer_text": "Parlay Royale Ã¢ÂÂ $50 Entry, $1,000 Prize",
     "style": "Electric",
     "user_email": "josh@wanna.com",
     "format": "portrait",
@@ -118,14 +162,14 @@
       "gallery_write_attempts": 1,
       "email_sent": false,
       "email_to": "josh@wanna.com",
-      "notes": "Regen-once applied for electric_palette correction. Lighting inconsistency was a false-positive from strict auditor â commercial-standard lighting acceptable. Background confirmed navy with atmospheric accents only."
+      "notes": "Regen-once applied for electric_palette correction. Lighting inconsistency was a false-positive from strict auditor Ã¢ÂÂ commercial-standard lighting acceptable. Background confirmed navy with atmospheric accents only."
     }
   },
   {
     "id": "wp-1777921009320-s",
     "platform": "wannaparlay",
     "game_name": "N/A",
-    "offer_text": "Parlay Royale â $50 Entry, $1,000 Prize",
+    "offer_text": "Parlay Royale Ã¢ÂÂ $50 Entry, $1,000 Prize",
     "style": "Electric",
     "user_email": "josh@wanna.com",
     "format": "square",
@@ -212,7 +256,7 @@
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-1777916803691-p.png",
     "created_at": "2026-05-04T17:46:25Z",
     "audit": {
-      "offer_text_verbatim_note": "ALL CAPS typographic rendering â content correct",
+      "offer_text_verbatim_note": "ALL CAPS typographic rendering Ã¢ÂÂ content correct",
       "disclaimer_exact_once": true,
       "no_wannaparlay_brand_mark": true,
       "no_reserved_blank_zone": true,
@@ -233,10 +277,10 @@
       "gap_resolved_via": "none_needed"
     },
     "realistic_verification": {
-      "realistic_verified_player": "Nikola JokiÄ",
+      "realistic_verified_player": "Nikola JokiÃÂ",
       "realistic_verified_team": "Denver Nuggets",
       "realistic_verified_jersey_number": "15",
-      "realistic_verification_source": "cbssports.com + nbcsports.com â confirmed current Nuggets, no trade as of May 2026"
+      "realistic_verification_source": "cbssports.com + nbcsports.com Ã¢ÂÂ confirmed current Nuggets, no trade as of May 2026"
     },
     "variation_fingerprint": "{\"player_or_kinetic\":\"Nikola_Jokic_Nuggets_15\",\"composition_position\":\"centered\",\"background_color_label\":\"deep_purple_atmospheric_gradient\",\"camera_angle\":\"studio_portrait_low_angle_upward_tilt\",\"dominant_light\":\"soft_diffused_backlight_purple_rim\",\"typography_label\":\"all_caps_bold_gold_metallic_upper_portion\"}"
   },
