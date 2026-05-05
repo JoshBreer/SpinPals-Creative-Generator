@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-17779990427892",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/66/32acec111055ddfc4a73559cc61b2d70ab0938172f750400b12facb43d60b2.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260505%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260505T163907Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a850a713a9858610bbaf5347910722013fa2bfec8d90bac6dd311bcc636edf74",
+    "created_at": "2026-05-05 16:37:22"
+  },
+  {
     "id": "cr-17779983027ECD",
     "game_name": "N/A",
     "format": "portrait",
