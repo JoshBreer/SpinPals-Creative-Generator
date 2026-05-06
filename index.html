@@ -1012,8 +1012,10 @@ async function doQuickGenerate(){
       const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:dUrlQG,created_at:new Date().toISOString(),source:'fal'};
       galleryData.unshift(falEntryQG);
       showResult(loadMsg,falEntryQG);
-      saveFalEntryToGithub({...falEntryQG,image_url:gUrlQG});
-      triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:gUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
+      saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG}).then(permUrlQG=>{
+        const eUrlQG=permUrlQG||gUrlQG;
+        triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:eUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
+      });
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1148,9 +1150,11 @@ async function doGenerate(){
       };
       galleryData.unshift(falEntry);
       showResult(loadMsg,falEntry);
-      saveFalEntryToGithub({...falEntry,image_url:gUrl});
-      // email_only:true prevents Twin from generating a new image
-      triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:gUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
+      // Save composite image permanently then send email with permanent URL
+      saveFalEntryToGithub({...falEntry,image_url:dUrl}).then(permanentUrl=>{
+        const emailUrl=permanentUrl||gUrl;
+        triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:emailUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
+      });
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1311,24 +1315,49 @@ async function doGenerate(){
 
 async function saveFalEntryToGithub(entry){
   try{
+    // Upload the composited image to GitHub so it never expires
+    let permanentUrl=entry.image_url;
+    if(entry.image_url&&entry.image_url.startsWith('data:')){
+      // Save data URL as image file in GitHub repo
+      const imgFilename='creatives/fal-'+Date.now()+'.jpg';
+      const imgApiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+imgFilename;
+      const base64Data=entry.image_url.split(',')[1];
+      const imgPut=await fetch(imgApiUrl,{
+        method:'PUT',
+        headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+        body:JSON.stringify({message:'fal creative image',content:base64Data})
+      });
+      if(imgPut.ok){
+        const imgData=await imgPut.json();
+        permanentUrl='https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+imgFilename;
+        console.log('FAL: image saved permanently:',permanentUrl);
+      }
+    }
+    // Now save to gallery.json with permanent URL
     const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
     const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
     if(!getRes.ok)throw new Error('GET failed');
     const fileData=await getRes.json();
     const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
-    existing.unshift(entry);
+    const saveEntry={...entry,image_url:permanentUrl};
+    existing.unshift(saveEntry);
     const putRes=await fetch(apiUrl,{
       method:'PUT',
       headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
       body:JSON.stringify({
-        message:'fal.ai fallback creative: '+entry.game_name,
+        message:'fal creative: '+entry.game_name,
         content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
         sha:fileData.sha
       })
     });
-    if(putRes.ok)console.log('FAL FALLBACK: saved to gallery.json');
-    else console.error('FAL FALLBACK: gallery save failed',putRes.status);
-  }catch(e){console.error('FAL FALLBACK: gallery save error',e);}
+    if(putRes.ok){
+      console.log('FAL: saved to gallery.json with permanent URL');
+      // Update the in-memory entry too
+      const mem=galleryData.find(c=>c.id===entry.id);
+      if(mem)mem.image_url=permanentUrl;
+    } else console.error('FAL: gallery save failed',putRes.status);
+    return permanentUrl;
+  }catch(e){console.error('FAL: save error',e);return entry.image_url;}
 }
 
 // ============================================================
@@ -1361,7 +1390,7 @@ function buildFalFallbackPrompt(){
     // SpinPals-style: bright, cartoonish, clean, colorful — adapted for sports
     const wannaClassic=[
       `Vibrant cartoon sports advertisement illustration, professional mobile game art quality. ${wannaBg} background. CENTER: A large glowing golden trophy cup with sparkle star effects radiating outward, sitting on a pile of shiny gold coins, each coin engraved with a dollar sign. The trophy emits warm golden volumetric light rays upward. SURROUNDING the trophy floating in dynamic positions: a hyper-detailed cartoon basketball (orange with black lines and specular highlight), a cartoon football (brown leather texture with white laces), a cartoon baseball (white with red stitching), all with neon green glow rim lighting and drop shadows. BACKGROUND: Large bold diagonal yellow lightning bolt shapes behind everything, like Adidas stripes but as lightning. Confetti pieces in purple and gold raining down. Small gold star sparkles scattered throughout. STYLE: Thick outlines on all objects, vivid saturated colors, smooth gradients, studio lighting on every object. Professional AAA mobile game UI art. Behance portfolio quality. Unreal Engine render quality.`,
-      `Bright celebratory cartoon sports illustration. ${wannaBg} background with subtle radial purple glow from center. CENTER: Massive pile of gold coins exploding upward like a fountain, coins spinning and catching light, dollar signs gleaming. Green neon energy beams shoot up from the coin pile. FLOATING AROUND: Three large cartoon sports balls — basketball top left with orange glow, football top right with brown leather detail, soccer ball bottom center with black and white panels — each ball casting a soft shadow and having a bright white specular highlight. CORNER ACCENTS: Gold star burst shapes in each corner. Yellow lightning bolt graphic shapes at left and right edges. A large "2X" in 3D gold letters floats above the coins glowing. STYLE: Comic book clean lines, vivid colors, every element perfectly rendered, professional digital illustration.`,
+      `Bright celebratory cartoon sports illustration. ${wannaBg} background with subtle radial purple glow from center. CENTER: Massive pile of gold coins exploding upward like a fountain, coins spinning and catching light, dollar signs gleaming. Green neon energy beams shoot up from the coin pile. FLOATING AROUND: Three large cartoon sports balls — basketball top left with orange glow, football top right with brown leather detail, soccer ball bottom center with black and white panels — each ball casting a soft shadow and having a bright white specular highlight. CORNER ACCENTS: Gold star burst shapes in each corner. Yellow lightning bolt graphic shapes at left and right edges. STYLE: Comic book clean lines, vivid colors, every element perfectly rendered, professional digital illustration.`,
       `Premium sports gaming illustration. ${wannaBg}. LEFT SIDE: Giant shiny gold trophy with wings spread, radiating light. RIGHT SIDE: Stack of oversized gold coins in perspective, shimmering. CENTER BOTTOM: Sports ball collection — basketball, football, baseball arranged in a triangle formation, each hyper-detailed with realistic texture but illustrated style, glowing neon green outline. TOP: Fireworks explosion in gold and purple sparkling across the sky. Bold yellow chevron arrow shapes pointing upward creating motion. Every element has depth, shadow, and premium sheen. Concept art quality. Art station featured illustration.`
     ];
     const thrillzzClassic=[
@@ -1374,12 +1403,12 @@ function buildFalFallbackPrompt(){
   } else if(style==='Realistic'){
     // Cinematic, cool-looking, NOT empty — atmospheric with sport elements but no real players
     const wannaRealistic=[
-      `Cinematic sports atmosphere photography. ${wannaBg} tones. SCENE: Inside a premium NBA basketball arena shot from the court level looking up. The court surface gleaming under dramatic floodlights creating star-burst light effects. Multiple light sources creating volumetric god rays through slight atmospheric haze. The scoreboard displays colorful light. Empty arena seats create a purple sea of color receding to darkness. FOREGROUND: A single NBA basketball sitting perfectly centered on the court logo, dramatic spotlight on it, photorealistic leather texture, the logo beneath it glowing with neon purple light. Shot on ARRI Alexa 35, 21mm Zeiss lens, T2.8. Cinematic color grade: deep purples, gold highlights. No people. Film grain.`,
-      `Premium sports product photography. ${wannaBg} studio background. HERO: A NFL football suspended in perfect mid-air position, rotating slightly, ultra-detailed leather texture with every seam and lace perfectly rendered, single hard light source from top-right creating dramatic shadow on left half. The ball's shadow falls perfectly on a reflective dark surface below it. BACKGROUND: Out of focus but visible — stadium lights in bokeh creating gold circle patterns on deep purple. Shot on Hasselblad H6D-100C, 100mm macro, f/2.8. Luxury advertising photography. No people.`,
-      `Cinematic atmospheric sports scene. ${wannaBg}. SCENE: Twilight aerial view of a professional stadium, the grass field perfectly illuminated by stadium lights casting long dramatic shadows, the playing lines crisp and geometric against vivid green. Shot from directly above, slight angle. Purple sky with golden sunset behind stadium rim. No people on field. Photorealistic. DJI X9-8K aerial camera. Magazine cover photography.`
+      `Cinematic sports action photograph. ${wannaBg} atmosphere. A professional NBA basketball player mid-dunk, seen from below looking up, arms fully extended, ball above rim, arena crowd blurred behind in purple bokeh. The player wears purple and gold jersey. Dramatic upward angle, stadium floodlights creating a halo behind the player. Shot on ARRI Alexa 35, 21mm Zeiss lens, T2.8. Cinematic color grade: deep purples, gold highlights. Film grain. No logos visible. No text.`,
+      `Dramatic sports athlete photograph. ${wannaBg} tones. An American football quarterback in purple and gold uniform, arm cocked back in full throwing motion, game face intense, stadium lights blazing behind him creating dramatic rim lighting silhouette effect. Low angle looking slightly upward. The ball in his hand catching golden light. Shot on Canon R5, 85mm f/1.4, ISO 800. Sports photography quality. No jersey logos visible. No text.`,
+      `High action sports photograph. ${wannaBg} atmosphere. A basketball player in mid-air catching a lob pass above the rim, body fully extended, opponent reaching up below, arena crowd going wild in purple bokeh background. Golden arena lights create dramatic underlighting. Shot on Sony A9 III, 400mm f/2.8, 1/2000s. Sports Illustrated cover quality. No text visible. No logos.`
     ];
     const thrillzzRealistic=[
-      `Cinematic gaming atmosphere. ${thrillzzBg} deep space navy. SCENE: Premium sportsbook environment — sleek dark room with multiple large curved screens on walls displaying sports data and statistics in electric blue and green. Dramatic blue LED underlighting on surfaces. Reflective dark floor. Empty but opulent. Blade Runner 2049 aesthetic. Shot on ARRI, 35mm anamorphic. Teal and orange color grade. No people.`,
+      `Elite sports action photograph. ${thrillzzBg} atmosphere. A professional football player bursting through defenders, legs driving powerfully, jersey in navy and electric blue, stadium lights creating dramatic rim lighting and lens flare. Low angle from turf level looking up. Motion blur on background crowd. Explosive athletic power. Shot on Nikon Z9, 200mm f/2.8, 1/4000s. ESPN magazine quality. No jersey text visible. No logos.`,
       `Dramatic sports equipment still life photography. ${thrillzzBg} background. ARRANGEMENT: Multiple sports balls — basketball, football, baseball — arranged in perfect composition with professional studio lighting. Each ball lit differently: basketball with orange warm light, football with cool rim light, baseball with dramatic side light. Dark reflective surface below each creating perfect reflections. Electric blue underlighting on surface. Medium format photography, Phaseone IQ4, 150mm lens. No people.`,
       `Cinematic empty arena photograph. ${thrillzzBg} atmosphere. An empty modern stadium at night from field level, floodlights off except for emergency lighting creating cyan and blue pools of light on the field surface. The emptiness is dramatic and cinematic. Security lights create long shadows. Shot on Sony VENICE 2, anamorphic, T1.8. Cinematic color grade with teal shadows and electric highlights. No people. Film quality.`
     ];
@@ -1503,24 +1532,44 @@ async function compositeTextOnImage(bgImageUrl){
       lines.forEach((ln,i)=>{
         const y=textTop+(i*lineH);
         
-        // Black stroke for depth
+        // Outer glow pass
         ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
-        ctx.strokeStyle='rgba(0,0,0,0.95)';
-        ctx.lineWidth=fontSize*0.12;
+        ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
+        ctx.shadowBlur=40;
+        ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
+        ctx.fillText(ln,W/2,y);
+        ctx.shadowBlur=0;
+
+        // Black stroke for depth
+        ctx.strokeStyle='rgba(0,0,0,0.98)';
+        ctx.lineWidth=fontSize*0.13;
         ctx.lineJoin='round';
         ctx.strokeText(ln,W/2,y);
 
-        // Gold gradient fill
+        // Brand-specific gradient fill
+        const isWannaCtx=typeof isWannaFlow==='function'&&isWannaFlow();
         const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
-        grd.addColorStop(0,'#FFEE00');
-        grd.addColorStop(0.45,'#FFD700');
-        grd.addColorStop(0.8,'#FF9500');
-        grd.addColorStop(1,'#FFD700');
+        if(isWannaCtx){
+          grd.addColorStop(0,'#FFFFFF');
+          grd.addColorStop(0.15,'#FFF500');
+          grd.addColorStop(0.5,'#FFD700');
+          grd.addColorStop(0.85,'#FF8C00');
+          grd.addColorStop(1,'#FFD700');
+        } else {
+          grd.addColorStop(0,'#FFFFFF');
+          grd.addColorStop(0.2,'#AAFF00');
+          grd.addColorStop(0.5,'#00FF88');
+          grd.addColorStop(0.85,'#00C8FF');
+          grd.addColorStop(1,'#00FF88');
+        }
         ctx.fillStyle=grd;
         ctx.fillText(ln,W/2,y);
 
-        // Gold shine highlight
-        ctx.fillStyle='rgba(255,255,220,0.35)';
+        // Second pass - shine
+        const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.45);
+        shine.addColorStop(0,'rgba(255,255,255,0.55)');
+        shine.addColorStop(1,'rgba(255,255,255,0)');
+        ctx.fillStyle=shine;
         ctx.fillText(ln,W/2,y);
       });
 
