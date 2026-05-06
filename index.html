@@ -507,7 +507,7 @@ async function sendFalEmail(toEmail,imageUrl,offerText,style){
       method:'POST',
       headers:{'Authorization':'Bearer '+RESEND_API_KEY,'Content-Type':'application/json'},
       body:JSON.stringify({
-        from:'RMGS Creative Studio <creatives@rmgs.online>',
+        from:'RMGS Creative Studio <onboarding@resend.dev>',
         reply_to:'creatives@rmgs.online',
         to:[toEmail],
         subject:'Your '+clientName+' Creative Is Ready',
@@ -1461,21 +1461,22 @@ function buildFalFallbackPrompt(){
     prompt=v[r(v.length)]+' CRITICAL: No text, no words, no buttons. No thin neon tube lights or wire lights — only thick solid lightning bolt SHAPES. No logos. Pure background art only. Ultra high resolution.';
 
   } else {
-    // Text Only — VIBRANT solid/gradient background, offer is the entire creative
+    // Text Only — ULTRA vibrant solid color background only
+    // The offer text is drawn by canvas so background must be clean and bright
     const wannaTextOnly=[
-      `Perfectly smooth vivid gradient background. Top: deep royal purple #4B0082. Bottom: rich magenta #C2185B. Seamless gradient transition. Absolutely nothing else in the frame. No objects, no textures, no patterns. Pure clean color gradient only. Flat design. Perfect for text overlay.`,
-      `Bold solid bright purple background #6A0DAD. Perfectly flat, perfectly clean, no gradients, no texture, nothing. Pure saturated royal purple filling entire frame. Nothing else.`,
-      `Vibrant gradient background. Left: electric purple #7B2FBE. Right: deep gold #B8860B. Smooth diagonal gradient. Clean flat color only. Nothing else in frame whatsoever.`,
-      `Rich radial gradient background. Center: bright gold #FFD700. Edges: deep purple #2D0060. Smooth glow from center outward. Nothing in frame except this color gradient. Clean and vivid.`
+      'Perfectly smooth solid hot pink #FF1493 background. Pure flat color filling entire frame. Nothing else. No gradients, no texture, no objects, no patterns. Pure vivid solid pink.',
+      'Perfectly smooth solid electric orange #FF6600 background. Pure flat color. Nothing else whatsoever. Just orange.',
+      'Vivid solid cobalt blue #0047FF background. Pure flat color filling entire frame. Nothing else. Just blue.',
+      'Bright solid purple #8B00FF background. Pure flat color. Nothing else. Just purple.'
     ];
     const thrillzzTextOnly=[
-      `Vivid gradient background. Top: electric blue #0066FF. Bottom: deep navy #000830. Perfectly clean smooth gradient. Nothing else in frame. No objects, no texture. Pure clean blue gradient for text overlay.`,
-      `Bold flat background. Solid neon electric blue #00BFFF filling entire frame. Perfectly flat. No gradients, no texture, nothing. Pure single vivid color.`,
-      `Gradient background. Left: neon green #00FF88. Right: deep navy #040C20. Smooth horizontal gradient. Absolutely nothing else. Clean flat color only.`,
-      `Vibrant radial gradient. Center: bright cyan #00FFFF. Edges: very dark navy #02060F. Clean smooth glow. Nothing in frame except this gradient. Pure vivid color.`
+      'Perfectly smooth solid electric blue #0066FF background. Pure flat color filling entire frame. Nothing else. Just blue.',
+      'Vivid solid neon green #00CC44 background. Pure flat color. Nothing else whatsoever. Just green.',
+      'Bright solid cyan #00CCFF background. Pure flat color. Nothing else. Just cyan.',
+      'Pure solid hot magenta #FF00AA background. Pure flat color filling entire frame. Nothing else.'
     ];
     const v=isWanna?wannaTextOnly:thrillzzTextOnly;
-    prompt=v[r(v.length)]+' NO text. NO logos. NO people. NO objects. NO patterns. JUST the background color. This is a solid color background only.';
+    prompt=v[r(v.length)]+' NO text. NO logos. NO objects. NO gradients. JUST the solid color background.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1506,36 +1507,38 @@ async function compositeTextOnImage(bgImageUrl){
       // ── BACKGROUND ──────────────────────────────────────────
       ctx.drawImage(img,0,0,W,H);
 
-      // Dark vignette overlay for text readability
-      const vignette=ctx.createRadialGradient(W/2,H*0.35,H*0.05,W/2,H*0.35,H*0.55);
-      vignette.addColorStop(0,'rgba(0,0,0,0)');
-      vignette.addColorStop(1,'rgba(0,0,0,0.55)');
-      ctx.fillStyle=vignette;
-      ctx.fillRect(0,0,W,H);
+      // For Text Only — no dark overlays, keep background pure and bright
+      if(state.style!=='Text Only'){
+        const vignette=ctx.createRadialGradient(W/2,H*0.35,H*0.05,W/2,H*0.35,H*0.55);
+        vignette.addColorStop(0,'rgba(0,0,0,0)');
+        vignette.addColorStop(1,'rgba(0,0,0,0.55)');
+        ctx.fillStyle=vignette;
+        ctx.fillRect(0,0,W,H);
 
-      // Strong dark gradient at top for headline legibility
-      const topGrad=ctx.createLinearGradient(0,0,0,H*0.52);
-      topGrad.addColorStop(0,'rgba(0,0,0,0.82)');
-      topGrad.addColorStop(0.6,'rgba(0,0,0,0.45)');
-      topGrad.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=topGrad;
-      ctx.fillRect(0,0,W,H*0.52);
+        const topGrad=ctx.createLinearGradient(0,0,0,H*0.52);
+        topGrad.addColorStop(0,'rgba(0,0,0,0.82)');
+        topGrad.addColorStop(0.6,'rgba(0,0,0,0.45)');
+        topGrad.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle=topGrad;
+        ctx.fillRect(0,0,W,H*0.52);
 
-      // Strong dark gradient at bottom for button/disclaimer
-      const botGrad=ctx.createLinearGradient(0,H*0.62,0,H);
-      botGrad.addColorStop(0,'rgba(0,0,0,0)');
-      botGrad.addColorStop(0.4,'rgba(0,0,0,0.6)');
-      botGrad.addColorStop(1,'rgba(0,0,0,0.92)');
-      ctx.fillStyle=botGrad;
-      ctx.fillRect(0,H*0.62,W,H*0.38);
+        const botGrad=ctx.createLinearGradient(0,H*0.62,0,H);
+        botGrad.addColorStop(0,'rgba(0,0,0,0)');
+        botGrad.addColorStop(0.4,'rgba(0,0,0,0.6)');
+        botGrad.addColorStop(1,'rgba(0,0,0,0.92)');
+        ctx.fillStyle=botGrad;
+        ctx.fillRect(0,H*0.62,W,H*0.38);
+      }
 
       // ── HEADLINE TEXT ────────────────────────────────────────
       // Smart word wrap — measure and split
       const words=offerText.split(' ');
-      const maxW=W*0.9;
+      // Text Only style: offer fills entire image, much larger font
+      const isTextOnly=state.style==='Text Only';
+      const maxW=isTextOnly?W*0.95:W*0.9;
       let lines=[];
       let line='';
-      let testSize=isPortrait?148:95;
+      let testSize=isTextOnly?(isPortrait?200:140):(isPortrait?148:95);
       ctx.font=`900 ${testSize}px Impact, 'Arial Black', sans-serif`;
       
       // Build lines
@@ -1564,7 +1567,8 @@ async function compositeTextOnImage(bgImageUrl){
 
       const lineH=fontSize*1.12;
       const totalH=lines.length*lineH;
-      const textTop=isPortrait?H*0.06:H*0.06;
+      // Text Only: vertically center in upper 80% of image
+      const textTop=isTextOnly?Math.max(H*0.08,(H*0.85-totalH)/2):isPortrait?H*0.06:H*0.06;
 
       ctx.textAlign='center';
       ctx.textBaseline='top';
@@ -1588,8 +1592,13 @@ async function compositeTextOnImage(bgImageUrl){
 
         // Brand-specific gradient fill
         const isWannaCtx=typeof isWannaFlow==='function'&&isWannaFlow();
+        const isTextOnlyCtx=state.style==='Text Only';
         const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
-        if(isWannaCtx){
+        if(isTextOnlyCtx){
+          // Pure white for Text Only — maximum contrast on bright background
+          grd.addColorStop(0,'#FFFFFF');
+          grd.addColorStop(1,'#FFFFFF');
+        } else if(isWannaCtx){
           grd.addColorStop(0,'#FFFFFF');
           grd.addColorStop(0.15,'#FFF500');
           grd.addColorStop(0.5,'#FFD700');
