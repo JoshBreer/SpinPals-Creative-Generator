@@ -1342,63 +1342,53 @@ function buildFalFallbackPrompt(){
   const style=state.style||'Classic';
   const r=n=>Math.floor(Math.random()*n);
 
-  const palettes=[
-    'very dark navy blue #0A0E28 background with deep purple #1A0845 radial glow',
-    'near-black #080010 background with rich violet #2D1060 atmospheric haze',
-    'dark charcoal #0D0D1A background with indigo #1B1464 and gold #FFD700 accent light',
-    'obsidian black with midnight blue #003087 and electric gold light rays',
-    'deep space black with royal purple #4B0082 soft glow around edges'
-  ];
-  const palette=palettes[r(palettes.length)];
+  // Shared negative prompt — block everything we never want
+  const negativePrompt='text, words, letters, numbers, logos, watermarks, buttons, UI elements, people, humans, faces, athletes, players, crowds, grass field, soccer field, football field, baseball diamond, stadium exterior, neon light tubes, fluorescent tubes, neon stripes, thin lines, cartoon characters, anime, low quality, blurry, pixelated, oversaturated, ugly';
 
   let prompt='';
-  let negativePrompt='neon light tubes, neon tube installation, neon stripes, neon rods, fluorescent tubes, light tubes, neon signs, text, words, letters, logos, watermarks, buttons, people, humans, athletes, faces, grass, field, stadium exterior';
 
   if(style==='Classic'){
-    // Cartoony illustrated — modeled on the Twin deposit bonus style
-    const subjects=[
-      '3D cartoon gold coins with dollar signs exploding upward from center in a fountain, green neon glow outline on each coin, dark navy background, yellow lightning bolt shapes in corners, sports balls (basketball football baseball soccer ball) floating in corners with neon outlines, upbeat mobile game art style',
-      'giant 3D gold trophy in center with sparkle effects and star burst rays, confetti pieces in purple and gold raining down, dark background, cartoon comic book style illustration, bold graphic design',
-      'stacked 3D gold coins pyramid with glow effects, floating dollar bill bills around it, sports emoji balls (basketball football baseball) in corners, dark navy to purple gradient, cartoon game art style with thick outlines',
-      'explosion of 3D gold stars and sparkle effects from center, floating sport balls with neon borders, dark background, confetti shower, celebratory mobile game loading screen style illustration'
+    // Upbeat cartoon/illustrated — dark navy with electric green/yellow energy, sport balls, coins
+    const v=[
+      'Hyper-detailed 3D illustration. Dark navy blue background #0A0E28. Explosion of 3D gold dollar coins with dollar signs bursting from center bottom, coins at various depths and angles with specular highlights and realistic shadows. Floating sports balls — basketball, football, baseball — each with realistic texture and neon green rim lighting, scattered in corners. Bold yellow lightning bolt graphic shapes in background. Green particle glow effects. Mobile game UI art style. Ultra high quality render. Dramatic studio lighting.',
+      'Premium 3D game art illustration. Very dark navy #080C1A background. Giant 3D gold trophy in center emanating golden light rays. Cascading gold coins raining from above. Four sports balls floating at corners — basketball orange, football brown, baseball white, soccer ball black and white — each with neon glow outline. Confetti explosion in purple and gold. Dramatic god rays from trophy. AAA mobile game loading screen quality.',
+      'Cinematic 3D sports illustration. Deep space navy background. Multiple large sports balls floating in zero gravity — basketball, football, baseball — each hyper-detailed with realistic leather texture, dramatic rim lighting, strong shadows. Gold and green particle dust trails behind each ball. Dark background with purple atmospheric glow from below. Unreal Engine quality render. No text anywhere.',
+      'Explosive 3D illustration. Near-black background. Stack of large 3D gold coins with dollar symbols glowing bright, stacked pyramid in center with coins spilling outward. Green electric energy wisps rising from coin pile. Sports balls orbiting at various distances. Bold diagonal yellow lightning bolt shapes. Neon green accent lighting on everything. Premium advertising quality.'
     ];
-    prompt=palette+'. '+subjects[r(subjects.length)]+'. High quality 3D cartoon render. Bold colors. Thick outlines. Zero text. Zero logos. Zero buttons. Background art only.';
-    negativePrompt+=', photorealistic, photography, realistic lighting, stadium, real people';
+    prompt=v[r(v.length)]+' Ultra detailed. 8K resolution. Professional commercial art. NO text. NO logos. NO buttons. Pure background illustration only.';
 
   } else if(style==='Realistic'){
-    const sportLabel=sportCtx.includes('nba')||sportCtx.includes('basketball')?'basketball':
-      sportCtx.includes('nhl')||sportCtx.includes('hockey')?'hockey':
-      sportCtx.includes('mlb')||sportCtx.includes('baseball')?'baseball':
-      sportCtx.includes('soccer')||sportCtx.includes('mls')?'soccer':'football';
-    const subjects=[
-      'empty '+sportLabel+' arena at night from wide angle, floodlights on, dramatic shadows, no people, architectural photography quality, purple and gold light tones',
-      sportLabel+' equipment extreme close up macro photography, leather texture detail, dark background, single dramatic spotlight, product photography quality',
-      'dark atmospheric '+sportLabel+' venue interior, volumetric light beams cutting through haze, moody cinematic quality, no people or players',
-      'abstract motion blur of '+sportLabel+' arena lights, long exposure photography, light streaks in purple and gold, kinetic energy'
+    const sportLabel=sportCtx.includes('nba')||sportCtx.includes('basketball')?'NBA basketball arena':
+      sportCtx.includes('nhl')||sportCtx.includes('hockey')?'NHL hockey rink':
+      sportCtx.includes('mlb')||sportCtx.includes('baseball')?'MLB baseball stadium':
+      sportCtx.includes('soccer')||sportCtx.includes('mls')?'MLS soccer stadium':'NFL football stadium';
+    const v=[
+      `Breathtaking aerial cinematic photograph of an empty ${sportLabel} at night. Shot from directly above looking down. Floodlights blazing white and gold creating dramatic shadows. Deep purple and indigo atmospheric tones. Photorealistic. No people. Shot on Phase One IQ4 150MP camera. f/8, ISO 400, wide angle lens. Magazine quality.`,
+      `Extreme macro close-up photography of sports equipment on pure black background. Hyper-detailed leather texture — every grain and stitch visible. Single hard light source from 45 degrees creating deep shadows. Dramatic contrast. Product photography quality. Sony A7R V, 100mm macro lens, f/2.8. One object only in center frame. No people.`,
+      `Cinematic interior architectural photograph of empty ${sportLabel}. Wide angle 16mm lens perspective. Volumetric purple and gold light beams cutting through atmospheric haze. Empty seats receding to infinity. Perfect symmetry. Moody and dramatic. No people or athletes. Shot on RED Monstro 8K. Hollywood cinematography quality.`,
+      `Abstract motion blur long exposure photograph inside a sports arena. Colored light trails in purple, gold, and blue streaking across frame. 30 second exposure. Perfectly dark background. Kinetic energy. Fine art photography. Leica M10, 35mm lens. Museum quality print.`
     ];
-    prompt=palette+'. '+subjects[r(subjects.length)]+'. Shot on Sony A7R IV. 85mm f1.4. Cinematic quality. NO people. NO text. NO logos. Background only.';
-    negativePrompt+=', neon lights, cartoon, illustration, text';
+    prompt=v[r(v.length)]+' Ultra photorealistic. NO people. NO text. NO logos. Pure atmospheric background only.';
 
   } else if(style==='Electric'){
-    // What Twin makes: dark navy + lightning bolt SHAPES (not tubes), sport balls, coins, energy
-    const subjects=[
-      'dark navy background with large bold yellow and green lightning bolt graphic shapes like the Thrillzz brand — thick diagonal bolt shapes not thin lines — with floating sport balls basketball football baseball with neon green outlines, green dollar coins, dynamic energy composition, mobile game UI art style',
-      'abstract digital energy burst from center, electric blue plasma expanding outward in cloud-like formations, neon green particle sparks scattered, dark navy background, cyberpunk color palette, no light tubes',
-      'dark navy background with bold diagonal neon green triangular and angular geometric shapes, lightning bolt graphic elements as thick solid shapes not thin lines, electric energy composition, dramatic contrast',
-      'dark dramatic background with electric storm visual — multiple branching bolt shapes as thick graphic elements, blue and green glow clouds, particle sparks, high contrast power surge aesthetic, no thin lines or tubes'
+    // Twin-style: dark navy + bold lightning shapes + sport balls with neon glow + energy
+    const v=[
+      'Hyper-detailed digital illustration. Very dark navy #050A1A background. Three massive bold yellow lightning bolt shapes — thick, solid graphic bolt shapes like sports brand logos, not thin lines — diagonal across frame creating dynamic energy. Sports balls floating with electric blue neon glow outline: basketball, football, baseball. Green matrix particle rain in background. Electric blue plasma orbs. Power surge aesthetic. High contrast. Premium mobile game art.',
+      'Dynamic sports energy digital art. Near-black background. Giant electric green and yellow diagonal geometric shapes — bold thick chevrons and lightning marks — creating kinetic movement. Basketball and football with neon teal outline floating at different sizes. Gold coin explosion in lower third. Electric blue lightning arc connecting balls. Dark and dramatic. Thrillzz brand energy.',
+      'Explosive electric sports wallpaper illustration. Dark navy background. Central bright green energy core radiating outward with electric tendrils. Bold yellow lightning bolt graphic shapes — solid thick shapes not lines — at corners. Floating sports balls with electric blue border: basketball, football. Gold particle explosion. Power and speed. Ultra premium game art quality.',
+      'Electric storm sports digital art. Very dark background. Multiple thick bold electric blue and neon green bolt SHAPES — not thin lines, but thick solid angular shapes like brand logos — crossing the frame diagonally. Sports balls exploding outward from center with trail effects. Gold coins scattering. Dark moody atmosphere with concentrated energy burst from center. No text anywhere.'
     ];
-    prompt=palette+'. '+subjects[r(subjects.length)]+'. Zero text. Zero logos. Zero buttons. Zero neon light tubes or fluorescent tubes. Background design only. High production quality.';
-    negativePrompt+=', thin lines, light tubes, neon tubes, fluorescent tubes, neon stripes, cartoon faces, people';
+    prompt=v[r(v.length)]+' 8K ultra detailed. Professional digital art. NO text. NO logos. NO thin neon tubes or fluorescent lights. Background art only.';
 
   } else {
-    // Text Only — premium minimal
-    const subjects=[
-      'smooth dark velvet texture with single soft light reflection, luxury product backdrop, deep shadows',
-      'dark polished marble with subtle purple and gold veining catching light, premium material shot',
-      'deep space photograph showing distant nebula in purple and gold tones, stars, NASA quality image',
-      'dark brushed metal surface with directional studio light creating gradient sheen, premium tech look'
+    // Text Only — ultra premium minimal
+    const v=[
+      'Award-winning product photography background. Smooth dark velvet textile surface, deep purple-black #1A0030 tone. Single focused beam of warm gold light from top right creating rich caustic shadow. Shot on Hasselblad X2D. Extreme shallow depth of field. Luxury fashion advertising quality. Nothing else in frame.',
+      'Fine art photography. Dark polished marble surface with deep purple and gold veining. Dramatic raking light from left catching every vein detail. Rich shadows. Shot on Phase One. Exclusive luxury brand campaign quality. Pure texture shot.',
+      'NASA quality astrophotography. Deep space backdrop. Milky way core in purple and gold tones. Stars sharp across entire frame. Galaxy dust lanes visible. Long exposure. Hubble-quality image. Deep space black with gold nebula clusters. No people.',
+      'Cinematic fog installation photography. Dark empty studio space. Thick atmospheric theatrical fog lit by single purple LED from below and gold LED from behind. Volumetric light rays visible. Abstract and moody. Shot on ARRI Alexa. Luxury campaign aesthetic.'
     ];
-    prompt=palette+'. '+subjects[r(subjects.length)]+'. No objects. No graphic elements. Pure texture and light. Zero text. Zero logos. Luxury advertising background.';
+    prompt=v[r(v.length)]+' Ultra detailed. NO text. NO logos. NO objects. Pure background only.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1406,80 +1396,129 @@ function buildFalFallbackPrompt(){
 
 // Draw text overlay on top of fal background image using canvas
 async function compositeTextOnImage(bgImageUrl){
-  // Returns {compositeDataUrl, originalUrl}
   return new Promise((resolve)=>{
     const fmt=state.format==='both'?'portrait':state.format||'portrait';
     const isPortrait=fmt==='portrait';
-    const W=isPortrait?1080:1080;
+    const W=1080;
     const H=isPortrait?1920:1080;
 
-    const offer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
+    const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
     const isTurkish=state.platform==='bankobet';
     const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
     const disclaimer=isWannaFlow()||isThrillzzFlow()
-      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States':'19+ | Free to Play | Not Available in All States | See Terms')
-      :'18+ | Play Responsibly | T&Cs Apply';
+      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
+      :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
 
     const canvas=document.createElement('canvas');
-    canvas.width=W;canvas.height=H;
+    canvas.width=W; canvas.height=H;
     const ctx=canvas.getContext('2d');
 
     const img=new Image();
     img.crossOrigin='anonymous';
     img.onload=()=>{
-      // Draw background
+      // ── BACKGROUND ──────────────────────────────────────────
       ctx.drawImage(img,0,0,W,H);
 
-      // Dark overlay on top 45% for text readability
-      const grad=ctx.createLinearGradient(0,0,0,H*0.5);
-      grad.addColorStop(0,'rgba(0,0,0,0.6)');
-      grad.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=grad;
-      ctx.fillRect(0,0,W,H*0.5);
+      // Dark vignette overlay for text readability
+      const vignette=ctx.createRadialGradient(W/2,H*0.35,H*0.05,W/2,H*0.35,H*0.55);
+      vignette.addColorStop(0,'rgba(0,0,0,0)');
+      vignette.addColorStop(1,'rgba(0,0,0,0.55)');
+      ctx.fillStyle=vignette;
+      ctx.fillRect(0,0,W,H);
 
-      // OFFER TEXT — top section
-      // Smart line breaking — split offer into lines that fit within canvas
-      const words=offer.split(' ');
-      const maxFontSize=isPortrait?130:75;
-      ctx.font=`900 ${maxFontSize}px Impact, Arial Black, sans-serif`;
-      const offerLines=[];
-      let currentLine='';
+      // Strong dark gradient at top for headline legibility
+      const topGrad=ctx.createLinearGradient(0,0,0,H*0.52);
+      topGrad.addColorStop(0,'rgba(0,0,0,0.82)');
+      topGrad.addColorStop(0.6,'rgba(0,0,0,0.45)');
+      topGrad.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=topGrad;
+      ctx.fillRect(0,0,W,H*0.52);
+
+      // Strong dark gradient at bottom for button/disclaimer
+      const botGrad=ctx.createLinearGradient(0,H*0.62,0,H);
+      botGrad.addColorStop(0,'rgba(0,0,0,0)');
+      botGrad.addColorStop(0.4,'rgba(0,0,0,0.6)');
+      botGrad.addColorStop(1,'rgba(0,0,0,0.92)');
+      ctx.fillStyle=botGrad;
+      ctx.fillRect(0,H*0.62,W,H*0.38);
+
+      // ── HEADLINE TEXT ────────────────────────────────────────
+      // Smart word wrap — measure and split
+      const words=offerText.split(' ');
+      const maxW=W*0.9;
+      let lines=[];
+      let line='';
+      let testSize=isPortrait?148:95;
+      ctx.font=`900 ${testSize}px Impact, 'Arial Black', sans-serif`;
+      
+      // Build lines
       words.forEach(word=>{
-        const test=currentLine?currentLine+' '+word:word;
-        if(ctx.measureText(test).width>W*0.92&&currentLine){
-          offerLines.push(currentLine);currentLine=word;
-        } else {currentLine=test;}
+        const test=line?line+' '+word:word;
+        if(ctx.measureText(test).width>maxW&&line){
+          lines.push(line); line=word;
+        } else line=test;
       });
-      if(currentLine)offerLines.push(currentLine);
-      // Scale font down if still too wide
-      let fontSize=maxFontSize;
-      offerLines.forEach(line=>{
-        while(ctx.measureText(line).width>W*0.92&&fontSize>40){
-          fontSize-=4;
-          ctx.font=`900 ${fontSize}px Impact, Arial Black, sans-serif`;
-        }
-      });
+      if(line)lines.push(line);
+
+      // Scale down font if too many lines
+      let fontSize=testSize;
+      if(lines.length>3)fontSize=Math.max(isPortrait?90:60,Math.floor(fontSize*(3/lines.length)));
+      
+      // Re-wrap at new size
+      if(lines.length>3){
+        ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
+        lines=[]; line='';
+        words.forEach(word=>{
+          const test=line?line+' '+word:word;
+          if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=word;}else line=test;
+        });
+        if(line)lines.push(line);
+      }
+
+      const lineH=fontSize*1.12;
+      const totalH=lines.length*lineH;
+      const textTop=isPortrait?H*0.06:H*0.06;
+
       ctx.textAlign='center';
-      ctx.shadowColor='rgba(0,0,0,0.9)';
-      ctx.shadowBlur=20;
-      ctx.shadowOffsetX=4;ctx.shadowOffsetY=4;
-      const goldGrad=ctx.createLinearGradient(0,H*0.02,0,H*0.40);
-      goldGrad.addColorStop(0,'#FFD700');
-      goldGrad.addColorStop(0.5,'#FFA500');
-      goldGrad.addColorStop(1,'#FFD700');
-      ctx.fillStyle=goldGrad;
-      const lineHeight=fontSize+16;
-      const totalTextH=offerLines.length*lineHeight;
-      const startY=isPortrait?H*0.06:H*0.08;
-      offerLines.forEach((line,i)=>{
-        ctx.fillText(line,W/2,startY+(i*lineHeight)+fontSize);
+      ctx.textBaseline='top';
+
+      lines.forEach((ln,i)=>{
+        const y=textTop+(i*lineH);
+        
+        // Black stroke for depth
+        ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
+        ctx.strokeStyle='rgba(0,0,0,0.95)';
+        ctx.lineWidth=fontSize*0.12;
+        ctx.lineJoin='round';
+        ctx.strokeText(ln,W/2,y);
+
+        // Gold gradient fill
+        const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
+        grd.addColorStop(0,'#FFEE00');
+        grd.addColorStop(0.45,'#FFD700');
+        grd.addColorStop(0.8,'#FF9500');
+        grd.addColorStop(1,'#FFD700');
+        ctx.fillStyle=grd;
+        ctx.fillText(ln,W/2,y);
+
+        // Gold shine highlight
+        ctx.fillStyle='rgba(255,255,220,0.35)';
+        ctx.fillText(ln,W/2,y);
       });
 
-      // CTA BUTTON — lower center
-      ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
-      const btnW=isPortrait?500:400;const btnH=isPortrait?110:80;
-      const btnX=(W-btnW)/2;const btnY=isPortrait?H*0.76:H*0.72;
+      // ── CTA BUTTON ───────────────────────────────────────────
+      const btnW=isPortrait?680:500;
+      const btnH=isPortrait?118:88;
       const btnR=btnH/2;
+      const btnX=(W-btnW)/2;
+      const btnY=isPortrait?H*0.76:H*0.74;
+
+      // Button shadow
+      ctx.shadowColor='rgba(0,200,80,0.5)';
+      ctx.shadowBlur=30;
+      ctx.shadowOffsetY=8;
+
+      // Draw pill button
       ctx.beginPath();
       ctx.moveTo(btnX+btnR,btnY);
       ctx.lineTo(btnX+btnW-btnR,btnY);
@@ -1491,29 +1530,59 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.lineTo(btnX,btnY+btnR);
       ctx.arcTo(btnX,btnY,btnX+btnR,btnY,btnR);
       ctx.closePath();
-      const btnGrad=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-      btnGrad.addColorStop(0,'#22c55e');
-      btnGrad.addColorStop(1,'#16a34a');
-      ctx.fillStyle=btnGrad;
+
+      // Green gradient fill
+      const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
+      btnGrd.addColorStop(0,'#30E870');
+      btnGrd.addColorStop(0.5,'#22C55E');
+      btnGrd.addColorStop(1,'#16A34A');
+      ctx.fillStyle=btnGrd;
       ctx.fill();
+
+      // Button shine
+      ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+      ctx.beginPath();
+      ctx.moveTo(btnX+btnR,btnY+2);
+      ctx.lineTo(btnX+btnW-btnR,btnY+2);
+      ctx.arcTo(btnX+btnW-2,btnY+2,btnX+btnW-2,btnY+btnR,btnR-2);
+      ctx.lineTo(btnX+btnW-2,btnY+btnH*0.45);
+      ctx.lineTo(btnX+2,btnY+btnH*0.45);
+      ctx.lineTo(btnX+2,btnY+btnR);
+      ctx.arcTo(btnX+2,btnY+2,btnX+btnR,btnY+2,btnR-2);
+      ctx.closePath();
+      ctx.fillStyle='rgba(255,255,255,0.18)';
+      ctx.fill();
+
       // Button text
-      ctx.font=`800 ${isPortrait?52:40}px Impact, Arial Black, sans-serif`;
-      ctx.fillStyle='#ffffff';
+      const btnFontSize=isPortrait?58:42;
+      ctx.font=`900 ${btnFontSize}px Impact, 'Arial Black', sans-serif`;
       ctx.textAlign='center';
-      ctx.fillText(ctaText,W/2,btnY+btnH*0.67);
+      ctx.textBaseline='middle';
+      ctx.shadowColor='rgba(0,0,0,0.4)';
+      ctx.shadowBlur=8;
+      ctx.shadowOffsetY=3;
+      ctx.fillStyle='#FFFFFF';
+      ctx.fillText(ctaText,W/2,btnY+btnH/2);
+      ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
-      // DISCLAIMER BAR — very bottom
-      const barH=isPortrait?60:50;
-      ctx.fillStyle='rgba(0,0,0,0.85)';
+      // ── DISCLAIMER BAR ───────────────────────────────────────
+      const barH=isPortrait?58:48;
+      ctx.fillStyle='rgba(0,0,0,0.88)';
       ctx.fillRect(0,H-barH,W,barH);
-      ctx.font=`400 ${isPortrait?26:22}px Arial, sans-serif`;
-      ctx.fillStyle='rgba(255,255,255,0.85)';
-      ctx.textAlign='center';
-      ctx.fillText(disclaimer,W/2,H-barH/2+9);
 
-      resolve({composite:canvas.toDataURL('image/jpeg',0.92),original:bgImageUrl});
+      // Subtle top border on bar
+      ctx.fillStyle='rgba(255,255,255,0.08)';
+      ctx.fillRect(0,H-barH,W,1);
+
+      ctx.font=`400 ${isPortrait?24:20}px -apple-system, Arial, sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.78)';
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText(disclaimer,W/2,H-barH/2);
+
+      resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
     };
-    img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl}); // fallback
+    img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl});
     img.src=bgImageUrl;
   });
 }
@@ -1752,27 +1821,7 @@ function showResult(loadMsg,found){
 
 
 
-async function saveFalEntryToGithub(entry){
-  try{
-    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
-    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
-    if(!getRes.ok)throw new Error('GET failed');
-    const fileData=await getRes.json();
-    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
-    existing.unshift(entry);
-    const putRes=await fetch(apiUrl,{
-      method:'PUT',
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify({
-        message:'fal.ai fallback creative: '+entry.game_name,
-        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
-        sha:fileData.sha
-      })
-    });
-    if(putRes.ok)console.log('FAL FALLBACK: saved to gallery.json');
-    else console.error('FAL FALLBACK: gallery save failed',putRes.status);
-  }catch(e){console.error('FAL FALLBACK: gallery save error',e);}
-}
+
 
 // ============================================================
 // FAL.AI FALLBACK — fires only if Twin hasn't responded in 6min
