@@ -325,6 +325,7 @@ const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a
 const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
 const THRILLZZ_WEBHOOK='https://build.twin.so/triggers/004adff6-c756-4d04-a9bc-7d17df6985b9/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
+const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
 const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
 const GITHUB_TOKEN='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';
@@ -495,6 +496,39 @@ function hasReachedDailyLimit(email){return getGenerationCount(email)>=DAILY_LIM
 async function triggerWebhook(data,url){
   try{await fetch(url,{method:'POST',body:JSON.stringify(data),mode:'no-cors'});return true;}
   catch(e){console.error('Webhook failed:',e);return false;}
+}
+
+async function sendFalEmail(toEmail,imageUrl,offerText,style){
+  try{
+    const isWanna=isWannaFlow();
+    const isThrillzz=isThrillzzFlow();
+    const clientName=isWanna?'WannaParlay':isThrillzz?'Thrillzz':'RMGS';
+    const res=await fetch('https://api.resend.com/emails',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+RESEND_API_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({
+        from:'RMGS Creative Studio <creatives@rmgs.online>',
+        reply_to:'creatives@rmgs.online',
+        to:[toEmail],
+        subject:'Your '+clientName+' Creative Is Ready',
+        html:`
+          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#0a0a0a;color:#fff;padding:24px;border-radius:12px;">
+            <h2 style="color:#FFD700;margin-top:0;">Your Creative Is Ready ⚡</h2>
+            <p style="color:#ccc;">Your <strong style="color:#fff;">${style}</strong> creative for <strong style="color:#FFD700;">${offerText}</strong> has been generated.</p>
+            <div style="margin:24px 0;text-align:center;">
+              <img src="${imageUrl}" style="max-width:100%;border-radius:8px;border:2px solid #333;" alt="Your Creative"/>
+            </div>
+            <div style="text-align:center;margin:20px 0;">
+              <a href="${imageUrl}" style="background:#22c55e;color:#fff;padding:12px 32px;border-radius:24px;text-decoration:none;font-weight:700;font-size:16px;">Download Creative</a>
+            </div>
+            <p style="color:#666;font-size:12px;margin-top:24px;border-top:1px solid #222;padding-top:16px;">RMGS Creative Studio &nbsp;|&nbsp; Reply to this email to contact us</p>
+          </div>
+        `
+      })
+    });
+    if(res.ok){console.log('FAL: email sent via Resend to',toEmail);}
+    else{const err=await res.json();console.error('FAL: Resend email failed',err);}
+  }catch(e){console.error('FAL: email error',e);}
 }
 
 // ============================================================
@@ -1349,19 +1383,8 @@ async function saveFalEntryToGithub(entry){
       else console.warn('FAL: gallery save failed',putGallery.status);
     }
 
-    // Step 3: Fire Twin webhook for email only (async, dont await — dont block UI)
-    triggerWebhook({
-      event:'fal_creative_complete',
-      source:'fal',
-      email_only:true,
-      image_url:permanentUrl,
-      offer_text:entry.offer_text,
-      style:entry.style,
-      format:entry.format,
-      platform:entry.platform,
-      user_email:entry.user_email
-    },getWebhook());
-    console.log('FAL: Twin notified for email');
+    // Step 3: Send email directly via Resend — instant, no Twin delay
+    sendFalEmail(entry.user_email,permanentUrl,entry.offer_text||'',entry.style||'');
 
     return permanentUrl;
   }catch(e){
