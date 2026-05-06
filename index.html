@@ -1342,53 +1342,71 @@ function buildFalFallbackPrompt(){
   const style=state.style||'Classic';
   const r=n=>Math.floor(Math.random()*n);
 
-  // Shared negative prompt — block everything we never want
-  const negativePrompt='text, words, letters, numbers, logos, watermarks, buttons, UI elements, people, humans, faces, athletes, players, crowds, grass field, soccer field, football field, baseball diamond, stadium exterior, neon light tubes, fluorescent tubes, neon stripes, thin lines, cartoon characters, anime, low quality, blurry, pixelated, oversaturated, ugly';
+  const isWanna=isWannaFlow();
+  const isThrillzz=isThrillzzFlow();
+
+  // Brand colors
+  const wannaBg='deep royal purple #3B0F6B to black gradient';
+  const thrillzzBg='very dark navy #060C1E to black gradient';
+  const wannaAccent='gold #FFD700 and bright green #22C55E';
+  const thrillzzAccent='electric blue #00C8FF and neon yellow-green #AAFF00';
+  const accent=isWanna?wannaAccent:thrillzzAccent;
+  const bg=isWanna?wannaBg:thrillzzBg;
+
+  const negativePrompt='text, words, letters, numbers, logos, watermarks, UI elements, buttons, people, humans, faces, athletes, real players, crowds, neon light tubes, fluorescent tube lights, thin wire lights, neon sign tubes, light rods, low quality, blurry, ugly, deformed, duplicate, extra limbs';
 
   let prompt='';
 
   if(style==='Classic'){
-    // Upbeat cartoon/illustrated — dark navy with electric green/yellow energy, sport balls, coins
-    const v=[
-      'Hyper-detailed 3D illustration. Dark navy blue background #0A0E28. Explosion of 3D gold dollar coins with dollar signs bursting from center bottom, coins at various depths and angles with specular highlights and realistic shadows. Floating sports balls — basketball, football, baseball — each with realistic texture and neon green rim lighting, scattered in corners. Bold yellow lightning bolt graphic shapes in background. Green particle glow effects. Mobile game UI art style. Ultra high quality render. Dramatic studio lighting.',
-      'Premium 3D game art illustration. Very dark navy #080C1A background. Giant 3D gold trophy in center emanating golden light rays. Cascading gold coins raining from above. Four sports balls floating at corners — basketball orange, football brown, baseball white, soccer ball black and white — each with neon glow outline. Confetti explosion in purple and gold. Dramatic god rays from trophy. AAA mobile game loading screen quality.',
-      'Cinematic 3D sports illustration. Deep space navy background. Multiple large sports balls floating in zero gravity — basketball, football, baseball — each hyper-detailed with realistic leather texture, dramatic rim lighting, strong shadows. Gold and green particle dust trails behind each ball. Dark background with purple atmospheric glow from below. Unreal Engine quality render. No text anywhere.',
-      'Explosive 3D illustration. Near-black background. Stack of large 3D gold coins with dollar symbols glowing bright, stacked pyramid in center with coins spilling outward. Green electric energy wisps rising from coin pile. Sports balls orbiting at various distances. Bold diagonal yellow lightning bolt shapes. Neon green accent lighting on everything. Premium advertising quality.'
+    // SpinPals-style: bright, cartoonish, clean, colorful — adapted for sports
+    const wannaClassic=[
+      `Vibrant cartoon sports advertisement illustration, professional mobile game art quality. ${wannaBg} background. CENTER: A large glowing golden trophy cup with sparkle star effects radiating outward, sitting on a pile of shiny gold coins, each coin engraved with a dollar sign. The trophy emits warm golden volumetric light rays upward. SURROUNDING the trophy floating in dynamic positions: a hyper-detailed cartoon basketball (orange with black lines and specular highlight), a cartoon football (brown leather texture with white laces), a cartoon baseball (white with red stitching), all with neon green glow rim lighting and drop shadows. BACKGROUND: Large bold diagonal yellow lightning bolt shapes behind everything, like Adidas stripes but as lightning. Confetti pieces in purple and gold raining down. Small gold star sparkles scattered throughout. STYLE: Thick outlines on all objects, vivid saturated colors, smooth gradients, studio lighting on every object. Professional AAA mobile game UI art. Behance portfolio quality. Unreal Engine render quality.`,
+      `Bright celebratory cartoon sports illustration. ${wannaBg} background with subtle radial purple glow from center. CENTER: Massive pile of gold coins exploding upward like a fountain, coins spinning and catching light, dollar signs gleaming. Green neon energy beams shoot up from the coin pile. FLOATING AROUND: Three large cartoon sports balls — basketball top left with orange glow, football top right with brown leather detail, soccer ball bottom center with black and white panels — each ball casting a soft shadow and having a bright white specular highlight. CORNER ACCENTS: Gold star burst shapes in each corner. Yellow lightning bolt graphic shapes at left and right edges. A large "2X" in 3D gold letters floats above the coins glowing. STYLE: Comic book clean lines, vivid colors, every element perfectly rendered, professional digital illustration.`,
+      `Premium sports gaming illustration. ${wannaBg}. LEFT SIDE: Giant shiny gold trophy with wings spread, radiating light. RIGHT SIDE: Stack of oversized gold coins in perspective, shimmering. CENTER BOTTOM: Sports ball collection — basketball, football, baseball arranged in a triangle formation, each hyper-detailed with realistic texture but illustrated style, glowing neon green outline. TOP: Fireworks explosion in gold and purple sparkling across the sky. Bold yellow chevron arrow shapes pointing upward creating motion. Every element has depth, shadow, and premium sheen. Concept art quality. Art station featured illustration.`
     ];
-    prompt=v[r(v.length)]+' Ultra detailed. 8K resolution. Professional commercial art. NO text. NO logos. NO buttons. Pure background illustration only.';
+    const thrillzzClassic=[
+      `Electric gaming advertisement illustration. ${thrillzzBg} background. CENTER: Giant 3D trophy made of blue crystal/ice emitting cyan light rays. Below it: Explosion of gold coins and ${thrillzzAccent} colored tokens bursting outward. FLOATING: Basketball, football, baseball each with electric blue neon outline glow, floating at different depths with motion blur trails. BACKGROUND: Bold thick yellow lightning bolt graphic shapes — Thrillzz brand style — crossing diagonally. Blue electric sparks and green particle effects fill negative space. TOP: Purple to cyan gradient energy beam from top. STYLE: Cyberpunk meets sports mobile app. Ultra polished. Unreal Engine 5 quality render.`,
+      `High energy sports gaming art. ${thrillzzBg}. HERO ELEMENT: Large 3D rendered shield/badge shape in center glowing electric blue with neon green border, radiating energy. AROUND IT: Basketball and football floating with electric blue halos and speed trails. Gold and cyan coins exploding outward. Bold yellow lightning bolt SHAPES (thick, solid shapes — not lines) create an X pattern in background. Green matrix rain effect behind everything. Electric blue orbs of light floating. STYLE: Premium esports aesthetic. Artstation quality. Professional sports betting app visual.`
+    ];
+    const v=isWanna?wannaClassic:thrillzzClassic;
+    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no letters anywhere. No logos. No buttons. This is the background visual only. Ultra high resolution. Hyper detailed.';
 
   } else if(style==='Realistic'){
-    const sportLabel=sportCtx.includes('nba')||sportCtx.includes('basketball')?'NBA basketball arena':
-      sportCtx.includes('nhl')||sportCtx.includes('hockey')?'NHL hockey rink':
-      sportCtx.includes('mlb')||sportCtx.includes('baseball')?'MLB baseball stadium':
-      sportCtx.includes('soccer')||sportCtx.includes('mls')?'MLS soccer stadium':'NFL football stadium';
-    const v=[
-      `Breathtaking aerial cinematic photograph of an empty ${sportLabel} at night. Shot from directly above looking down. Floodlights blazing white and gold creating dramatic shadows. Deep purple and indigo atmospheric tones. Photorealistic. No people. Shot on Phase One IQ4 150MP camera. f/8, ISO 400, wide angle lens. Magazine quality.`,
-      `Extreme macro close-up photography of sports equipment on pure black background. Hyper-detailed leather texture — every grain and stitch visible. Single hard light source from 45 degrees creating deep shadows. Dramatic contrast. Product photography quality. Sony A7R V, 100mm macro lens, f/2.8. One object only in center frame. No people.`,
-      `Cinematic interior architectural photograph of empty ${sportLabel}. Wide angle 16mm lens perspective. Volumetric purple and gold light beams cutting through atmospheric haze. Empty seats receding to infinity. Perfect symmetry. Moody and dramatic. No people or athletes. Shot on RED Monstro 8K. Hollywood cinematography quality.`,
-      `Abstract motion blur long exposure photograph inside a sports arena. Colored light trails in purple, gold, and blue streaking across frame. 30 second exposure. Perfectly dark background. Kinetic energy. Fine art photography. Leica M10, 35mm lens. Museum quality print.`
+    // Cinematic, cool-looking, NOT empty — atmospheric with sport elements but no real players
+    const wannaRealistic=[
+      `Cinematic sports atmosphere photography. ${wannaBg} tones. SCENE: Inside a premium NBA basketball arena shot from the court level looking up. The court surface gleaming under dramatic floodlights creating star-burst light effects. Multiple light sources creating volumetric god rays through slight atmospheric haze. The scoreboard displays colorful light. Empty arena seats create a purple sea of color receding to darkness. FOREGROUND: A single NBA basketball sitting perfectly centered on the court logo, dramatic spotlight on it, photorealistic leather texture, the logo beneath it glowing with neon purple light. Shot on ARRI Alexa 35, 21mm Zeiss lens, T2.8. Cinematic color grade: deep purples, gold highlights. No people. Film grain.`,
+      `Premium sports product photography. ${wannaBg} studio background. HERO: A NFL football suspended in perfect mid-air position, rotating slightly, ultra-detailed leather texture with every seam and lace perfectly rendered, single hard light source from top-right creating dramatic shadow on left half. The ball's shadow falls perfectly on a reflective dark surface below it. BACKGROUND: Out of focus but visible — stadium lights in bokeh creating gold circle patterns on deep purple. Shot on Hasselblad H6D-100C, 100mm macro, f/2.8. Luxury advertising photography. No people.`,
+      `Cinematic atmospheric sports scene. ${wannaBg}. SCENE: Twilight aerial view of a professional stadium, the grass field perfectly illuminated by stadium lights casting long dramatic shadows, the playing lines crisp and geometric against vivid green. Shot from directly above, slight angle. Purple sky with golden sunset behind stadium rim. No people on field. Photorealistic. DJI X9-8K aerial camera. Magazine cover photography.`
     ];
-    prompt=v[r(v.length)]+' Ultra photorealistic. NO people. NO text. NO logos. Pure atmospheric background only.';
+    const thrillzzRealistic=[
+      `Cinematic gaming atmosphere. ${thrillzzBg} deep space navy. SCENE: Premium sportsbook environment — sleek dark room with multiple large curved screens on walls displaying sports data and statistics in electric blue and green. Dramatic blue LED underlighting on surfaces. Reflective dark floor. Empty but opulent. Blade Runner 2049 aesthetic. Shot on ARRI, 35mm anamorphic. Teal and orange color grade. No people.`,
+      `Dramatic sports equipment still life photography. ${thrillzzBg} background. ARRANGEMENT: Multiple sports balls — basketball, football, baseball — arranged in perfect composition with professional studio lighting. Each ball lit differently: basketball with orange warm light, football with cool rim light, baseball with dramatic side light. Dark reflective surface below each creating perfect reflections. Electric blue underlighting on surface. Medium format photography, Phaseone IQ4, 150mm lens. No people.`,
+      `Cinematic empty arena photograph. ${thrillzzBg} atmosphere. An empty modern stadium at night from field level, floodlights off except for emergency lighting creating cyan and blue pools of light on the field surface. The emptiness is dramatic and cinematic. Security lights create long shadows. Shot on Sony VENICE 2, anamorphic, T1.8. Cinematic color grade with teal shadows and electric highlights. No people. Film quality.`
+    ];
+    const v=isWanna?wannaRealistic:thrillzzRealistic;
+    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no letters. No logos or watermarks. No people or players. Background only.';
 
   } else if(style==='Electric'){
-    // Twin-style: dark navy + bold lightning shapes + sport balls with neon glow + energy
-    const v=[
-      'Hyper-detailed digital illustration. Very dark navy #050A1A background. Three massive bold yellow lightning bolt shapes — thick, solid graphic bolt shapes like sports brand logos, not thin lines — diagonal across frame creating dynamic energy. Sports balls floating with electric blue neon glow outline: basketball, football, baseball. Green matrix particle rain in background. Electric blue plasma orbs. Power surge aesthetic. High contrast. Premium mobile game art.',
-      'Dynamic sports energy digital art. Near-black background. Giant electric green and yellow diagonal geometric shapes — bold thick chevrons and lightning marks — creating kinetic movement. Basketball and football with neon teal outline floating at different sizes. Gold coin explosion in lower third. Electric blue lightning arc connecting balls. Dark and dramatic. Thrillzz brand energy.',
-      'Explosive electric sports wallpaper illustration. Dark navy background. Central bright green energy core radiating outward with electric tendrils. Bold yellow lightning bolt graphic shapes — solid thick shapes not lines — at corners. Floating sports balls with electric blue border: basketball, football. Gold particle explosion. Power and speed. Ultra premium game art quality.',
-      'Electric storm sports digital art. Very dark background. Multiple thick bold electric blue and neon green bolt SHAPES — not thin lines, but thick solid angular shapes like brand logos — crossing the frame diagonally. Sports balls exploding outward from center with trail effects. Gold coins scattering. Dark moody atmosphere with concentrated energy burst from center. No text anywhere.'
+    const wannaElectric=[
+      `Premium digital sports energy art. ${wannaBg}. COMPOSITION: Multiple large bold LIGHTNING BOLT SHAPES — thick solid geometric bolt shapes exactly like sports brand logo lightning marks, NOT thin wire lines — in bright yellow-gold, arranged dynamically crossing at center. Each bolt is a thick solid filled shape with slight gradient from yellow to orange. Behind the bolts: deep purple atmospheric glow clouds. AROUND THE BOLTS: Basketball and football floating with bright gold neon outline glow, small size, scattered. Green particle sparks where bolts cross. Gold light emanates from crossing point creating a radial burst. Very dark background making everything POP. Sports energy drink advertisement quality. Behance featured design.`,
+      `Electric sports power art. ${wannaBg} background. HERO: Three thick yellow lightning bolt SHAPES (solid filled, thick like Adidas stripes but bent into lightning forms) arranged in fan pattern from bottom center. Each bolt glows and radiates. Green electric plasma clouds bloom around bolt tips. Basketball with purple glow left, football with gold glow right, baseball with white glow top — all floating. Small coin sparkles throughout. STYLE: Bold graphic design meets fine art digital painting. Poster quality. Nike campaign aesthetic.`
     ];
-    prompt=v[r(v.length)]+' 8K ultra detailed. Professional digital art. NO text. NO logos. NO thin neon tubes or fluorescent lights. Background art only.';
+    const thrillzzElectric=[
+      `High voltage electric sports art. ${thrillzzBg}. COMPOSITION: Three MASSIVE thick electric blue lightning bolt SHAPES — solid thick shapes not thin lines, each bolt the width of a human torso — arranged in triangle formation, their crossing point creating an explosion of white-blue light. Neon yellow-green energy plasma clouds around each bolt tip. Basketball, football floating at edges with electric blue neon halos. Green data stream particles fill background. Central explosion point radiates cyan light rings outward. Thrillzz electric brand energy. Cyberpunk sports poster quality.`,
+      `Electric power surge sports illustration. ${thrillzzBg}. SCENE: A central concentrated ball of electric plasma energy — blue-white sphere with electric arcs reaching outward. From this core: thick bold chevron and lightning SHAPES (solid geometric, not lines) in neon yellow extend to all corners creating an X pattern. Sports balls float within the energy field each with electric glow outline. Matrix green particles rain behind everything. Extreme contrast, dark background making neon elements explode visually. High end esports tournament poster quality.`
+    ];
+    const v=isWanna?wannaElectric:thrillzzElectric;
+    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no buttons. No thin neon tube lights or wire lights — only thick solid lightning bolt SHAPES. No logos. Pure background art only. Ultra high resolution.';
 
   } else {
     // Text Only — ultra premium minimal
     const v=[
-      'Award-winning product photography background. Smooth dark velvet textile surface, deep purple-black #1A0030 tone. Single focused beam of warm gold light from top right creating rich caustic shadow. Shot on Hasselblad X2D. Extreme shallow depth of field. Luxury fashion advertising quality. Nothing else in frame.',
-      'Fine art photography. Dark polished marble surface with deep purple and gold veining. Dramatic raking light from left catching every vein detail. Rich shadows. Shot on Phase One. Exclusive luxury brand campaign quality. Pure texture shot.',
-      'NASA quality astrophotography. Deep space backdrop. Milky way core in purple and gold tones. Stars sharp across entire frame. Galaxy dust lanes visible. Long exposure. Hubble-quality image. Deep space black with gold nebula clusters. No people.',
-      'Cinematic fog installation photography. Dark empty studio space. Thick atmospheric theatrical fog lit by single purple LED from below and gold LED from behind. Volumetric light rays visible. Abstract and moody. Shot on ARRI Alexa. Luxury campaign aesthetic.'
+      `Luxury premium advertising background. ${bg}. Single focused golden light beam from upper right illuminating smooth dark surface. Deep rich shadows. Subtle lens flare. Shot on Hasselblad. Luxury fashion brand campaign. Nothing in frame except light and shadow.`,
+      `Fine art photography background. ${bg} tones. Swirling ${accent} light painting on pure black, long exposure, perfectly abstract and balanced. Museum quality print.`,
+      `Premium studio background. ${bg}. Atmospheric fog illuminated by ${accent} colored LED lights creating volumetric rays and haze. Abstract and moody. Cinematic quality. No objects.`,
+      `Luxury dark background. Deep rich ${bg}. Bokeh lights in ${accent} colors creating soft circular highlights at various depths. Perfect for text overlay. Clean and premium.`
     ];
-    prompt=v[r(v.length)]+' Ultra detailed. NO text. NO logos. NO objects. Pure background only.';
+    prompt=v[r(v.length)]+' NO text. NO logos. NO objects. Pure background only.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
