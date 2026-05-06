@@ -27,10 +27,30 @@
     "game_name": "The Main Event",
     "id": "wp-1778085529052-p",
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wannaparlay/wp-electric-portrait-1778085529052.jpg",
-    "offer_text": "The Main Event â $2 Entry, Win $2,000",
+    "offer_text": "The Main Event Ã¢ÂÂ $2 Entry, Win $2,000",
     "platform": "wannaparlay",
     "style": "Electric",
     "user_email": "josh@wanna.com"
+  },
+  {
+    "id": "cr-1778085438EB47",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0b/98e0491d62d61cbd12e6aa9000e6c1e7c5d67d20947b76d16204eb3ef359bd.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260506%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260506T163928Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5cd8a1a93f8e0d9d93768621bdb8e1ec4e8095ae864979db83faa917f4785714",
+    "created_at": "2026-05-06 16:37:18"
+  },
+  {
+    "id": "cr-1778085431D984",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/45/b5afcb96a2ef2d75c51a14c170a8f2b49b62da45984bb4ab7efa27ce0c066c.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260506%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260506T163840Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fe83bebabd824e675701185de20663d129a474530df05c5681eeaad01aa31fa9",
+    "created_at": "2026-05-06 16:37:11"
   },
   {
     "id": "wp-1778084632180-p",
