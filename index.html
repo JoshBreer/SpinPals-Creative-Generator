@@ -439,15 +439,9 @@ function renderGallery(filter='all'){
   const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':'spinpals';
   let items=galleryData.filter(c=>{
     if(!c.image_url||!c.user_email)return false;
-    // Filter out expired fal CDN URLs (v3b.fal.media expire after ~24h)
-    // Only keep if it's a GitHub URL, data URL, or non-fal URL
-    if(c.source==='fal'&&c.image_url.includes('fal.media')&&!c.image_url.includes('raw.githubusercontent')){
-      // Check if created more than 20 hours ago
-      if(c.created_at){
-        const age=Date.now()-new Date(c.created_at).getTime();
-        if(age>20*60*60*1000)return false; // skip expired fal CDN entries
-      }
-    }
+    // Hide any fal CDN URLs — they expire and show as blank gray boxes
+    // Only show entries with permanent GitHub URLs or non-expiring sources
+    if(c.image_url&&c.image_url.includes('fal.media'))return false;
     const entryEmail=c.user_email.trim().toLowerCase();
     const entryPlatform=(c.platform||'').toLowerCase();
     if(entryEmail===me)return true;
