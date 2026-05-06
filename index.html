@@ -1148,6 +1148,26 @@ async function doGenerate(){
   const useDirectFal=(isWannaFlow()||isThrillzzFlow())&&FAL_SIMPLE_STYLES.includes(state.style);
 
   if(useDirectFal){
+    // Text Only: skip fal entirely — pure canvas with guaranteed vivid color
+    if(state.style==='Text Only'){
+      const loadDiv2=document.createElement('div');loadDiv2.className='loading';
+      loadDiv2.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your Text Only ad...</div><div class="est-time">Instant</div><div class="est-sub">Your creative is being crafted</div>';
+      const loadMsg2=document.createElement('div');loadMsg2.className='bubble bot';loadMsg2.appendChild(loadDiv2);
+      chatEl.appendChild(loadMsg2);chatEl.scrollTop=chatEl.scrollHeight;
+      incrementGenerationCount(currentUserEmail);
+      const toResult=await generateTextOnlyCanvas();
+      if(toResult){
+        const cPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+        const toEntry={id:'text-only-'+Date.now(),game_name:'Text Only',format:state.format==='both'?'portrait':state.format||'portrait',offer_text:state.offer,style:'Text Only',platform:cPlatform,user_email:currentUserEmail,image_url:toResult,created_at:new Date().toISOString(),source:'fal'};
+        galleryData.unshift(toEntry);
+        showResult(loadMsg2,toEntry);
+        try{const lk='rmgs_gallery_'+currentUserEmail.trim().toLowerCase();const ex=JSON.parse(localStorage.getItem(lk)||'[]');ex.unshift({...toEntry});if(ex.length>50)ex.splice(50);localStorage.setItem(lk,JSON.stringify(ex));}catch(e){}
+        saveFalEntryToGithub({...toEntry,gallery_url:toResult});
+      } else {
+        loadDiv2.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
+      }
+      return;
+    }
     // Show loading screen
     const loadDiv=document.createElement('div');loadDiv.className='loading';
     loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+state.style+' ad...</div><div class="est-time">1–3 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
@@ -1348,6 +1368,112 @@ async function doGenerate(){
 }
 
 
+
+async function generateTextOnlyCanvas(){
+  return new Promise((resolve)=>{
+    const fmt=state.format==='both'?'portrait':state.format||'portrait';
+    const isPortrait=fmt==='portrait';
+    const W=1080;
+    const H=isPortrait?1920:1080;
+    const canvas=document.createElement('canvas');
+    canvas.width=W;canvas.height=H;
+    const ctx=canvas.getContext('2d');
+
+    // Vivid solid background colors
+    const wannaColors=['#FF0090','#FF5500','#00DD44','#FFD700','#CC00FF','#FF3300'];
+    const thrillzzColors=['#0055FF','#00DDFF','#FF0080','#00FF55','#8800FF','#FF6600'];
+    const colors=isWannaFlow()?wannaColors:thrillzzColors;
+    const bgColor=colors[Math.floor(Math.random()*colors.length)];
+
+    // Fill background with vivid solid color
+    ctx.fillStyle=bgColor;
+    ctx.fillRect(0,0,W,H);
+
+    // Offer text — fill entire image
+    const offer=(state.offer||'WIN BIG').toUpperCase();
+    const disclaimer=isWannaFlow()||isThrillzzFlow()
+      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
+      :'18+ | Play Responsibly | T&Cs Apply';
+
+    const disclaimerBarH=isPortrait?58:48;
+    const usableH=H-disclaimerBarH-20; // space for text
+    const maxW=W*0.88;
+
+    // Load Bebas Neue then draw
+    const font=new FontFace('Bebas Neue','url(https://fonts.gstatic.com/s/bebasnew/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2)');
+    font.load().then(loaded=>{
+      document.fonts.add(loaded);
+      drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPortrait);
+      resolve(canvas.toDataURL('image/jpeg',0.93));
+    }).catch(()=>{
+      // Fallback if font fails to load
+      drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPortrait);
+      resolve(canvas.toDataURL('image/jpeg',0.93));
+    });
+  });
+}
+
+function drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPortrait){
+  const words=offer.split(' ');
+  
+  // Strategy: find the font size where text FILLS the usable height
+  // Try each word on its own line first (max font), then combine words
+  // Target: lines fill 90-100% of usable height
+  
+  let bestFontSize=60;
+  let bestLines=[];
+  let bestFill=0;
+
+  for(let fontSize=400;fontSize>=60;fontSize-=2){
+    ctx.font=`900 ${fontSize}px 'Bebas Neue', Impact, sans-serif`;
+    // Wrap words
+    const lines=[];let line='';
+    words.forEach(word=>{
+      const test=line?line+' '+word:word;
+      if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=word;}
+      else line=test;
+    });
+    if(line)lines.push(line);
+
+    const lineH=fontSize*1.08;
+    const totalH=lines.length*lineH;
+    const fill=totalH/usableH;
+
+    // Find size where fill is closest to 95% without going over
+    if(totalH<=usableH*0.97&&fill>bestFill){
+      bestFill=fill;
+      bestFontSize=fontSize;
+      bestLines=lines;
+    }
+    // Once we drop below 70% fill, stop — we had our best already
+    if(fill<0.70&&bestFill>0.50)break;
+  }
+
+  // Draw — stretch lines to fill full height by adjusting lineH
+  const lineH=bestLines.length>1?(usableH*0.95)/(bestLines.length):bestFontSize*1.08;
+  const totalH=bestLines.length*lineH;
+  // Start from top with small padding
+  const startY=H*0.04+bestFontSize;
+
+  ctx.textAlign='center';
+  ctx.textBaseline='alphabetic';
+
+  bestLines.forEach((line,i)=>{
+    const y=startY+(i*lineH);
+    ctx.font=`900 ${bestFontSize}px 'Bebas Neue', Impact, sans-serif`;
+    ctx.fillStyle='#FFFFFF';
+    ctx.fillText(line,W/2,y);
+  });
+
+  // Disclaimer bar at bottom
+  ctx.fillStyle='rgba(0,0,0,0.75)';
+  ctx.fillRect(0,H-disclaimerBarH,W,disclaimerBarH);
+  ctx.font=`400 ${isPortrait?24:20}px Arial, sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,0.85)';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText(disclaimer,W/2,H-disclaimerBarH/2);
+}
 
 async function saveFalEntryToGithub(entry){
   // Send to Twin — Twin saves to gallery.json and we send email via Resend
