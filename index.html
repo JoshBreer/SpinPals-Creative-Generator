@@ -1439,17 +1439,19 @@ function drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPor
     });
     if(line)lines.push(line);
 
+    // Every line must fit within maxW — if any word overflows, skip this size
+    const allFit=lines.every(l=>ctx.measureText(l).width<=maxW*0.98);
+    if(!allFit)continue;
+
     const lineH=fontSize*1.08;
     const totalH=lines.length*lineH;
     const fill=totalH/usableH;
 
-    // Find size where fill is closest to 95% without going over
-    if(totalH<=usableH*0.97&&fill>bestFill){
+    if(totalH<=usableH*0.95&&fill>bestFill){
       bestFill=fill;
       bestFontSize=fontSize;
       bestLines=lines;
     }
-    // Once we drop below 70% fill, stop — we had our best already
     if(fill<0.70&&bestFill>0.50)break;
   }
 
