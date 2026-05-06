@@ -1922,5 +1922,18 @@
     "source": "fal",
     "disclaimer_variant": "social",
     "notes": "IMAGE_UPLOAD_FAILED - data URI embedded in webhook; no external URL to upload to GitHub. Check run thz-1778104987099-676279 for image data."
+  },
+  {
+    "id": "fal-1778106891874-textonly-p",
+    "platform": "thrillzz",
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "Daily Login Reward — Free Coins Every Day",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778106891874-250494-portrait.jpg",
+    "created_at": "2026-05-06T22:34:16.947Z",
+    "source": "fal",
+    "disclaimer_variant": "social"
   }
 ]
