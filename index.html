@@ -459,18 +459,13 @@ function renderGallery(filter='all'){
     img.alt=c.game_name||'Creative';
     img.style.cssText='width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
     img.onerror=()=>{
-      // Try loading via proxy in case URL is expired or CORS blocked
+      // Try proxy first
       if(!img.dataset.tried){
         img.dataset.tried='1';
         img.src='https://images.weserv.nl/?url='+encodeURIComponent(c.image_url)+'&output=jpg';
       } else {
-        // Show expired indicator instead of blank gray
-        img.style.display='none';
-        const exp=document.createElement('div');
-        exp.style.cssText='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card2);color:var(--txt3);font-size:11px;text-align:center;padding:8px;gap:6px;';
-        exp.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Preview expired</span><a href="'+c.image_url+'" target="_blank" style="color:var(--blue);text-decoration:underline;font-size:10px;">Open original ↗</a>';
-        thumb.style.position='relative';
-        thumb.appendChild(exp);
+        // Image is truly expired — hide the entire card from gallery
+        card.style.display='none';
       }
     };
     const overlay=document.createElement('div');overlay.className='gallery-overlay';
