@@ -1911,5 +1911,17 @@
     "created_at": "2026-05-06T21:35:59.663Z",
     "source": "fal",
     "disclaimer_variant": "social"
+  },
+  {
+    "id": "thz-1778103452491-map-p",
+    "platform": "thrillzz",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "100% Match on First Purchase up to $25",
+    "style": "Map",
+    "user_email": "cuneyt@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778103452491-420775-portrait.jpg",
+    "created_at": "2026-05-06T21:43:12Z",
+    "disclaimer_variant": "social"
   }
 ]
