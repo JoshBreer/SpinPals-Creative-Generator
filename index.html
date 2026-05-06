@@ -1012,10 +1012,7 @@ async function doQuickGenerate(){
       const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:dUrlQG,created_at:new Date().toISOString(),source:'fal'};
       galleryData.unshift(falEntryQG);
       showResult(loadMsg,falEntryQG);
-      saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG}).then(permUrlQG=>{
-        const eUrlQG=permUrlQG||gUrlQG;
-        triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:eUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
-      });
+      saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG,gallery_url:gUrlQG});
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1151,10 +1148,7 @@ async function doGenerate(){
       galleryData.unshift(falEntry);
       showResult(loadMsg,falEntry);
       // Save composite image permanently then send email with permanent URL
-      saveFalEntryToGithub({...falEntry,image_url:dUrl}).then(permanentUrl=>{
-        const emailUrl=permanentUrl||gUrl;
-        triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:emailUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
-      });
+      saveFalEntryToGithub({...falEntry,image_url:dUrl,gallery_url:gUrl});
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1314,50 +1308,26 @@ async function doGenerate(){
 
 
 async function saveFalEntryToGithub(entry){
-  try{
-    // Upload the composited image to GitHub so it never expires
-    let permanentUrl=entry.image_url;
-    if(entry.image_url&&entry.image_url.startsWith('data:')){
-      // Save data URL as image file in GitHub repo
-      const imgFilename='creatives/fal-'+Date.now()+'.jpg';
-      const imgApiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+imgFilename;
-      const base64Data=entry.image_url.split(',')[1];
-      const imgPut=await fetch(imgApiUrl,{
-        method:'PUT',
-        headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-        body:JSON.stringify({message:'fal creative image',content:base64Data})
-      });
-      if(imgPut.ok){
-        const imgData=await imgPut.json();
-        permanentUrl='https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+imgFilename;
-        console.log('FAL: image saved permanently:',permanentUrl);
-      }
-    }
-    // Now save to gallery.json with permanent URL
-    const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
-    const getRes=await fetch(apiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
-    if(!getRes.ok)throw new Error('GET failed');
-    const fileData=await getRes.json();
-    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
-    const saveEntry={...entry,image_url:permanentUrl};
-    existing.unshift(saveEntry);
-    const putRes=await fetch(apiUrl,{
-      method:'PUT',
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify({
-        message:'fal creative: '+entry.game_name,
-        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
-        sha:fileData.sha
-      })
-    });
-    if(putRes.ok){
-      console.log('FAL: saved to gallery.json with permanent URL');
-      // Update the in-memory entry too
-      const mem=galleryData.find(c=>c.id===entry.id);
-      if(mem)mem.image_url=permanentUrl;
-    } else console.error('FAL: gallery save failed',putRes.status);
-    return permanentUrl;
-  }catch(e){console.error('FAL: save error',e);return entry.image_url;}
+  // Use the original fal CDN URL (not data URL) for Twin to save
+  const imageUrl=entry.gallery_url||entry.image_url;
+  // Send to Twin - Twin handles gallery save AND email
+  const payload={
+    event:'fal_creative_complete',
+    source:'fal',
+    email_only:false,
+    save_to_gallery:true,
+    image_url:imageUrl,
+    game_name:entry.game_name,
+    offer_text:entry.offer_text,
+    style:entry.style,
+    format:entry.format,
+    platform:entry.platform,
+    user_email:entry.user_email,
+    created_at:entry.created_at
+  };
+  console.log('FAL: sending to Twin for gallery save + email...',imageUrl.substring(0,60));
+  await triggerWebhook(payload,getWebhook());
+  return imageUrl;
 }
 
 // ============================================================
@@ -1428,14 +1398,21 @@ function buildFalFallbackPrompt(){
     prompt=v[r(v.length)]+' CRITICAL: No text, no words, no buttons. No thin neon tube lights or wire lights — only thick solid lightning bolt SHAPES. No logos. Pure background art only. Ultra high resolution.';
 
   } else {
-    // Text Only — ultra premium minimal
-    const v=[
-      `Luxury premium advertising background. ${bg}. Single focused golden light beam from upper right illuminating smooth dark surface. Deep rich shadows. Subtle lens flare. Shot on Hasselblad. Luxury fashion brand campaign. Nothing in frame except light and shadow.`,
-      `Fine art photography background. ${bg} tones. Swirling ${accent} light painting on pure black, long exposure, perfectly abstract and balanced. Museum quality print.`,
-      `Premium studio background. ${bg}. Atmospheric fog illuminated by ${accent} colored LED lights creating volumetric rays and haze. Abstract and moody. Cinematic quality. No objects.`,
-      `Luxury dark background. Deep rich ${bg}. Bokeh lights in ${accent} colors creating soft circular highlights at various depths. Perfect for text overlay. Clean and premium.`
+    // Text Only — VIBRANT solid/gradient background, offer is the entire creative
+    const wannaTextOnly=[
+      `Perfectly smooth vivid gradient background. Top: deep royal purple #4B0082. Bottom: rich magenta #C2185B. Seamless gradient transition. Absolutely nothing else in the frame. No objects, no textures, no patterns. Pure clean color gradient only. Flat design. Perfect for text overlay.`,
+      `Bold solid bright purple background #6A0DAD. Perfectly flat, perfectly clean, no gradients, no texture, nothing. Pure saturated royal purple filling entire frame. Nothing else.`,
+      `Vibrant gradient background. Left: electric purple #7B2FBE. Right: deep gold #B8860B. Smooth diagonal gradient. Clean flat color only. Nothing else in frame whatsoever.`,
+      `Rich radial gradient background. Center: bright gold #FFD700. Edges: deep purple #2D0060. Smooth glow from center outward. Nothing in frame except this color gradient. Clean and vivid.`
     ];
-    prompt=v[r(v.length)]+' NO text. NO logos. NO objects. Pure background only.';
+    const thrillzzTextOnly=[
+      `Vivid gradient background. Top: electric blue #0066FF. Bottom: deep navy #000830. Perfectly clean smooth gradient. Nothing else in frame. No objects, no texture. Pure clean blue gradient for text overlay.`,
+      `Bold flat background. Solid neon electric blue #00BFFF filling entire frame. Perfectly flat. No gradients, no texture, nothing. Pure single vivid color.`,
+      `Gradient background. Left: neon green #00FF88. Right: deep navy #040C20. Smooth horizontal gradient. Absolutely nothing else. Clean flat color only.`,
+      `Vibrant radial gradient. Center: bright cyan #00FFFF. Edges: very dark navy #02060F. Clean smooth glow. Nothing in frame except this gradient. Pure vivid color.`
+    ];
+    const v=isWanna?wannaTextOnly:thrillzzTextOnly;
+    prompt=v[r(v.length)]+' NO text. NO logos. NO people. NO objects. NO patterns. JUST the background color. This is a solid color background only.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
