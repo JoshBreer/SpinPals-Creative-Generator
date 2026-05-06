@@ -438,10 +438,18 @@ function renderGallery(filter='all'){
   galleryEl.innerHTML='';
   const me=currentUserEmail.trim().toLowerCase();
   const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':'spinpals';
+  
+  // Merge localStorage entries with galleryData (localStorage = immediate local save)
+  const localKey='rmgs_gallery_'+me;
+  let localEntries=[];
+  try{const s=localStorage.getItem(localKey);if(s)localEntries=JSON.parse(s);}catch(e){}
+  // Add local entries not already in galleryData
+  localEntries.forEach(le=>{
+    if(!galleryData.find(g=>g.id===le.id))galleryData.push(le);
+  });
+
   let items=galleryData.filter(c=>{
     if(!c.image_url||!c.user_email)return false;
-    // Hide any fal CDN URLs — they expire and show as blank gray boxes
-    // Only show entries with permanent GitHub URLs or non-expiring sources
     if(c.image_url&&c.image_url.includes('fal.media'))return false;
     const entryEmail=c.user_email.trim().toLowerCase();
     const entryPlatform=(c.platform||'').toLowerCase();
@@ -1029,6 +1037,14 @@ async function doQuickGenerate(){
       const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:dUrlQG,created_at:new Date().toISOString(),source:'fal'};
       galleryData.unshift(falEntryQG);
       showResult(loadMsg,falEntryQG);
+      try{
+        const lk='rmgs_gallery_'+currentUserEmail.trim().toLowerCase();
+        const existing=JSON.parse(localStorage.getItem(lk)||'[]');
+        existing.unshift({...falEntryQG,image_url:dUrlQG});
+        if(existing.length>50)existing.splice(50);
+        localStorage.setItem(lk,JSON.stringify(existing));
+        console.log('FAL: saved to localStorage');
+      }catch(e){}
       saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG,gallery_url:gUrlQG});
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
@@ -1164,7 +1180,16 @@ async function doGenerate(){
       };
       galleryData.unshift(falEntry);
       showResult(loadMsg,falEntry);
-      // Save composite image permanently then send email with permanent URL
+      // Save to localStorage immediately
+      try{
+        const lk='rmgs_gallery_'+currentUserEmail.trim().toLowerCase();
+        const ex=JSON.parse(localStorage.getItem(lk)||'[]');
+        ex.unshift({...falEntry,image_url:dUrl});
+        if(ex.length>50)ex.splice(50);
+        localStorage.setItem(lk,JSON.stringify(ex));
+        console.log('FAL: saved to localStorage instantly');
+      }catch(e){}
+      // Send to Twin for permanent save + email
       saveFalEntryToGithub({...falEntry,image_url:dUrl,gallery_url:gUrl});
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
@@ -1361,80 +1386,79 @@ function buildFalFallbackPrompt(){
   const sportCtx=(state.game||'').toLowerCase();
   const style=state.style||'Classic';
   const r=n=>Math.floor(Math.random()*n);
+  const pick=arr=>arr[r(arr.length)];
 
   const isWanna=isWannaFlow();
-  const isThrillzz=isThrillzzFlow();
 
-  // Brand colors
-  const wannaBg='deep royal purple #3B0F6B to black gradient';
-  const thrillzzBg='very dark navy #060C1E to black gradient';
-  const wannaAccent='gold #FFD700 and bright green #22C55E';
-  const thrillzzAccent='electric blue #00C8FF and neon yellow-green #AAFF00';
-  const accent=isWanna?wannaAccent:thrillzzAccent;
-  const bg=isWanna?wannaBg:thrillzzBg;
-
-  const negativePrompt='text, words, letters, numbers, logos, watermarks, UI elements, buttons, people, humans, faces, athletes, real players, crowds, neon light tubes, fluorescent tube lights, thin wire lights, neon sign tubes, light rods, low quality, blurry, ugly, deformed, duplicate, extra limbs';
+  const negativePrompt='text, words, letters, numbers, logos, watermarks, buttons, UI elements, neon light tubes, fluorescent tube lights, thin wire neon lights, low quality, blurry, ugly, deformed';
 
   let prompt='';
 
   if(style==='Classic'){
-    // SpinPals-style: bright, cartoonish, clean, colorful — adapted for sports
     const wannaClassic=[
-      `Vibrant cartoon sports advertisement illustration, professional mobile game art quality. ${wannaBg} background. CENTER: A large glowing golden trophy cup with sparkle star effects radiating outward, sitting on a pile of shiny gold coins, each coin engraved with a dollar sign. The trophy emits warm golden volumetric light rays upward. SURROUNDING the trophy floating in dynamic positions: a hyper-detailed cartoon basketball (orange with black lines and specular highlight), a cartoon football (brown leather texture with white laces), a cartoon baseball (white with red stitching), all with neon green glow rim lighting and drop shadows. BACKGROUND: Large bold diagonal yellow lightning bolt shapes behind everything, like Adidas stripes but as lightning. Confetti pieces in purple and gold raining down. Small gold star sparkles scattered throughout. STYLE: Thick outlines on all objects, vivid saturated colors, smooth gradients, studio lighting on every object. Professional AAA mobile game UI art. Behance portfolio quality. Unreal Engine render quality.`,
-      `Bright celebratory cartoon sports illustration. ${wannaBg} background with subtle radial purple glow from center. CENTER: Massive pile of gold coins exploding upward like a fountain, coins spinning and catching light, dollar signs gleaming. Green neon energy beams shoot up from the coin pile. FLOATING AROUND: Three large cartoon sports balls — basketball top left with orange glow, football top right with brown leather detail, soccer ball bottom center with black and white panels — each ball casting a soft shadow and having a bright white specular highlight. CORNER ACCENTS: Gold star burst shapes in each corner. Yellow lightning bolt graphic shapes at left and right edges. STYLE: Comic book clean lines, vivid colors, every element perfectly rendered, professional digital illustration.`,
-      `Premium sports gaming illustration. ${wannaBg}. LEFT SIDE: Giant shiny gold trophy with wings spread, radiating light. RIGHT SIDE: Stack of oversized gold coins in perspective, shimmering. CENTER BOTTOM: Sports ball collection — basketball, football, baseball arranged in a triangle formation, each hyper-detailed with realistic texture but illustrated style, glowing neon green outline. TOP: Fireworks explosion in gold and purple sparkling across the sky. Bold yellow chevron arrow shapes pointing upward creating motion. Every element has depth, shadow, and premium sheen. Concept art quality. Art station featured illustration.`
+      'Hyper-detailed 3D illustration. Deep royal purple #3B0F6B background. CENTER: Giant golden trophy cup radiating warm light rays, surrounded by explosion of shiny gold coins with dollar signs, coins spinning at various angles. AROUND: Cartoon basketball (orange), football (brown), baseball (white with red stitching) floating with neon green glow. Bold yellow lightning bolt shapes in corners. Gold confetti raining. AAA mobile game art style. Unreal Engine quality.',
+      'Premium 3D game art. Dark purple background. Stack of enormous gold coins exploding upward from bottom center like a fountain, each coin catching studio light. Green energy beams shooting from coin pile. Sports balls orbiting: basketball top-left, football top-right, soccer ball center. Gold star bursts at corners. Comic book thick outlines on everything. Vivid saturated colors.',
+      'Vibrant cartoon sports illustration. Purple to black gradient. HERO: Massive gold trophy with wings spread wide, emitting golden god rays. Coins cascading around it. Basketball, football, baseball in triangle formation below, each with metallic sheen and neon outline. Fireworks in purple and gold across top. Celebration energy. Artstation featured quality.',
+      'Dynamic 3D sports poster art. Very dark purple. Central explosion of purple and gold energy. Three large sport balls blasting outward from center — basketball left, football right, baseball top. Gold coins scattering everywhere. Bold diagonal yellow lightning bolt shapes creating X pattern. Green particle sparks at intersections. Nike campaign quality illustration.'
     ];
     const thrillzzClassic=[
-      `Electric gaming advertisement illustration. ${thrillzzBg} background. CENTER: Giant 3D trophy made of blue crystal/ice emitting cyan light rays. Below it: Explosion of gold coins and ${thrillzzAccent} colored tokens bursting outward. FLOATING: Basketball, football, baseball each with electric blue neon outline glow, floating at different depths with motion blur trails. BACKGROUND: Bold thick yellow lightning bolt graphic shapes — Thrillzz brand style — crossing diagonally. Blue electric sparks and green particle effects fill negative space. TOP: Purple to cyan gradient energy beam from top. STYLE: Cyberpunk meets sports mobile app. Ultra polished. Unreal Engine 5 quality render.`,
-      `High energy sports gaming art. ${thrillzzBg}. HERO ELEMENT: Large 3D rendered shield/badge shape in center glowing electric blue with neon green border, radiating energy. AROUND IT: Basketball and football floating with electric blue halos and speed trails. Gold and cyan coins exploding outward. Bold yellow lightning bolt SHAPES (thick, solid shapes — not lines) create an X pattern in background. Green matrix rain effect behind everything. Electric blue orbs of light floating. STYLE: Premium esports aesthetic. Artstation quality. Professional sports betting app visual.`
+      'High energy digital art. Very dark navy #060C1E. Central 3D blue crystal trophy emitting cyan light rays. Explosion of gold coins and electric blue tokens below it. Basketball, football, baseball floating with electric blue neon halos. Bold thick yellow lightning bolt SHAPES crossing diagonally. Green matrix particle rain. Cyberpunk sports aesthetic. Unreal Engine 5 quality.',
+      'Premium esports poster. Dark navy background. Large electric blue shield badge center glowing neon. Basketball and football orbiting with speed trails. Gold and cyan coins exploding outward. Thick yellow lightning bolt graphic shapes forming X in background. Neon green particle effects. Ultra polished artstation quality.',
+      'Electric gaming illustration. Near-black navy. Three massive neon lightning bolt SHAPES in yellow-green arranged fan pattern from bottom. Each bolt radiates energy. Basketball purple glow left, football gold glow right, baseball white glow top. Coin sparkle trail between bolts. Maximum contrast dark background. Thrillzz brand energy.',
+      'Futuristic sports art. Dark navy. Electric energy core in center — bright cyan sphere with blue plasma arcs. Bold geometric lightning shapes extending to corners in neon yellow. Sport balls floating in energy field with electric halos. Green data stream behind. Extreme contrast. High end tournament poster quality.'
     ];
-    const v=isWanna?wannaClassic:thrillzzClassic;
-    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no letters anywhere. No logos. No buttons. This is the background visual only. Ultra high resolution. Hyper detailed.';
+    prompt=pick(isWanna?wannaClassic:thrillzzClassic)+' NO text. NO logos. NO buttons. Ultra detailed. 8K.';
 
   } else if(style==='Realistic'){
-    // Cinematic, cool-looking, NOT empty — atmospheric with sport elements but no real players
+    // Massively varied - different sports, positions, angles, lighting, times of day
     const wannaRealistic=[
-      `Cinematic sports action photograph. ${wannaBg} atmosphere. A professional NBA basketball player mid-dunk, seen from below looking up, arms fully extended, ball above rim, arena crowd blurred behind in purple bokeh. The player wears purple and gold jersey. Dramatic upward angle, stadium floodlights creating a halo behind the player. Shot on ARRI Alexa 35, 21mm Zeiss lens, T2.8. Cinematic color grade: deep purples, gold highlights. Film grain. No logos visible. No text.`,
-      `Dramatic sports athlete photograph. ${wannaBg} tones. An American football quarterback in purple and gold uniform, arm cocked back in full throwing motion, game face intense, stadium lights blazing behind him creating dramatic rim lighting silhouette effect. Low angle looking slightly upward. The ball in his hand catching golden light. Shot on Canon R5, 85mm f/1.4, ISO 800. Sports photography quality. No jersey logos visible. No text.`,
-      `High action sports photograph. ${wannaBg} atmosphere. A basketball player in mid-air catching a lob pass above the rim, body fully extended, opponent reaching up below, arena crowd going wild in purple bokeh background. Golden arena lights create dramatic underlighting. Shot on Sony A9 III, 400mm f/2.8, 1/2000s. Sports Illustrated cover quality. No text visible. No logos.`
+      'Cinematic sports photograph. Deep purple atmosphere. NFL quarterback #12 in purple and gold uniform, arm fully cocked back in perfect throwing pose, profile view from 45 degrees, stadium lights creating rim lighting behind. Shot on Canon R5, 135mm f/1.8, 1/2000s. Sports Illustrated quality. No jersey text visible.',
+      'Dramatic sports action shot. Purple atmospheric tones. MLB baseball player in white pinstripe uniform, aggressive batting stance, bat just made contact, baseball blurred mid-air, stadium crowd bokeh behind. Shot on Sony A9 III, 300mm f/2.8. Dynamic motion. ESPN quality.',
+      'Intense sports portrait. Deep purple background. NHL hockey player in dark purple helmet and jersey, gloves gripping stick, ice spray at skate level, arena lights reflecting on ice surface behind. Low angle looking up. Shot on Nikon Z9, 70mm f/2. Power and intensity.',
+      'Explosive basketball moment. Purple arena atmosphere. NBA player seen from below, one hand on rim completing a thunderous dunk, arena crowd blurred, multiple arena lights creating star pattern behind player. Shot on ARRI Alexa, 24mm anamorphic. Cinematic wide angle.',
+      'Athletic soccer action. Purple twilight sky. Soccer player in purple jersey mid-bicycle kick, ball visible at foot, stadium lights blazing, long shadows on perfect grass. Side angle, dramatic. Shot on RED Monstro, 85mm. Nike campaign quality.',
+      'MMA fighter portrait. Dark purple atmospheric studio. Fighter in fighting stance, face determined, gloves up, dramatic side lighting creating deep shadows on muscular physique. Professional sports photography. Shot on Hasselblad X2D, 80mm.'
     ];
     const thrillzzRealistic=[
-      `Elite sports action photograph. ${thrillzzBg} atmosphere. A professional football player bursting through defenders, legs driving powerfully, jersey in navy and electric blue, stadium lights creating dramatic rim lighting and lens flare. Low angle from turf level looking up. Motion blur on background crowd. Explosive athletic power. Shot on Nikon Z9, 200mm f/2.8, 1/4000s. ESPN magazine quality. No jersey text visible. No logos.`,
-      `Dramatic sports equipment still life photography. ${thrillzzBg} background. ARRANGEMENT: Multiple sports balls — basketball, football, baseball — arranged in perfect composition with professional studio lighting. Each ball lit differently: basketball with orange warm light, football with cool rim light, baseball with dramatic side light. Dark reflective surface below each creating perfect reflections. Electric blue underlighting on surface. Medium format photography, Phaseone IQ4, 150mm lens. No people.`,
-      `Cinematic empty arena photograph. ${thrillzzBg} atmosphere. An empty modern stadium at night from field level, floodlights off except for emergency lighting creating cyan and blue pools of light on the field surface. The emptiness is dramatic and cinematic. Security lights create long shadows. Shot on Sony VENICE 2, anamorphic, T1.8. Cinematic color grade with teal shadows and electric highlights. No people. Film quality.`
+      'Elite football action. Dark navy blue atmosphere. NFL running back in navy jersey bursting through defenders, legs driving powerfully, stadium lights creating dramatic rim lighting, motion blur on background. Low angle turf level. Shot on Nikon Z9, 200mm f/2.8, 1/4000s. ESPN quality.',
+      'Basketball intensity. Navy blue arena atmosphere. NBA point guard in navy uniform driving to basket, defender reaching, arena crowd electric in background, multiple arena lights creating dramatic halos. Shot on Sony VENICE 2, 35mm anamorphic. Cinematic quality.',
+      'Baseball drama. Dark navy stadium. MLB pitcher mid-windup, full extension, stadium lights blazing behind creating silhouette edge, packed crowd in bokeh background. Shot on RED Komodo, 300mm f/2.8. Sports illustrated cover.',
+      'Hockey power. Dark navy ice arena. NHL defenseman taking massive slap shot, stick at full extension, ice chips flying, arena lights reflecting on ice surface, empty net visible in background. Shot on Phase One, 150mm. Maximum impact.',
+      'Boxing championship. Dark navy atmosphere. Professional boxer in fighting stance, championship belt visible, dramatic side spotlight creating intense shadow pattern on determined face. Studio sports photography quality.',
+      'Soccer star moment. Navy blue stadium atmosphere. Soccer player celebrating goal, arms spread wide, stadium lights blazing, crowd going insane in background bokeh, night game atmosphere. Shot on ARRI, 35mm anamorphic.'
     ];
-    const v=isWanna?wannaRealistic:thrillzzRealistic;
-    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no letters. No logos or watermarks. No people or players. Background only.';
+    prompt=pick(isWanna?wannaRealistic:thrillzzRealistic)+' Ultra photorealistic. No logos visible. NO text. NO buttons. Background only.';
 
   } else if(style==='Electric'){
     const wannaElectric=[
-      `Premium digital sports energy art. ${wannaBg}. COMPOSITION: Multiple large bold LIGHTNING BOLT SHAPES — thick solid geometric bolt shapes exactly like sports brand logo lightning marks, NOT thin wire lines — in bright yellow-gold, arranged dynamically crossing at center. Each bolt is a thick solid filled shape with slight gradient from yellow to orange. Behind the bolts: deep purple atmospheric glow clouds. AROUND THE BOLTS: Basketball and football floating with bright gold neon outline glow, small size, scattered. Green particle sparks where bolts cross. Gold light emanates from crossing point creating a radial burst. Very dark background making everything POP. Sports energy drink advertisement quality. Behance featured design.`,
-      `Electric sports power art. ${wannaBg} background. HERO: Three thick yellow lightning bolt SHAPES (solid filled, thick like Adidas stripes but bent into lightning forms) arranged in fan pattern from bottom center. Each bolt glows and radiates. Green electric plasma clouds bloom around bolt tips. Basketball with purple glow left, football with gold glow right, baseball with white glow top — all floating. Small coin sparkles throughout. STYLE: Bold graphic design meets fine art digital painting. Poster quality. Nike campaign aesthetic.`
+      'Bold electric sports art. Deep purple to black background. Three massive THICK SOLID YELLOW lightning bolt shapes — wide solid bolt forms like sports brand marks — diagonal across frame. Each bolt glows with inner light. Basketball and football with gold neon outline floating between bolts. Green particle sparks at bolt intersections. Gold energy radiating from center. Nike Thunder aesthetic.',
+      'Power surge illustration. Near-black purple. Giant thick yellow lightning bolt shape splits frame diagonally from top-left to bottom-right, wide and solid not thin. Purple plasma clouds bloom around it. Football with gold halo top-right, basketball with gold halo bottom-left. Gold coin shower from bolt tip. Maximum energy.',
+      'Electric stadium art. Dark purple. Two thick bold yellow lightning bolt graphic shapes crossing at center forming X — SOLID THICK SHAPES like Adidas stripes bent into bolts. Explosion of gold light at crossing point. Sports balls orbiting. Purple and gold energy waves expanding outward. Cinematic power.',
+      'Thunder sports poster. Very dark purple to black. Fan of three thick yellow-gold bolt shapes from bottom center spreading upward. Each bolt solid and wide, glowing edges. Basketball, football, baseball floating in bolt energy field. Purple electric atmosphere. Premium sports brand campaign.'
     ];
     const thrillzzElectric=[
-      `High voltage electric sports art. ${thrillzzBg}. COMPOSITION: Three MASSIVE thick electric blue lightning bolt SHAPES — solid thick shapes not thin lines, each bolt the width of a human torso — arranged in triangle formation, their crossing point creating an explosion of white-blue light. Neon yellow-green energy plasma clouds around each bolt tip. Basketball, football floating at edges with electric blue neon halos. Green data stream particles fill background. Central explosion point radiates cyan light rings outward. Thrillzz electric brand energy. Cyberpunk sports poster quality.`,
-      `Electric power surge sports illustration. ${thrillzzBg}. SCENE: A central concentrated ball of electric plasma energy — blue-white sphere with electric arcs reaching outward. From this core: thick bold chevron and lightning SHAPES (solid geometric, not lines) in neon yellow extend to all corners creating an X pattern. Sports balls float within the energy field each with electric glow outline. Matrix green particles rain behind everything. Extreme contrast, dark background making neon elements explode visually. High end esports tournament poster quality.`
+      'High voltage art. Very dark navy #050A1A. Three MASSIVE thick solid electric blue lightning bolt shapes — wide solid geometric bolt forms, NOT thin lines — forming triangle. Bright white-blue explosion at center convergence point. Neon yellow-green energy plasma clouds at bolt tips. Basketball and football with cyan electric halos. Green matrix particle rain behind. Thrillzz power.',
+      'Cyberpunk sports energy. Near-black navy. Concentrated ball of electric plasma — bright cyan-white sphere — center frame with electric arcs reaching outward. Thick bold chevron and lightning SOLID SHAPES in neon yellow extend to all corners. Sport balls in energy field. Extreme contrast. Esports tournament quality.',
+      'Electric storm art. Dark navy. Multiple thick solid neon blue lightning bolt shapes branching across frame — thick as a forearm, solid not thin wire. Green glow clouds at tips. Basketball, football floating with electric blue borders. Gold coin explosion from central bolt. Maximum voltage.',
+      'Neon power illustration. Very dark navy. Giant yellow lightning bolt SHAPE — thick solid graphic element like brand logo — dominates center. Electric blue plasma field surrounding it. Smaller bolt shapes in corners. Sports balls orbiting with electric halos. Green energy wisps. Ultra premium gaming visual.'
     ];
-    const v=isWanna?wannaElectric:thrillzzElectric;
-    prompt=v[r(v.length)]+' CRITICAL: No text, no words, no buttons. No thin neon tube lights or wire lights — only thick solid lightning bolt SHAPES. No logos. Pure background art only. Ultra high resolution.';
+    prompt=pick(isWanna?wannaElectric:thrillzzElectric)+' NO text. NO thin wire neon tubes. NO logos. Thick SOLID lightning shapes only. Ultra detailed.';
 
   } else {
-    // Text Only — ULTRA vibrant solid color background only
-    // The offer text is drawn by canvas so background must be clean and bright
-    const wannaTextOnly=[
-      'Vivid diagonal gradient background. Top-left: hot pink #FF1493. Bottom-right: electric purple #8B00FF. Perfectly smooth gradient. Nothing else in frame.',
-      'Bright gradient background. Top: electric orange #FF4500. Bottom: hot pink #FF1493. Smooth vivid gradient. Nothing else.',
-      'Bold gradient. Left: royal blue #0047FF. Right: hot purple #CC00FF. Smooth vivid gradient filling entire frame. Nothing else.',
-      'Vibrant gradient. Top: bright gold #FFD700. Bottom: electric orange #FF4500. Bold warm gradient. Nothing else in frame.'
+    // Text Only — vibrant gradient backgrounds
+    const wannaText=[
+      'Smooth diagonal gradient. Top-left: hot pink #FF1493. Bottom-right: electric purple #8B00FF. Perfectly clean. Nothing else.',
+      'Bold gradient. Top: electric orange #FF4500. Bottom: vivid pink #FF1493. Smooth and vivid. Nothing else in frame.',
+      'Vibrant gradient. Left: royal blue #0047FF. Right: hot purple #CC00FF. Bold and clean. Nothing else.',
+      'Warm gradient. Top: bright gold #FFD700. Bottom: electric orange #FF4500. Rich and vivid. Nothing else.'
     ];
-    const thrillzzTextOnly=[
-      'Bold gradient background. Top-left: electric blue #0066FF. Bottom-right: neon green #00FF88. Vivid diagonal gradient. Nothing else.',
-      'Vibrant gradient. Top: bright cyan #00FFFF. Bottom: electric blue #0000FF. Smooth gradient. Nothing else.',
-      'Bright gradient. Left: neon green #00FF44. Right: electric blue #0066FF. Bold gradient filling entire frame. Nothing else.',
-      'Vivid gradient. Top: hot magenta #FF00AA. Bottom: electric blue #0066FF. Smooth bold gradient. Nothing else.'
+    const thrillzzText=[
+      'Bold diagonal gradient. Top-left: electric blue #0066FF. Bottom-right: neon green #00FF88. Vivid and clean. Nothing else.',
+      'Vibrant gradient. Top: bright cyan #00FFFF. Bottom: electric blue #0000FF. Pure and bold. Nothing else.',
+      'Strong gradient. Left: neon green #00FF44. Right: electric blue #0066FF. Bold. Nothing else.',
+      'Vivid gradient. Top: hot magenta #FF00AA. Bottom: electric blue #0066FF. Bold and clean. Nothing else.'
     ];
-    const v=isWanna?wannaTextOnly:thrillzzTextOnly;
-    prompt=v[r(v.length)]+' NO text. NO logos. NO objects. NO gradients. JUST the solid color background.';
+    prompt=pick(isWanna?wannaText:thrillzzText)+' Pure background gradient only. NO text. NO logos. NO objects whatsoever.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1668,7 +1692,7 @@ async function falFallbackGenerate(){
     const {prompt, negativePrompt, aspectRatio}=buildFalFallbackPrompt();
     console.log('FAL PROMPT:',prompt.substring(0,200));
     // Submit to fal queue
-    const falBody={prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg'};
+    const falBody={prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg',seed:Math.floor(Math.random()*999999999)};
     if(negativePrompt)falBody.negative_prompt=negativePrompt;
     const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
       method:'POST',
