@@ -1330,7 +1330,7 @@ async function saveFalEntryToGithub(entry){
   const saveUrl=entry.gallery_url||entry.image_url;
   console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
   
-  // Fire to Twin — no-cors, Twin receives and saves to gallery.json
+  // Twin saves to gallery
   triggerWebhook({
     event:'fal_creative_complete',
     source:'fal',
@@ -1345,7 +1345,7 @@ async function saveFalEntryToGithub(entry){
     created_at:entry.created_at
   },getWebhook());
 
-  // Send email directly via Resend (instant)
+  // Resend handles email — onboarding@resend.dev works without domain verification
   sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
   
   return saveUrl;
