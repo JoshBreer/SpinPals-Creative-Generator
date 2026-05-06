@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-177810707119C8",
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-177810707119C8.jpg",
+    "created_at": "2026-05-06 22:37:51"
+  },
+  {
     "id": "cr-177810333780EB1E25",
     "game_name": "Live Dragon Tiger",
     "format": "square",
@@ -1898,73 +1908,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
-  },
-  {
-    "id": "fal-1778103387820-text-only-p",
-    "platform": "thrillzz",
-    "game_name": "Text Only",
-    "format": "portrait",
-    "offer_text": "FREE Welcome Bonus Ã¢ÂÂ 3,000 Thrillzz Coins + 3 Thrillzz Sweeps",
-    "style": "Text Only",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/fal-1778103387820-p.jpg",
-    "created_at": "2026-05-06T21:35:59.663Z",
-    "source": "fal",
-    "disclaimer_variant": "social"
-  },
-  {
-    "id": "thz-1778103452491-map-p",
-    "platform": "thrillzz",
-    "game_name": "N/A",
-    "format": "portrait",
-    "offer_text": "100% Match on First Purchase up to $25",
-    "style": "Map",
-    "user_email": "cuneyt@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778103452491-420775-portrait.jpg",
-    "created_at": "2026-05-06T21:43:12Z",
-    "disclaimer_variant": "social"
-  },
-  {
-    "id": "fal-1778104997368-text-only-s",
-    "platform": "thrillzz",
-    "game_name": "Text Only",
-    "format": "square",
-    "offer_text": "Bet $10 Get $50 + Free Entry to $100K Pickem",
-    "style": "Text Only",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778104997368-876201-square.jpg",
-    "created_at": "2026-05-06T22:02:52.181Z",
-    "source": "fal",
-    "disclaimer_variant": "social"
-  },
-  {
-    "game_name": "Text Only",
-    "format": "portrait",
-    "offer_text": "Hos Geldin Paketi - %100 + 200 Ucretsiz Donus",
-    "style": "Text Only",
-    "platform": "bankobet",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/bankobet_text-only_portrait_20260506T223448.png",
-    "created_at": "2026-05-06T22:34:48.002Z"
-  },
-  {
-    "game_name": "Text Only",
-    "format": "portrait",
-    "offer_text": "Weekly Sports Cashback 3%",
-    "style": "Text Only",
-    "platform": "betewin",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/betewin_text-only_portrait_20260506T223432.png",
-    "created_at": "2026-05-06T22:34:32.864Z"
-  },
-  {
-    "game_name": "Text Only",
-    "format": "portrait",
-    "offer_text": "100 TL Deneme Bonusu",
-    "style": "Text Only",
-    "platform": "bankobet",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/bankobet_text-only_portrait_20260506T223728.png",
-    "created_at": "2026-05-06T22:37:28.550Z"
   }
 ]
