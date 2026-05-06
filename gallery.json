@@ -1923,5 +1923,18 @@
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778103452491-420775-portrait.jpg",
     "created_at": "2026-05-06T21:43:12Z",
     "disclaimer_variant": "social"
+  },
+  {
+    "id": "fal-1778104997368-text-only-s",
+    "platform": "thrillzz",
+    "game_name": "Text Only",
+    "format": "square",
+    "offer_text": "Bet $10 Get $50 + Free Entry to $100K Pickem",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/thz-1778104997368-876201-square.jpg",
+    "created_at": "2026-05-06T22:02:52.181Z",
+    "source": "fal",
+    "disclaimer_variant": "social"
   }
 ]
