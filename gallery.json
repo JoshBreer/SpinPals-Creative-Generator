@@ -1908,5 +1908,19 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
     "created_at": "2026-03-30 20:24:20"
+  },
+  {
+    "id": "fal-1778104987099-text-only-p",
+    "platform": "thrillzz",
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "400% Deposit Match",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "data:image/jpeg;base64,[EMBEDDED_IMAGE_FROM_WEBHOOK]",
+    "created_at": "2026-05-06T22:02:41.501Z",
+    "source": "fal",
+    "disclaimer_variant": "social",
+    "notes": "IMAGE_UPLOAD_FAILED - data URI embedded in webhook; no external URL to upload to GitHub. Check run thz-1778104987099-676279 for image data."
   }
 ]
