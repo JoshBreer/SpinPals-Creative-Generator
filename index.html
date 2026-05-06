@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>RMGS Creative Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1447,18 +1447,18 @@ function buildFalFallbackPrompt(){
   } else {
     // Text Only — vibrant gradient backgrounds
     const wannaText=[
-      'Smooth diagonal gradient. Top-left: hot pink #FF1493. Bottom-right: electric purple #8B00FF. Perfectly clean. Nothing else.',
-      'Bold gradient. Top: electric orange #FF4500. Bottom: vivid pink #FF1493. Smooth and vivid. Nothing else in frame.',
-      'Vibrant gradient. Left: royal blue #0047FF. Right: hot purple #CC00FF. Bold and clean. Nothing else.',
-      'Warm gradient. Top: bright gold #FFD700. Bottom: electric orange #FF4500. Rich and vivid. Nothing else.'
+      'SOLID FLAT COLOR background. Pure bright neon pink #FF0090. Maximum saturation. No gradients. No texture. Just this single vivid color filling the entire frame. Like a painted wall of pure neon pink. Nothing else.',
+      'SOLID FLAT COLOR background. Pure electric orange #FF5500. Maximum brightness and saturation. No gradients. No texture. Just this vivid orange filling entire frame. Nothing else whatsoever.',
+      'SOLID FLAT COLOR background. Pure vivid lime green #00FF44. Maximum saturation. No gradients. No texture. Just this bright green filling entire frame. Nothing else.',
+      'SOLID FLAT COLOR background. Pure electric yellow #FFE000. Maximum brightness. No gradients. No texture. Just vivid yellow filling entire frame. Nothing else.'
     ];
     const thrillzzText=[
-      'Bold diagonal gradient. Top-left: electric blue #0066FF. Bottom-right: neon green #00FF88. Vivid and clean. Nothing else.',
-      'Vibrant gradient. Top: bright cyan #00FFFF. Bottom: electric blue #0000FF. Pure and bold. Nothing else.',
-      'Strong gradient. Left: neon green #00FF44. Right: electric blue #0066FF. Bold. Nothing else.',
-      'Vivid gradient. Top: hot magenta #FF00AA. Bottom: electric blue #0066FF. Bold and clean. Nothing else.'
+      'SOLID FLAT COLOR background. Pure electric blue #0055FF. Maximum saturation. No gradients. No texture. Just this vivid blue filling entire frame. Nothing else.',
+      'SOLID FLAT COLOR background. Pure neon cyan #00EEFF. Maximum brightness. No gradients. No texture. Just this vivid cyan color. Nothing else.',
+      'SOLID FLAT COLOR background. Pure hot magenta #FF0080. Maximum saturation. No gradients. Just vivid magenta filling entire frame. Nothing else.',
+      'SOLID FLAT COLOR background. Pure neon green #00FF55. Maximum brightness and saturation. No gradients. Just this green. Nothing else.'
     ];
-    prompt=pick(isWanna?wannaText:thrillzzText)+' Pure background gradient only. NO text. NO logos. NO objects whatsoever.';
+    prompt=pick(isWanna?wannaText:thrillzzText)+' Solid flat color only. NO text. NO logos. NO objects. NO gradients. Just pure vivid color.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1517,7 +1517,7 @@ async function compositeTextOnImage(bgImageUrl){
       const words=offerText.split(' ');
       // Text Only style: offer fills entire image, much larger font
       const isTextOnly=state.style==='Text Only';
-      const maxW=isTextOnly?W*0.95:W*0.9;
+      const maxW=isTextOnly?W*0.85:W*0.9;
       let lines=[];
       let line='';
       let testSize=isTextOnly?(isPortrait?230:160):(isPortrait?148:95);
@@ -1538,7 +1538,7 @@ async function compositeTextOnImage(bgImageUrl){
       
       // Re-wrap at new size
       if(lines.length>3){
-        ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
+        ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
         lines=[]; line='';
         words.forEach(word=>{
           const test=line?line+' '+word:word;
@@ -1560,7 +1560,7 @@ async function compositeTextOnImage(bgImageUrl){
         
         // For Text Only — no stroke, no glow, clean pure white
         if(state.style!=='Text Only'){
-          ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
+          ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
           ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
           ctx.shadowBlur=40;
           ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
