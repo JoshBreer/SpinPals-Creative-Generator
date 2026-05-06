@@ -665,7 +665,10 @@ async function stepFormat(){
   msg("Let's go →",'user');await delay(250);
   const m=msg('What <span class="accent">format</span> do you need?');
   const w=document.createElement('div');w.className='opt-group';
-  [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']].forEach(([val,label])=>{
+  // Sports clients (WannaParlay/Thrillzz) only get portrait + square — fal.ai can't do both
+  const formatOptions=isSportsFlow()?[['portrait','Portrait (9:16)'],['square','Square (1:1)']]:
+    [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']];
+  formatOptions.forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
     b.onclick=()=>{
       if(b.disabled)return;lockButtons(w);
@@ -673,7 +676,6 @@ async function stepFormat(){
       state.format=val;
       const afterFormat=chatEl.children.length;
       msg(label,'user',()=>{
-        // Remove all bubbles after format question and redo from format
         while(chatEl.children.length>afterFormat-1)chatEl.removeChild(chatEl.lastChild);
         state.format=null;state.style=null;state.game=null;state.offer=null;state.customInstructions=null;
         stepFormat();
@@ -942,7 +944,7 @@ async function doQuickGenerate(){
     state.platform=Math.random()>0.5?'betewin':'bankobet';
   }
 
-  const formats=['portrait','square','both'];
+  const formats=isSportsFlow()?['portrait','square']:['portrait','square','both'];
   const styles=['Classic','Realistic'];
   const {top,all}=getGames();
   const offers=getOffers();
