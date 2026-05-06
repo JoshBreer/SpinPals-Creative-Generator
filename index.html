@@ -1292,8 +1292,7 @@ async function doGenerate(){
 
 async function saveFalEntryToGithub(entry){
   try{
-    // entry.image_url is the composited canvas (data URL with text overlay)
-    // Upload it to GitHub as a permanent image file
+    // Step 1: Upload composited image to GitHub immediately (fast, ~2s)
     const dataUrl=entry.image_url;
     const isDataUrl=dataUrl&&dataUrl.startsWith('data:');
     let permanentUrl=entry.gallery_url||dataUrl;
@@ -1301,40 +1300,69 @@ async function saveFalEntryToGithub(entry){
     if(isDataUrl){
       const base64=dataUrl.split(',')[1];
       const filename='creatives/fal-'+Date.now()+'.jpg';
-      const apiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+filename;
-      const putRes=await fetch(apiUrl,{
+      const imgApiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/'+filename;
+      const putRes=await fetch(imgApiUrl,{
         method:'PUT',
         headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
         body:JSON.stringify({message:'fal creative',content:base64})
       });
       if(putRes.ok){
         permanentUrl='https://raw.githubusercontent.com/'+GITHUB_REPO+'/main/'+filename;
-        console.log('FAL: composited image uploaded:',permanentUrl);
-        // Update in-memory gallery entry with permanent URL
+        console.log('FAL: image uploaded:',permanentUrl);
         const mem=galleryData.find(c=>c.id===entry.id);
         if(mem)mem.image_url=permanentUrl;
       } else {
-        console.warn('FAL: image upload failed, using fal CDN URL');
-        permanentUrl=entry.gallery_url||entry.image_url;
+        permanentUrl=entry.gallery_url||dataUrl;
+        console.warn('FAL: image upload failed, status:',putRes.status);
       }
     }
 
-    // Send to Twin with permanent URL — Twin saves to gallery.json and sends email
-    const payload={
+    // Step 2: Save to gallery.json directly from browser (fast, ~2s)
+    const galleryApiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
+    const getRes=await fetch(galleryApiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
+    if(getRes.ok){
+      const fileData=await getRes.json();
+      const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
+      const saveEntry={
+        id:entry.id,
+        game_name:entry.game_name,
+        offer_text:entry.offer_text,
+        style:entry.style,
+        format:entry.format,
+        platform:entry.platform,
+        user_email:entry.user_email,
+        image_url:permanentUrl,
+        created_at:entry.created_at,
+        source:'fal'
+      };
+      existing.unshift(saveEntry);
+      const putGallery=await fetch(galleryApiUrl,{
+        method:'PUT',
+        headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+        body:JSON.stringify({
+          message:'fal creative: '+entry.game_name,
+          content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
+          sha:fileData.sha
+        })
+      });
+      if(putGallery.ok)console.log('FAL: saved to gallery.json');
+      else console.warn('FAL: gallery save failed',putGallery.status);
+    }
+
+    // Step 3: Fire Twin webhook for email only (async, dont await — dont block UI)
+    triggerWebhook({
       event:'fal_creative_complete',
       source:'fal',
-      save_to_gallery:true,
+      email_only:true,
       image_url:permanentUrl,
-      game_name:entry.game_name,
       offer_text:entry.offer_text,
       style:entry.style,
       format:entry.format,
       platform:entry.platform,
-      user_email:entry.user_email,
-      created_at:entry.created_at
-    };
-    console.log('FAL: notifying Twin with permanent URL...',permanentUrl.substring(0,80));
-    await triggerWebhook(payload,getWebhook());
+      user_email:entry.user_email
+    },getWebhook());
+    console.log('FAL: Twin notified for email');
+
     return permanentUrl;
   }catch(e){
     console.error('FAL: save error',e);
