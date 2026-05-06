@@ -1552,16 +1552,14 @@ async function falFallbackGenerate(){
     // Fetch result
     const rr=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
     if(!rr.ok)throw new Error('fal result fetch failed');
-    const result=await rr.json();
-    console.log('FAL FALLBACK RESULT:',JSON.stringify(result).substring(0,300));
-    if(result.images&&result.images[0]){
-      const img=result.images[0];
+    const falResult=await rr.json();
+    console.log('FAL RESULT:',JSON.stringify(falResult).substring(0,300));
+    if(falResult.images&&falResult.images[0]){
+      const img=falResult.images[0];
       const bgUrl=typeof img==='string'?img:img.url;
-      // Composite text overlay on top of background using canvas
-      console.log('FAL FALLBACK: compositing text overlay...');
-      const result=await compositeTextOnImage(bgUrl);
-      // Return both: composite for display, original CDN URL for gallery storage
-      return result;
+      console.log('FAL: compositing text overlay on',bgUrl.substring(0,60));
+      const composited=await compositeTextOnImage(bgUrl);
+      return composited;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
