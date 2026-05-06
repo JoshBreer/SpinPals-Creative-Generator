@@ -1005,11 +1005,13 @@ async function doQuickGenerate(){
     if(falStoppedQG)return;
     if(falUrlQG){
       const qcPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
-      const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:falUrlQG,created_at:new Date().toISOString(),source:'fal'};
+      const dUrlQG=falUrlQG&&falUrlQG.composite?falUrlQG.composite:falUrlQG;
+      const gUrlQG=falUrlQG&&falUrlQG.original?falUrlQG.original:falUrlQG;
+      const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:dUrlQG,created_at:new Date().toISOString(),source:'fal'};
       galleryData.unshift(falEntryQG);
       showResult(loadMsg,falEntryQG);
-      saveFalEntryToGithub(falEntryQG);
-      triggerWebhook({event:'creative_complete',source:'fal',image_url:falUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
+      saveFalEntryToGithub({...falEntryQG,image_url:gUrlQG});
+      triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:gUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1132,19 +1134,21 @@ async function doGenerate(){
     if(falStopped)return;
     if(falUrl){
       const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+      const dUrl=falUrl&&falUrl.composite?falUrl.composite:falUrl;
+      const gUrl=falUrl&&falUrl.original?falUrl.original:falUrl;
       const falEntry={
         id:'fal-direct-'+Date.now(),
         game_name:state.game&&state.game!=='N/A'?state.game:state.style,
         format:state.format==='both'?'portrait':state.format||'portrait',
         offer_text:state.offer,style:state.style,
         platform:clientPlatform,user_email:currentUserEmail,
-        image_url:falUrl,created_at:new Date().toISOString(),source:'fal'
+        image_url:dUrl,created_at:new Date().toISOString(),source:'fal'
       };
       galleryData.unshift(falEntry);
       showResult(loadMsg,falEntry);
-      saveFalEntryToGithub(falEntry);
-      // Notify Twin to send email
-      triggerWebhook({event:'creative_complete',source:'fal',image_url:falUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
+      saveFalEntryToGithub({...falEntry,image_url:gUrl});
+      // email_only:true prevents Twin from generating a new image
+      triggerWebhook({event:'creative_complete',source:'fal',email_only:true,image_url:gUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1249,11 +1253,12 @@ async function doGenerate(){
             created_at:new Date().toISOString(),
             source:'fal'
           };
+          const fbDispUrl=falUrl&&falUrl.composite?falUrl.composite:falUrl;
+          const fbGalUrl=falUrl&&falUrl.original?falUrl.original:falUrl;
+          falEntry.image_url=fbDispUrl;
           galleryData.unshift(falEntry);
           showResult(loadMsg,falEntry);
-          // Save to GitHub gallery.json so it persists across page refreshes
-          saveFalEntryToGithub(falEntry);
-          // Notify Twin to send email to the user with the fal result
+          saveFalEntryToGithub({...falEntry,image_url:fbGalUrl});
           const emailPayload={
             event:'creative_complete',
             source:'fal',
@@ -1333,108 +1338,65 @@ function buildFalFallbackPrompt(){
   const aspectRatio=fmt==='portrait'?'9:16':'1:1';
   const sportCtx=(state.game||'').toLowerCase();
   const style=state.style||'Classic';
-
-  // Dynamic randomization — pick independent variables and combine them
-  const seed=Math.random();
   const r=n=>Math.floor(Math.random()*n);
 
-  // Color palettes
   const palettes=[
-    'ultra-deep violet #1A0040 to black gradient, neon gold #FFD700 accent lighting',
-    'midnight indigo #0D0033 background, electric magenta #FF00FF and gold light rays',
-    'near-black #080010 with rich amethyst #6B21A8 radial glow from center',
-    'obsidian black to dark plum #2D1060 gradient, warm amber #FFA500 rim lighting',
-    'deep space black with royal purple #4B0082 nebula-like atmospheric fog',
-    'charcoal #1A1A2E to dark navy #16213E gradient with violet #7B2FBE accent'
+    'very dark navy blue #0A0E28 background with deep purple #1A0845 radial glow',
+    'near-black #080010 background with rich violet #2D1060 atmospheric haze',
+    'dark charcoal #0D0D1A background with indigo #1B1464 and gold #FFD700 accent light',
+    'obsidian black with midnight blue #003087 and electric gold light rays',
+    'deep space black with royal purple #4B0082 soft glow around edges'
   ];
-
-  // Lighting setups
-  const lightingSetups=[
-    'single dramatic overhead key light, deep shadows, cinematic noir contrast',
-    'rim lighting from behind creating glowing silhouette edge, lens flare',
-    'three-point studio lighting, soft fill, hard key light at 45 degrees',
-    'underglow lighting from below, dramatic upward shadows',
-    'split lighting, half bright half dark, sharp dividing line',
-    'volumetric god rays cutting through atmospheric haze, dust particles'
-  ];
-
-  // Textures/materials
-  const textures=[
-    'worn leather texture in background, subtle grain',
-    'smooth polished surface with reflections',
-    'brushed metal with light streaks',
-    'concrete texture with subtle depth',
-    'fabric weave pattern in deep shadow',
-    'frosted glass with backlit glow'
-  ];
-
   const palette=palettes[r(palettes.length)];
-  const lighting=lightingSetups[r(lightingSetups.length)];
-  const texture=textures[r(textures.length)];
 
   let prompt='';
-  let negativePrompt='grass field, soccer field, football field, baseball diamond, stadium exterior, crowd, players, people, humans, text, words, letters, numbers, logos, buttons, watermarks, balls on grass, generic sports background';
+  let negativePrompt='neon light tubes, neon tube installation, neon stripes, neon rods, fluorescent tubes, light tubes, neon signs, text, words, letters, logos, watermarks, buttons, people, humans, athletes, faces, grass, field, stadium exterior';
 
   if(style==='Classic'){
+    // Cartoony illustrated — modeled on the Twin deposit bonus style
     const subjects=[
-      'explosion of colorful confetti and streamers bursting from center, celebratory',
-      'floating 3D trophy made of solid gold, polished reflective surface, dramatic product shot',
-      'comic book style radial speed lines in gold and white, retro energy burst',
-      'scattered gold coins and dollar signs floating at various depths',
-      'stacked retro sports badges and pennants, flat design illustration',
-      'geometric diamond pattern in gold foil on deep background, luxury feel',
-      'fireworks explosion frozen in time, colorful light trails, dark sky',
-      'cascading gold stars and sparkles, celebration atmosphere'
+      '3D cartoon gold coins with dollar signs exploding upward from center in a fountain, green neon glow outline on each coin, dark navy background, yellow lightning bolt shapes in corners, sports balls (basketball football baseball soccer ball) floating in corners with neon outlines, upbeat mobile game art style',
+      'giant 3D gold trophy in center with sparkle effects and star burst rays, confetti pieces in purple and gold raining down, dark background, cartoon comic book style illustration, bold graphic design',
+      'stacked 3D gold coins pyramid with glow effects, floating dollar bill bills around it, sports emoji balls (basketball football baseball) in corners, dark navy to purple gradient, cartoon game art style with thick outlines',
+      'explosion of 3D gold stars and sparkle effects from center, floating sport balls with neon borders, dark background, confetti shower, celebratory mobile game loading screen style illustration'
     ];
-    const subject=subjects[r(subjects.length)];
-    prompt='Graphic design art direction. '+palette+'. '+subject+'. '+lighting+'. '+texture+'. High end advertising aesthetic. Bold color contrast. No photorealism needed — stylized and graphic. Shot on Hasselblad. 8K resolution.';
-    negativePrompt+=' realistic photography, sports field, athletes, stadium';
+    prompt=palette+'. '+subjects[r(subjects.length)]+'. High quality 3D cartoon render. Bold colors. Thick outlines. Zero text. Zero logos. Zero buttons. Background art only.';
+    negativePrompt+=', photorealistic, photography, realistic lighting, stadium, real people';
 
   } else if(style==='Realistic'){
-    const sportLabel=sportCtx.includes('nba')||sportCtx.includes('basketball')?'NBA basketball':
-      sportCtx.includes('nhl')||sportCtx.includes('hockey')?'NHL hockey':
-      sportCtx.includes('mlb')||sportCtx.includes('baseball')?'MLB baseball':
-      sportCtx.includes('soccer')||sportCtx.includes('mls')?'MLS soccer':'NFL football';
+    const sportLabel=sportCtx.includes('nba')||sportCtx.includes('basketball')?'basketball':
+      sportCtx.includes('nhl')||sportCtx.includes('hockey')?'hockey':
+      sportCtx.includes('mlb')||sportCtx.includes('baseball')?'baseball':
+      sportCtx.includes('soccer')||sportCtx.includes('mls')?'soccer':'football';
     const subjects=[
-      sportLabel+' arena interior at night, empty seats glowing under floodlights, parquet floor or ice surface reflecting light, wide angle architectural photography',
-      'extreme macro close-up of '+sportLabel+' equipment, shallow depth of field, subject sharp background bokeh, product photography',
-      'abstract motion blur of '+sportLabel+' colors, long exposure photography, light trails, kinetic energy',
-      'smoke and light installation art, colored theatrical smoke in purple and gold, dramatic beams cutting through',
-      'rain on glass foreground, out of focus '+sportLabel+' arena lights behind, melancholy cinematic mood',
-      'underwater refraction light patterns, abstract rippling caustics in purple and gold tones, dreamy'
+      'empty '+sportLabel+' arena at night from wide angle, floodlights on, dramatic shadows, no people, architectural photography quality, purple and gold light tones',
+      sportLabel+' equipment extreme close up macro photography, leather texture detail, dark background, single dramatic spotlight, product photography quality',
+      'dark atmospheric '+sportLabel+' venue interior, volumetric light beams cutting through haze, moody cinematic quality, no people or players',
+      'abstract motion blur of '+sportLabel+' arena lights, long exposure photography, light streaks in purple and gold, kinetic energy'
     ];
-    const subject=subjects[r(subjects.length)];
-    prompt='Commercial photography. '+palette+'. '+subject+'. '+lighting+'. Shot on Sony A7R IV. 85mm f1.4 lens. Professional studio quality. Magazine cover lighting. No people no players.';
-    negativePrompt+=' cartoon, illustration, athletes, crowds';
+    prompt=palette+'. '+subjects[r(subjects.length)]+'. Shot on Sony A7R IV. 85mm f1.4. Cinematic quality. NO people. NO text. NO logos. Background only.';
+    negativePrompt+=', neon lights, cartoon, illustration, text';
 
   } else if(style==='Electric'){
+    // What Twin makes: dark navy + lightning bolt SHAPES (not tubes), sport balls, coins, energy
     const subjects=[
-      'cyberpunk neon light installation, electric blue #00BFFF and acid green #00FF41 plasma tubes crossing, dark void background',
-      'digital data visualization, flowing streams of electric particles in blue and green, matrix energy',
-      'high voltage Tesla coil discharge, branching electrical arcs in cyan and white, black background, long exposure photography',
-      'abstract neon wireframe geometry, glowing grid lines in electric blue, vanishing point perspective, dark space',
-      'plasma ball electricity close up, tendrils of violet and blue lightning reaching outward, deep black background',
-      'fiber optic light explosion, thousands of electric blue and green light strands radiating from center, long exposure',
-      'laser light show beams, multiple blue and green laser lines crossing in dark space, atmospheric haze',
-      'lightning strike in slow motion, branching white-blue bolt, dramatic contrast against dark sky, high speed photography'
+      'dark navy background with large bold yellow and green lightning bolt graphic shapes like the Thrillzz brand — thick diagonal bolt shapes not thin lines — with floating sport balls basketball football baseball with neon green outlines, green dollar coins, dynamic energy composition, mobile game UI art style',
+      'abstract digital energy burst from center, electric blue plasma expanding outward in cloud-like formations, neon green particle sparks scattered, dark navy background, cyberpunk color palette, no light tubes',
+      'dark navy background with bold diagonal neon green triangular and angular geometric shapes, lightning bolt graphic elements as thick solid shapes not thin lines, electric energy composition, dramatic contrast',
+      'dark dramatic background with electric storm visual — multiple branching bolt shapes as thick graphic elements, blue and green glow clouds, particle sparks, high contrast power surge aesthetic, no thin lines or tubes'
     ];
-    const subject=subjects[r(subjects.length)];
-    prompt='Fine art photography meets commercial design. Very dark near-black background. '+subject+'. '+lighting+'. Ultra high contrast. Neon colors only. Shot on Phase One. 4K long exposure.';
-    negativePrompt+=' purple background, cartoon, illustration, sports equipment, stadium, warm colors, orange, red';
+    prompt=palette+'. '+subjects[r(subjects.length)]+'. Zero text. Zero logos. Zero buttons. Zero neon light tubes or fluorescent tubes. Background design only. High production quality.';
+    negativePrompt+=', thin lines, light tubes, neon tubes, fluorescent tubes, neon stripes, cartoon faces, people';
 
   } else {
-    // Text Only — ultra clean minimal
+    // Text Only — premium minimal
     const subjects=[
-      'smooth premium dark velvet surface, subtle light reflection, luxury product backdrop',
-      'dark polished marble texture with subtle purple veining, moody elegant',
-      'deep space photograph, distant galaxy, nebula in purple and gold, NASA quality',
-      'fog machine output, thick atmospheric haze in a dark studio, one light source',
-      'ink dropped in water slow motion, purple and gold ink diffusing in clear water, black background',
-      'dark brushed aluminum surface, directional light, premium tech aesthetic'
+      'smooth dark velvet texture with single soft light reflection, luxury product backdrop, deep shadows',
+      'dark polished marble with subtle purple and gold veining catching light, premium material shot',
+      'deep space photograph showing distant nebula in purple and gold tones, stars, NASA quality image',
+      'dark brushed metal surface with directional studio light creating gradient sheen, premium tech look'
     ];
-    const subject=subjects[r(subjects.length)];
-    prompt='Minimalist premium background. '+palette+'. '+subject+'. '+lighting+'. No graphic elements. No objects. Pure texture and light. Shot on Leica M10. Luxury advertising photography.';
-    negativePrompt+=' cartoon, sports equipment, stadium, busy, cluttered';
+    prompt=palette+'. '+subjects[r(subjects.length)]+'. No objects. No graphic elements. Pure texture and light. Zero text. Zero logos. Luxury advertising background.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1442,6 +1404,7 @@ function buildFalFallbackPrompt(){
 
 // Draw text overlay on top of fal background image using canvas
 async function compositeTextOnImage(bgImageUrl){
+  // Returns {compositeDataUrl, originalUrl}
   return new Promise((resolve)=>{
     const fmt=state.format==='both'?'portrait':state.format||'portrait';
     const isPortrait=fmt==='portrait';
@@ -1546,9 +1509,9 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.textAlign='center';
       ctx.fillText(disclaimer,W/2,H-barH/2+9);
 
-      resolve(canvas.toDataURL('image/jpeg',0.92));
+      resolve({composite:canvas.toDataURL('image/jpeg',0.92),original:bgImageUrl});
     };
-    img.onerror=()=>resolve(bgImageUrl); // fallback to raw bg if canvas fails
+    img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl}); // fallback
     img.src=bgImageUrl;
   });
 }
@@ -1594,8 +1557,9 @@ async function falFallbackGenerate(){
       const bgUrl=typeof img==='string'?img:img.url;
       // Composite text overlay on top of background using canvas
       console.log('FAL FALLBACK: compositing text overlay...');
-      const finalDataUrl=await compositeTextOnImage(bgUrl);
-      return finalDataUrl;
+      const result=await compositeTextOnImage(bgUrl);
+      // Return both: composite for display, original CDN URL for gallery storage
+      return result;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
@@ -1818,6 +1782,7 @@ async function saveFalEntryToGithub(entry){
 
 // Draw text overlay on top of fal background image using canvas
 async function compositeTextOnImage(bgImageUrl){
+  // Returns {compositeDataUrl, originalUrl}
   return new Promise((resolve)=>{
     const fmt=state.format==='both'?'portrait':state.format||'portrait';
     const isPortrait=fmt==='portrait';
@@ -1922,9 +1887,9 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.textAlign='center';
       ctx.fillText(disclaimer,W/2,H-barH/2+9);
 
-      resolve(canvas.toDataURL('image/jpeg',0.92));
+      resolve({composite:canvas.toDataURL('image/jpeg',0.92),original:bgImageUrl});
     };
-    img.onerror=()=>resolve(bgImageUrl); // fallback to raw bg if canvas fails
+    img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl}); // fallback
     img.src=bgImageUrl;
   });
 }
