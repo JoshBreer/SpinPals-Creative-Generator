@@ -1011,7 +1011,7 @@ async function doQuickGenerate(){
 
   // DIRECT FAL PATH for sports clients with simple styles
   const FAL_SIMPLE_QG=['Classic','Realistic','Electric','Text Only'];
-  const useDirectFalQG=isSports&&FAL_SIMPLE_QG.includes(randStyle);
+  const useDirectFalQG=(isWannaFlow()||isThrillzzFlow())?FAL_SIMPLE_QG.includes(randStyle):randStyle==='Text Only';
 
   if(useDirectFalQG){
     const loadDiv=document.createElement('div');loadDiv.className='loading';
@@ -1145,7 +1145,9 @@ async function doGenerate(){
 
   // DIRECT FAL PATH — WannaParlay/Thrillzz simple styles skip Twin entirely
   const FAL_SIMPLE_STYLES=['Classic','Realistic','Electric','Text Only'];
-  const useDirectFal=(isWannaFlow()||isThrillzzFlow())&&FAL_SIMPLE_STYLES.includes(state.style);
+  // WannaParlay/Thrillzz: all simple styles go to fal
+  // SpinPals/Mario: only Text Only goes to fal, rest through Twin
+  const useDirectFal=(isWannaFlow()||isThrillzzFlow())?FAL_SIMPLE_STYLES.includes(state.style):state.style==='Text Only';
 
   if(useDirectFal){
     // Text Only: skip fal entirely — pure canvas with guaranteed vivid color
@@ -1391,9 +1393,11 @@ async function generateTextOnlyCanvas(){
 
     // Offer text — fill entire image
     const offer=(state.offer||'WIN BIG').toUpperCase();
-    const disclaimer=isWannaFlow()||isThrillzzFlow()
-      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
-      :'18+ | Play Responsibly | T&Cs Apply';
+    const isTurkishCtx=state.platform==='bankobet';
+    const disclaimer=isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':
+      isThrillzzFlow()?'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms':
+      isTurkishCtx?'18+ | Sorumlu Oyna | Şartlar Geçerlidir':
+      '18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
 
     const disclaimerBarH=isPortrait?58:48;
     const usableH=H-disclaimerBarH-20; // space for text
@@ -1515,76 +1519,89 @@ function buildFalFallbackPrompt(){
   const pick=arr=>arr[r(arr.length)];
 
   const isWanna=isWannaFlow();
+  const isThrillzz=isThrillzzFlow();
+  const isMario=isMarioFlow();
+  const isSpinPals=!isWanna&&!isThrillzz&&!isMario;
+  const isTurkish=state.platform==='bankobet';
 
   const negativePrompt='text, words, letters, numbers, logos, watermarks, buttons, UI elements, neon light tubes, fluorescent tube lights, thin wire neon lights, low quality, blurry, ugly, deformed';
 
   let prompt='';
 
   if(style==='Classic'){
-    const wannaClassic=[
-      'Hyper-detailed 3D illustration. Deep royal purple #3B0F6B background. CENTER: Giant golden trophy cup radiating warm light rays, surrounded by explosion of shiny gold coins with dollar signs, coins spinning at various angles. AROUND: Cartoon basketball (orange), football (brown), baseball (white with red stitching) floating with neon green glow. Bold yellow lightning bolt shapes in corners. Gold confetti raining. AAA mobile game art style. Unreal Engine quality.',
-      'Premium 3D game art. Dark purple background. Stack of enormous gold coins exploding upward from bottom center like a fountain, each coin catching studio light. Green energy beams shooting from coin pile. Sports balls orbiting: basketball top-left, football top-right, soccer ball center. Gold star bursts at corners. Comic book thick outlines on everything. Vivid saturated colors.',
-      'Vibrant cartoon sports illustration. Purple to black gradient. HERO: Massive gold trophy with wings spread wide, emitting golden god rays. Coins cascading around it. Basketball, football, baseball in triangle formation below, each with metallic sheen and neon outline. Fireworks in purple and gold across top. Celebration energy. Artstation featured quality.',
-      'Dynamic 3D sports poster art. Very dark purple. Central explosion of purple and gold energy. Three large sport balls blasting outward from center — basketball left, football right, baseball top. Gold coins scattering everywhere. Bold diagonal yellow lightning bolt shapes creating X pattern. Green particle sparks at intersections. Nike campaign quality illustration.'
+    const spinpalsCasino=[
+      'Hyper-detailed 3D casino illustration. Deep teal #006B6B to dark background. CENTER: Giant golden slot machine with spinning reels showing lucky 7s, cherries, stars, glowing neon outlines. Gold coins exploding outward from machine. Colorful playing card suits floating: hearts, diamonds, clubs, spades each glowing. Purple and teal neon light effects. Premium casino app art. Unreal Engine quality. No text.',
+      'Vibrant casino celebration art. Dark navy background. Massive pile of gold coins center with dollar signs gleaming. Casino chips in red, blue, green stacked high. Slot machine reels showing jackpot. Rainbow confetti raining down. Lucky dice showing sixes. Stars and sparkle effects everywhere. AAA mobile casino game quality.',
+      'Premium casino illustration. Rich dark background. Golden roulette wheel dominating center, dramatically lit. Chips scattered around. Playing cards face up showing winning hand. Green felt texture subtle. Casino token explosion. Luxury casino aesthetic. Behance quality artwork.',
+      'Explosive casino jackpot art. Dark background. JACKPOT winner scene: gold coins fountaining upward, slot machine reels all showing 777. Purple laser lights from above. Casino chips raining. Lucky horseshoe and four-leaf clovers floating. Premium mobile game celebration screen quality.'
     ];
-    const thrillzzClassic=[
-      'High energy digital art. Very dark navy #060C1E. Central 3D blue crystal trophy emitting cyan light rays. Explosion of gold coins and electric blue tokens below it. Basketball, football, baseball floating with electric blue neon halos. Bold thick yellow lightning bolt SHAPES crossing diagonally. Green matrix particle rain. Cyberpunk sports aesthetic. Unreal Engine 5 quality.',
-      'Premium esports poster. Dark navy background. Large electric blue shield badge center glowing neon. Basketball and football orbiting with speed trails. Gold and cyan coins exploding outward. Thick yellow lightning bolt graphic shapes forming X in background. Neon green particle effects. Ultra polished artstation quality.',
-      'Electric gaming illustration. Near-black navy. Three massive neon lightning bolt SHAPES in yellow-green arranged fan pattern from bottom. Each bolt radiates energy. Basketball purple glow left, football gold glow right, baseball white glow top. Coin sparkle trail between bolts. Maximum contrast dark background. Thrillzz brand energy.',
-      'Futuristic sports art. Dark navy. Electric energy core in center — bright cyan sphere with blue plasma arcs. Bold geometric lightning shapes extending to corners in neon yellow. Sport balls floating in energy field with electric halos. Green data stream behind. Extreme contrast. High end tournament poster quality.'
+    const betewinClassic=[
+      'Dynamic sports betting illustration. Dark navy background. Football/soccer ball center with dramatic stadium lighting. Sport icons floating: football, basketball, tennis ball with neon blue glow. Bold diagonal energy lines. Gold trophy in corner radiating light. Premium sports app art. Professional advertising quality. No text.',
+      'Premium sportsbook art. Dark navy. Multiple sports balls in constellation formation — football top, basketball left, tennis right, cricket bottom — each with metallic sheen and neon outline. Central golden trophy exploding with light. Blue and gold color scheme. ESPN broadcast graphic quality.',
+      'Sports energy illustration. Deep navy. Dramatic action composition: large football with motion blur trails, green pitch lines in background, stadium lights creating god rays. Gold and blue energy effects. Professional sports brand quality artwork.',
+      'International sports poster art. Dark navy blue. World globe with stadium dots highlighted, sports equipment orbiting it: football, basketball, tennis racket, cricket bat. Gold trophy centerpiece. Bold energy lines. World class sports brand aesthetic.'
     ];
-    prompt=pick(isWanna?wannaClassic:thrillzzClassic)+' NO text. NO logos. NO buttons. Ultra detailed. 8K.';
+    const bankobetClassic=[
+      'Turkish sports betting illustration. Deep dark navy. Football/soccer ball centered with dramatic lighting, Turkish flag colors red and white as subtle accent. Stadium atmosphere in background bokeh. Gold trophy radiating light. Premium sports app art. Bold and dynamic. No text.',
+      'Premium Türk spor görseli. Dark navy background. Football dominant center with action energy lines. Basketball and tennis accents. Bold gold trophy. Red and white energy accent colors. Professional advertising quality poster art.',
+      'Energetic sports illustration. Very dark background. Large football with golden impact lines radiating outward. Multiple sport elements orbiting: basketball, tennis ball. Red energy streaks as accent. Gold center explosion. Premium mobile sports app quality.',
+      'Bold sports betting art. Dark navy. Football stadium aerial view in background blur. Large golden trophy dominant center glowing warm. Sports balls and championship medals floating. Turkish sports energy. Premium brand quality.'
+    ];
+    const v=isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
+    prompt=pick(v)+' Ultra detailed 8K. NO text. NO logos. NO buttons. Background art only.';
 
   } else if(style==='Realistic'){
-    // Massively varied - different sports, positions, angles, lighting, times of day
-    const wannaRealistic=[
-      'Cinematic sports photograph. Deep purple atmosphere. NFL quarterback #12 in purple and gold uniform, arm fully cocked back in perfect throwing pose, profile view from 45 degrees, stadium lights creating rim lighting behind. Shot on Canon R5, 135mm f/1.8, 1/2000s. Sports Illustrated quality. No jersey text visible.',
-      'Dramatic sports action shot. Purple atmospheric tones. MLB baseball player in white pinstripe uniform, aggressive batting stance, bat just made contact, baseball blurred mid-air, stadium crowd bokeh behind. Shot on Sony A9 III, 300mm f/2.8. Dynamic motion. ESPN quality.',
-      'Intense sports portrait. Deep purple background. NHL hockey player in dark purple helmet and jersey, gloves gripping stick, ice spray at skate level, arena lights reflecting on ice surface behind. Low angle looking up. Shot on Nikon Z9, 70mm f/2. Power and intensity.',
-      'Explosive basketball moment. Purple arena atmosphere. NBA player seen from below, one hand on rim completing a thunderous dunk, arena crowd blurred, multiple arena lights creating star pattern behind player. Shot on ARRI Alexa, 24mm anamorphic. Cinematic wide angle.',
-      'Athletic soccer action. Purple twilight sky. Soccer player in purple jersey mid-bicycle kick, ball visible at foot, stadium lights blazing, long shadows on perfect grass. Side angle, dramatic. Shot on RED Monstro, 85mm. Nike campaign quality.',
-      'MMA fighter portrait. Dark purple atmospheric studio. Fighter in fighting stance, face determined, gloves up, dramatic side lighting creating deep shadows on muscular physique. Professional sports photography. Shot on Hasselblad X2D, 80mm.'
+    const spinpalsRealistic=[
+      'Cinematic casino photograph. Dark atmospheric luxury casino interior. Crystal chandeliers overhead creating warm bokeh. Roulette wheel in soft focus with dramatic rim lighting. Green felt tables receding into darkness. No people. Shot on ARRI Alexa, 35mm. Luxury brand campaign quality.',
+      'Fine art casino photography. Extreme macro close-up of casino chips stacked, different colors, shallow depth of field, dramatic side lighting. One chip perfectly sharp, rest in beautiful bokeh. Shot on Hasselblad, 100mm macro. Museum quality.',
+      'Atmospheric casino interior photograph. Empty high-end casino at night. Slot machine lights creating warm colorful glow in darkness. Deep shadows. Moody cinematic quality. No people. Shot on Sony Venice 2, anamorphic. Film quality.',
+      'Premium casino product photography. Single deck of playing cards fanned out perfectly on dark velvet surface, dramatic overhead lighting, perfect symmetry. Gold casino chips beside them. Shot on Phase One IQ4. Luxury advertising.'
     ];
-    const thrillzzRealistic=[
-      'Elite football action. Dark navy blue atmosphere. NFL running back in navy jersey bursting through defenders, legs driving powerfully, stadium lights creating dramatic rim lighting, motion blur on background. Low angle turf level. Shot on Nikon Z9, 200mm f/2.8, 1/4000s. ESPN quality.',
-      'Basketball intensity. Navy blue arena atmosphere. NBA point guard in navy uniform driving to basket, defender reaching, arena crowd electric in background, multiple arena lights creating dramatic halos. Shot on Sony VENICE 2, 35mm anamorphic. Cinematic quality.',
-      'Baseball drama. Dark navy stadium. MLB pitcher mid-windup, full extension, stadium lights blazing behind creating silhouette edge, packed crowd in bokeh background. Shot on RED Komodo, 300mm f/2.8. Sports illustrated cover.',
-      'Hockey power. Dark navy ice arena. NHL defenseman taking massive slap shot, stick at full extension, ice chips flying, arena lights reflecting on ice surface, empty net visible in background. Shot on Phase One, 150mm. Maximum impact.',
-      'Boxing championship. Dark navy atmosphere. Professional boxer in fighting stance, championship belt visible, dramatic side spotlight creating intense shadow pattern on determined face. Studio sports photography quality.',
-      'Soccer star moment. Navy blue stadium atmosphere. Soccer player celebrating goal, arms spread wide, stadium lights blazing, crowd going insane in background bokeh, night game atmosphere. Shot on ARRI, 35mm anamorphic.'
+    const betewinRealistic=[
+      'Cinematic sports photograph. Empty professional football stadium at night from field level. Floodlights blazing creating dramatic light shafts through atmospheric haze. Perfect green pitch. No players. Shot on ARRI Alexa 35, 21mm. Cinematic quality.',
+      'Dramatic sports action. Professional soccer player in blue and gold uniform mid-bicycle kick, stadium crowd bokeh, multiple arena lights creating dramatic halos. Shot on Sony A9 III, 400mm f/2.8. Sports Illustrated quality.',
+      'Athletic basketball moment. NBA player in navy uniform seen from below mid-dunk, arena crowd electric behind in purple bokeh, multiple arena lights creating halos. Shot on Canon R5, 135mm. Cinematic.',
+      'Tennis championship photograph. Tennis player mid-serve at center court, stadium packed, dramatic overhead court lighting, ball frozen mid-toss. Shot on Nikon Z9, 200mm f/2.8. Championship quality.'
     ];
-    prompt=pick(isWanna?wannaRealistic:thrillzzRealistic)+' Ultra photorealistic. No logos visible. NO text. NO buttons. Background only.';
+    const bankobetRealistic=[
+      'Cinematic football photograph. Professional footballer in red and white uniform mid-sprint with ball, stadium lights blazing, Turkish crowd blurred behind. Low angle turf level. Shot on ARRI, 200mm. Championship quality.',
+      'Turkish sports action. Professional football player celebrating goal, arms spread, Turkish stadium crowd going wild behind in bokeh, night match atmosphere. Shot on Sony A9, 300mm. Drama and energy.',
+      'Athletic sports moment. Football/soccer goalkeeper diving dramatically to save ball, stadium lights creating rim lighting silhouette, crowd blurred behind. Shot on Canon R5, 400mm. Sports Illustrated quality.',
+      'Stadium atmosphere photograph. Empty Turkish football stadium at night, floodlights creating dramatic cross-lighting on perfect pitch, architectural grandeur. Shot on ARRI, 16mm. Cinematic wide angle.'
+    ];
+    const v=isSpinPals?spinpalsRealistic:isTurkish?bankobetRealistic:betewinRealistic;
+    prompt=pick(v)+' Ultra photorealistic. NO logos visible. NO text. NO buttons. Background only.';
 
   } else if(style==='Electric'){
-    const wannaElectric=[
-      'Bold electric sports art. Deep purple to black background. Three massive THICK SOLID YELLOW lightning bolt shapes — wide solid bolt forms like sports brand marks — diagonal across frame. Each bolt glows with inner light. Basketball and football with gold neon outline floating between bolts. Green particle sparks at bolt intersections. Gold energy radiating from center. Nike Thunder aesthetic.',
-      'Power surge illustration. Near-black purple. Giant thick yellow lightning bolt shape splits frame diagonally from top-left to bottom-right, wide and solid not thin. Purple plasma clouds bloom around it. Football with gold halo top-right, basketball with gold halo bottom-left. Gold coin shower from bolt tip. Maximum energy.',
-      'Electric stadium art. Dark purple. Two thick bold yellow lightning bolt graphic shapes crossing at center forming X — SOLID THICK SHAPES like Adidas stripes bent into bolts. Explosion of gold light at crossing point. Sports balls orbiting. Purple and gold energy waves expanding outward. Cinematic power.',
-      'Thunder sports poster. Very dark purple to black. Fan of three thick yellow-gold bolt shapes from bottom center spreading upward. Each bolt solid and wide, glowing edges. Basketball, football, baseball floating in bolt energy field. Purple electric atmosphere. Premium sports brand campaign.'
+    const spinpalsElectric=[
+      'Electric casino energy art. Deep dark background. Slot machine reels wrapped in neon electric glow — purple, pink, cyan neon lights (actual neon tube signs, not bolts) creating retro casino atmosphere. Gold sparks. Casino chip shapes floating with electric outline. Neon casino aesthetic.',
+      'Neon casino illustration. Near-black background. Roulette wheel outline in bright neon pink. Casino card suits in neon colors. Electric energy field around everything. Retro Vegas neon sign aesthetic. Purple and pink dominant. Premium art.',
+      'Casino power surge art. Dark background. Explosion of electric energy in purple and gold from center. Casino elements — dice, cards, chips — floating in energy field with neon outlines. Bold color contrast. Premium advertising quality.',
+      'Electric jackpot art. Very dark background. Neon slot reels showing 777 with electric glow in purple, blue, pink. Gold coin explosion with electric trails. Neon lights reflection on dark surface. Vegas premium aesthetic.'
     ];
-    const thrillzzElectric=[
-      'High voltage art. Very dark navy #050A1A. Three MASSIVE thick solid electric blue lightning bolt shapes — wide solid geometric bolt forms, NOT thin lines — forming triangle. Bright white-blue explosion at center convergence point. Neon yellow-green energy plasma clouds at bolt tips. Basketball and football with cyan electric halos. Green matrix particle rain behind. Thrillzz power.',
-      'Cyberpunk sports energy. Near-black navy. Concentrated ball of electric plasma — bright cyan-white sphere — center frame with electric arcs reaching outward. Thick bold chevron and lightning SOLID SHAPES in neon yellow extend to all corners. Sport balls in energy field. Extreme contrast. Esports tournament quality.',
-      'Electric storm art. Dark navy. Multiple thick solid neon blue lightning bolt shapes branching across frame — thick as a forearm, solid not thin wire. Green glow clouds at tips. Basketball, football floating with electric blue borders. Gold coin explosion from central bolt. Maximum voltage.',
-      'Neon power illustration. Very dark navy. Giant yellow lightning bolt SHAPE — thick solid graphic element like brand logo — dominates center. Electric blue plasma field surrounding it. Smaller bolt shapes in corners. Sports balls orbiting with electric halos. Green energy wisps. Ultra premium gaming visual.'
+    const baseElectric=isWanna?[
+      'Bold electric sports art. Deep purple to black. Three massive THICK SOLID YELLOW lightning bolt shapes diagonal across frame. Basketball and football with gold neon outline floating. Green particle sparks at bolt intersections. Gold energy from center.',
+      'Power surge illustration. Near-black purple. Giant thick yellow lightning bolt shape splits frame diagonally, wide and solid. Football gold halo top-right, basketball gold halo bottom-left. Gold coin shower from bolt tip.',
+      'Electric stadium art. Dark purple. Two thick bold yellow lightning bolt graphic shapes crossing at center forming X — SOLID THICK SHAPES. Explosion of gold light at crossing. Sports balls orbiting. Purple gold energy waves.',
+      'Thunder sports poster. Very dark purple to black. Fan of three thick yellow-gold bolt shapes from bottom center spreading upward. Each bolt solid and wide glowing. Basketball football baseball floating in bolt field.'
+    ]:[
+      'High voltage electric art. Very dark navy. Three MASSIVE thick solid electric blue lightning bolt shapes — wide solid geometric bolt forms — forming triangle. White-blue explosion at center. Neon yellow-green plasma at bolt tips. Sport balls with cyan halos.',
+      'Cyberpunk sports energy. Near-black navy. Electric plasma sphere center with arcs reaching outward. Thick bold chevron lightning SOLID SHAPES in neon yellow extend to all corners. Sport balls in energy field. Extreme contrast.',
+      'Electric storm art. Dark navy. Multiple thick solid neon blue lightning bolt shapes branching across frame — thick as a forearm solid not thin wire. Green glow clouds at tips. Basketball football floating with electric blue borders.',
+      'Neon power illustration. Very dark navy. Giant yellow lightning bolt SHAPE — thick solid graphic element — dominates center. Electric blue plasma field. Smaller bolt shapes in corners. Sports balls orbiting with electric halos.'
     ];
-    prompt=pick(isWanna?wannaElectric:thrillzzElectric)+' NO text. NO thin wire neon tubes. NO logos. Thick SOLID lightning shapes only. Ultra detailed.';
+    const v=isSpinPals?spinpalsElectric:baseElectric;
+    prompt=pick(v)+' NO text. NO thin wire neon tubes (SpinPals can use actual neon signs). NO logos. Ultra detailed.';
 
   } else {
-    // Text Only — vibrant gradient backgrounds
-    const wannaText=[
-      'SOLID FLAT COLOR background. Pure bright neon pink #FF0090. Maximum saturation. No gradients. No texture. Just this single vivid color filling the entire frame. Like a painted wall of pure neon pink. Nothing else.',
-      'SOLID FLAT COLOR background. Pure electric orange #FF5500. Maximum brightness and saturation. No gradients. No texture. Just this vivid orange filling entire frame. Nothing else whatsoever.',
-      'SOLID FLAT COLOR background. Pure vivid lime green #00FF44. Maximum saturation. No gradients. No texture. Just this bright green filling entire frame. Nothing else.',
-      'SOLID FLAT COLOR background. Pure electric yellow #FFE000. Maximum brightness. No gradients. No texture. Just vivid yellow filling entire frame. Nothing else.'
-    ];
-    const thrillzzText=[
-      'SOLID FLAT COLOR background. Pure electric blue #0055FF. Maximum saturation. No gradients. No texture. Just this vivid blue filling entire frame. Nothing else.',
-      'SOLID FLAT COLOR background. Pure neon cyan #00EEFF. Maximum brightness. No gradients. No texture. Just this vivid cyan color. Nothing else.',
-      'SOLID FLAT COLOR background. Pure hot magenta #FF0080. Maximum saturation. No gradients. Just vivid magenta filling entire frame. Nothing else.',
-      'SOLID FLAT COLOR background. Pure neon green #00FF55. Maximum brightness and saturation. No gradients. Just this green. Nothing else.'
-    ];
-    prompt=pick(isWanna?wannaText:thrillzzText)+' Solid flat color only. NO text. NO logos. NO objects. NO gradients. Just pure vivid color.';
+    // Text Only — pure canvas, no fal needed but keep prompt for fallback
+    const colors=isSpinPals?['#6600CC','#00AACC','#CC0066','#00AA44']:
+      isTurkish?['#CC0000','#0044FF','#FF6600','#AA00FF']:
+      isMario?['#0044FF','#00AACC','#FF6600','#00AA44']:
+      isWanna?['#FF0090','#FF5500','#00DD44','#FFD700']:
+      ['#0055FF','#00DDFF','#FF0080','#00FF55'];
+    const c=colors[r(colors.length)];
+    prompt='SOLID FLAT COLOR background. Pure vivid '+c+'. Maximum saturation. No gradients. No texture. No objects. Just this single vivid color filling entire frame. Nothing else.';
   }
 
   return {prompt, negativePrompt, aspectRatio};
@@ -1599,8 +1616,8 @@ async function compositeTextOnImage(bgImageUrl){
     const H=isPortrait?1920:1080;
 
     const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
-    const isTurkish=state.platform==='bankobet';
-    const ctaText=isTurkish?'HEMEN OYNA':'CLAIM NOW';
+    const isTurkishCtx2=state.platform==='bankobet';
+    const ctaText=isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW';
     const disclaimer=isWannaFlow()||isThrillzzFlow()
       ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
       :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
@@ -1700,29 +1717,33 @@ async function compositeTextOnImage(bgImageUrl){
 
         // Brand-specific gradient fill
         const isWannaCtx=typeof isWannaFlow==='function'&&isWannaFlow();
+        const isThrillzzCtx=typeof isThrillzzFlow==='function'&&isThrillzzFlow();
+        const isMarioCtx=typeof isMarioFlow==='function'&&isMarioFlow();
         const isTextOnlyCtx=state.style==='Text Only';
         const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
         if(isTextOnlyCtx){
-          // Pure white for Text Only — maximum contrast on bright background
-          grd.addColorStop(0,'#FFFFFF');
-          grd.addColorStop(1,'#FFFFFF');
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(1,'#FFFFFF');
         } else if(isWannaCtx){
-          grd.addColorStop(0,'#FFFFFF');
-          grd.addColorStop(0.15,'#FFF500');
-          grd.addColorStop(0.5,'#FFD700');
-          grd.addColorStop(0.85,'#FF8C00');
-          grd.addColorStop(1,'#FFD700');
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.15,'#FFF500');
+          grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF8C00');grd.addColorStop(1,'#FFD700');
+        } else if(isThrillzzCtx){
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFF00');
+          grd.addColorStop(0.5,'#00FF88');grd.addColorStop(0.85,'#00C8FF');grd.addColorStop(1,'#00FF88');
+        } else if(isMarioCtx&&state.platform==='bankobet'){
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#FFD700');
+          grd.addColorStop(0.7,'#FF2200');grd.addColorStop(1,'#FFD700');
+        } else if(isMarioCtx){
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#88CCFF');
+          grd.addColorStop(0.7,'#0088FF');grd.addColorStop(1,'#00CCFF');
         } else {
-          grd.addColorStop(0,'#FFFFFF');
-          grd.addColorStop(0.2,'#AAFF00');
-          grd.addColorStop(0.5,'#00FF88');
-          grd.addColorStop(0.85,'#00C8FF');
-          grd.addColorStop(1,'#00FF88');
+          // SpinPals: gold to purple
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFD700');
+          grd.addColorStop(0.5,'#AA44FF');grd.addColorStop(0.85,'#FFD700');grd.addColorStop(1,'#AA44FF');
         }
         ctx.fillStyle=grd;
         ctx.fillText(ln,W/2,y);
 
-        // Second pass - shine (not for Text Only)
+                // Second pass - shine (not for Text Only)
         if(state.style!=='Text Only'){
           const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.45);
           shine.addColorStop(0,'rgba(255,255,255,0.55)');
