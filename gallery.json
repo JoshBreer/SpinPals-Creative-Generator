@@ -1904,7 +1904,7 @@
     "platform": "thrillzz",
     "game_name": "Text Only",
     "format": "portrait",
-    "offer_text": "FREE Welcome Bonus â 3,000 Thrillzz Coins + 3 Thrillzz Sweeps",
+    "offer_text": "FREE Welcome Bonus Ã¢ÂÂ 3,000 Thrillzz Coins + 3 Thrillzz Sweeps",
     "style": "Text Only",
     "user_email": "josh@rmgs.online",
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/fal-1778103387820-p.jpg",
@@ -1956,5 +1956,15 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/betewin_text-only_portrait_20260506T223432.png",
     "created_at": "2026-05-06T22:34:32.864Z"
+  },
+  {
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "100 TL Deneme Bonusu",
+    "style": "Text Only",
+    "platform": "bankobet",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/bankobet_text-only_portrait_20260506T223728.png",
+    "created_at": "2026-05-06T22:37:28.550Z"
   }
 ]
