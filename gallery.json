@@ -1904,7 +1904,7 @@
     "platform": "thrillzz",
     "game_name": "Text Only",
     "format": "portrait",
-    "offer_text": "FREE Welcome Bonus — 3,000 Thrillzz Coins + 3 Thrillzz Sweeps",
+    "offer_text": "FREE Welcome Bonus â 3,000 Thrillzz Coins + 3 Thrillzz Sweeps",
     "style": "Text Only",
     "user_email": "josh@rmgs.online",
     "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/fal-1778103387820-p.jpg",
@@ -1936,5 +1936,15 @@
     "created_at": "2026-05-06T22:02:52.181Z",
     "source": "fal",
     "disclaimer_variant": "social"
+  },
+  {
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "Hos Geldin Paketi - %100 + 200 Ucretsiz Donus",
+    "style": "Text Only",
+    "platform": "bankobet",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/bankobet_text-only_portrait_20260506T223448.png",
+    "created_at": "2026-05-06T22:34:48.002Z"
   }
 ]
