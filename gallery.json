@@ -1,5 +1,28 @@
 [
   {
+    "id": "wp-1778094259973-fal",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wp_realistic_wannaparlay_portrait_1778094259973.jpg",
+    "github_image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wp_realistic_wannaparlay_portrait_1778094259973.jpg",
+    "github_upload_attempts": 1,
+    "platform": "wannaparlay",
+    "game_name": "unknown",
+    "offer_text": "Turn $4 Into $4,000",
+    "style": "Realistic",
+    "format": "portrait",
+    "user_email": "josh@rmgs.online",
+    "created_at": "2026-05-06T19:04:09.000Z",
+    "source": "fal",
+    "original_image_url_redacted": "signed URL omitted from gallery row",
+    "audit": {
+      "source": "fal",
+      "gallery_write_attempts": 1,
+      "email_sent": false,
+      "email_to": "josh@rmgs.online",
+      "github_image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/wp_realistic_wannaparlay_portrait_1778094259973.jpg",
+      "github_upload_attempts": 1
+    }
+  },
+  {
     "audit": {
       "email_sent": false,
       "email_to": "josh@rmgs.online",
