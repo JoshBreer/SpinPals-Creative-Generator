@@ -1448,16 +1448,16 @@ function buildFalFallbackPrompt(){
     // Text Only — ULTRA vibrant solid color background only
     // The offer text is drawn by canvas so background must be clean and bright
     const wannaTextOnly=[
-      'Perfectly smooth solid hot pink #FF1493 background. Pure flat color filling entire frame. Nothing else. No gradients, no texture, no objects, no patterns. Pure vivid solid pink.',
-      'Perfectly smooth solid electric orange #FF6600 background. Pure flat color. Nothing else whatsoever. Just orange.',
-      'Vivid solid cobalt blue #0047FF background. Pure flat color filling entire frame. Nothing else. Just blue.',
-      'Bright solid purple #8B00FF background. Pure flat color. Nothing else. Just purple.'
+      'Vivid diagonal gradient background. Top-left: hot pink #FF1493. Bottom-right: electric purple #8B00FF. Perfectly smooth gradient. Nothing else in frame.',
+      'Bright gradient background. Top: electric orange #FF4500. Bottom: hot pink #FF1493. Smooth vivid gradient. Nothing else.',
+      'Bold gradient. Left: royal blue #0047FF. Right: hot purple #CC00FF. Smooth vivid gradient filling entire frame. Nothing else.',
+      'Vibrant gradient. Top: bright gold #FFD700. Bottom: electric orange #FF4500. Bold warm gradient. Nothing else in frame.'
     ];
     const thrillzzTextOnly=[
-      'Perfectly smooth solid electric blue #0066FF background. Pure flat color filling entire frame. Nothing else. Just blue.',
-      'Vivid solid neon green #00CC44 background. Pure flat color. Nothing else whatsoever. Just green.',
-      'Bright solid cyan #00CCFF background. Pure flat color. Nothing else. Just cyan.',
-      'Pure solid hot magenta #FF00AA background. Pure flat color filling entire frame. Nothing else.'
+      'Bold gradient background. Top-left: electric blue #0066FF. Bottom-right: neon green #00FF88. Vivid diagonal gradient. Nothing else.',
+      'Vibrant gradient. Top: bright cyan #00FFFF. Bottom: electric blue #0000FF. Smooth gradient. Nothing else.',
+      'Bright gradient. Left: neon green #00FF44. Right: electric blue #0066FF. Bold gradient filling entire frame. Nothing else.',
+      'Vivid gradient. Top: hot magenta #FF00AA. Bottom: electric blue #0066FF. Smooth bold gradient. Nothing else.'
     ];
     const v=isWanna?wannaTextOnly:thrillzzTextOnly;
     prompt=v[r(v.length)]+' NO text. NO logos. NO objects. NO gradients. JUST the solid color background.';
@@ -1560,19 +1560,19 @@ async function compositeTextOnImage(bgImageUrl){
       lines.forEach((ln,i)=>{
         const y=textTop+(i*lineH);
         
-        // Outer glow pass
-        ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
-        ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
-        ctx.shadowBlur=40;
-        ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
-        ctx.fillText(ln,W/2,y);
-        ctx.shadowBlur=0;
-
-        // Black stroke for depth
-        ctx.strokeStyle='rgba(0,0,0,0.98)';
-        ctx.lineWidth=fontSize*0.13;
-        ctx.lineJoin='round';
-        ctx.strokeText(ln,W/2,y);
+        // For Text Only — no stroke, no glow, clean pure white
+        if(state.style!=='Text Only'){
+          ctx.font=`900 ${fontSize}px Impact, 'Arial Black', sans-serif`;
+          ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
+          ctx.shadowBlur=40;
+          ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
+          ctx.fillText(ln,W/2,y);
+          ctx.shadowBlur=0;
+          ctx.strokeStyle='rgba(0,0,0,0.98)';
+          ctx.lineWidth=fontSize*0.13;
+          ctx.lineJoin='round';
+          ctx.strokeText(ln,W/2,y);
+        }
 
         // Brand-specific gradient fill
         const isWannaCtx=typeof isWannaFlow==='function'&&isWannaFlow();
@@ -1598,12 +1598,14 @@ async function compositeTextOnImage(bgImageUrl){
         ctx.fillStyle=grd;
         ctx.fillText(ln,W/2,y);
 
-        // Second pass - shine
-        const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.45);
-        shine.addColorStop(0,'rgba(255,255,255,0.55)');
-        shine.addColorStop(1,'rgba(255,255,255,0)');
-        ctx.fillStyle=shine;
-        ctx.fillText(ln,W/2,y);
+        // Second pass - shine (not for Text Only)
+        if(state.style!=='Text Only'){
+          const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.45);
+          shine.addColorStop(0,'rgba(255,255,255,0.55)');
+          shine.addColorStop(1,'rgba(255,255,255,0)');
+          ctx.fillStyle=shine;
+          ctx.fillText(ln,W/2,y);
+        }
       });
 
       // ── CTA BUTTON ───────────────────────────────────────────
