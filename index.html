@@ -1325,56 +1325,30 @@ async function doGenerate(){
 
 
 async function saveFalEntryToGithub(entry){
-  try{
-    // Use fal CDN URL directly — no image upload needed (fast save)
-    const saveUrl=entry.gallery_url||entry.image_url;
-    console.log('FAL: saving to gallery.json...',saveUrl.substring(0,60));
+  // Send to Twin — Twin saves to gallery.json and we send email via Resend
+  // Twin already knows how to write to GitHub correctly from its server (no CORS/token issues)
+  const saveUrl=entry.gallery_url||entry.image_url;
+  console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
+  
+  // Fire to Twin — no-cors, Twin receives and saves to gallery.json
+  triggerWebhook({
+    event:'fal_creative_complete',
+    source:'fal',
+    save_to_gallery:true,
+    image_url:saveUrl,
+    game_name:entry.game_name,
+    offer_text:entry.offer_text,
+    style:entry.style,
+    format:entry.format,
+    platform:entry.platform,
+    user_email:entry.user_email,
+    created_at:entry.created_at
+  },getWebhook());
 
-    // Save to gallery.json
-    const galleryApiUrl='https://api.github.com/repos/'+GITHUB_REPO+'/contents/gallery.json';
-    const getRes=await fetch(galleryApiUrl,{headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'}});
-    if(!getRes.ok)throw new Error('Gallery GET failed: '+getRes.status);
-    const fileData=await getRes.json();
-    const existing=JSON.parse(atob(fileData.content.replace(/\n/g,'')));
-    const saveEntry={
-      id:entry.id,
-      game_name:entry.game_name,
-      offer_text:entry.offer_text,
-      style:entry.style,
-      format:entry.format,
-      platform:entry.platform,
-      user_email:entry.user_email,
-      image_url:saveUrl,
-      created_at:entry.created_at,
-      source:'fal'
-    };
-    existing.unshift(saveEntry);
-    const putGallery=await fetch(galleryApiUrl,{
-      method:'PUT',
-      headers:{'Authorization':'token '+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify({
-        message:'fal creative: '+entry.game_name,
-        content:btoa(unescape(encodeURIComponent(JSON.stringify(existing,null,2)))),
-        sha:fileData.sha
-      })
-    });
-    if(putGallery.ok){
-      console.log('FAL: saved to gallery.json successfully');
-    } else {
-      console.error('FAL: gallery save failed',putGallery.status);
-    }
-
-    // Send email via Resend
-    sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
-
-    return saveUrl;
-  }catch(e){
-    console.error('FAL: save error',e);
-    // Still try to send email even if save failed
-    const url=entry.gallery_url||entry.image_url;
-    sendFalEmail(entry.user_email,url,entry.offer_text||'',entry.style||'');
-    return url;
-  }
+  // Send email directly via Resend (instant)
+  sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
+  
+  return saveUrl;
 }
 
 // ============================================================
