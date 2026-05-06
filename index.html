@@ -982,6 +982,40 @@ async function doQuickGenerate(){
     return;
   }
 
+  // DIRECT FAL PATH for sports clients with simple styles
+  const FAL_SIMPLE_QG=['Classic','Realistic','Electric','Text Only'];
+  const useDirectFalQG=isSports&&FAL_SIMPLE_QG.includes(randStyle);
+
+  if(useDirectFalQG){
+    const loadDiv=document.createElement('div');loadDiv.className='loading';
+    loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+randStyle+' ad...</div><div class="est-time">1–3 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+    const stopBtnQG=document.createElement('button');
+    stopBtnQG.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
+    stopBtnQG.textContent='Stop Generation';
+    let falStoppedQG=false;
+    stopBtnQG.onclick=()=>{falStoppedQG=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
+    loadDiv.appendChild(stopBtnQG);
+    const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+    chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+    incrementGenerationCount(currentUserEmail);
+    const startTsQG=Date.now();
+    const timerQG=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTsQG)/1000)+'s elapsed';},1000);
+    const falUrlQG=await falFallbackGenerate();
+    clearInterval(timerQG);
+    if(falStoppedQG)return;
+    if(falUrlQG){
+      const qcPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+      const falEntryQG={id:'fal-direct-'+Date.now(),game_name:randGame!=='N/A'?randGame:randStyle,format:randFormat==='both'?'portrait':randFormat,offer_text:randOffer.title,style:randStyle,platform:qcPlatform,user_email:currentUserEmail,image_url:falUrlQG,created_at:new Date().toISOString(),source:'fal'};
+      galleryData.unshift(falEntryQG);
+      showResult(loadMsg,falEntryQG);
+      saveFalEntryToGithub(falEntryQG);
+      triggerWebhook({event:'creative_complete',source:'fal',image_url:falUrlQG,offer_text:randOffer.title,style:randStyle,format:falEntryQG.format,platform:qcPlatform,user_email:currentUserEmail},getWebhook());
+    } else {
+      loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
+    }
+    return;
+  }
+
   await fetchGallery();
   const snapKeys=new Set(galleryData.filter(c=>c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&c.image_url&&c.source!=='fal').map(c=>c.id||(c.image_url.split('?')[0])));
   const snapCount=snapKeys.size;
@@ -1070,6 +1104,50 @@ async function doGenerate(){
   try{
   if(hasReachedDailyLimit(currentUserEmail)&&!currentUserEmail.endsWith('@rmgs.online')){
     msg('<div style="text-align:center;padding:10px 0"><div style="font-size:28px;margin-bottom:12px">⛔</div><div style="font-weight:700;font-size:16px;color:var(--white);margin-bottom:8px">Daily Limit Reached</div><div style="font-size:14px;color:var(--txt2);line-height:1.6;margin-bottom:14px">You have used all 10 of your daily generations. Your limit resets at midnight.</div><div style="font-size:13px;color:var(--txt2)">To upgrade your plan or get support, please reach out to your RMGS representative.</div></div>');
+    return;
+  }
+
+  // DIRECT FAL PATH — WannaParlay/Thrillzz simple styles skip Twin entirely
+  const FAL_SIMPLE_STYLES=['Classic','Realistic','Electric','Text Only'];
+  const useDirectFal=(isWannaFlow()||isThrillzzFlow())&&FAL_SIMPLE_STYLES.includes(state.style);
+
+  if(useDirectFal){
+    // Show loading screen
+    const loadDiv=document.createElement('div');loadDiv.className='loading';
+    loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating your '+state.style+' ad...</div><div class="est-time">1–3 minutes</div><div class="est-sub">Your creative is being crafted</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+    const stopBtn=document.createElement('button');
+    stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
+    stopBtn.textContent='Stop Generation';
+    let falStopped=false;
+    stopBtn.onclick=()=>{falStopped=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
+    loadDiv.appendChild(stopBtn);
+    const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+    chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+    incrementGenerationCount(currentUserEmail);
+    const startTs=Date.now();
+    const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+    // Generate directly with fal
+    const falUrl=await falFallbackGenerate();
+    clearInterval(timerInterval);
+    if(falStopped)return;
+    if(falUrl){
+      const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+      const falEntry={
+        id:'fal-direct-'+Date.now(),
+        game_name:state.game&&state.game!=='N/A'?state.game:state.style,
+        format:state.format==='both'?'portrait':state.format||'portrait',
+        offer_text:state.offer,style:state.style,
+        platform:clientPlatform,user_email:currentUserEmail,
+        image_url:falUrl,created_at:new Date().toISOString(),source:'fal'
+      };
+      galleryData.unshift(falEntry);
+      showResult(loadMsg,falEntry);
+      saveFalEntryToGithub(falEntry);
+      // Notify Twin to send email
+      triggerWebhook({event:'creative_complete',source:'fal',image_url:falUrl,offer_text:state.offer,style:state.style,format:falEntry.format,platform:clientPlatform,user_email:currentUserEmail},getWebhook());
+    } else {
+      loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
+    }
     return;
   }
 
@@ -1796,53 +1874,7 @@ async function compositeTextOnImage(bgImageUrl){
   });
 }
 
-async function falFallbackGenerate(){
-  try{
-    const {prompt, aspectRatio}=buildFalFallbackPrompt();
-    // Submit to fal queue
-    const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
-      method:'POST',
-      headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg'})
-    });
-    if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
-    const submitData=await submitRes.json();
-    const requestId=submitData.request_id;
-    if(!requestId)throw new Error('No request_id');
-    const statusUrl=submitData.status_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId+'/status');
-    const responseUrl=submitData.response_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId);
-    console.log('FAL FALLBACK SUBMITTED, requestId:',requestId);
-    // Poll for completion
-    let attempts=0;
-    while(attempts<60){
-      await new Promise(r=>setTimeout(r,5000));
-      attempts++;
-      const sr=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-      if(!sr.ok)continue;
-      const sd=await sr.json();
-      console.log('FAL FALLBACK STATUS attempt '+attempts+':',sd.status);
-      if(sd.status==='FAILED')throw new Error('fal generation failed');
-      if(sd.status==='COMPLETED')break;
-    }
-    // Fetch result
-    const rr=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-    if(!rr.ok)throw new Error('fal result fetch failed');
-    const result=await rr.json();
-    console.log('FAL FALLBACK RESULT:',JSON.stringify(result).substring(0,300));
-    if(result.images&&result.images[0]){
-      const img=result.images[0];
-      const bgUrl=typeof img==='string'?img:img.url;
-      // Composite text overlay on top of background using canvas
-      console.log('FAL FALLBACK: compositing text overlay...');
-      const finalDataUrl=await compositeTextOnImage(bgUrl);
-      return finalDataUrl;
-    }
-    throw new Error('No image URL in fal result');
-  }catch(e){
-    console.error('FAL FALLBACK ERROR:',e);
-    return null;
-  }
-}
+
 
 // ============================================================
 
