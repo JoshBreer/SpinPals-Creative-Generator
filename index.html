@@ -1520,7 +1520,7 @@ async function compositeTextOnImage(bgImageUrl){
       const maxW=isTextOnly?W*0.95:W*0.9;
       let lines=[];
       let line='';
-      let testSize=isTextOnly?(isPortrait?200:140):(isPortrait?148:95);
+      let testSize=isTextOnly?(isPortrait?230:160):(isPortrait?148:95);
       ctx.font=`900 ${testSize}px Impact, 'Arial Black', sans-serif`;
       
       // Build lines
@@ -1547,10 +1547,10 @@ async function compositeTextOnImage(bgImageUrl){
         if(line)lines.push(line);
       }
 
-      const lineH=fontSize*1.12;
+      const lineH=isTextOnly?fontSize*1.18:fontSize*1.12;
       const totalH=lines.length*lineH;
-      // Text Only: vertically center in upper 80% of image
-      const textTop=isTextOnly?Math.max(H*0.08,(H*0.85-totalH)/2):isPortrait?H*0.06:H*0.06;
+      // Text Only: fill entire image with text - start near top, massive font
+      const textTop=isTextOnly?H*0.04:isPortrait?H*0.06:H*0.06;
 
       ctx.textAlign='center';
       ctx.textBaseline='top';
@@ -1606,7 +1606,10 @@ async function compositeTextOnImage(bgImageUrl){
         }
       });
 
-      // ── CTA BUTTON ───────────────────────────────────────────
+      // ── CTA BUTTON — skip for Text Only ────────────────────
+      if(state.style==='Text Only'){
+        // No button on Text Only — offer text IS the entire creative
+      } else {
       const btnW=isPortrait?680:500;
       const btnH=isPortrait?118:88;
       const btnR=btnH/2;
@@ -1665,6 +1668,7 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.fillText(ctaText,W/2,btnY+btnH/2);
       ctx.shadowBlur=0;ctx.shadowOffsetY=0;
 
+      } // end if not Text Only (CTA button)
       // ── DISCLAIMER BAR ───────────────────────────────────────
       const barH=isPortrait?58:48;
       ctx.fillStyle='rgba(0,0,0,0.88)';
