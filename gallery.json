@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17781966041CF3",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17781966041CF3.jpg",
+    "created_at": "2026-05-07 23:30:04"
+  },
+  {
+    "id": "cr-1778196604SQ90BC",
+    "game_name": "Hot Pepper",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778196604SQ90BC.jpg",
+    "created_at": "2026-05-07 23:30:04"
+  },
+  {
     "id": "cr-177819619301D1",
     "game_name": "Crazy Time",
     "format": "square",
@@ -1978,25 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/d8a96aaf960d583aa1a9487b55d5fcfd75e5e99f4d726d4aa616f785381965.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T204124Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7267410d5b820bdbb12f727469166bcbd01ab2155855577bcef87badee38de9a",
     "created_at": "2026-03-30 20:36:41"
-  },
-  {
-    "id": "cr-1774902745909",
-    "game_name": "Snoop Dog Dollars",
-    "format": "square",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/1b/3571e07a9f3a3d9cee0c1a09f6e6a334d2384a7033d10a8ec4a89575b3168a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203710Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=03a2b7d39173b9a3a41b557b6933fd482b8e46a32a9bda1341c59bc4a0ac1c8e",
-    "created_at": "2026-03-30 20:32:26"
-  },
-  {
-    "id": "cr-1774902513623",
-    "game_name": "Snoop Dog Dollars",
-    "format": "square",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/88/a0102d3b3bb0cf7a7686570a28c0ddda5d0dd5e2a0aaf6abe7d77d99629d67.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203222Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=81d8b15da485e5ff4faa3963fbd262806d4cb08962c220fd2a40038bd6774106",
-    "created_at": "2026-03-30 20:28:34"
   }
 ]
