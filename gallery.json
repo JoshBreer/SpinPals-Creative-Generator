@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-177819619301D1",
+    "game_name": "Crazy Time",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-177819619301D1.jpg",
+    "created_at": "2026-05-07 23:23:13"
+  },
+  {
+    "id": "cr-1778196187B59F",
+    "game_name": "Crazy Time",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778196187B59F.jpg",
+    "created_at": "2026-05-07 23:23:07"
+  },
+  {
     "id": "cr-1778175405614E",
     "game_name": "N/A",
     "format": "portrait",
@@ -1978,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/88/a0102d3b3bb0cf7a7686570a28c0ddda5d0dd5e2a0aaf6abe7d77d99629d67.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T203222Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=81d8b15da485e5ff4faa3963fbd262806d4cb08962c220fd2a40038bd6774106",
     "created_at": "2026-03-30 20:28:34"
-  },
-  {
-    "id": "cr-1774902260017",
-    "game_name": "Buffalo King Megaways",
-    "format": "square",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/f062ddb9e9b9ea8eb67b11f4df5c718e8303cbddd08d0adde28219f3cc7de5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T202643Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac59f276e2ab36e0a09aca2d3e12ed9a954e735ba603f2761363a3760d389bbd",
-    "created_at": "2026-03-30 20:24:20"
   }
 ]
