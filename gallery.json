@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1778197042285E",
+    "game_name": "Spinpals",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778197042285E.jpg",
+    "created_at": "2026-05-07 23:37:22"
+  },
+  {
     "id": "cr-177819700402C8",
     "game_name": "Hot Pepper",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/23/8ecfc79fcc49128eaa399bc87bbefb10ec5eb0e7b3fd6fed680fb59cfa87cd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211053Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dac524db20b4121012222816dc772c07dccfbb2a312df9ec888a9bb0a1859884",
     "created_at": "2026-03-30 20:58:22"
-  },
-  {
-    "id": "cr-1774903582769",
-    "game_name": "Emerald King",
-    "format": "portrait",
-    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f4/3a93424b138d04cab33bd9ec9a368a5e3c5fc4e53c32692d333a828ce95ff9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T205042Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8e6fc4b9f0215b4e657df5e621025a4a31e0fa3e52c61ea87c3ae1f6efafc87",
-    "created_at": "2026-03-30 20:46:23"
   }
 ]
