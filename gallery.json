@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1778172040A35F",
+    "game_name": "Wolf Gold",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778172040A35F.jpg",
+    "created_at": "2026-05-07 16:40:40"
+  },
+  {
+    "id": "cr-1778172040SQ9B30",
+    "game_name": "Wolf Gold",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778172040SQ9B30.jpg",
+    "created_at": "2026-05-07 16:40:40"
+  },
+  {
     "id": "cr-177817015993C8",
     "game_name": "N/A",
     "format": "portrait",
