@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-177819700402C8",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-177819700402C8.jpg",
+    "created_at": "2026-05-07 23:36:44"
+  },
+  {
     "id": "cr-17781966041CF3",
     "game_name": "Hot Pepper",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f4/3a93424b138d04cab33bd9ec9a368a5e3c5fc4e53c32692d333a828ce95ff9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T205042Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8e6fc4b9f0215b4e657df5e621025a4a31e0fa3e52c61ea87c3ae1f6efafc87",
     "created_at": "2026-03-30 20:46:23"
-  },
-  {
-    "id": "cr-1774903001345",
-    "game_name": "Divine Fortune",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/37/d8a96aaf960d583aa1a9487b55d5fcfd75e5e99f4d726d4aa616f785381965.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T204124Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7267410d5b820bdbb12f727469166bcbd01ab2155855577bcef87badee38de9a",
-    "created_at": "2026-03-30 20:36:41"
   }
 ]
