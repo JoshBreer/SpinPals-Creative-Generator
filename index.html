@@ -263,52 +263,45 @@ const SPINPALS_GAMES={"Arcade":[{"id":"aviator","name":"Aviator"},{"id":"crash",
 const SPINPALS_TOP=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
 
 // EPICSWEEP GAMES
+const EPICSWEEP_TOP=['Starburst XXXtreme','Le Bandit','Miami Mayhem','Chaos Crew','Crazy Time','Sweet Bonanza','Aviator','Money Train 4'];
 const EPICSWEEP_GAMES={
   'Slots':[
-    {name:'Starburst',desc:'Classic NetEnt slot with expanding wilds'},
-    {name:'Starburst XXXtreme',desc:'High volatility version with bigger wins'},
-    {name:'Le Bandit',desc:'High volatility Hacksaw slot'},
-    {name:'2 Wild 2 Die',desc:'Action-packed slot with wild features'},
-    {name:'Chaos Crew',desc:'Fun Hacksaw slot with bonus features'},
-    {name:'Miami Mayhem',desc:'Brand new Hacksaw release'},
-    {name:'Weekend in Vegas',desc:'Classic Vegas-style slot experience'},
-    {name:'2 Million B.C.',desc:'Nostalgic prehistoric themed slot'},
-    {name:'Divine Fortune Black',desc:'Progressive jackpot slot from NetEnt'},
-    {name:'RIP City',desc:'High energy slot with big potential'},
-    {name:'Land of the Free',desc:'Nolimit City patriotic themed slot'},
-    {name:'Sweet Bonanza',desc:'Candy-themed high volatility slot'},
-    {name:'Book of Dead',desc:'Egyptian adventure slot classic'},
-    {name:'Jammin Jars',desc:'Fruit themed slot with cluster pays'},
-    {name:'Money Train 4',desc:'High stakes train robbery slot'}
-  ],
-  'Table Games':[
-    {name:'Blackjack Classic',desc:'Standard single hand blackjack'},
-    {name:'Blackjack Multihand',desc:'Play multiple hands simultaneously'},
-    {name:'Lightning Blackjack',desc:'Evolution live blackjack with multipliers'},
-    {name:'Roulette',desc:'Classic European roulette'},
-    {name:'American Roulette',desc:'Double zero American roulette'},
-    {name:'Baccarat',desc:'Classic card game of chance'}
+    {id:'starburst',name:'Starburst'},{id:'starburst-xxxxtreme',name:'Starburst XXXtreme'},
+    {id:'le-bandit',name:'Le Bandit'},{id:'2-wild-2-die',name:'2 Wild 2 Die'},
+    {id:'chaos-crew',name:'Chaos Crew'},{id:'miami-mayhem',name:'Miami Mayhem'},
+    {id:'weekend-in-vegas',name:'Weekend in Vegas'},{id:'2-million-bc',name:'2 Million B.C.'},
+    {id:'divine-fortune-black',name:'Divine Fortune Black'},{id:'rip-city',name:'RIP City'},
+    {id:'land-of-the-free',name:'Land of the Free'},{id:'sweet-bonanza',name:'Sweet Bonanza'},
+    {id:'book-of-dead',name:'Book of Dead'},{id:'jammin-jars',name:'Jammin Jars'},
+    {id:'money-train-4',name:'Money Train 4'},{id:'gates-of-olympus',name:'Gates of Olympus'},
+    {id:'sugar-rush',name:'Sugar Rush'},{id:'starlight-princess',name:'Starlight Princess'},
+    {id:'wolf-gold',name:'Wolf Gold'},{id:'big-bass-bonanza',name:'Big Bass Bonanza'},
+    {id:'immortal-romance',name:'Immortal Romance'},{id:'gonzo-quest',name:"Gonzo's Quest"},
+    {id:'thunderstruck-ii',name:'Thunderstruck II'},{id:'dead-or-alive-2',name:'Dead or Alive 2'},
+    {id:'buffalo-king',name:'Buffalo King Megaways'}
   ],
   'Live Dealer':[
-    {name:'Live Blackjack',desc:'Real dealer blackjack from Evolution'},
-    {name:'Live Roulette',desc:'Real dealer roulette experience'},
-    {name:'Crazy Time',desc:'Live game show with huge multipliers'},
-    {name:'Monopoly Live',desc:'Board game meets live casino'},
-    {name:'Dream Catcher',desc:'Money wheel live game show'}
+    {id:'crazy-time',name:'Crazy Time'},{id:'lightning-blackjack',name:'Lightning Blackjack'},
+    {id:'monopoly-live',name:'Monopoly Live'},{id:'dream-catcher',name:'Dream Catcher'},
+    {id:'live-roulette',name:'Live Roulette'},{id:'live-baccarat',name:'Live Baccarat'},
+    {id:'speed-baccarat',name:'Speed Baccarat'},{id:'lightning-roulette',name:'Lightning Roulette'},
+    {id:'funky-time',name:'Funky Time'}
+  ],
+  'Table Games':[
+    {id:'blackjack-classic',name:'Classic Blackjack'},{id:'blackjack-multihand',name:'Multihand Blackjack'},
+    {id:'european-roulette',name:'European Roulette'},{id:'american-roulette',name:'American Roulette'},
+    {id:'baccarat',name:'Baccarat'},{id:'casino-holdem',name:"Casino Hold'em"},
+    {id:'three-card-poker',name:'Three Card Poker'}
   ],
   'Crash Games':[
-    {name:'Aviator',desc:'Classic crash game — cash out before it flies away'},
-    {name:'JetX',desc:'Jet-themed crash game with multipliers'},
-    {name:'Spaceman',desc:'Space themed crash game'},
-    {name:'Crash X',desc:'High speed crash game'},
-    {name:'Plinko',desc:'Drop the ball and watch the multipliers'}
+    {id:'aviator',name:'Aviator'},{id:'spaceman',name:'Spaceman'},
+    {id:'jetx',name:'JetX'},{id:'plinko',name:'Plinko'},
+    {id:'crash-x',name:'Crash X'},{id:'mines',name:'Mines'}
   ],
   'Instant Win':[
-    {name:'Scratch Cards',desc:'90+ instant win scratch card games'},
-    {name:'Mines',desc:'Navigate the minefield for multipliers'},
-    {name:'Bingo',desc:'Classic social bingo experience'},
-    {name:'Keno',desc:'Pick your numbers and win'},
-    {name:'Fishing Games',desc:'Reel in big prizes with fishing themed games'}
+    {id:'scratch-cards',name:'Scratch Cards'},{id:'keno',name:'Keno'},
+    {id:'bingo',name:'Bingo'},{id:'fishing-games',name:'Fishing Games'},
+    {id:'hi-lo',name:'Hi-Lo'}
   ]
 };
 
@@ -422,7 +415,7 @@ function getWebhook(){
 // Helper: get correct games/sports
 function getGames(){
   if(isWannaFlow()||isThrillzzFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
-  if(isEpicSweepFlow())return {top:EPICSWEEP_GAMES,all:EPICSWEEP_GAMES};
+  if(isEpicSweepFlow())return {top:EPICSWEEP_TOP,all:EPICSWEEP_GAMES};
   if(!isMarioFlow())return {top:SPINPALS_TOP,all:SPINPALS_GAMES};
   if(state.platform==='betewin')return {top:BETEWIN_TOP,all:BETEWIN_GAMES};
   return {top:BANKOBET_TOP,all:BANKOBET_GAMES};
