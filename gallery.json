@@ -1,33 +1,13 @@
 [
   {
-    "id": "cr-19E08B7A3F1",
-    "game_name": "Mines",
-    "format": "square",
-    "offer_text": "First Purchase Bonus â 250,000 GC + 50 SC FREE + 500 VIP XP",
-    "style": "Classic",
-    "user_email": "josh@epicsweep.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/52/10b233e117dc37f7a77f74b7247789628f480d26f11dee8ee165a818c99cf7.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T175119Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6f02a1367b9dc772ca1e0b88a469a867ed517e094be4c739af5978180a359dfb",
-    "created_at": "2026-05-08 17:51:19"
-  },
-  {
-    "id": "cr-19E08A8591E",
-    "game_name": "Chaos Crew",
+    "id": "cr-1778262657DEDB",
+    "game_name": "Snoop Dogg Dollars",
     "format": "portrait",
-    "offer_text": "FREE Welcome Bonus Ã¢ÂÂ 100,000 GC + 2 SC",
-    "style": "Classic",
-    "user_email": "josh@epicsweep.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/69/a9d72c9a77b42aa4a751c85137c3f88dfb3e754ff4db5cdc57acbb50658579.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T173433Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=70a5c7f10d861b20dc834f2c5d77f9ac4bbd5f2605f86af2f912c43a02531029",
-    "created_at": "2026-05-08 17:34:55"
-  },
-  {
-    "id": "cr-19E0872C315",
-    "game_name": "Starburst",
-    "format": "square",
-    "offer_text": "FREE Welcome Bonus Ã¢ÂÂ 100,000 GC + 2 SC",
-    "style": "Classic",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/24/4acc90cb1593b1294502d21c91b219920aea85cb44134b2904a6dd1303b68d.jpg",
-    "created_at": "2026-05-08 16:36:39"
+    "offer_text": "none",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778262657DEDB.jpg",
+    "created_at": "2026-05-08 17:50:57"
   },
   {
     "id": "cr-1778197042285E",
@@ -2018,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/55/becd63231f8b3b27b16f9a7034a897c7621c418f9ec8eb50c1aab10c85cf68.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211113Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c2583ef5343529db898d46372175fdc826d45ec20ab57367e018fcb2cb53a670",
     "created_at": "2026-03-30 21:03:52"
-  },
-  {
-    "id": "cr-1774904302187",
-    "game_name": "Great Rhino Megaways",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/23/8ecfc79fcc49128eaa399bc87bbefb10ec5eb0e7b3fd6fed680fb59cfa87cd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211053Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=dac524db20b4121012222816dc772c07dccfbb2a312df9ec888a9bb0a1859884",
-    "created_at": "2026-03-30 20:58:22"
   }
 ]
