@@ -1,9 +1,19 @@
 [
   {
+    "id": "cr-19E08A8591E",
+    "game_name": "Chaos Crew",
+    "format": "portrait",
+    "offer_text": "FREE Welcome Bonus â 100,000 GC + 2 SC",
+    "style": "Classic",
+    "user_email": "josh@epicsweep.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/69/a9d72c9a77b42aa4a751c85137c3f88dfb3e754ff4db5cdc57acbb50658579.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T173433Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=70a5c7f10d861b20dc834f2c5d77f9ac4bbd5f2605f86af2f912c43a02531029",
+    "created_at": "2026-05-08 17:34:55"
+  },
+  {
     "id": "cr-19E0872C315",
     "game_name": "Starburst",
     "format": "square",
-    "offer_text": "FREE Welcome Bonus — 100,000 GC + 2 SC",
+    "offer_text": "FREE Welcome Bonus â 100,000 GC + 2 SC",
     "style": "Classic",
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/24/4acc90cb1593b1294502d21c91b219920aea85cb44134b2904a6dd1303b68d.jpg",
