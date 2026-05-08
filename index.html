@@ -237,7 +237,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
   </div>
   <div class="stats-grid" id="statsGrid"></div>
   <table class="stats-table">
-    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Thrillzz</th><th>Last Generated</th></tr></thead>
+    <thead><tr><th>Team Member</th><th>Total Creatives</th><th>SpinPals</th><th>Mario</th><th>WannaParlay</th><th>Thrillzz</th><th>EpicSweep</th><th>Last Generated</th></tr></thead>
     <tbody id="statsBody"></tbody>
   </table>
 </section>
@@ -261,6 +261,69 @@ body{background:var(--bg);color:var(--txt);font-family:'Minion Pro','Cormorant G
 // SPINPALS GAMES
 const SPINPALS_GAMES={"Arcade":[{"id":"aviator","name":"Aviator"},{"id":"crash","name":"Crash"},{"id":"plinko","name":"Plinko"},{"id":"limbo","name":"Limbo"},{"id":"mines","name":"Mines"},{"id":"keno","name":"Keno"},{"id":"hilo","name":"Hi-Lo"}],"Fish Games":[{"id":"fish-catch","name":"Fish Catch"},{"id":"fishing-kingdom","name":"Fishing Kingdom"},{"id":"golden-fish","name":"Golden Fish"},{"id":"ocean-king","name":"Ocean King"},{"id":"royal-fishing","name":"Royal Fishing"}],"Jackpot":[{"id":"divine-fortune","name":"Divine Fortune"},{"id":"jackpot-megaways","name":"Jackpot Megaways"},{"id":"major-millions","name":"Major Millions"},{"id":"mega-fortune","name":"Mega Fortune"},{"id":"mega-moolah","name":"Mega Moolah"},{"id":"mega-moolah-jackpot","name":"Mega Moolah Jackpot"},{"id":"treasure-nile","name":"Treasure Nile"},{"id":"wolf-legend-megaways","name":"Wolf Legend Megaways"}],"Live Casino":[{"id":"crazy-time","name":"Crazy Time"},{"id":"deal-or-no-deal","name":"Deal or No Deal Live"},{"id":"dream-catcher","name":"Dream Catcher"},{"id":"funky-time","name":"Funky Time"},{"id":"lightning-roulette","name":"Lightning Roulette"},{"id":"live-baccarat","name":"Live Baccarat"},{"id":"live-blackjack","name":"Live Blackjack"},{"id":"live-dragon-tiger","name":"Live Dragon Tiger"},{"id":"live-football-studio","name":"Live Football Studio"},{"id":"live-mega-ball","name":"Live Mega Ball"},{"id":"live-roulette","name":"Live Roulette"},{"id":"monopoly-live","name":"Monopoly Live"},{"id":"sic-bo","name":"Sic Bo Live"},{"id":"speed-baccarat","name":"Speed Baccarat"},{"id":"stair-pong","name":"Stair Pong"}],"Slots":[{"id":"4-pot-riches","name":"4 Pot Riches"},{"id":"5-lions-megaways","name":"5 Lions Megaways"},{"id":"agent-royale","name":"Agent Royale"},{"id":"aztec-gems","name":"Aztec Gems"},{"id":"big-bass-bonanza","name":"Big Bass Bonanza"},{"id":"big-bass-splash","name":"Big Bass Splash"},{"id":"big-juan","name":"Big Juan"},{"id":"blood-suckers","name":"Blood Suckers"},{"id":"bonanza-megaways","name":"Bonanza Megaways"},{"id":"book-of-dead","name":"Book of Dead"},{"id":"book-of-fallen","name":"Book of Fallen"},{"id":"buffalo-king","name":"Buffalo King Megaways"},{"id":"cash-bonanza","name":"Cash Bonanza"},{"id":"cash-elevator","name":"Cash Elevator"},{"id":"coins-of-leprechaun","name":"Coins of Leprechaun"},{"id":"cowboys-gold","name":"Cowboys Gold"},{"id":"crystal-caverns","name":"Crystal Caverns Megaways"},{"id":"dead-or-alive","name":"Dead or Alive 2"},{"id":"dog-house","name":"The Dog House"},{"id":"dog-house-megaways","name":"The Dog House Megaways"},{"id":"dragon-kingdom","name":"Dragon Kingdom"},{"id":"emerald-king","name":"Emerald King"},{"id":"fire-joker","name":"Fire Joker"},{"id":"floating-dragon","name":"Floating Dragon"},{"id":"fortune-ox","name":"Fortune Ox"},{"id":"fortune-rabbit","name":"Fortune Rabbit"},{"id":"fortune-tiger","name":"Fortune Tiger"},{"id":"fruit-party","name":"Fruit Party"},{"id":"fruit-party-2","name":"Fruit Party 2"},{"id":"gates-of-olympus","name":"Gates of Olympus"},{"id":"gems-bonanza","name":"Gems Bonanza"},{"id":"gold-rush","name":"Gold Rush"},{"id":"gonzos-quest","name":"Gonzo's Quest"},{"id":"great-rhino","name":"Great Rhino Megaways"},{"id":"hot-fiesta","name":"Hot Fiesta"},{"id":"hot-pepper","name":"Hot Pepper"},{"id":"immortal-romance","name":"Immortal Romance"},{"id":"john-hunter","name":"John Hunter and the Tomb of the Scarab Queen"},{"id":"jokers-jewels","name":"Joker's Jewels"},{"id":"king-of-the-sky","name":"King of the Sky"},{"id":"lucky-clover","name":"Lucky Clover"},{"id":"lucky-lightning","name":"Lucky Lightning"},{"id":"madame-destiny","name":"Madame Destiny Megaways"},{"id":"magic-journey","name":"Magic Journey"},{"id":"money-train","name":"Money Train"},{"id":"mustang-gold","name":"Mustang Gold"},{"id":"panda-fortune","name":"Panda Fortune"},{"id":"phoenix-rises","name":"Phoenix Rises"},{"id":"pirates-gold","name":"Pirates Gold"},{"id":"pirates-plenty","name":"Pirates Plenty"},{"id":"pragmatic-christmas","name":"Xmas Joker"},{"id":"pyramid-king","name":"Pyramid King"},{"id":"release-kraken","name":"Release the Kraken"},{"id":"rise-of-giza","name":"Rise of Giza PowerNudge"},{"id":"rocket-blast","name":"Rocket Blast Megaways"},{"id":"san-quentin","name":"San Quentin xWays"},{"id":"snake-arena","name":"Snake Arena"},{"id":"snoop-dog-dollars","name":"Snoop Dogg Dollars"},{"id":"spartan-king","name":"Spartan King"},{"id":"spin-and-score","name":"Spin & Score Megaways"},{"id":"starburst","name":"Starburst"},{"id":"starburst-xxxtreme","name":"Starburst XXXtreme"},{"id":"starlight-princess","name":"Starlight Princess"},{"id":"sugar-rush","name":"Sugar Rush"},{"id":"sweet-bonanza","name":"Sweet Bonanza"},{"id":"sweet-bonanza-1000","name":"Sweet Bonanza 1000"},{"id":"thunderstruck-ii","name":"Thunderstruck II"},{"id":"treasure-wild","name":"Treasure Wild"},{"id":"tree-of-riches","name":"Tree of Riches"},{"id":"wild-walker","name":"Wild Walker"},{"id":"wild-west-gold","name":"Wild West Gold"},{"id":"wild-wild-riches","name":"Wild Wild Riches"},{"id":"wolf-gold","name":"Wolf Gold"},{"id":"zombie-school","name":"Zombie School Megaways"},{"id":"zeus-vs-hades","name":"Zeus vs Hades"}],"Table Games":[{"id":"american-roulette","name":"American Roulette"},{"id":"baccarat","name":"Baccarat"},{"id":"caribbean-stud","name":"Caribbean Stud Poker"},{"id":"casino-holdem","name":"Casino Hold'em"},{"id":"blackjack-classic","name":"Classic Blackjack"},{"id":"craps","name":"Craps"},{"id":"european-roulette","name":"European Roulette"},{"id":"french-roulette","name":"French Roulette"},{"id":"multihand-blackjack","name":"Multihand Blackjack"},{"id":"pai-gow-poker","name":"Pai Gow Poker"},{"id":"red-dog","name":"Red Dog"},{"id":"texas-holdem-bonus","name":"Texas Hold'em Bonus"},{"id":"three-card-poker","name":"Three Card Poker"},{"id":"top-card","name":"Top Card"}]};
 const SPINPALS_TOP=['Gates of Olympus','Sweet Bonanza','Big Bass Bonanza','Snoop Dogg Dollars','Sugar Rush','Starlight Princess','Wolf Gold','Crazy Time'];
+
+// EPICSWEEP GAMES
+const EPICSWEEP_GAMES={
+  'Slots':[
+    {name:'Starburst',desc:'Classic NetEnt slot with expanding wilds'},
+    {name:'Starburst XXXtreme',desc:'High volatility version with bigger wins'},
+    {name:'Le Bandit',desc:'High volatility Hacksaw slot'},
+    {name:'2 Wild 2 Die',desc:'Action-packed slot with wild features'},
+    {name:'Chaos Crew',desc:'Fun Hacksaw slot with bonus features'},
+    {name:'Miami Mayhem',desc:'Brand new Hacksaw release'},
+    {name:'Weekend in Vegas',desc:'Classic Vegas-style slot experience'},
+    {name:'2 Million B.C.',desc:'Nostalgic prehistoric themed slot'},
+    {name:'Divine Fortune Black',desc:'Progressive jackpot slot from NetEnt'},
+    {name:'RIP City',desc:'High energy slot with big potential'},
+    {name:'Land of the Free',desc:'Nolimit City patriotic themed slot'},
+    {name:'Sweet Bonanza',desc:'Candy-themed high volatility slot'},
+    {name:'Book of Dead',desc:'Egyptian adventure slot classic'},
+    {name:'Jammin Jars',desc:'Fruit themed slot with cluster pays'},
+    {name:'Money Train 4',desc:'High stakes train robbery slot'}
+  ],
+  'Table Games':[
+    {name:'Blackjack Classic',desc:'Standard single hand blackjack'},
+    {name:'Blackjack Multihand',desc:'Play multiple hands simultaneously'},
+    {name:'Lightning Blackjack',desc:'Evolution live blackjack with multipliers'},
+    {name:'Roulette',desc:'Classic European roulette'},
+    {name:'American Roulette',desc:'Double zero American roulette'},
+    {name:'Baccarat',desc:'Classic card game of chance'}
+  ],
+  'Live Dealer':[
+    {name:'Live Blackjack',desc:'Real dealer blackjack from Evolution'},
+    {name:'Live Roulette',desc:'Real dealer roulette experience'},
+    {name:'Crazy Time',desc:'Live game show with huge multipliers'},
+    {name:'Monopoly Live',desc:'Board game meets live casino'},
+    {name:'Dream Catcher',desc:'Money wheel live game show'}
+  ],
+  'Crash Games':[
+    {name:'Aviator',desc:'Classic crash game — cash out before it flies away'},
+    {name:'JetX',desc:'Jet-themed crash game with multipliers'},
+    {name:'Spaceman',desc:'Space themed crash game'},
+    {name:'Crash X',desc:'High speed crash game'},
+    {name:'Plinko',desc:'Drop the ball and watch the multipliers'}
+  ],
+  'Instant Win':[
+    {name:'Scratch Cards',desc:'90+ instant win scratch card games'},
+    {name:'Mines',desc:'Navigate the minefield for multipliers'},
+    {name:'Bingo',desc:'Classic social bingo experience'},
+    {name:'Keno',desc:'Pick your numbers and win'},
+    {name:'Fishing Games',desc:'Reel in big prizes with fishing themed games'}
+  ]
+};
+
+// EPICSWEEP OFFERS
+const EPICSWEEP_OFFERS=[
+  {id:'es1',title:'FREE Welcome Bonus — 100,000 GC + 2 SC',description:'Sign up free, verify email — no purchase needed'},
+  {id:'es2',title:'First Purchase Bonus — 250,000 GC + 50 SC FREE + 500 VIP XP',description:'Best value offer — massive bonus on first purchase'},
+  {id:'es3',title:'Deposit $20 — Get 20 SC Bonus FREE',description:'Most popular purchase — 100,000 GC + 20 SC'},
+  {id:'es4',title:'Daily Free Spin — Win Up To 2,000,000 GC',description:'Spin the free wheel every day for Gold Coins and Sweeps Coins'},
+  {id:'es5',title:'Refer a Friend — Earn 200,000 GC + 50 SC',description:'Share your code — earn 20% of coins when friend purchases'},
+  {id:'es6',title:'VIP Loyalty Program — Coinback + Exclusive Rewards',description:'Level up through tiers to unlock SC coinback and exclusive promos'},
+  {id:'es7',title:'Mail-In Free SC — Earn 1-5 SC Free',description:'No purchase necessary — mail in for free Sweeps Coins'},
+  {id:'es8',title:'Play Free — Real Cash Prizes Possible',description:'Free to play, win real prizes with Sweeps Coins'}
+];
+
 const SPINPALS_OFFERS=[{id:'s0',title:'50 FREE SPINS on First Purchase',description:'Best performing offer - 50 free spins'},
 {id:'s1',title:'6 SC FREE + 60K GC FREE + Daily FREE Spins',description:'New player welcome bonus'},{id:'s2',title:'GC 400K + FREE SC 35 + 50 FREE SPINS',description:'Premium signup offer'},{id:'s3',title:'25 FREE SC + 250K GC on First Purchase',description:'First purchase bonus'},{id:'s4',title:'Daily Login Bonus: Up to 10 SC FREE',description:'Daily rewards program'},{id:'s5',title:'Refer a Friend: Get 20 SC + 100K GC',description:'Referral program'},{id:'s6',title:'Weekend Special: Double GC on All Purchases',description:'Weekend promotion'},{id:'s7',title:'VIP Exclusive: 100 SC + 1M GC Package',description:'VIP tier reward'}];
 
@@ -324,6 +387,7 @@ const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
 const THRILLZZ_WEBHOOK='https://build.twin.so/triggers/004adff6-c756-4d04-a9bc-7d17df6985b9/webhook';
+const EPICSWEEP_WEBHOOK='EPICSWEEP_WEBHOOK_URL_HERE';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
@@ -343,6 +407,7 @@ let currentUserEmail=null;
 function isMarioFlow(){return state.client==='mario';}
 function isWannaFlow(){return state.client==='wannaparlay';}
 function isThrillzzFlow(){return state.client==='thrillzz';}
+function isEpicSweepFlow(){return state.client==='epicsweep';}
 function isSportsFlow(){return isWannaFlow()||isThrillzzFlow();}
 
 // Helper: get correct webhook
@@ -350,12 +415,14 @@ function getWebhook(){
   if(isMarioFlow())return MARIO_WEBHOOK;
   if(isWannaFlow())return WANNAPARLAY_WEBHOOK;
   if(isThrillzzFlow())return THRILLZZ_WEBHOOK;
+  if(isEpicSweepFlow())return EPICSWEEP_WEBHOOK;
   return SPINPALS_WEBHOOK;
 }
 
 // Helper: get correct games/sports
 function getGames(){
   if(isWannaFlow()||isThrillzzFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
+  if(isEpicSweepFlow())return {top:EPICSWEEP_GAMES,all:EPICSWEEP_GAMES};
   if(!isMarioFlow())return {top:SPINPALS_TOP,all:SPINPALS_GAMES};
   if(state.platform==='betewin')return {top:BETEWIN_TOP,all:BETEWIN_GAMES};
   return {top:BANKOBET_TOP,all:BANKOBET_GAMES};
@@ -365,6 +432,7 @@ function getGames(){
 function getOffers(){
   if(isWannaFlow())return WANNAPARLAY_OFFERS;
   if(isThrillzzFlow())return THRILLZZ_OFFERS;
+  if(isEpicSweepFlow())return EPICSWEEP_OFFERS;
   if(!isMarioFlow())return SPINPALS_OFFERS;
   if(state.platform==='betewin')return BETEWIN_OFFERS;
   return BANKOBET_OFFERS;
@@ -437,7 +505,7 @@ async function fetchGallery(){
 function renderGallery(filter='all'){
   galleryEl.innerHTML='';
   const me=currentUserEmail.trim().toLowerCase();
-  const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':'spinpals';
+  const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':isEpicSweepFlow()?'epicsweep':'spinpals';
   
   // Merge localStorage entries with galleryData (localStorage = immediate local save)
   const localKey='rmgs_gallery_'+me;
@@ -597,6 +665,9 @@ async function startChat(){
     showStartButtons();
   } else if(currentUserEmail.endsWith('@thrillzz.com')){
     state.client='thrillzz';
+    showStartButtons();
+  } else if(currentUserEmail.endsWith('@epicsweep.com')||currentUserEmail.endsWith('@epicsweep.us')){
+    state.client='epicsweep';
     showStartButtons();
   }
 }
@@ -1069,7 +1140,7 @@ async function doQuickGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const qClientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const qClientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
   const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:qClientPlatform};
   await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
@@ -1189,7 +1260,7 @@ async function doGenerate(){
     clearInterval(timerInterval);
     if(falStopped)return;
     if(falUrl){
-      const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+      const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
       const dUrl=falUrl&&falUrl.composite?falUrl.composite:falUrl;
       const gUrl=falUrl&&falUrl.original?falUrl.original:falUrl;
       const falEntry={
@@ -1237,7 +1308,7 @@ async function doGenerate(){
   const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
   chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
 
-  const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':'spinpals');
+  const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
   const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:clientPlatform};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
   await triggerWebhook(payload,getWebhook());
@@ -1396,6 +1467,7 @@ async function generateTextOnlyCanvas(){
     const isTurkishCtx=state.platform==='bankobet';
     const disclaimer=isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':
       isThrillzzFlow()?'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms':
+      isEpicSweepFlow()?'21+ | Sweepstakes Casino | Free to Play | Not Available in All States | See Terms':
       isTurkishCtx?'18+ | Sorumlu Oyna | Şartlar Geçerlidir':
       '18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
 
@@ -1597,7 +1669,9 @@ function buildFalFallbackPrompt(){
 
   } else {
     // Text Only — pure canvas, no fal needed but keep prompt for fallback
-    const colors=isSpinPals?['#6600CC','#00AACC','#CC0066','#00AA44']:
+    const isEpicSweep=isEpicSweepFlow();
+    const colors=isEpicSweep?['#FF6600','#00AA55','#0066CC','#CC0099','#FFD700','#AA00FF']:
+      isSpinPals?['#6600CC','#00AACC','#CC0066','#00AA44']:
       isTurkish?['#CC0000','#0044FF','#FF6600','#AA00FF']:
       isMario?['#0044FF','#00AACC','#FF6600','#00AA44']:
       isWanna?['#FF0090','#FF5500','#00DD44','#FFD700']:
@@ -1737,6 +1811,10 @@ async function compositeTextOnImage(bgImageUrl){
         } else if(isMarioCtx){
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#88CCFF');
           grd.addColorStop(0.7,'#0088FF');grd.addColorStop(1,'#00CCFF');
+        } else if(isEpicSweepFlow()){
+          // EpicSweep: white to gold — sweepstakes casino premium feel
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
+          grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
         } else {
           // SpinPals: gold to purple
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFD700');
@@ -2163,13 +2241,14 @@ async function renderStats(){
   const byUser={};
   allItems.forEach(c=>{
     const u=c.user_email.trim().toLowerCase();
-    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,thrillzz:0,lastDate:null};
+    if(!byUser[u])byUser[u]={total:0,spinpals:0,mario:0,wanna:0,thrillzz:0,epicsweep:0,lastDate:null};
     byUser[u].total++;
     const cp=getPlatform(c);
     if(cp==='spinpals')byUser[u].spinpals++;
     else if(cp==='mario')byUser[u].mario++;
     else if(cp==='wanna')byUser[u].wanna++;
     else if(cp==='thrillzz')byUser[u].thrillzz++;
+    else if(cp==='epicsweep')byUser[u].epicsweep=byUser[u].epicsweep||0,byUser[u].epicsweep++;
     const d=new Date(c.created_at);
     if(!byUser[u].lastDate||d>byUser[u].lastDate)byUser[u].lastDate=d;
   });
@@ -2182,7 +2261,8 @@ async function renderStats(){
   const uniqueUsers=Object.keys(byUser).length;
 
   grid.innerHTML='';
-  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals'},{n:marioTotal,l:'Mario'},{n:wannaTotal,l:'Wanna Parlay'},{n:thrillzzTotal,l:'Thrillzz'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
+  const epicTotal=allItems.filter(c=>getPlatform(c)==='epicsweep').length;
+  [{n:totalAll,l:'Total Creatives'},{n:spTotal,l:'SpinPals'},{n:marioTotal,l:'Mario'},{n:wannaTotal,l:'Wanna Parlay'},{n:thrillzzTotal,l:'Thrillzz'},{n:epicTotal,l:'EpicSweep'},{n:uniqueUsers,l:'Active Users'}].forEach(function(item){
     grid.innerHTML+='<div class="stat-card"><div class="stat-number">'+item.n+'</div><div class="stat-label">'+item.l+'</div></div>';
   });
 
@@ -2195,7 +2275,7 @@ async function renderStats(){
     const email=pair[0];const data=pair[1];
     const name=email.split('@')[0];
     const last=data.lastDate?data.lastDate.toLocaleDateString():'Never';
-    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+(data.thrillzz||0)+'</td><td>'+last+'</td></tr>';
+    tbody.innerHTML+='<tr><td>'+name+'<span style="color:var(--txt3);font-size:11px;"> @'+email.split('@')[1]+'</span></td><td><strong>'+data.total+'</strong></td><td>'+data.spinpals+'</td><td>'+data.mario+'</td><td>'+(data.wanna||0)+'</td><td>'+(data.thrillzz||0)+'</td><td>'+(data.epicsweep||0)+'</td><td>'+last+'</td></tr>';
   });
   // Add refresh button
   const refreshBtn=document.getElementById('statsRefreshBtn');
