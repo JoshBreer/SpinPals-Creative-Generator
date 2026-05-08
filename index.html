@@ -305,16 +305,18 @@ const EPICSWEEP_GAMES={
   ]
 };
 
-// EPICSWEEP OFFERS
+// EPICSWEEP OFFERS — verified May 2026
 const EPICSWEEP_OFFERS=[
-  {id:'es1',title:'FREE Welcome Bonus — 100,000 GC + 2 SC',description:'Sign up free, verify email — no purchase needed'},
-  {id:'es2',title:'First Purchase Bonus — 250,000 GC + 50 SC FREE + 500 VIP XP',description:'Best value offer — massive bonus on first purchase'},
-  {id:'es3',title:'Deposit $20 — Get 20 SC Bonus FREE',description:'Most popular purchase — 100,000 GC + 20 SC'},
-  {id:'es4',title:'Daily Free Spin — Win Up To 2,000,000 GC',description:'Spin the free wheel every day for Gold Coins and Sweeps Coins'},
-  {id:'es5',title:'Refer a Friend — Earn 200,000 GC + 50 SC',description:'Share your code — earn 20% of coins when friend purchases'},
-  {id:'es6',title:'VIP Loyalty Program — Coinback + Exclusive Rewards',description:'Level up through tiers to unlock SC coinback and exclusive promos'},
-  {id:'es7',title:'Mail-In Free SC — Earn 1-5 SC Free',description:'No purchase necessary — mail in for free Sweeps Coins'},
-  {id:'es8',title:'Play Free — Real Cash Prizes Possible',description:'Free to play, win real prizes with Sweeps Coins'}
+  {id:'es1',title:'Sign Up FREE — 100,000 GC + 1 SC',description:'Register and verify email — no purchase needed'},
+  {id:'es2',title:'$4.99 — 12,000 GC + 6 SC FREE + 60 VIP XP',description:'Starter package — 20% extra free'},
+  {id:'es3',title:'$19.99 — 200,000 GC + 40 SC FREE + 400 VIP XP',description:'Popular package — 100% extra free'},
+  {id:'es4',title:'$34.99 — 250,000 GC + 50 SC FREE + 500 VIP XP',description:'Best value — normally $50'},
+  {id:'es5',title:'$20 Purchase — 100,000 GC + 20 SC FREE',description:'Most used package — great everyday value'},
+  {id:'es6',title:'$50 Purchase — 250,000 GC + 50 SC FREE',description:'Premium package — maximum coins'},
+  {id:'es7',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours — 25K-50K GC + 1-3 SC daily'},
+  {id:'es8',title:'Refer a Friend — Earn FREE Coins',description:'Share your link — earn bonus coins when friends join'},
+  {id:'es9',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins'},
+  {id:'es10',title:'VIP Program — SC Coinback + Exclusive Rewards',description:'Level up for SC coinback, exclusive promos, and tier bonuses'}
 ];
 
 const SPINPALS_OFFERS=[{id:'s0',title:'50 FREE SPINS on First Purchase',description:'Best performing offer - 50 free spins'},
@@ -530,14 +532,8 @@ function renderGallery(filter='all'){
     img.alt=c.game_name||'Creative';
     img.style.cssText='width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;';
     img.onerror=()=>{
-      // Try proxy first
-      if(!img.dataset.tried){
-        img.dataset.tried='1';
-        img.src='https://images.weserv.nl/?url='+encodeURIComponent(c.image_url)+'&output=jpg';
-      } else {
-        // Image is truly expired — hide the entire card from gallery
-        card.style.display='none';
-      }
+      // Skip proxy — just hide card immediately on any load failure
+      card.style.display='none';
     };
     const overlay=document.createElement('div');overlay.className='gallery-overlay';
     overlay.innerHTML='<div class="gallery-name">'+(c.game_name||'Creative')+'</div><div class="gallery-badge">'+(c.format==='portrait'?'9:16':'1:1')+'</div>';
@@ -771,9 +767,9 @@ async function stepFormat(){
   msg("Let's go →",'user');await delay(250);
   const m=msg('What <span class="accent">format</span> do you need?');
   const w=document.createElement('div');w.className='opt-group';
-  // Sports clients (WannaParlay/Thrillzz) only get portrait + square — fal.ai can't do both
-  const formatOptions=isSportsFlow()?[['portrait','Portrait (9:16)'],['square','Square (1:1)']]:
-    [['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']];
+  // All clients get portrait + square + both
+  // For fal.ai clients: "both" runs two sequential fal generations
+  const formatOptions=[['portrait','Portrait (9:16)'],['square','Square (1:1)'],['both','Both (9:16 + 1:1)']];
   formatOptions.forEach(([val,label])=>{
     const b=document.createElement('button');b.className='opt-btn';b.textContent=label;
     b.onclick=()=>{
@@ -1231,6 +1227,46 @@ async function doGenerate(){
   const useDirectFal=(isWannaFlow()||isThrillzzFlow())?FAL_SIMPLE_STYLES.includes(state.style):state.style==='Text Only';
 
   if(useDirectFal){
+    // Handle 'both' format — run portrait then square sequentially
+    if(state.format==='both'){
+      const origFormat=state.format;
+      const loadDiv=document.createElement('div');loadDiv.className='loading';
+      loadDiv.innerHTML='<div class="pulse-dots"><span></span><span></span><span></span></div><div class="loading-text">Generating both sizes...</div><div class="est-time">2–5 minutes</div><div class="est-sub">Portrait then square — hang tight</div><div class="loading-elapsed" id="elapsed">0s elapsed</div>';
+      const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
+      chatEl.appendChild(loadMsg);chatEl.scrollTop=chatEl.scrollHeight;
+      incrementGenerationCount(currentUserEmail);
+      const startTs=Date.now();
+      const timerI=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
+      // Portrait
+      state.format='portrait';
+      const por=await falFallbackGenerate();
+      // Square
+      state.format='square';
+      const sq=await falFallbackGenerate();
+      state.format=origFormat;
+      clearInterval(timerI);
+      const cPlatformB=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
+      [por,sq].forEach((res,idx)=>{
+        if(!res)return;
+        const dUrl=res.composite||res;
+        const gUrl=res.original||res;
+        const fmt=idx===0?'portrait':'square';
+        const ent={id:'fal-direct-'+Date.now()+'-'+fmt,game_name:state.game&&state.game!=='N/A'?state.game:state.style,format:fmt,offer_text:state.offer,style:state.style,platform:cPlatformB,user_email:currentUserEmail,image_url:dUrl,created_at:new Date().toISOString(),source:'fal'};
+        galleryData.unshift(ent);
+        try{const lk='rmgs_gallery_'+currentUserEmail.trim().toLowerCase();const ex=JSON.parse(localStorage.getItem(lk)||'[]');ex.unshift({...ent});if(ex.length>50)ex.splice(50);localStorage.setItem(lk,JSON.stringify(ex));}catch(e){}
+        saveFalEntryToGithub({...ent,gallery_url:gUrl});
+      });
+      // Show both results
+      if(por||sq){
+        const dPor=por?(por.composite||por):null;
+        const dSq=sq?(sq.composite||sq):null;
+        const displayEntry={id:'fal-both-'+Date.now(),game_name:state.game&&state.game!=='N/A'?state.game:state.style,format:'both',offer_text:state.offer,style:state.style,platform:cPlatformB,user_email:currentUserEmail,image_url:dPor||dSq,image_url_square:dSq,created_at:new Date().toISOString(),source:'fal'};
+        showResult(loadMsg,displayEntry);
+      } else {
+        loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
+      }
+      return;
+    }
     // Text Only: skip fal entirely — pure canvas with guaranteed vivid color
     if(state.style==='Text Only'){
       const loadDiv2=document.createElement('div');loadDiv2.className='loading';
