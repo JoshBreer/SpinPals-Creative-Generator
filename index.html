@@ -387,7 +387,7 @@ const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
 const THRILLZZ_WEBHOOK='https://build.twin.so/triggers/004adff6-c756-4d04-a9bc-7d17df6985b9/webhook';
-const EPICSWEEP_WEBHOOK='EPICSWEEP_WEBHOOK_URL_HERE';
+const EPICSWEEP_WEBHOOK='https://api.twin.so/webhook/ce560ba3-a2d7-4539-9eee-e2f7d573205f';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
@@ -708,6 +708,9 @@ function showRmgsClientSelector(){
         state.platform=null;
         showStartButtons();
       } else if(val==='thrillzz'){
+        state.platform=null;
+        showStartButtons();
+      } else if(val==='epicsweep'){
         state.platform=null;
         showStartButtons();
       } else {
