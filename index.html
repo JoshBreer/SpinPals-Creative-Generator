@@ -465,7 +465,8 @@ function activateDashboard(email){
   const isRmgs=email.endsWith('@rmgs.online');
   const isWanna=email.endsWith('@wanna.com');
   const isThrillzz=email.endsWith('@thrillzz.com');
-  if(isSpinPals||isMario||isRmgs||isWanna||isThrillzz){
+  const isEpicSweep=email.endsWith('@epicsweep.com')||email.endsWith('@epicsweep.us');
+  if(isSpinPals||isMario||isRmgs||isWanna||isThrillzz||isEpicSweep){
     document.getElementById('chatSection').style.display='block';
     document.getElementById('gallerySection').style.display='block';
     document.getElementById('galleryUserTag').textContent=email;
