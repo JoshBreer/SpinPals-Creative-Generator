@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19E090E91F8",
+    "game_name": "Miami Mayhem",
+    "format": "portrait",
+    "offer_text": "$19.99 — 200,000 GC + 40 SC FREE + 400 VIP XP",
+    "style": "Classic",
+    "user_email": "josh@epicsweep.com",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c5/3cc0e0f3ec9cf08b85cd24f0ff1a38126702a7bc7759702117a6f2b8571bdb.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T192606Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0a9d39501955d00b657076e24eace3f84432ac294907e3dd296ff5353d461dc4",
+    "created_at": "2026-05-08 19:26:06"
+  },
+  {
     "id": "cr-19E08C4C35F",
     "game_name": "Crazy Time",
     "format": "square",
