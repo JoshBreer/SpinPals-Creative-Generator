@@ -1,9 +1,19 @@
 [
   {
+    "id": "cr-19E08C4C35F",
+    "game_name": "Crazy Time",
+    "format": "square",
+    "offer_text": "Daily Free Spin â Win Up To 2,000,000 GC (daily wheel, no purchase)",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/db/27fcb08a02aa49f968341ca09e5cfa261bbdad298b36c1884153356623a9d0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T180532Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5e15607949f65f9ae7556d45ec97f4910f2d6abd0790665c5e762ca88451890d",
+    "created_at": "2026-05-08 18:05:53"
+  },
+  {
     "id": "cr-19E08C13AF0",
     "game_name": "Starburst XXXtreme",
     "format": "portrait",
-    "offer_text": "First Purchase Bonus â 250,000 GC + 50 SC FREE + 500 VIP XP",
+    "offer_text": "First Purchase Bonus Ã¢ÂÂ 250,000 GC + 50 SC FREE + 500 VIP XP",
     "style": "Classic",
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f6/aa0d0e2e92d21af3d84c8f7f8f906b7d5d8a1d522f8a23b0bd397e7d4812f4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T180138Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5c9f3e3e589e17fe394d0bcdf593bdb68a3af8cd8d61a7af74b3d2c1129952bd",
@@ -13,7 +23,7 @@
     "id": "cr-19E08BA8781",
     "game_name": "Sweet Bonanza",
     "format": "portrait",
-    "offer_text": "Deposit $20 â Get 20 SC Bonus FREE (most popular â 100,000 GC + 20 SC)",
+    "offer_text": "Deposit $20 Ã¢ÂÂ Get 20 SC Bonus FREE (most popular Ã¢ÂÂ 100,000 GC + 20 SC)",
     "style": "Realistic",
     "user_email": "josh@epicsweep.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f9/9a2b192f06a8ae7d5870775b6dea2a22f5f66e268717dd9158e3d6694d80a2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260508%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260508T175424Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c28d05e02017bcdb104f00262099f2ab41173274f3325d7f67d0b3d665ccd91e",
