@@ -381,6 +381,35 @@ const SPINPALS_WEBHOOK='https://build.twin.so/triggers/c47df937-3da1-45cd-814b-1
 const MARIO_WEBHOOK='https://build.twin.so/triggers/143147f3-2345-4b9b-bf6b-a89a5040aef4/webhook';
 const WANNAPARLAY_WEBHOOK='https://build.twin.so/triggers/f58a1503-f391-4175-b15a-4af976c44007/webhook';
 const THRILLZZ_WEBHOOK='https://build.twin.so/triggers/004adff6-c756-4d04-a9bc-7d17df6985b9/webhook';
+// TESTLAB — fal.ai test dashboard (RMGS only, not a real client)
+const TESTLAB_GAMES={
+  'Action Slots':[
+    {id:'neon-hunter',name:'Neon Hunter'},{id:'cash-blitz',name:'Cash Blitz'},
+    {id:'thunder-vault',name:'Thunder Vault'},{id:'gold-rush-x',name:'Gold Rush X'},
+    {id:'wild-circuit',name:'Wild Circuit'},{id:'dragon-stacks',name:'Dragon Stacks'}
+  ],
+  'Jackpot Games':[
+    {id:'mega-strike',name:'Mega Strike'},{id:'vault-breaker',name:'Vault Breaker'},
+    {id:'lucky-grid',name:'Lucky Grid'},{id:'super-sevens',name:'Super Sevens'}
+  ],
+  'Live Casino':[
+    {id:'live-roulette-vip',name:'VIP Live Roulette'},{id:'lightning-tables',name:'Lightning Tables'},
+    {id:'high-roller-bj',name:'High Roller Blackjack'}
+  ],
+  'Crash & Instant':[
+    {id:'rocket-cash',name:'Rocket Cash'},{id:'flip-x',name:'Flip X'},
+    {id:'drop-zone',name:'Drop Zone'}
+  ]
+};
+const TESTLAB_TOP=['Neon Hunter','Cash Blitz','Thunder Vault','Mega Strike','Rocket Cash'];
+const TESTLAB_OFFERS=[
+  {id:'tl1',title:'Welcome Pack — 500,000 GC + 50 SC FREE',description:'Test offer 1 — big welcome bonus'},
+  {id:'tl2',title:'$9.99 — Double Coins All Weekend',description:'Test offer 2 — weekend promo'},
+  {id:'tl3',title:'First Deposit 200% Match Up To $100',description:'Test offer 3 — deposit match'},
+  {id:'tl4',title:'Daily Free Spin — Win Up To 1,000,000 GC',description:'Test offer 4 — daily wheel'},
+  {id:'tl5',title:'Refer 3 Friends — Get $25 FREE',description:'Test offer 5 — referral bonus'},
+  {id:'tl6',title:'VIP Only: 50 SC Cashback This Week',description:'Test offer 6 — VIP cashback'}
+];
 const EPICSWEEP_WEBHOOK='https://build.twin.so/triggers/ce560ba3-a2d7-4539-9eee-e2f7d573205f/webhook';
 const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/gallery.json?t=';
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
@@ -402,6 +431,7 @@ function isMarioFlow(){return state.client==='mario';}
 function isWannaFlow(){return state.client==='wannaparlay';}
 function isThrillzzFlow(){return state.client==='thrillzz';}
 function isEpicSweepFlow(){return state.client==='epicsweep';}
+function isTestLabFlow(){return state.client==='testlab';}
 function isSportsFlow(){return isWannaFlow()||isThrillzzFlow();}
 
 // Helper: get correct webhook
@@ -410,6 +440,7 @@ function getWebhook(){
   if(isWannaFlow())return WANNAPARLAY_WEBHOOK;
   if(isThrillzzFlow())return THRILLZZ_WEBHOOK;
   if(isEpicSweepFlow())return EPICSWEEP_WEBHOOK;
+  if(isTestLabFlow())return null;
   return SPINPALS_WEBHOOK;
 }
 
@@ -417,6 +448,7 @@ function getWebhook(){
 function getGames(){
   if(isWannaFlow()||isThrillzzFlow())return {top:WANNAPARLAY_TOP,all:WANNAPARLAY_SPORTS};
   if(isEpicSweepFlow())return {top:EPICSWEEP_TOP,all:EPICSWEEP_GAMES};
+  if(isTestLabFlow())return {top:TESTLAB_TOP,all:TESTLAB_GAMES};
   if(!isMarioFlow())return {top:SPINPALS_TOP,all:SPINPALS_GAMES};
   if(state.platform==='betewin')return {top:BETEWIN_TOP,all:BETEWIN_GAMES};
   return {top:BANKOBET_TOP,all:BANKOBET_GAMES};
@@ -427,6 +459,7 @@ function getOffers(){
   if(isWannaFlow())return WANNAPARLAY_OFFERS;
   if(isThrillzzFlow())return THRILLZZ_OFFERS;
   if(isEpicSweepFlow())return EPICSWEEP_OFFERS;
+  if(isTestLabFlow())return TESTLAB_OFFERS;
   if(!isMarioFlow())return SPINPALS_OFFERS;
   if(state.platform==='betewin')return BETEWIN_OFFERS;
   return BANKOBET_OFFERS;
@@ -500,7 +533,7 @@ async function fetchGallery(){
 function renderGallery(filter='all'){
   galleryEl.innerHTML='';
   const me=currentUserEmail.trim().toLowerCase();
-  const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':isEpicSweepFlow()?'epicsweep':'spinpals';
+  const myPlatform=isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isMarioFlow()?'mario':isEpicSweepFlow()?'epicsweep':isTestLabFlow()?'testlab':'spinpals';
   
   // Merge localStorage entries with galleryData (localStorage = immediate local save)
   const localKey='rmgs_gallery_'+me;
@@ -689,7 +722,7 @@ function showRmgsClientSelector(){
   const w=document.createElement('div');
   w.style.cssText='display:flex;gap:16px;justify-content:center;flex-wrap:wrap;';
 
-  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)'],['wannaparlay','Wanna Parlay'],['thrillzz','Thrillzz'],['epicsweep','EpicSweep']].forEach(([val,label])=>{
+  [['spinpals','SpinPals'],['mario','Mario (Betewin / Bankobet)'],['wannaparlay','Wanna Parlay'],['thrillzz','Thrillzz'],['epicsweep','EpicSweep'],['testlab','🧪 FAL TestLab']].forEach(([val,label])=>{
     const b=document.createElement('button');
     b.style.cssText='padding:16px 32px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:.2s;min-width:200px;';
     b.textContent=label;
@@ -713,6 +746,9 @@ function showRmgsClientSelector(){
         state.platform=null;
         showStartButtons();
       } else if(val==='epicsweep'){
+        state.platform=null;
+        showStartButtons();
+      } else if(val==='testlab'){
         state.platform=null;
         showStartButtons();
       } else {
@@ -1222,8 +1258,9 @@ async function doGenerate(){
   // DIRECT FAL PATH — WannaParlay/Thrillzz simple styles skip Twin entirely
   const FAL_SIMPLE_STYLES=['Classic','Realistic','Electric','Text Only'];
   // WannaParlay/Thrillzz: all simple styles go to fal
-  // SpinPals/Mario: only Text Only goes to fal, rest through Twin
-  const useDirectFal=(isWannaFlow()||isThrillzzFlow())?FAL_SIMPLE_STYLES.includes(state.style):state.style==='Text Only';
+  // SpinPals/Mario: only Text Only goes to fal
+  // TestLab: ALL styles go to fal (test environment)
+  const useDirectFal=isTestLabFlow()?true:(isWannaFlow()||isThrillzzFlow())?FAL_SIMPLE_STYLES.includes(state.style):state.style==='Text Only';
 
   if(useDirectFal){
     // Handle 'both' format — run portrait then square sequentially
@@ -1513,6 +1550,7 @@ async function generateTextOnlyCanvas(){
     const disclaimer=isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':
       isThrillzzFlow()?'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms':
       isEpicSweepFlow()?'21+ | Sweepstakes Casino | Free to Play | Not Available in All States | See Terms':
+      isTestLabFlow()?'18+ | Test Creative | Not a Real Offer | For Internal Use Only':
       isTurkishCtx?'18+ | Sorumlu Oyna | Şartlar Geçerlidir':
       '18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
 
@@ -1640,7 +1678,8 @@ function buildFalFallbackPrompt(){
   const isWanna=isWannaFlow();
   const isThrillzz=isThrillzzFlow();
   const isMario=isMarioFlow();
-  const isSpinPals=!isWanna&&!isThrillzz&&!isMario;
+  const isTestLab=typeof isTestLabFlow==='function'&&isTestLabFlow();
+  const isSpinPals=!isWanna&&!isThrillzz&&!isMario&&!isTestLab;
   const isTurkish=state.platform==='bankobet';
 
   const negativePrompt='text, words, letters, numbers, logos, watermarks, buttons, UI elements, neon light tubes, fluorescent tube lights, thin wire neon lights, low quality, blurry, ugly, deformed';
@@ -1666,7 +1705,19 @@ function buildFalFallbackPrompt(){
       'Energetic sports illustration. Very dark background. Large football with golden impact lines radiating outward. Multiple sport elements orbiting: basketball, tennis ball. Red energy streaks as accent. Gold center explosion. Premium mobile sports app quality.',
       'Bold sports betting art. Dark navy. Football stadium aerial view in background blur. Large golden trophy dominant center glowing warm. Sports balls and championship medals floating. Turkish sports energy. Premium brand quality.'
     ];
-    const v=isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
+    const testlabClassic=[
+      'Hyper-detailed 3D casino illustration. Deep dark teal #003340 background. Center: Giant golden slot machine reels showing jackpot — triple 7s glowing, coins exploding outward. Casino chips in teal, gold, white scattered. Neon teal light beams. Playing cards floating. AAA mobile game quality. Ultra polished.',
+      'Premium casino celebration art. Very dark background with teal glow. Oversized gold trophy center emitting warm rays. Cascading gold and teal coins. Neon slot machine symbols orbiting. Vivid and dramatic. Unreal Engine quality render.',
+      'Epic jackpot illustration. Dark background. Slot reels frozen on three blazing 7s, gold explosion from center. Teal electric energy beams radiating outward. Casino chips, dice, playing cards mid-air. Cinematic dramatic lighting.',
+      'Dynamic casino game art. Near-black with teal atmosphere. Premium slot machine hero in center glowing bright. Gold coin fountain. Teal neon outlines on every element. Star burst light rays. Mobile game loading screen quality.'
+    ];
+    const realisticTestlab=[
+      'Cinematic casino interior photography. Very dark atmospheric luxury casino. Crystal chandeliers casting warm light. Dramatic shadows. Empty roulette table in spotlight. No people. Shot on ARRI Alexa, 35mm. Luxury campaign quality.',
+      'Macro casino photography. Extreme close-up of casino chips stacked — teal, gold, black. Shallow depth of field. Single hard side light. Dark background. Shot on Hasselblad 100mm macro. Premium advertising quality.',
+      'Atmospheric slot machine photograph. Lone slot machine in dark casino, screen glow illuminating surrounding darkness. Cinematic and moody. No people. Shot on Sony Venice 2. Film quality.',
+      'Luxury casino product shot. Single deck of cards fanned perfectly on dark velvet surface. Gold coins beside them. Dramatic overhead spotlight. Shot on Phase One IQ4. Magazine quality.'
+    ];
+    const v=isTestLab?testlabClassic:isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
     prompt=pick(v)+' Ultra detailed 8K. NO text. NO logos. NO buttons. Background art only.';
 
   } else if(style==='Realistic'){
@@ -1688,7 +1739,7 @@ function buildFalFallbackPrompt(){
       'Athletic sports moment. Football/soccer goalkeeper diving dramatically to save ball, stadium lights creating rim lighting silhouette, crowd blurred behind. Shot on Canon R5, 400mm. Sports Illustrated quality.',
       'Stadium atmosphere photograph. Empty Turkish football stadium at night, floodlights creating dramatic cross-lighting on perfect pitch, architectural grandeur. Shot on ARRI, 16mm. Cinematic wide angle.'
     ];
-    const v=isSpinPals?spinpalsRealistic:isTurkish?bankobetRealistic:betewinRealistic;
+    const v=isTestLab?realisticTestlab:isSpinPals?spinpalsRealistic:isTurkish?bankobetRealistic:betewinRealistic;
     prompt=pick(v)+' Ultra photorealistic. NO logos visible. NO text. NO buttons. Background only.';
 
   } else if(style==='Electric'){
@@ -1709,13 +1760,20 @@ function buildFalFallbackPrompt(){
       'Electric storm art. Dark navy. Multiple thick solid neon blue lightning bolt shapes branching across frame — thick as a forearm solid not thin wire. Green glow clouds at tips. Basketball football floating with electric blue borders.',
       'Neon power illustration. Very dark navy. Giant yellow lightning bolt SHAPE — thick solid graphic element — dominates center. Electric blue plasma field. Smaller bolt shapes in corners. Sports balls orbiting with electric halos.'
     ];
-    const v=isSpinPals?spinpalsElectric:baseElectric;
+    const electricTestlab=[
+      'Electric casino energy art. Dark teal-black background. Thick solid teal lightning bolt SHAPES crossing frame diagonally. Casino chips floating with electric glow. Gold coin explosion at bolt intersection. Neon teal and gold color palette. Ultra premium.',
+      'Neon power surge casino art. Near-black background. Giant teal electric plasma sphere center with arcs reaching outward. Slot machine symbols in energy field. Gold coin trails. Bold neon teal atmosphere. High contrast.',
+      'Electric jackpot art. Very dark background. Triple lightning bolt shapes in teal and gold forming triangle. Casino elements in energy field with glowing outlines. Matrix particle effects. Maximum contrast.',
+      'Casino power art. Dark background. Concentrated beam of teal-white energy from top. Casino chips and card suits caught in energy stream. Gold sparks at impact point. Cinematic power surge visual.'
+    ];
+    const v=isTestLab?electricTestlab:isSpinPals?spinpalsElectric:baseElectric;
     prompt=pick(v)+' NO text. NO thin wire neon tubes (SpinPals can use actual neon signs). NO logos. Ultra detailed.';
 
   } else {
     // Text Only — pure canvas, no fal needed but keep prompt for fallback
     const isEpicSweep=isEpicSweepFlow();
-    const colors=isEpicSweep?['#FF6600','#00AA55','#0066CC','#CC0099','#FFD700','#AA00FF']:
+    const colors=isTestLab?['#00CCBB','#FF6600','#0088FF','#CC00BB','#00DD44','#FF3300']:
+      isEpicSweep?['#FF6600','#00AA55','#0066CC','#CC0099','#FFD700','#AA00FF']:
       isSpinPals?['#6600CC','#00AACC','#CC0066','#00AA44']:
       isTurkish?['#CC0000','#0044FF','#FF6600','#AA00FF']:
       isMario?['#0044FF','#00AACC','#FF6600','#00AA44']:
@@ -1857,9 +1915,12 @@ async function compositeTextOnImage(bgImageUrl){
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#88CCFF');
           grd.addColorStop(0.7,'#0088FF');grd.addColorStop(1,'#00CCFF');
         } else if(isEpicSweepFlow()){
-          // EpicSweep: white to gold — sweepstakes casino premium feel
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
           grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
+        } else if(isTestLabFlow()){
+          // TestLab: white to electric teal
+          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
+          grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
         } else {
           // SpinPals: gold to purple
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFD700');
