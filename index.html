@@ -1637,29 +1637,31 @@ function drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPor
 }
 
 async function saveFalEntryToGithub(entry){
-  // Send to Twin — Twin saves to gallery.json and we send email via Resend
-  // Twin already knows how to write to GitHub correctly from its server (no CORS/token issues)
   const saveUrl=entry.gallery_url||entry.image_url;
-  console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
-  
-  // Twin saves to gallery
-  triggerWebhook({
-    event:'fal_creative_complete',
-    source:'fal',
-    save_to_gallery:true,
-    image_url:saveUrl,
-    game_name:entry.game_name,
-    offer_text:entry.offer_text,
-    style:entry.style,
-    format:entry.format,
-    platform:entry.platform,
-    user_email:entry.user_email,
-    created_at:entry.created_at
-  },getWebhook());
+  const webhookUrl=getWebhook();
 
-  // Resend handles email — onboarding@resend.dev works without domain verification
-  sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
-  
+  // Only fire Twin webhook if there's a real webhook URL (skip for TestLab)
+  if(webhookUrl){
+    console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
+    triggerWebhook({
+      event:'fal_creative_complete',
+      source:'fal',
+      save_to_gallery:true,
+      image_url:saveUrl,
+      game_name:entry.game_name,
+      offer_text:entry.offer_text,
+      style:entry.style,
+      format:entry.format,
+      platform:entry.platform,
+      user_email:entry.user_email,
+      created_at:entry.created_at
+    },webhookUrl);
+    // Send email via Resend
+    sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
+  } else {
+    console.log('FAL: TestLab mode — skipping Twin webhook and email');
+  }
+
   return saveUrl;
 }
 
