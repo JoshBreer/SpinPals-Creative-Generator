@@ -1688,6 +1688,14 @@ function buildFalFallbackPrompt(){
 
   let prompt='';
 
+  // TestLab realistic prompts — defined at top level so all style blocks can access
+  const realisticTestlab=[
+    'Cinematic casino interior photography. Very dark atmospheric luxury casino. Crystal chandeliers casting warm light. Dramatic shadows. Empty roulette table in spotlight. No people. Shot on ARRI Alexa 35mm. Luxury campaign quality.',
+    'Macro casino photography. Extreme close-up of casino chips stacked teal gold black. Shallow depth of field. Single hard side light. Dark background. Shot on Hasselblad 100mm macro. Premium quality.',
+    'Atmospheric slot machine photograph. Lone slot machine in dark casino, screen glow illuminating surrounding darkness. Cinematic and moody. No people. Shot on Sony Venice 2. Film quality.',
+    'Luxury casino product shot. Single deck of cards fanned perfectly on dark velvet surface. Gold coins beside them. Dramatic overhead spotlight. Shot on Phase One IQ4. Magazine quality.'
+  ];
+
   if(style==='Classic'){
     const spinpalsCasino=[
       'Hyper-detailed 3D casino illustration. Deep teal #006B6B to dark background. CENTER: Giant golden slot machine with spinning reels showing lucky 7s, cherries, stars, glowing neon outlines. Gold coins exploding outward from machine. Colorful playing card suits floating: hearts, diamonds, clubs, spades each glowing. Purple and teal neon light effects. Premium casino app art. Unreal Engine quality. No text.',
@@ -1712,12 +1720,6 @@ function buildFalFallbackPrompt(){
       'Premium casino celebration art. Very dark background with teal glow. Oversized gold trophy center emitting warm rays. Cascading gold and teal coins. Neon slot machine symbols orbiting. Vivid and dramatic. Unreal Engine quality render.',
       'Epic jackpot illustration. Dark background. Slot reels frozen on three blazing 7s, gold explosion from center. Teal electric energy beams radiating outward. Casino chips, dice, playing cards mid-air. Cinematic dramatic lighting.',
       'Dynamic casino game art. Near-black with teal atmosphere. Premium slot machine hero in center glowing bright. Gold coin fountain. Teal neon outlines on every element. Star burst light rays. Mobile game loading screen quality.'
-    ];
-    const realisticTestlab=[
-      'Cinematic casino interior photography. Very dark atmospheric luxury casino. Crystal chandeliers casting warm light. Dramatic shadows. Empty roulette table in spotlight. No people. Shot on ARRI Alexa, 35mm. Luxury campaign quality.',
-      'Macro casino photography. Extreme close-up of casino chips stacked — teal, gold, black. Shallow depth of field. Single hard side light. Dark background. Shot on Hasselblad 100mm macro. Premium advertising quality.',
-      'Atmospheric slot machine photograph. Lone slot machine in dark casino, screen glow illuminating surrounding darkness. Cinematic and moody. No people. Shot on Sony Venice 2. Film quality.',
-      'Luxury casino product shot. Single deck of cards fanned perfectly on dark velvet surface. Gold coins beside them. Dramatic overhead spotlight. Shot on Phase One IQ4. Magazine quality.'
     ];
     const v=isTestLab?testlabClassic:isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
     prompt=pick(v)+' Ultra detailed 8K. NO text. NO logos. NO buttons. Background art only.';
