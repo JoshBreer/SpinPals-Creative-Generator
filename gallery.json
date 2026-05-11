@@ -1,9 +1,19 @@
 [
   {
+    "id": "cr-19E1952EFE1",
+    "game_name": "Miami Mayhem",
+    "format": "square",
+    "offer_text": "$9.99 â 220,000 GC + 22 SC + 499 VIP XP",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/23/a52f46ac2dd0bdd42666c0a26bc3ecff4fe046b879a5ab21102fab3d9eafb2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260511%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260511T231442Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9262956cbbdaaf918f02755ac349d95e86074f7771a7b86e2a8a1d1c9d5ca685",
+    "created_at": "2026-05-11 23:14:42"
+  },
+  {
     "id": "cr-19E194CF90F",
     "game_name": "Crazy Time",
     "format": "portrait",
-    "offer_text": "Daily Bonus Wheel — Free GC + SC Every Day",
+    "offer_text": "Daily Bonus Wheel â Free GC + SC Every Day",
     "style": "Custom",
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/8e/22d249ae943089de3eb9e14d87f62969f13f411bad6547979fa6b3deee0cd9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260511%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260511T230827Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=89151b9645904d62a95beaa595c6745da1d43af959d135ea124925954cb2a973",
@@ -13,7 +23,7 @@
     "id": "cr-19E1944A736",
     "game_name": "Sweet Bonanza",
     "format": "portrait",
-    "offer_text": "$4.99 â 12,000 GC + 6 SC + 250 VIP XP",
+    "offer_text": "$4.99 Ã¢ÂÂ 12,000 GC + 6 SC + 250 VIP XP",
     "style": "Classic",
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/68/2d928834b0e42d4cbe7bb5d2a08666a8ecf8efe16f6f0f9274a8e24d67e757.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260511%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260511T225913Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=86d4ebf01a60ec7ed41d9903903df7400a128767d48e36227826a90d6a933f6b",
