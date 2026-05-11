@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1778534046C928",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778534046C928.jpg",
+    "created_at": "2026-05-11 21:14:06"
+  },
+  {
     "id": "cr-17785336693497",
     "game_name": "Snoop Dogg Dollars",
     "format": "square",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/52/f7fbe457c2656cd0b9e03ec63647c161e6a651dca07cd95381ffdd387161c2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5b59daeb7a97d5d3ea6e31e8626481d3dab1a2c032c3c781443a9b081d617bc2",
     "created_at": "2026-03-30 21:16:59"
-  },
-  {
-    "id": "cr-1774905261297",
-    "game_name": "Fire Joker",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/10/d87d1eddd10f9de2ac92ce8f23386ff234081145ec9ad3f085d81e11401d47.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211505Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a3741135f84c5d00879c79939f6c1c840af00c719f4feba3f4d204e8be5e4c14",
-    "created_at": "2026-03-30 21:14:21"
   }
 ]
