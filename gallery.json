@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1778534643165B",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778534643165B.jpg",
+    "created_at": "2026-05-11 21:24:03"
+  },
+  {
+    "id": "cr-1778534637FAL9",
+    "game_name": "N/A",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778534637FAL9.jpg",
+    "created_at": "2026-05-11 21:23:57"
+  },
+  {
     "id": "cr-1778534603E8D2",
     "game_name": "Custom",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/5b06b43619d4ead4c1d222196fab00fe5c374bde29b37cca9943e52a6f9544.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T170149Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=265a5e9fad0ff2160b4ed56d7b87abe82ca52b0cda091166e20a5f0db6a2efcc",
     "created_at": "2026-03-31 17:00:59"
-  },
-  {
-    "id": "cr-17749761133F7C",
-    "game_name": "Dragon Kingdom",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/fb/665d7f38012ddf5259c76558c8e941d77b7ceecf0a0ea55f80c30e8980ea0b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T165601Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ed83e223d55c24bc00e2ac4f99de38ef03f34f794d57562849cee724f3dc3fa2",
-    "created_at": "2026-03-31 16:55:13"
-  },
-  {
-    "id": "cr-1774973239FA59",
-    "game_name": "Gold Rush",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/db/7192b580fa363dd63f4268bb4c0c44b3e45fb0861f74d9355550f1eee0320d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260331%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260331T160742Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=00c98c2a25fb2752097b9f706b9de45c241cf4d4d4ce5a2b8c7866da746f03ce",
-    "created_at": "2026-03-31 16:07:19"
   }
 ]
