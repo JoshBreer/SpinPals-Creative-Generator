@@ -1689,11 +1689,24 @@ function buildFalFallbackPrompt(){
   let prompt='';
 
   // TestLab realistic prompts — defined at top level so all style blocks can access
+  // TestLab Realistic — 8 unique cinematic scenes
   const realisticTestlab=[
-    'Cinematic casino interior photography. Very dark atmospheric luxury casino. Crystal chandeliers casting warm light. Dramatic shadows. Empty roulette table in spotlight. No people. Shot on ARRI Alexa 35mm. Luxury campaign quality.',
-    'Macro casino photography. Extreme close-up of casino chips stacked teal gold black. Shallow depth of field. Single hard side light. Dark background. Shot on Hasselblad 100mm macro. Premium quality.',
-    'Atmospheric slot machine photograph. Lone slot machine in dark casino, screen glow illuminating surrounding darkness. Cinematic and moody. No people. Shot on Sony Venice 2. Film quality.',
-    'Luxury casino product shot. Single deck of cards fanned perfectly on dark velvet surface. Gold coins beside them. Dramatic overhead spotlight. Shot on Phase One IQ4. Magazine quality.'
+    // Scene 1: Aerial casino resort
+    'Cinematic aerial photograph of a luxury Las Vegas casino resort at night from above, pools and lights glowing, strip visible in background, teal rooftop lighting, dramatic. DJI X9 aerial camera. No people visible.',
+    // Scene 2: Poker table macro
+    'Extreme close-up macro photograph of poker chips and playing cards on green felt. Ace of spades sharp in foreground, chips stacked in bokeh behind. Single overhead spotlight. Shot on Leica 100mm macro f/2. Dark moody atmosphere.',
+    // Scene 3: Roulette wheel motion blur
+    'Long exposure photograph of a roulette wheel spinning, ball caught mid-motion as a streak of light. Rich teal and gold light trails. Dark atmospheric casino background. Shot on Sony A7R V, 50mm, 1/15s. Fine art photography.',
+    // Scene 4: Dice mid-air
+    'High speed action photograph of casino dice frozen mid-air just above a craps table, showing lucky numbers, perfect studio strobe lighting, dark background with teal accent light. Shot on Nikon Z9 1/8000s. Cinematic product shot.',
+    // Scene 5: Slot machine glow
+    'Moody atmospheric photograph of a single modern slot machine screen glowing in a dark casino, the light illuminating the surrounding darkness dramatically. No people. Cinematic teal color grade. Shot on ARRI Alexa, 35mm, T1.4.',
+    // Scene 6: Jackpot coins
+    'Dramatic photograph of gold coins cascading and caught mid-fall against pure black background. High speed strobe photography. Each coin perfectly sharp. Shot on Hasselblad X2D, 120mm macro. Luxury advertising quality.',
+    // Scene 7: Baccarat table
+    'Wide angle cinematic shot of an empty premium baccarat table in a private VIP room. Dramatic overhead chandelier. Dark oak paneling. Gold and green. Quiet luxury. No people. Shot on ARRI Alexa Mini LF. Architectural photography.',
+    // Scene 8: Card shuffle freeze
+    'High speed photograph of playing cards caught mid-shuffle, a perfect arc of cards frozen in air. Pure dark background. Single dramatic side light creating deep shadows on card faces. Shot on Phase One IQ4, 80mm, strobe. Museum quality.'
   ];
 
   if(style==='Classic'){
@@ -1715,11 +1728,25 @@ function buildFalFallbackPrompt(){
       'Energetic sports illustration. Very dark background. Large football with golden impact lines radiating outward. Multiple sport elements orbiting: basketball, tennis ball. Red energy streaks as accent. Gold center explosion. Premium mobile sports app quality.',
       'Bold sports betting art. Dark navy. Football stadium aerial view in background blur. Large golden trophy dominant center glowing warm. Sports balls and championship medals floating. Turkish sports energy. Premium brand quality.'
     ];
+    // TestLab Classic — 8 completely different scenes, each with unique energy
+    const gameRef=(state.game&&state.game!=='N/A')?state.game:'slots';
     const testlabClassic=[
-      'Hyper-detailed 3D casino illustration. Deep dark teal #003340 background. Center: Giant golden slot machine reels showing jackpot — triple 7s glowing, coins exploding outward. Casino chips in teal, gold, white scattered. Neon teal light beams. Playing cards floating. AAA mobile game quality. Ultra polished.',
-      'Premium casino celebration art. Very dark background with teal glow. Oversized gold trophy center emitting warm rays. Cascading gold and teal coins. Neon slot machine symbols orbiting. Vivid and dramatic. Unreal Engine quality render.',
-      'Epic jackpot illustration. Dark background. Slot reels frozen on three blazing 7s, gold explosion from center. Teal electric energy beams radiating outward. Casino chips, dice, playing cards mid-air. Cinematic dramatic lighting.',
-      'Dynamic casino game art. Near-black with teal atmosphere. Premium slot machine hero in center glowing bright. Gold coin fountain. Teal neon outlines on every element. Star burst light rays. Mobile game loading screen quality.'
+      // Scene 1: Dragon slot — fire and fantasy
+      '3D cartoon illustration, very dark background. HERO: A massive emerald dragon coiled around a glowing golden slot machine, fire breath illuminating the scene in orange and teal. Gold coins raining from above. Jewels and gems floating. Mobile game splash screen quality. Rich deep colors. Ultra detailed.',
+      // Scene 2: Space/sci-fi slot
+      '3D illustration, deep space dark background. HERO: Futuristic chrome slot machine floating in space, neon teal glow, reels showing planets and stars. Asteroid field of gold coins surrounding it. Galaxy nebula in background purple and teal. Electric sparks on reels. Premium sci-fi game art.',
+      // Scene 3: Wild West gold rush
+      '3D cartoon art, dark brown-black background. HERO: Wild West saloon slot machine covered in gold dust, sheriff star badges and playing cards flying outward. Gold coins and nuggets exploding like a mine blast. Teal and gold color scheme. Dynamic diagonal composition. AAA game art.',
+      // Scene 4: Ocean/underwater treasure
+      '3D illustration, very dark deep ocean background. HERO: Treasure chest overflowing with gold coins, surrounded by glowing slot machine reels showing fish and anchors. Bioluminescent teal underwater glow. Bubbles of coins rising upward. Coral and pearls scattered. Cinematic underwater lighting.',
+      // Scene 5: Ancient Egypt jackpot
+      '3D cartoon illustration, dark golden-black background. HERO: Giant golden scarab beetle on a slot machine, pyramid silhouettes behind, Eye of Horus symbols glowing teal on reels. Papyrus scrolls and Egyptian gold coins exploding outward. Mystical glow. Premium illustrated quality.',
+      // Scene 6: Neon city slots
+      '3D illustration, night city dark background. HERO: Massive neon-lit slot machine towering like a skyscraper with teal and gold light trails, city lights bokeh below. Card suits and lucky 7s flying. Urban energy. Blade Runner aesthetic meets casino. Ultra premium art.',
+      // Scene 7: Volcanic jackpot
+      '3D cartoon art, very dark volcanic background. HERO: Slot machine sitting on a lava platform, erupting volcano behind sending gold coins skyward like lava. Teal electric lightning in dark sky. Glowing ember particles. Molten gold dripping from reels showing jackpot. Epic dramatic scene.',
+      // Scene 8: Ice palace casino
+      '3D illustration, deep dark ice cave background. HERO: Crystal ice slot machine with frozen reels cracking open, gold coins and snowflakes bursting outward. Teal aurora borealis lighting the cave above. Ice shards catching light. Magical and premium. Winter jackpot aesthetic.'
     ];
     const v=isTestLab?testlabClassic:isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
     prompt=pick(v)+' Ultra detailed 8K. NO text. NO logos. NO buttons. Background art only.';
