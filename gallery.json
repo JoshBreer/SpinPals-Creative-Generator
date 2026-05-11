@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1778534569696C",
+    "game_name": "Custom",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778534569696C.jpg",
+    "created_at": "2026-05-11 21:22:49"
+  },
+  {
     "id": "cr-1778534046C928",
     "game_name": "N/A",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b0/4079a5a07ca56f1eff932ada25f24604be39c5b0d8e2f157c92636c11eae69.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T212348Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f693182711769239a369553e1a7c590c0979a6963a2719bf44888617037257c0",
     "created_at": "2026-03-30 21:23:01"
-  },
-  {
-    "id": "cr-1774905418866",
-    "game_name": "Pyramid King",
-    "format": "square",
-    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/52/f7fbe457c2656cd0b9e03ec63647c161e6a651dca07cd95381ffdd387161c2.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260330%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260330T211747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5b59daeb7a97d5d3ea6e31e8626481d3dab1a2c032c3c781443a9b081d617bc2",
-    "created_at": "2026-03-30 21:16:59"
   }
 ]
