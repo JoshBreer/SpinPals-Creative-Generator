@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19e186c7eda",
+    "game_name": "Sweet Bonanza",
+    "format": "portrait",
+    "offer_text": "Sign Up FREE — 100,000 GC + 1 SC",
+    "style": "Text Only",
+    "user_email": "josh@epicsweep.com",
+    "image_url": "fal_generated_portrait_image",
+    "created_at": "2026-05-11 19:02:19"
+  },
+  {
     "id": "cr-19e1828034c",
     "game_name": "Starburst XXXtreme",
     "format": "square",
