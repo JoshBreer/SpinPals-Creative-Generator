@@ -682,8 +682,15 @@ async function startChat(){
   },50);
   await delay(200);
 
-  // RMGS.ONLINE: show big client selector first
+  // RMGS.ONLINE: show client selector — but if client already chosen, go straight in
   if(currentUserEmail.endsWith('@rmgs.online')){
+    if(state.client){
+      // Client already selected — preserve it and go to start buttons
+      const savedClient=state.client;
+      state={client:savedClient,platform:null,format:null,style:null,game:null,offer:null,customInstructions:null};
+      showStartButtons();
+      return;
+    }
     showRmgsClientSelector();
     return;
   }
@@ -1183,7 +1190,7 @@ async function doQuickGenerate(){
 
   const qClientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
   const payload={game_name:randGame,format:randFormat,offer_text:randOffer.title,style:randStyle,user_email:currentUserEmail,platform:qClientPlatform};
-  await triggerWebhook(payload,getWebhook());
+  if(getWebhook())await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
@@ -1393,7 +1400,7 @@ async function doGenerate(){
   const clientPlatform=state.platform||(isWannaFlow()?'wannaparlay':isThrillzzFlow()?'thrillzz':isEpicSweepFlow()?'epicsweep':isMarioFlow()?state.platform||'betewin':'spinpals');
   const payload={game_name:state.game,format:state.format,offer_text:state.offer,style:state.style,user_email:currentUserEmail,platform:clientPlatform};
   if(state.customInstructions)payload.custom_instructions=state.customInstructions;
-  await triggerWebhook(payload,getWebhook());
+  if(getWebhook())await triggerWebhook(payload,getWebhook());
   incrementGenerationCount(currentUserEmail);
 
   const timerInterval=setInterval(()=>{const el=document.getElementById('elapsed');if(el)el.textContent=Math.floor((Date.now()-startTs)/1000)+'s elapsed';},1000);
@@ -1486,7 +1493,7 @@ async function doGenerate(){
             platform:clientPlatform,
             user_email:currentUserEmail
           };
-          triggerWebhook(emailPayload,getWebhook());
+          if(getWebhook())triggerWebhook(emailPayload,getWebhook());
         }
       }).catch(()=>{});
     }
@@ -2326,7 +2333,7 @@ function showResult(loadMsg,found){
 // FEEDBACK
 // ============================================================
 async function sendFeedback(feedback,imageData){
-  try{await fetch(getWebhook(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'creative_feedback',feedback:feedback,game_name:imageData.game_name,format:imageData.format,style:imageData.style,offer_text:imageData.offer_text,image_url:imageData.image_url,user_email:currentUserEmail}),mode:'no-cors'});}catch(e){}
+  try{if(getWebhook())await fetch(getWebhook(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'creative_feedback',feedback:feedback,game_name:imageData.game_name,format:imageData.format,style:imageData.style,offer_text:imageData.offer_text,image_url:imageData.image_url,user_email:currentUserEmail}),mode:'no-cors'});}catch(e){}
 }
 
 // ============================================================
