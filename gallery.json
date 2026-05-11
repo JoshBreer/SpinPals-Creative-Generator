@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19e1818aa46",
+    "game_name": "Crazy Time",
+    "format": "square",
+    "offer_text": "Daily Bonus Wheel — Free GC + SC Every Day",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4b/fe544ddf4378297723945b917af63853d7d4e143c2c299f897796b33005f5d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260511%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260511T173128Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e2fc4a2517067f7c8ce320d0b23568431783852153f7387f0acce2fbdc498d99",
+    "created_at": "2026-05-11 17:31:28"
+  },
+  {
     "id": "cr-19e17ca5d80",
     "game_name": "Plinko",
     "format": "portrait",
