@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19E194CF90F",
+    "game_name": "Crazy Time",
+    "format": "portrait",
+    "offer_text": "Daily Bonus Wheel — Free GC + SC Every Day",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/8e/22d249ae943089de3eb9e14d87f62969f13f411bad6547979fa6b3deee0cd9.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260511%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260511T230827Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=89151b9645904d62a95beaa595c6745da1d43af959d135ea124925954cb2a973",
+    "created_at": "2026-05-11 23:08:27"
+  },
+  {
     "id": "cr-19E1944A736",
     "game_name": "Sweet Bonanza",
     "format": "portrait",
