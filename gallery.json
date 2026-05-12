@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17786112326ACA",
+    "game_name": "Joker's Jewels",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17786112326ACA.jpg",
+    "created_at": "2026-05-12 18:40:32"
+  },
+  {
+    "id": "cr-1778611228F2E4",
+    "game_name": "Joker's Jewels",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778611228F2E4.jpg",
+    "created_at": "2026-05-12 18:40:28"
+  },
+  {
     "id": "cr-1778608463352A",
     "game_name": "Coins of Leprechaun",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ef/534ac406278ed35236b6fdb0a376812973f574299471cd9d1576d1a82c4f42.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T043658Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7e03f7d036376c90a455ffb5d5ad3e6778c62192e53ddc063278a03a2a162f91",
     "created_at": "2026-04-14 04:35:47"
-  },
-  {
-    "id": "cr-177614078534CA",
-    "game_name": "Book of Dead",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Surprise me",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7e/3f580c10faefea44488ce3f5946fe07188a67784f094157cb09a6ea438dc00.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T042707Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ffeaca617597523e88556ccbc74bbddb640f2bc87b0295fb7d4bc9b7580bf977",
-    "created_at": "2026-04-14 04:26:25"
-  },
-  {
-    "id": "cr-17761232134F10",
-    "game_name": "Fishing Kingdom",
-    "format": "square",
-    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f2/82c9b78f5f01b2ba25e11ac9aa7d514a23f09d6edf3dfefeba0cc67f36eacf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T233416Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=da5f0ddc73b7f1615bdfe42d5a5af121d41c4b3c0e74a129eab29d5d43f03947",
-    "created_at": "2026-04-13 23:33:33"
   }
 ]
