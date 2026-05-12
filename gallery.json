@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-177860815730A0",
+    "game_name": "Hot Pepper",
+    "format": "portrait",
+    "offer_text": "VIP Exclusive: 100 SC + 1M GC Package",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-177860815730A0.jpg",
+    "created_at": "2026-05-12 17:49:17"
+  },
+  {
     "id": "cr-17786058110B75P",
     "game_name": "N/A",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b4/73e749fb3a6f6ee35cffb371be1659755586dc38a8943418fa90efe8bef760.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260401%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260401T192758Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4c8e034c89a253560d7000b2251016a20d6dcbef4357412bd4726d8e4aa3625d",
     "created_at": "2026-04-01 19:27:11"
-  },
-  {
-    "id": "cr-177507101201B5",
-    "game_name": "Big Juan",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Surprise me",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/64/76b7a74019fccfc85c91c7f2840f9296c0375e5b0fdb3fead6d64f4be8da62.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260401%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260401T191738Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1453d57a6b9249dd6346f395cc7f59fdd805e2211b2dacfd364245ff7120f21d",
-    "created_at": "2026-04-01 19:16:52"
   }
 ]
