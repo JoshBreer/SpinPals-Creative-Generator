@@ -20,6 +20,16 @@
     "created_at": "2026-05-12 17:54:13"
   },
   {
+    "id": "cr-17786084448B1C",
+    "game_name": "Text Only",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Text Only",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17786084448B1C.jpg",
+    "created_at": "2026-05-12 17:54:04"
+  },
+  {
     "id": "cr-177860815730A0",
     "game_name": "Hot Pepper",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f2/82c9b78f5f01b2ba25e11ac9aa7d514a23f09d6edf3dfefeba0cc67f36eacf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T233416Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=da5f0ddc73b7f1615bdfe42d5a5af121d41c4b3c0e74a129eab29d5d43f03947",
     "created_at": "2026-04-13 23:33:33"
-  },
-  {
-    "id": "cr-17761156754AE5",
-    "game_name": "Hot Pepper",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Fire/Inferno",
-    "user_email": "",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/26/465a7305a246100c3abca6d299e957719019534da1bd98158d8d7337a062fd.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260413%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260413T212838Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a8b2b6cacbc71601d9837c6c7ec50e1585359be78183bf4f034e0195616ca9fb",
-    "created_at": "2026-04-13 21:27:55"
   }
 ]
