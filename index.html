@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v61 — composite rewrite 2026-05-13 -->
+<!-- RMGS Creative Studio v62 — no-box floating text 2026-05-13 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1986,23 +1986,17 @@ function buildFalFallbackPrompt(){
 // ── CANVAS HELPERS ───────────────────────────────────────────────────────────
 function drawRoundRect(ctx,x,y,w,h,r){
   ctx.beginPath();
-  ctx.moveTo(x+r,y);
-  ctx.lineTo(x+w-r,y);
-  ctx.arcTo(x+w,y,x+w,y+h,r);
-  ctx.lineTo(x+w,y+h-r);
-  ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
-  ctx.lineTo(x+r,y+h);
-  ctx.arcTo(x,y+h,x,y+h-r,r);
-  ctx.lineTo(x,y+r);
-  ctx.arcTo(x,y,x+r,y,r);
-  ctx.closePath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();
 }
 
-// Fit text to maxWidth — returns {fontSize, lines}
-function fitText(ctx,text,maxW,startSize,minSize,font){
+// Auto-fit text — shrinks font until all words fit in ≤3 lines within maxW
+function fitText(ctx,text,maxW,startSize,minSize){
   let size=startSize;
   while(size>=minSize){
-    ctx.font=`900 ${size}px ${font}`;
+    ctx.font=`900 ${size}px Impact,'Arial Black',sans-serif`;
     const words=text.split(' ');
     let lines=[],line='';
     words.forEach(w=>{
@@ -2011,166 +2005,134 @@ function fitText(ctx,text,maxW,startSize,minSize,font){
       else line=test;
     });
     if(line)lines.push(line);
-    // Accept if 3 lines or fewer, or we've hit min
     if(lines.length<=3||size<=minSize)return{fontSize:size,lines};
-    size=Math.floor(size*0.88);
+    size=Math.floor(size*0.87);
   }
 }
 
-// Draw text with stroke + gradient fill + shine — the "game ad" look
-function drawAdText(ctx,lines,fontSize,startY,lineH,W,gradColors,strokeW){
-  const font=`900 ${fontSize}px Impact,'Arial Black',sans-serif`;
-  ctx.font=font;
+// Render offer text — floating directly on the scene, no box, like the reference ads
+// Multi-pass: deep shadow pool → thick stroke → gradient fill → shine
+function renderOfferText(ctx,lines,fontSize,startY,lineH,W,isRealistic,isClassic){
+  ctx.font=`900 ${fontSize}px Impact,'Arial Black',sans-serif`;
   ctx.textAlign='center';
   ctx.textBaseline='top';
+
   lines.forEach((ln,i)=>{
     const y=startY+(i*lineH);
-    // 1. Outer glow pass
-    ctx.shadowColor=gradColors[1]||'rgba(255,200,0,0.9)';
-    ctx.shadowBlur=fontSize*0.45;
+
+    // Pass 1: deep drop shadow for depth
+    ctx.shadowColor='rgba(0,0,0,0.95)';
+    ctx.shadowBlur=fontSize*0.18;
+    ctx.shadowOffsetX=fontSize*0.04;
+    ctx.shadowOffsetY=fontSize*0.07;
     ctx.fillStyle='rgba(0,0,0,0)';
     ctx.fillText(ln,W/2,y);
-    ctx.shadowBlur=0;
-    // 2. Thick black stroke
-    ctx.strokeStyle='rgba(0,0,0,0.95)';
-    ctx.lineWidth=strokeW||fontSize*0.14;
+    ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+
+    // Pass 2: thick black stroke — gives the "game logo" outline look
+    ctx.strokeStyle='rgba(0,0,0,1)';
+    ctx.lineWidth=fontSize*0.16;
     ctx.lineJoin='round';
     ctx.strokeText(ln,W/2,y);
-    // 3. Gradient fill
+
+    // Pass 3: colored outer glow (style-specific)
+    if(isRealistic){
+      ctx.shadowColor='rgba(255,180,0,0.8)';
+    } else if(isClassic){
+      ctx.shadowColor='rgba(80,220,255,0.75)';
+    } else {
+      ctx.shadowColor='rgba(0,255,120,0.75)';
+    }
+    ctx.shadowBlur=fontSize*0.5;
+    ctx.fillStyle='rgba(0,0,0,0)';
+    ctx.fillText(ln,W/2,y);
+    ctx.shadowBlur=0;ctx.shadowColor='transparent';
+
+    // Pass 4: gradient fill — white top → rich color → warm bottom
     const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
-    gradColors.forEach((c,idx)=>grd.addColorStop(idx/(gradColors.length-1),c));
+    if(isRealistic){
+      grd.addColorStop(0,'#FFFFFF');
+      grd.addColorStop(0.18,'#FFF8C0');
+      grd.addColorStop(0.5,'#FFD700');
+      grd.addColorStop(0.82,'#FF9900');
+      grd.addColorStop(1,'#FFD700');
+    } else if(isClassic){
+      grd.addColorStop(0,'#FFFFFF');
+      grd.addColorStop(0.15,'#E0F8FF');
+      grd.addColorStop(0.5,'#00DDFF');
+      grd.addColorStop(0.82,'#0088FF');
+      grd.addColorStop(1,'#00CCFF');
+    } else {
+      // Electric / sports
+      grd.addColorStop(0,'#FFFFFF');
+      grd.addColorStop(0.18,'#FFFE80');
+      grd.addColorStop(0.5,'#FFD700');
+      grd.addColorStop(0.82,'#FF8C00');
+      grd.addColorStop(1,'#FFD700');
+    }
     ctx.fillStyle=grd;
     ctx.fillText(ln,W/2,y);
-    // 4. Shine highlight — top 40% of letter
-    const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.42);
-    shine.addColorStop(0,'rgba(255,255,255,0.62)');
+
+    // Pass 5: specular shine — top 38% of letterforms
+    const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.38);
+    shine.addColorStop(0,'rgba(255,255,255,0.72)');
     shine.addColorStop(1,'rgba(255,255,255,0)');
     ctx.fillStyle=shine;
     ctx.fillText(ln,W/2,y);
   });
-  ctx.shadowBlur=0;ctx.shadowColor='transparent';
+  ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;ctx.shadowColor='transparent';
 }
 
-// Draw the styled offer banner — dark panel with bright border, matching reference images
-function drawOfferBanner(ctx,offerLines,offerFontSize,W,H,isPortrait,isRealistic){
-  const lineH=offerFontSize*1.18;
-  const textBlockH=offerLines.length*lineH;
-  const padV=isPortrait?38:28;
-  const padH=isPortrait?60:44;
-  const bannerH=textBlockH+padV*2;
-  const bannerW=isPortrait?W*0.88:W*0.82;
-  const bannerX=(W-bannerW)/2;
-  // Position: lower-middle of image — 52% down for portrait, 48% for square
-  const bannerY=isPortrait?H*0.535:H*0.50;
-
-  // Style: Realistic = dark gold parchment / Classic = deep blue neon ribbon
-  const isClassic=state.style==='Classic';
-
-  // Outer glow
-  ctx.shadowColor=isRealistic?'rgba(255,200,80,0.55)':'rgba(0,180,255,0.55)';
-  ctx.shadowBlur=isPortrait?40:30;
-  drawRoundRect(ctx,bannerX-4,bannerY-4,bannerW+8,bannerH+8,isPortrait?22:16);
-  ctx.fillStyle=isRealistic?'rgba(180,130,30,0.3)':'rgba(0,100,200,0.3)';
-  ctx.fill();
-  ctx.shadowBlur=0;ctx.shadowColor='transparent';
-
-  // Main banner body
-  drawRoundRect(ctx,bannerX,bannerY,bannerW,bannerH,isPortrait?18:13);
-  const bgGrd=ctx.createLinearGradient(0,bannerY,0,bannerY+bannerH);
-  if(isRealistic){
-    bgGrd.addColorStop(0,'rgba(30,20,0,0.93)');
-    bgGrd.addColorStop(0.5,'rgba(60,40,0,0.90)');
-    bgGrd.addColorStop(1,'rgba(20,12,0,0.95)');
-  } else {
-    bgGrd.addColorStop(0,'rgba(0,20,80,0.95)');
-    bgGrd.addColorStop(0.5,'rgba(0,40,120,0.92)');
-    bgGrd.addColorStop(1,'rgba(0,15,60,0.97)');
-  }
-  ctx.fillStyle=bgGrd;
-  ctx.fill();
-
-  // Border — two strokes: thick outer dim, thin inner bright
-  drawRoundRect(ctx,bannerX,bannerY,bannerW,bannerH,isPortrait?18:13);
-  ctx.strokeStyle=isRealistic?'rgba(255,200,60,0.9)':'rgba(0,200,255,0.9)';
-  ctx.lineWidth=isPortrait?5:4;
-  ctx.stroke();
-  drawRoundRect(ctx,bannerX+5,bannerY+5,bannerW-10,bannerH-10,isPortrait?14:10);
-  ctx.strokeStyle=isRealistic?'rgba(255,240,160,0.4)':'rgba(150,240,255,0.35)';
-  ctx.lineWidth=isPortrait?2:1.5;
-  ctx.stroke();
-
-  // Offer text inside banner
-  const textY=bannerY+padV;
-  const offerGrad=isRealistic
-    ?['#FFFFFF','#FFF8DC','#FFD700','#FFA500','#FFD700']
-    :['#FFFFFF','#E0F4FF','#00CFFF','#0088FF','#00CFFF'];
-  drawAdText(ctx,offerLines,offerFontSize,textY,lineH,W,offerGrad,offerFontSize*0.11);
-
-  return bannerY+bannerH; // return bottom edge for CTA positioning
-}
-
-// Draw the CTA button — styled pill matching reference image quality
-function drawCTAButton(ctx,ctaText,W,H,isPortrait,topEdge,isRealistic){
-  const btnW=isPortrait?W*0.72:W*0.52;
-  const btnH=isPortrait?H*0.072:H*0.098;
+// CTA button — clean pill, style-matched, no chunky boxes
+function renderCTAButton(ctx,label,W,H,isPortrait,topEdge,isRealistic,isClassic){
+  const btnW=isPortrait?W*0.68:W*0.5;
+  const btnH=isPortrait?Math.round(H*0.065):Math.round(H*0.088);
   const btnR=btnH/2;
   const btnX=(W-btnW)/2;
-  const gap=isPortrait?H*0.022:H*0.028;
-  const btnY=topEdge+gap;
+  const gap=isPortrait?H*0.024:H*0.030;
+  const btnY=Math.min(topEdge+gap, H*0.865-btnH);
 
-  // Clamp so button never goes below 88% of image height
-  const maxBtnY=H*0.88-btnH;
-  const finalBtnY=Math.min(btnY,maxBtnY);
+  // Colors: Realistic = gold, Classic = green, Electric/sports = gold-green
+  const c0=isRealistic?'#FFE033':'#1AFF6E';
+  const c1=isRealistic?'#FFB300':'#16D458';
+  const c2=isRealistic?'#C47A00':'#0E9040';
+  const c3=isRealistic?'#7A4200':'#065E28';
+  const glowC=isRealistic?'rgba(255,175,0,0.75)':'rgba(0,240,90,0.75)';
+  const borderC=isRealistic?'rgba(255,240,130,0.9)':'rgba(140,255,170,0.85)';
 
-  // Outer glow halo
-  ctx.shadowColor=isRealistic?'rgba(255,180,0,0.7)':'rgba(0,255,100,0.7)';
-  ctx.shadowBlur=isPortrait?55:40;
-  drawRoundRect(ctx,btnX-6,finalBtnY-6,btnW+12,btnH+12,btnR+6);
-  ctx.fillStyle=isRealistic?'rgba(255,160,0,0.18)':'rgba(0,240,80,0.18)';
-  ctx.fill();
+  // Outer glow bloom
+  ctx.shadowColor=glowC;
+  ctx.shadowBlur=isPortrait?52:38;
+  drawRoundRect(ctx,btnX-5,btnY-5,btnW+10,btnH+10,btnR+5);
+  ctx.fillStyle='rgba(0,0,0,0)';ctx.fill();
   ctx.shadowBlur=0;ctx.shadowColor='transparent';
 
-  // Button body gradient
-  drawRoundRect(ctx,btnX,finalBtnY,btnW,btnH,btnR);
-  const btnGrd=ctx.createLinearGradient(0,finalBtnY,0,finalBtnY+btnH);
-  if(isRealistic){
-    btnGrd.addColorStop(0,'#FFE44A');
-    btnGrd.addColorStop(0.35,'#FFC200');
-    btnGrd.addColorStop(0.7,'#E08000');
-    btnGrd.addColorStop(1,'#B85C00');
-  } else {
-    btnGrd.addColorStop(0,'#22FF7A');
-    btnGrd.addColorStop(0.35,'#16C955');
-    btnGrd.addColorStop(0.7,'#0E8C38');
-    btnGrd.addColorStop(1,'#075C22');
-  }
-  ctx.fillStyle=btnGrd;
-  ctx.fill();
+  // Button body
+  drawRoundRect(ctx,btnX,btnY,btnW,btnH,btnR);
+  const bg=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
+  bg.addColorStop(0,c0);bg.addColorStop(0.38,c1);
+  bg.addColorStop(0.72,c2);bg.addColorStop(1,c3);
+  ctx.fillStyle=bg;ctx.fill();
 
-  // Border ring
-  drawRoundRect(ctx,btnX,finalBtnY,btnW,btnH,btnR);
-  ctx.strokeStyle=isRealistic?'rgba(255,240,120,0.85)':'rgba(150,255,180,0.7)';
-  ctx.lineWidth=isPortrait?4:3;
-  ctx.stroke();
+  // Crisp border
+  drawRoundRect(ctx,btnX,btnY,btnW,btnH,btnR);
+  ctx.strokeStyle=borderC;ctx.lineWidth=isPortrait?3.5:2.5;ctx.stroke();
 
-  // Shine — top half highlight
-  drawRoundRect(ctx,btnX+4,finalBtnY+3,btnW-8,btnH*0.46,btnR-4);
-  ctx.fillStyle='rgba(255,255,255,0.28)';
-  ctx.fill();
+  // Gloss shine — top 44%
+  drawRoundRect(ctx,btnX+3,btnY+2,btnW-6,btnH*0.44,btnR);
+  ctx.fillStyle='rgba(255,255,255,0.30)';ctx.fill();
 
-  // Button label
-  const btnFontSize=isPortrait?Math.round(btnH*0.48):Math.round(btnH*0.46);
-  ctx.font=`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.shadowColor='rgba(0,0,0,0.7)';
-  ctx.shadowBlur=isPortrait?10:8;
-  ctx.shadowOffsetY=isPortrait?4:3;
+  // Label
+  const fs=isPortrait?Math.round(btnH*0.47):Math.round(btnH*0.45);
+  ctx.font=`900 ${fs}px Impact,'Arial Black',sans-serif`;
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.shadowColor='rgba(0,0,0,0.75)';
+  ctx.shadowBlur=8;ctx.shadowOffsetY=isPortrait?3:2;
   ctx.fillStyle='#FFFFFF';
-  ctx.fillText(ctaText,W/2,finalBtnY+btnH/2);
+  ctx.fillText(label,W/2,btnY+btnH/2);
   ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.shadowColor='transparent';
 
-  return finalBtnY+btnH;
+  return btnY+btnH;
 }
 
 // ── MAIN COMPOSITE FUNCTION ──────────────────────────────────────────────────
@@ -2181,6 +2143,7 @@ async function compositeTextOnImage(bgImageUrl){
     const W=1080;
     const H=isPortrait?1920:1080;
     const isRealistic=state.style==='Realistic';
+    const isClassic=state.style==='Classic';
     const isTextOnly=state.style==='Text Only';
     const isTurkish=state.platform==='bankobet';
 
@@ -2202,39 +2165,36 @@ async function compositeTextOnImage(bgImageUrl){
       // ── 1. BACKGROUND ────────────────────────────────────────
       ctx.drawImage(img,0,0,W,H);
 
+      // ── 2. OVERLAYS — only for styled modes ─────────────────
       if(!isTextOnly){
-        // Subtle edge vignette — don't kill the image, just frame it
-        const vig=ctx.createRadialGradient(W/2,H*0.42,H*0.18,W/2,H*0.42,H*0.72);
+        // Light edge vignette — frame the image without killing it
+        const vig=ctx.createRadialGradient(W/2,H*0.40,H*0.15,W/2,H*0.40,H*0.76);
         vig.addColorStop(0,'rgba(0,0,0,0)');
-        vig.addColorStop(0.7,'rgba(0,0,0,0.08)');
-        vig.addColorStop(1,'rgba(0,0,0,0.38)');
-        ctx.fillStyle=vig;
-        ctx.fillRect(0,0,W,H);
+        vig.addColorStop(0.68,'rgba(0,0,0,0.06)');
+        vig.addColorStop(1,'rgba(0,0,0,0.42)');
+        ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
 
-        // Bottom dark zone — ensures banner/button area is readable
-        const botGrad=ctx.createLinearGradient(0,H*0.46,0,H);
-        botGrad.addColorStop(0,'rgba(0,0,0,0)');
-        botGrad.addColorStop(0.28,'rgba(0,0,0,0.35)');
-        botGrad.addColorStop(0.6,'rgba(0,0,0,0.70)');
-        botGrad.addColorStop(1,'rgba(0,0,0,0.88)');
-        ctx.fillStyle=botGrad;
-        ctx.fillRect(0,H*0.46,W,H*0.54);
+        // Bottom fade — the text zone needs to be readable
+        // Starts at ~48% and deepens so text sits clean on dark
+        const botFade=ctx.createLinearGradient(0,H*0.44,0,H*0.96);
+        botFade.addColorStop(0,'rgba(0,0,0,0)');
+        botFade.addColorStop(0.22,'rgba(0,0,0,0.28)');
+        botFade.addColorStop(0.52,'rgba(0,0,0,0.62)');
+        botFade.addColorStop(0.80,'rgba(0,0,0,0.80)');
+        botFade.addColorStop(1,'rgba(0,0,0,0.88)');
+        ctx.fillStyle=botFade;ctx.fillRect(0,H*0.44,W,H*0.56);
       }
 
-      // ── 2. TEXT ONLY MODE — fill frame with big text, no banner/button ──
+      // ── 3. TEXT ONLY MODE ────────────────────────────────────
       if(isTextOnly){
-        const maxW=W*0.86;
-        const {fontSize,lines}=fitText(ctx,offerText,maxW,isPortrait?240:160,60,'Impact,Arial Black,sans-serif');
-        const lineH=fontSize*1.15;
+        const {fontSize,lines}=fitText(ctx,offerText,W*0.86,isPortrait?240:160,60);
+        const lineH=fontSize*1.14;
         const totalH=lines.length*lineH;
         const startY=(H-totalH)/2;
-        drawAdText(ctx,lines,fontSize,startY,lineH,W,['#FFFFFF','#FFFFFF'],fontSize*0.1);
-        // Disclaimer bar
-        const barH=isPortrait?60:48;
-        ctx.fillStyle='rgba(0,0,0,0.88)';
-        ctx.fillRect(0,H-barH,W,barH);
-        ctx.fillStyle='rgba(255,255,255,0.12)';
-        ctx.fillRect(0,H-barH,W,2);
+        renderOfferText(ctx,lines,fontSize,startY,lineH,W,false,false);
+        const barH=isPortrait?58:46;
+        ctx.fillStyle='rgba(0,0,0,0.90)';ctx.fillRect(0,H-barH,W,barH);
+        ctx.fillStyle='rgba(255,255,255,0.12)';ctx.fillRect(0,H-barH,W,2);
         ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
         ctx.fillStyle='rgba(255,255,255,0.88)';
         ctx.textAlign='center';ctx.textBaseline='middle';
@@ -2242,22 +2202,24 @@ async function compositeTextOnImage(bgImageUrl){
         return resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
       }
 
-      // ── 3. OFFER BANNER ──────────────────────────────────────
-      // Fit offer text to banner width
-      const bannerTextMaxW=isPortrait?W*0.78:W*0.70;
-      const offerStartSize=isPortrait?118:82;
-      const {fontSize:offerFontSize,lines:offerLines}=fitText(ctx,offerText,bannerTextMaxW,offerStartSize,isPortrait?56:40,'Impact,Arial Black,sans-serif');
-      const bannerBottom=drawOfferBanner(ctx,offerLines,offerFontSize,W,H,isPortrait,isRealistic);
+      // ── 4. OFFER TEXT — floating on scene, no box ────────────
+      // Portrait: starts at 52% down. Square: 46% down.
+      const offerMaxW=isPortrait?W*0.86:W*0.80;
+      const offerStart=isPortrait?148:100;
+      const offerMin=isPortrait?62:44;
+      const {fontSize:offerFontSize,lines:offerLines}=fitText(ctx,offerText,offerMaxW,offerStart,offerMin);
+      const offerLineH=offerFontSize*1.16;
+      const offerBlockH=offerLines.length*offerLineH;
+      const offerY=isPortrait?H*0.525:H*0.455;
+      renderOfferText(ctx,offerLines,offerFontSize,offerY,offerLineH,W,isRealistic,isClassic);
 
-      // ── 4. CTA BUTTON ────────────────────────────────────────
-      const btnBottom=drawCTAButton(ctx,ctaText,W,H,isPortrait,bannerBottom,isRealistic);
+      // ── 5. CTA BUTTON ────────────────────────────────────────
+      const btnBottom=renderCTAButton(ctx,ctaText,W,H,isPortrait,offerY+offerBlockH,isRealistic,isClassic);
 
-      // ── 5. DISCLAIMER BAR ────────────────────────────────────
-      const barH=isPortrait?58:46;
-      ctx.fillStyle='rgba(0,0,0,0.92)';
-      ctx.fillRect(0,H-barH,W,barH);
-      ctx.fillStyle='rgba(255,255,255,0.13)';
-      ctx.fillRect(0,H-barH,W,2);
+      // ── 6. DISCLAIMER BAR ────────────────────────────────────
+      const barH=isPortrait?56:44;
+      ctx.fillStyle='rgba(0,0,0,0.92)';ctx.fillRect(0,H-barH,W,barH);
+      ctx.fillStyle='rgba(255,255,255,0.12)';ctx.fillRect(0,H-barH,W,2);
       ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
       ctx.fillStyle='rgba(255,255,255,0.88)';
       ctx.textAlign='center';ctx.textBaseline='middle';
