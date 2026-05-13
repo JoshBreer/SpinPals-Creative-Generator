@@ -1783,24 +1783,24 @@ function buildFalFallbackPrompt(){
   let prompt='';
 
   // TestLab realistic prompts — defined at top level so all style blocks can access
-  // TestLab Realistic — 8 unique cinematic scenes
+  // TestLab Realistic — dramatic cinematic, NOT boring empty rooms
   const realisticTestlab=[
-    // Scene 1: Aerial casino resort
-    'Cinematic aerial photograph of a luxury Las Vegas casino resort at night from above, pools and lights glowing, strip visible in background, teal rooftop lighting, dramatic. DJI X9 aerial camera. No people visible.',
-    // Scene 2: Poker table macro
-    'Extreme close-up macro photograph of poker chips and playing cards on green felt. Ace of spades sharp in foreground, chips stacked in bokeh behind. Single overhead spotlight. Shot on Leica 100mm macro f/2. Dark moody atmosphere.',
-    // Scene 3: Roulette wheel motion blur
-    'Long exposure photograph of a roulette wheel spinning, ball caught mid-motion as a streak of light. Rich teal and gold light trails. Dark atmospheric casino background. Shot on Sony A7R V, 50mm, 1/15s. Fine art photography.',
-    // Scene 4: Dice mid-air
-    'High speed action photograph of casino dice frozen mid-air just above a craps table, showing lucky numbers, perfect studio strobe lighting, dark background with teal accent light. Shot on Nikon Z9 1/8000s. Cinematic product shot.',
-    // Scene 5: Slot machine glow
-    'Moody atmospheric photograph of a single modern slot machine screen glowing in a dark casino, the light illuminating the surrounding darkness dramatically. No people. Cinematic teal color grade. Shot on ARRI Alexa, 35mm, T1.4.',
-    // Scene 6: Jackpot coins
-    'Dramatic photograph of gold coins cascading and caught mid-fall against pure black background. High speed strobe photography. Each coin perfectly sharp. Shot on Hasselblad X2D, 120mm macro. Luxury advertising quality.',
-    // Scene 7: Baccarat table
-    'Wide angle cinematic shot of an empty premium baccarat table in a private VIP room. Dramatic overhead chandelier. Dark oak paneling. Gold and green. Quiet luxury. No people. Shot on ARRI Alexa Mini LF. Architectural photography.',
-    // Scene 8: Card shuffle freeze
-    'High speed photograph of playing cards caught mid-shuffle, a perfect arc of cards frozen in air. Pure dark background. Single dramatic side light creating deep shadows on card faces. Shot on Phase One IQ4, 80mm, strobe. Museum quality.'
+    // Scene 1: Waterfall of coins — dramatic product shot
+    'Hyper-cinematic product photography. Thousands of gold casino coins cascading down like a waterfall, caught in mid-fall by 1/8000s strobe. Each coin perfectly sharp catching light. Deep black background with single dramatic overhead spotlight creating intense shadows. The coins fill the entire frame. Shot on Hasselblad X2D 150MP, 120mm macro. Luxury advertising campaign. Rich warm gold tones against pure black.',
+    // Scene 2: Roulette in motion — dramatic blur
+    'Award-winning casino photography. Roulette wheel spinning at speed, ball a bright streak of white light orbiting the blur of red and black. Rich teal and gold light trails from casino lights. Dark atmospheric smoky background with depth. Shot on Sony A7R V, 50mm f/1.2, 1/8s, ISO 800. Motion and energy. The colors glow against darkness. Cinematic color grade by Roger Deakins.',
+    // Scene 3: Playing card explosion — frozen chaos  
+    'High speed strobe photograph. Entire deck of playing cards exploding outward in perfect 360 degree burst, frozen perfectly at apex. Each card sharp, suits visible, fanned in perfect arcs. Deep black background. Single hard rim light from left catching card edges. Shot on Phase One IQ4, 80mm, Broncolor strobe 1/10000s. Museum quality fine art photography.',
+    // Scene 4: Chip tower collapsing
+    'Dramatic high speed photograph. Tower of casino chips — reds blues greens — caught at exact moment of falling, chips in perfect chaotic mid-air positions, some spinning edge-on. Each chip perfectly sharp catching studio strobe. Deep velvet black background. Shot on Nikon Z9, 105mm macro, f/8, 1/8000s. Clean and dramatic. Luxury brand quality.',
+    // Scene 5: VIP poker room atmosphere
+    'Cinematic wide angle establishing shot of a private VIP poker room. Dramatic volumetric light from single overhead pendant lamp illuminating table. Deep shadows everywhere. Rich dark leather and mahogany. Green felt glowing under light. Playing cards and chips artfully arranged. Atmospheric haze. Shot on ARRI Alexa 35, 18mm Zeiss, T2.8. Martin Scorsese film quality. No people.',
+    // Scene 6: Slot machine jackpot glow
+    'Cinematic close-up of slot machine display screen at jackpot moment. Screen emitting intense golden light into surrounding darkness. Motion blur on spinning reels transitioning to three locked 7s. Coins beginning to pour from tray catching screen light. Shot on RED Monstro 8K, 85mm, T1.4. Rich teal and gold color grade. Dramatic contrast. No people.',
+    // Scene 7: Dice macro drama
+    'Extreme macro photography. Single red casino die, face showing six, shot from extreme low angle on black mirror surface creating perfect reflection below. Every dot perfectly sharp. Hard side light creating dramatic shadow. Background is pure black bokeh of casino lights. Shot on Canon R5, 100mm macro, f/4, ring flash. Advertising photography quality.',
+    // Scene 8: Gold coins rain against dark
+    'Fine art photograph. Gold coins frozen in perfect rain falling from top to bottom of frame. Deep black background. Single slit of light from the side illuminating each coin differently — some face up, some edge-on, creating depth. Rich golden tones. Slight motion blur on a few coins for sense of movement. Shot on Leica SL2, 90mm Summicron, strobe. Editorial luxury quality.'
   ];
 
   if(style==='Classic'){
@@ -1822,25 +1822,24 @@ function buildFalFallbackPrompt(){
       'Energetic sports illustration. Very dark background. Large football with golden impact lines radiating outward. Multiple sport elements orbiting: basketball, tennis ball. Red energy streaks as accent. Gold center explosion. Premium mobile sports app quality.',
       'Bold sports betting art. Dark navy. Football stadium aerial view in background blur. Large golden trophy dominant center glowing warm. Sports balls and championship medals floating. Turkish sports energy. Premium brand quality.'
     ];
-    // TestLab Classic — 8 completely different scenes, each with unique energy
-    const gameRef=(state.game&&state.game!=='N/A')?state.game:'slots';
+    // TestLab Classic — Sweet Bonanza style: BUSY, chaotic, colorful cartoon chaos
     const testlabClassic=[
-      // Scene 1: Dragon slot — fire and fantasy
-      '3D cartoon illustration, very dark background. HERO: A massive emerald dragon coiled around a glowing golden slot machine, fire breath illuminating the scene in orange and teal. Gold coins raining from above. Jewels and gems floating. Mobile game splash screen quality. Rich deep colors. Ultra detailed.',
-      // Scene 2: Space/sci-fi slot
-      '3D illustration, deep space dark background. HERO: Futuristic chrome slot machine floating in space, neon teal glow, reels showing planets and stars. Asteroid field of gold coins surrounding it. Galaxy nebula in background purple and teal. Electric sparks on reels. Premium sci-fi game art.',
-      // Scene 3: Wild West gold rush
-      '3D cartoon art, dark brown-black background. HERO: Wild West saloon slot machine covered in gold dust, sheriff star badges and playing cards flying outward. Gold coins and nuggets exploding like a mine blast. Teal and gold color scheme. Dynamic diagonal composition. AAA game art.',
-      // Scene 4: Ocean/underwater treasure
-      '3D illustration, very dark deep ocean background. HERO: Treasure chest overflowing with gold coins, surrounded by glowing slot machine reels showing fish and anchors. Bioluminescent teal underwater glow. Bubbles of coins rising upward. Coral and pearls scattered. Cinematic underwater lighting.',
-      // Scene 5: Ancient Egypt jackpot
-      '3D cartoon illustration, dark golden-black background. HERO: Giant golden scarab beetle on a slot machine, pyramid silhouettes behind, Eye of Horus symbols glowing teal on reels. Papyrus scrolls and Egyptian gold coins exploding outward. Mystical glow. Premium illustrated quality.',
-      // Scene 6: Neon city slots
-      '3D illustration, night city dark background. HERO: Massive neon-lit slot machine towering like a skyscraper with teal and gold light trails, city lights bokeh below. Card suits and lucky 7s flying. Urban energy. Blade Runner aesthetic meets casino. Ultra premium art.',
-      // Scene 7: Volcanic jackpot
-      '3D cartoon art, very dark volcanic background. HERO: Slot machine sitting on a lava platform, erupting volcano behind sending gold coins skyward like lava. Teal electric lightning in dark sky. Glowing ember particles. Molten gold dripping from reels showing jackpot. Epic dramatic scene.',
-      // Scene 8: Ice palace casino
-      '3D illustration, deep dark ice cave background. HERO: Crystal ice slot machine with frozen reels cracking open, gold coins and snowflakes bursting outward. Teal aurora borealis lighting the cave above. Ice shards catching light. Magical and premium. Winter jackpot aesthetic.'
+      // Scene 1: Candy/Sweet Bonanza style
+      'Extremely busy vibrant cartoon illustration. Bright colorful candy and sweets theme. Overflowing pile of lollipops watermelons grapes plums bananas hearts bursting from center. Thick cartoon outlines. Rainbow gradient background deep purple to hot pink. Scattered gold coins everywhere. Spinning star bursts and sparkles in every corner. Confetti explosion. Each candy catches bright studio light with specular highlights. SO MUCH HAPPENING. Pragmatic Play Sweet Bonanza mobile game art style. Ultra detailed 8K.',
+      // Scene 2: Fruit machine chaos
+      'Insanely detailed cartoon fruit slot illustration. Deep navy to purple background. Massive watermelons grapes cherries lemons oranges EXPLODING outward from center slot machine reels. Each fruit oversized and cartoonishly perfect with thick black outlines. Gold coins showering from all angles. Rainbow light beams shooting from behind. Star clusters. Neon glow on every element. Wild symbols flying. Jam-packed composition. Mobile casino game art. 8K ultra detailed.',
+      // Scene 3: Aztec treasure explosion  
+      'Hyper-detailed cartoon treasure explosion. Dark golden atmospheric background. Aztec gold coins masks and gems BURSTING outward in all directions. Glowing sun symbols. Jade green snakes and serpents as decorative borders. Golden calendar wheels. Jewels — emeralds rubies sapphires — flying everywhere at different sizes. Thick cartoon outlines on everything. Every inch of frame filled. Rich saturated colors. Busy and exciting. AAA mobile game loading screen quality.',
+      // Scene 4: Norse/Viking riches  
+      'Extremely busy cartoon Norse mythology illustration. Dark stormy sky background with lightning. Giant Viking ship in background. Overflowing treasure chest center spilling gold coins axes helmets and runes. Thor hammer spinning. Wolves and ravens as small details. Ravens carrying coins. Lightning bolts framing scene. Golden runic symbols everywhere. Cartoon style thick outlines vivid colors. Every inch packed. Epic and dramatic. Infinity Reels quality.',
+      // Scene 5: Japanese fortune 
+      'Wildly colorful Japanese fortune carnival illustration. Deep red and black background with gold. Koi fish swimming through cascading gold coins. Lucky cats waving. Cherry blossom petals mixed with yen coins floating. Daruma dolls and fans as accent pieces. Maneki neko golden figures at sides. Fireworks explosions. Lanterns glowing. Dragon curling around frame edge. Overloaded composition. Thick cartoon outlines. Rich saturated red gold and white. 8K detailed.',
+      // Scene 6: Egyptian gold chaos
+      'Incredibly detailed cartoon ancient Egypt jackpot scene. Deep purple and gold background. Giant Eye of Horus radiating light from center. Pharaoh mask with glowing jewels. Scarab beetles carrying gold coins. Ankh symbols spinning. Pyramids tiny in background. Gold coins EVERYWHERE — raining down cascading flying. Playing card suits as hieroglyphs. Canopic jar accents. Every square inch filled with elements. Thick outlines vivid colors. Mobile game loading screen energy.',
+      // Scene 7: Dragon riches
+      'Massive detailed Chinese dragon wealth illustration cartoon. Deep red background gold accents. Giant glittering Chinese dragon coiled around enormous pile of gold coins ingots and gems. Pearl of wisdom glowing bright. Lucky coins with square holes. Red lanterns hanging. Cherry blossoms falling. Firecracker explosions everywhere. Fish jumping. Jade pagodas tiny in corners. Overflowing composition every inch used. Thick cartoon outlines. Lucky red and gold palette. Premium casino mobile art.',
+      // Scene 8: Ocean depths jackpot
+      'Vibrant underwater treasure illustration cartoon. Deep dark ocean background bioluminescent glow. Huge treasure chest exploding open sending gold coins jewels pearls upward. Colorful tropical fish darting everywhere. Octopus with coin-filled tentacles. Seahorses in corners. Coral reef colorful as frame. Bubbles turning into coins rising. Sunken ship silhouette background. Giant clam with glowing pearl center. PACKED composition every element detailed. Thick cartoon outlines vivid blues greens golds.'
     ];
     const v=isTestLab?testlabClassic:isSpinPals?spinpalsCasino:isTurkish?bankobetClassic:betewinClassic;
     prompt=pick(v)+' Ultra detailed 8K. NO text. NO logos. NO buttons. Background art only.';
@@ -2047,9 +2046,21 @@ async function compositeTextOnImage(bgImageUrl){
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
           grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
         } else if(isTestLabFlow()){
-          // TestLab: white to electric teal
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
-          grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
+          // TestLab: vary by style — Classic gets hot colors, Realistic gets gold/white
+          if(state.style==='Classic'){
+            // Hot vibrant gradient to match cartoon chaos
+            const hues=['#FF1493','#FF6600','#FFD700','#00FF88','#FF00FF','#00CCFF'];
+            const h=hues[Math.floor(Math.random()*hues.length)];
+            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,h);
+            grd.addColorStop(0.7,h);grd.addColorStop(1,'#FFFFFF');
+          } else if(state.style==='Realistic'){
+            // Cinematic gold/white for luxury feel
+            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFF8DC');
+            grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FFA500');grd.addColorStop(1,'#FFD700');
+          } else {
+            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
+            grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
+          }
         } else {
           // SpinPals: gold to purple
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFD700');
