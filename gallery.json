@@ -1,13 +1,23 @@
 [
   {
-    "id": "cr-19E22CAF785",
-    "game_name": "3 Super Hot Chillies",
+    "id": "cr-17787001443CEAP",
+    "game_name": "Gates of Olympus",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17787001443CEAP.jpg",
+    "created_at": "2026-05-13 19:22:24"
+  },
+  {
+    "id": "cr-177870014485F3S",
+    "game_name": "Gates of Olympus",
     "format": "square",
-    "offer_text": "Sign Up FREE — 100,000 GC + 1 SC",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c5/aacc95b54a57cb9ed94e9f6a323bf70272befdb533cbcc609f75f6bd8c4feb.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260513%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260513T192232Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3b7890644503092a50e1c0b492fff4b5bcfebe8250775848aa208bd02322a507",
-    "created_at": "2026-05-13 19:23:07"
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-177870014485F3S.jpg",
+    "created_at": "2026-05-13 19:22:24"
   },
   {
     "id": "cr-1778699351SB2P",
@@ -1988,25 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/bf/d1d5b6577ee54ba56a7a10bdbc2783120fcb5096bb1487285506cbc4b1557f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T180340Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=04e39da60ed92a2019999023e471ce69f7b45b0c04ca57cdf9a4b94bdb9d6bbc",
     "created_at": "2026-04-15 18:03:02"
-  },
-  {
-    "id": "cr-17762755870663",
-    "game_name": "Live Baccarat",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Bold Text",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/6b/ca5128c09c5ff343e643e06d5e8f9a1d97a23770f88c4929888b31971205a3.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T175342Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=84948a349288a25b5dfeb2d27451afbf184e32fa4ad64012cdcad60637a9cbb2",
-    "created_at": "2026-04-15 17:53:07"
-  },
-  {
-    "id": "cr-1776271100A1B2",
-    "game_name": "Jackpot Megaways",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Celtic/Irish",
-    "user_email": "justinc@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/45/9277915ecdc9934702f49afdb95263b4f5ef51cf1663b7137545610375fed5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T163903Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=43b012b2981e42ceb328acf2832994e957703a76ba58753e1eff82134ce5cc3d",
-    "created_at": "2026-04-15 16:38:20"
   }
 ]
