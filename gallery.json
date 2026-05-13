@@ -1,13 +1,23 @@
 [
   {
-    "id": "cr-19E22CFEEC6",
-    "game_name": "3 Super Hot Chillies",
+    "id": "cr-1778700909FE85",
+    "game_name": "N/A",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778700909FE85.jpg",
+    "created_at": "2026-05-13 19:35:09"
+  },
+  {
+    "id": "cr-1778700904BECB",
+    "game_name": "Text Only",
     "format": "portrait",
-    "offer_text": "Sign Up FREE — 100,000 GC + 1 SC",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://v3b.fal.media/files/b/0a9a14dc/LinptUZMqwxLHwF2klXVs_7f1b8a9d27bf44458cd66f0d8d35ceb6.jpg",
-    "created_at": "2026-05-13 19:27:33"
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Text Only",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778700904BECB.jpg",
+    "created_at": "2026-05-13 19:35:04"
   },
   {
     "id": "cr-17787001443CEAP",
@@ -1988,25 +1998,5 @@
     "user_email": "breerjoshua@gmail.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/9c98b775555dd226efab766e68e06c5493501e8cad95c6ee4782bb7cabefeb.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T181633Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=203b3ec2cfa7495e3b52965a92915be7fa916f2aee2e812f5989e801e4de8dab",
     "created_at": "2026-04-15 18:15:55"
-  },
-  {
-    "id": "cr-1776276525B680",
-    "game_name": "Test",
-    "format": "square",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Bold Text",
-    "user_email": "breerjoshua@gmail.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/17/4e0eef87bb9bc9c895f5fc3389505b03c8cf42aac4e0a3a63c1c568efa510d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T180927Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=7bdb39fc66bb0c906fee3acf8925758aa38206e742aa248a9e2584b5d53fb4cf",
-    "created_at": "2026-04-15 18:08:45"
-  },
-  {
-    "id": "cr-17762761825FC9",
-    "game_name": "Floating Dragon",
-    "format": "portrait",
-    "offer_text": "6 SC FREE + 60K GC FREE + Daily FREE Spins",
-    "style": "Bold Text",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/bf/d1d5b6577ee54ba56a7a10bdbc2783120fcb5096bb1487285506cbc4b1557f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T180340Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=04e39da60ed92a2019999023e471ce69f7b45b0c04ca57cdf9a4b94bdb9d6bbc",
-    "created_at": "2026-04-15 18:03:02"
   }
 ]
