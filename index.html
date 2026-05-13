@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v63 — full one-shot fal generation 2026-05-13 -->
+<!-- RMGS Creative Studio v64 — CORS fix, direct URL passthrough 2026-05-13 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2109,52 +2109,29 @@ function renderCTAButton(ctx,label,W,H,isPortrait,topEdge,isRealistic,isClassic)
 }
 
 // ── MAIN COMPOSITE FUNCTION ──────────────────────────────────────────────────
-// fal.ai now generates the COMPLETE ad — game title, scene, offer banner, CTA button.
-// This function only adds the legal disclaimer bar at the bottom.
+// fal.ai generates the COMPLETE ad. For Classic/Realistic/Electric we just
+// return the URL directly — no canvas needed, no CORS risk.
+// Canvas is only used for Text Only (solid color bg + offer text overlay).
 async function compositeTextOnImage(bgImageUrl){
-  return new Promise((resolve)=>{
-    const fmt=state.format==='both'?'portrait':state.format||'portrait';
-    const isPortrait=fmt==='portrait';
-    const W=1080;
-    const H=isPortrait?1920:1080;
-    const isTextOnly=state.style==='Text Only';
-    const isTurkish=state.platform==='bankobet';
+  const fmt=state.format==='both'?'portrait':state.format||'portrait';
+  const isPortrait=fmt==='portrait';
+  const W=1080;
+  const H=isPortrait?1920:1080;
+  const isTextOnly=state.style==='Text Only';
 
+  // Non-Text-Only: fal generated everything — return URL directly
+  if(!isTextOnly){
+    return {composite:bgImageUrl, original:bgImageUrl};
+  }
+
+  // Text Only: draw offer text over the solid color background
+  return new Promise((resolve)=>{
+    const rawOffer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
+    const offerText=rawOffer.toUpperCase();
     const disclaimer=isWannaFlow()||isThrillzzFlow()
       ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
       :'No Purchase Necessary. 18+. Void Where Prohibited by Law. Terms of Use Apply.';
 
-    // Text Only mode — fal returns solid color, we draw big offer text on it
-    if(isTextOnly){
-      const rawOffer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
-      const offerText=rawOffer.toUpperCase();
-      const canvas=document.createElement('canvas');
-      canvas.width=W;canvas.height=H;
-      const ctx=canvas.getContext('2d');
-      const img=new Image();
-      img.crossOrigin='anonymous';
-      img.onload=()=>{
-        ctx.drawImage(img,0,0,W,H);
-        const {fontSize,lines}=fitText(ctx,offerText,W*0.86,isPortrait?240:160,60);
-        const lineH=fontSize*1.14;
-        const totalH=lines.length*lineH;
-        const startY=(H-totalH)/2;
-        renderOfferText(ctx,lines,fontSize,startY,lineH,W,false,false);
-        const barH=isPortrait?58:46;
-        ctx.fillStyle='rgba(0,0,0,0.90)';ctx.fillRect(0,H-barH,W,barH);
-        ctx.fillStyle='rgba(255,255,255,0.12)';ctx.fillRect(0,H-barH,W,2);
-        ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
-        ctx.fillStyle='rgba(255,255,255,0.88)';
-        ctx.textAlign='center';ctx.textBaseline='middle';
-        ctx.fillText(disclaimer,W/2,H-barH/2);
-        resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
-      };
-      img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl});
-      img.src=bgImageUrl;
-      return;
-    }
-
-    // All other styles — fal generated the complete ad, just add disclaimer bar
     const canvas=document.createElement('canvas');
     canvas.width=W;canvas.height=H;
     const ctx=canvas.getContext('2d');
@@ -2162,9 +2139,13 @@ async function compositeTextOnImage(bgImageUrl){
     img.crossOrigin='anonymous';
     img.onload=()=>{
       ctx.drawImage(img,0,0,W,H);
-      // Disclaimer bar only
-      const barH=isPortrait?56:44;
-      ctx.fillStyle='rgba(0,0,0,0.92)';ctx.fillRect(0,H-barH,W,barH);
+      const {fontSize,lines}=fitText(ctx,offerText,W*0.86,isPortrait?240:160,60);
+      const lineH=fontSize*1.14;
+      const totalH=lines.length*lineH;
+      const startY=(H-totalH)/2;
+      renderOfferText(ctx,lines,fontSize,startY,lineH,W,false,false);
+      const barH=isPortrait?58:46;
+      ctx.fillStyle='rgba(0,0,0,0.90)';ctx.fillRect(0,H-barH,W,barH);
       ctx.fillStyle='rgba(255,255,255,0.12)';ctx.fillRect(0,H-barH,W,2);
       ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
       ctx.fillStyle='rgba(255,255,255,0.88)';
@@ -2172,7 +2153,15 @@ async function compositeTextOnImage(bgImageUrl){
       ctx.fillText(disclaimer,W/2,H-barH/2);
       resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
     };
-    img.onerror=()=>resolve({composite:bgImageUrl,original:bgImageUrl});
+    img.onerror=()=>{
+      // Fallback: draw text on black background
+      ctx.fillStyle='#111';ctx.fillRect(0,0,W,H);
+      const {fontSize,lines}=fitText(ctx,offerText,W*0.86,isPortrait?240:160,60);
+      const lineH=fontSize*1.14;
+      const startY=(H-lines.length*lineH)/2;
+      renderOfferText(ctx,lines,fontSize,startY,lineH,W,false,false);
+      resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
+    };
     img.src=bgImageUrl;
   });
 }
