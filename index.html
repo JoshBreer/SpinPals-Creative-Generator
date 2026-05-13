@@ -1938,25 +1938,29 @@ async function compositeTextOnImage(bgImageUrl){
 
       // For Text Only — no dark overlays, keep background pure and bright
       if(state.style!=='Text Only'){
-        const vignette=ctx.createRadialGradient(W/2,H*0.35,H*0.05,W/2,H*0.35,H*0.55);
+        // Edge vignette — stronger for more drama
+        const vignette=ctx.createRadialGradient(W/2,H*0.38,H*0.08,W/2,H*0.38,H*0.62);
         vignette.addColorStop(0,'rgba(0,0,0,0)');
-        vignette.addColorStop(1,'rgba(0,0,0,0.55)');
+        vignette.addColorStop(0.7,'rgba(0,0,0,0.3)');
+        vignette.addColorStop(1,'rgba(0,0,0,0.72)');
         ctx.fillStyle=vignette;
         ctx.fillRect(0,0,W,H);
 
-        const topGrad=ctx.createLinearGradient(0,0,0,H*0.52);
-        topGrad.addColorStop(0,'rgba(0,0,0,0.82)');
-        topGrad.addColorStop(0.6,'rgba(0,0,0,0.45)');
+        // Top gradient — strong dark so text always readable
+        const topGrad=ctx.createLinearGradient(0,0,0,H*0.55);
+        topGrad.addColorStop(0,'rgba(0,0,0,0.88)');
+        topGrad.addColorStop(0.55,'rgba(0,0,0,0.5)');
         topGrad.addColorStop(1,'rgba(0,0,0,0)');
         ctx.fillStyle=topGrad;
-        ctx.fillRect(0,0,W,H*0.52);
+        ctx.fillRect(0,0,W,H*0.55);
 
-        const botGrad=ctx.createLinearGradient(0,H*0.62,0,H);
+        // Bottom gradient — darker for button area
+        const botGrad=ctx.createLinearGradient(0,H*0.58,0,H);
         botGrad.addColorStop(0,'rgba(0,0,0,0)');
-        botGrad.addColorStop(0.4,'rgba(0,0,0,0.6)');
-        botGrad.addColorStop(1,'rgba(0,0,0,0.92)');
+        botGrad.addColorStop(0.35,'rgba(0,0,0,0.65)');
+        botGrad.addColorStop(1,'rgba(0,0,0,0.95)');
         ctx.fillStyle=botGrad;
-        ctx.fillRect(0,H*0.62,W,H*0.38);
+        ctx.fillRect(0,H*0.58,W,H*0.42);
       }
 
       // ── HEADLINE TEXT ────────────────────────────────────────
@@ -2065,79 +2069,79 @@ async function compositeTextOnImage(bgImageUrl){
       });
 
       // ── CTA BUTTON — skip for Text Only ────────────────────
-      if(state.style==='Text Only'){
-        // No button on Text Only — offer text IS the entire creative
-      } else {
-      const btnW=isPortrait?680:500;
-      const btnH=isPortrait?118:88;
-      const btnR=btnH/2;
-      const btnX=(W-btnW)/2;
-      const btnY=isPortrait?H*0.76:H*0.74;
+      if(state.style!=='Text Only'){
+        const btnW=isPortrait?800:580;
+        const btnH=isPortrait?140:104;
+        const btnR=btnH/2;
+        const btnX=(W-btnW)/2;
+        const btnY=isPortrait?H*0.75:H*0.73;
 
-      // Button shadow
-      ctx.shadowColor='rgba(0,200,80,0.5)';
-      ctx.shadowBlur=30;
-      ctx.shadowOffsetY=8;
+        // Outer glow — double pass for intensity
+        ctx.shadowColor='rgba(0,255,80,0.7)';
+        ctx.shadowBlur=50;
+        ctx.shadowOffsetY=0;
 
-      // Draw pill button
-      ctx.beginPath();
-      ctx.moveTo(btnX+btnR,btnY);
-      ctx.lineTo(btnX+btnW-btnR,btnY);
-      ctx.arcTo(btnX+btnW,btnY,btnX+btnW,btnY+btnH,btnR);
-      ctx.lineTo(btnX+btnW,btnY+btnH-btnR);
-      ctx.arcTo(btnX+btnW,btnY+btnH,btnX+btnW-btnR,btnY+btnH,btnR);
-      ctx.lineTo(btnX+btnR,btnY+btnH);
-      ctx.arcTo(btnX,btnY+btnH,btnX,btnY+btnH-btnR,btnR);
-      ctx.lineTo(btnX,btnY+btnR);
-      ctx.arcTo(btnX,btnY,btnX+btnR,btnY,btnR);
-      ctx.closePath();
+        // Draw pill button
+        const drawPill=(x,y,w,h,r)=>{
+          ctx.beginPath();
+          ctx.moveTo(x+r,y);
+          ctx.lineTo(x+w-r,y);
+          ctx.arcTo(x+w,y,x+w,y+h,r);
+          ctx.lineTo(x+w,y+h-r);
+          ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+          ctx.lineTo(x+r,y+h);
+          ctx.arcTo(x,y+h,x,y+h-r,r);
+          ctx.lineTo(x,y+r);
+          ctx.arcTo(x,y,x+r,y,r);
+          ctx.closePath();
+        };
 
-      // Green gradient fill
-      const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-      btnGrd.addColorStop(0,'#30E870');
-      btnGrd.addColorStop(0.5,'#22C55E');
-      btnGrd.addColorStop(1,'#16A34A');
-      ctx.fillStyle=btnGrd;
-      ctx.fill();
+        // Glow halo layer
+        drawPill(btnX-8,btnY-8,btnW+16,btnH+16,btnR+8);
+        ctx.fillStyle='rgba(0,230,80,0.25)';
+        ctx.fill();
 
-      // Button shine
-      ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-      ctx.beginPath();
-      ctx.moveTo(btnX+btnR,btnY+2);
-      ctx.lineTo(btnX+btnW-btnR,btnY+2);
-      ctx.arcTo(btnX+btnW-2,btnY+2,btnX+btnW-2,btnY+btnR,btnR-2);
-      ctx.lineTo(btnX+btnW-2,btnY+btnH*0.45);
-      ctx.lineTo(btnX+2,btnY+btnH*0.45);
-      ctx.lineTo(btnX+2,btnY+btnR);
-      ctx.arcTo(btnX+2,btnY+2,btnX+btnR,btnY+2,btnR-2);
-      ctx.closePath();
-      ctx.fillStyle='rgba(255,255,255,0.18)';
-      ctx.fill();
+        // Main button
+        ctx.shadowBlur=35;
+        drawPill(btnX,btnY,btnW,btnH,btnR);
+        const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
+        btnGrd.addColorStop(0,'#00FF66');
+        btnGrd.addColorStop(0.4,'#22C55E');
+        btnGrd.addColorStop(1,'#15803D');
+        ctx.fillStyle=btnGrd;
+        ctx.fill();
 
-      // Button text
-      const btnFontSize=isPortrait?58:42;
-      ctx.font=`900 ${btnFontSize}px Impact, 'Arial Black', sans-serif`;
-      ctx.textAlign='center';
-      ctx.textBaseline='middle';
-      ctx.shadowColor='rgba(0,0,0,0.4)';
-      ctx.shadowBlur=8;
-      ctx.shadowOffsetY=3;
-      ctx.fillStyle='#FFFFFF';
-      ctx.fillText(ctaText,W/2,btnY+btnH/2);
-      ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+        // Shine highlight
+        ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+        drawPill(btnX+3,btnY+3,btnW-6,btnH*0.48,btnR-3);
+        ctx.fillStyle='rgba(255,255,255,0.22)';
+        ctx.fill();
 
-      } // end if not Text Only (CTA button)
+        // Button text — bigger and bolder
+        const btnFontSize=isPortrait?70:50;
+        ctx.font=`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        // Text shadow
+        ctx.shadowColor='rgba(0,0,0,0.6)';
+        ctx.shadowBlur=12;
+        ctx.shadowOffsetY=4;
+        ctx.fillStyle='#FFFFFF';
+        ctx.fillText(ctaText,W/2,btnY+btnH/2);
+        ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+      }
+
       // ── DISCLAIMER BAR ───────────────────────────────────────
-      const barH=isPortrait?58:48;
-      ctx.fillStyle='rgba(0,0,0,0.88)';
+      const barH=isPortrait?62:50;
+      // Solid dark bar
+      ctx.fillStyle='rgba(0,0,0,0.92)';
       ctx.fillRect(0,H-barH,W,barH);
-
-      // Subtle top border on bar
-      ctx.fillStyle='rgba(255,255,255,0.08)';
-      ctx.fillRect(0,H-barH,W,1);
-
-      ctx.font=`400 ${isPortrait?24:20}px -apple-system, Arial, sans-serif`;
-      ctx.fillStyle='rgba(255,255,255,0.78)';
+      // Bright top border line
+      ctx.fillStyle='rgba(255,255,255,0.15)';
+      ctx.fillRect(0,H-barH,W,2);
+      // Disclaimer text
+      ctx.font=`400 ${isPortrait?25:21}px -apple-system,Arial,sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.9)';
       ctx.textAlign='center';
       ctx.textBaseline='middle';
       ctx.fillText(disclaimer,W/2,H-barH/2);
