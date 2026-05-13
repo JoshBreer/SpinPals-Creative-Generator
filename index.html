@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v60 — prompts updated 2026-05-13 -->
+<!-- RMGS Creative Studio v61 — composite rewrite 2026-05-13 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1983,257 +1983,284 @@ function buildFalFallbackPrompt(){
   return {prompt, negativePrompt, aspectRatio};
 }
 
-// Draw text overlay on top of fal background image using canvas
+// ── CANVAS HELPERS ───────────────────────────────────────────────────────────
+function drawRoundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h);
+  ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r);
+  ctx.arcTo(x,y,x+r,y,r);
+  ctx.closePath();
+}
+
+// Fit text to maxWidth — returns {fontSize, lines}
+function fitText(ctx,text,maxW,startSize,minSize,font){
+  let size=startSize;
+  while(size>=minSize){
+    ctx.font=`900 ${size}px ${font}`;
+    const words=text.split(' ');
+    let lines=[],line='';
+    words.forEach(w=>{
+      const test=line?line+' '+w:w;
+      if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=w;}
+      else line=test;
+    });
+    if(line)lines.push(line);
+    // Accept if 3 lines or fewer, or we've hit min
+    if(lines.length<=3||size<=minSize)return{fontSize:size,lines};
+    size=Math.floor(size*0.88);
+  }
+}
+
+// Draw text with stroke + gradient fill + shine — the "game ad" look
+function drawAdText(ctx,lines,fontSize,startY,lineH,W,gradColors,strokeW){
+  const font=`900 ${fontSize}px Impact,'Arial Black',sans-serif`;
+  ctx.font=font;
+  ctx.textAlign='center';
+  ctx.textBaseline='top';
+  lines.forEach((ln,i)=>{
+    const y=startY+(i*lineH);
+    // 1. Outer glow pass
+    ctx.shadowColor=gradColors[1]||'rgba(255,200,0,0.9)';
+    ctx.shadowBlur=fontSize*0.45;
+    ctx.fillStyle='rgba(0,0,0,0)';
+    ctx.fillText(ln,W/2,y);
+    ctx.shadowBlur=0;
+    // 2. Thick black stroke
+    ctx.strokeStyle='rgba(0,0,0,0.95)';
+    ctx.lineWidth=strokeW||fontSize*0.14;
+    ctx.lineJoin='round';
+    ctx.strokeText(ln,W/2,y);
+    // 3. Gradient fill
+    const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
+    gradColors.forEach((c,idx)=>grd.addColorStop(idx/(gradColors.length-1),c));
+    ctx.fillStyle=grd;
+    ctx.fillText(ln,W/2,y);
+    // 4. Shine highlight — top 40% of letter
+    const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.42);
+    shine.addColorStop(0,'rgba(255,255,255,0.62)');
+    shine.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=shine;
+    ctx.fillText(ln,W/2,y);
+  });
+  ctx.shadowBlur=0;ctx.shadowColor='transparent';
+}
+
+// Draw the styled offer banner — dark panel with bright border, matching reference images
+function drawOfferBanner(ctx,offerLines,offerFontSize,W,H,isPortrait,isRealistic){
+  const lineH=offerFontSize*1.18;
+  const textBlockH=offerLines.length*lineH;
+  const padV=isPortrait?38:28;
+  const padH=isPortrait?60:44;
+  const bannerH=textBlockH+padV*2;
+  const bannerW=isPortrait?W*0.88:W*0.82;
+  const bannerX=(W-bannerW)/2;
+  // Position: lower-middle of image — 52% down for portrait, 48% for square
+  const bannerY=isPortrait?H*0.535:H*0.50;
+
+  // Style: Realistic = dark gold parchment / Classic = deep blue neon ribbon
+  const isClassic=state.style==='Classic';
+
+  // Outer glow
+  ctx.shadowColor=isRealistic?'rgba(255,200,80,0.55)':'rgba(0,180,255,0.55)';
+  ctx.shadowBlur=isPortrait?40:30;
+  drawRoundRect(ctx,bannerX-4,bannerY-4,bannerW+8,bannerH+8,isPortrait?22:16);
+  ctx.fillStyle=isRealistic?'rgba(180,130,30,0.3)':'rgba(0,100,200,0.3)';
+  ctx.fill();
+  ctx.shadowBlur=0;ctx.shadowColor='transparent';
+
+  // Main banner body
+  drawRoundRect(ctx,bannerX,bannerY,bannerW,bannerH,isPortrait?18:13);
+  const bgGrd=ctx.createLinearGradient(0,bannerY,0,bannerY+bannerH);
+  if(isRealistic){
+    bgGrd.addColorStop(0,'rgba(30,20,0,0.93)');
+    bgGrd.addColorStop(0.5,'rgba(60,40,0,0.90)');
+    bgGrd.addColorStop(1,'rgba(20,12,0,0.95)');
+  } else {
+    bgGrd.addColorStop(0,'rgba(0,20,80,0.95)');
+    bgGrd.addColorStop(0.5,'rgba(0,40,120,0.92)');
+    bgGrd.addColorStop(1,'rgba(0,15,60,0.97)');
+  }
+  ctx.fillStyle=bgGrd;
+  ctx.fill();
+
+  // Border — two strokes: thick outer dim, thin inner bright
+  drawRoundRect(ctx,bannerX,bannerY,bannerW,bannerH,isPortrait?18:13);
+  ctx.strokeStyle=isRealistic?'rgba(255,200,60,0.9)':'rgba(0,200,255,0.9)';
+  ctx.lineWidth=isPortrait?5:4;
+  ctx.stroke();
+  drawRoundRect(ctx,bannerX+5,bannerY+5,bannerW-10,bannerH-10,isPortrait?14:10);
+  ctx.strokeStyle=isRealistic?'rgba(255,240,160,0.4)':'rgba(150,240,255,0.35)';
+  ctx.lineWidth=isPortrait?2:1.5;
+  ctx.stroke();
+
+  // Offer text inside banner
+  const textY=bannerY+padV;
+  const offerGrad=isRealistic
+    ?['#FFFFFF','#FFF8DC','#FFD700','#FFA500','#FFD700']
+    :['#FFFFFF','#E0F4FF','#00CFFF','#0088FF','#00CFFF'];
+  drawAdText(ctx,offerLines,offerFontSize,textY,lineH,W,offerGrad,offerFontSize*0.11);
+
+  return bannerY+bannerH; // return bottom edge for CTA positioning
+}
+
+// Draw the CTA button — styled pill matching reference image quality
+function drawCTAButton(ctx,ctaText,W,H,isPortrait,topEdge,isRealistic){
+  const btnW=isPortrait?W*0.72:W*0.52;
+  const btnH=isPortrait?H*0.072:H*0.098;
+  const btnR=btnH/2;
+  const btnX=(W-btnW)/2;
+  const gap=isPortrait?H*0.022:H*0.028;
+  const btnY=topEdge+gap;
+
+  // Clamp so button never goes below 88% of image height
+  const maxBtnY=H*0.88-btnH;
+  const finalBtnY=Math.min(btnY,maxBtnY);
+
+  // Outer glow halo
+  ctx.shadowColor=isRealistic?'rgba(255,180,0,0.7)':'rgba(0,255,100,0.7)';
+  ctx.shadowBlur=isPortrait?55:40;
+  drawRoundRect(ctx,btnX-6,finalBtnY-6,btnW+12,btnH+12,btnR+6);
+  ctx.fillStyle=isRealistic?'rgba(255,160,0,0.18)':'rgba(0,240,80,0.18)';
+  ctx.fill();
+  ctx.shadowBlur=0;ctx.shadowColor='transparent';
+
+  // Button body gradient
+  drawRoundRect(ctx,btnX,finalBtnY,btnW,btnH,btnR);
+  const btnGrd=ctx.createLinearGradient(0,finalBtnY,0,finalBtnY+btnH);
+  if(isRealistic){
+    btnGrd.addColorStop(0,'#FFE44A');
+    btnGrd.addColorStop(0.35,'#FFC200');
+    btnGrd.addColorStop(0.7,'#E08000');
+    btnGrd.addColorStop(1,'#B85C00');
+  } else {
+    btnGrd.addColorStop(0,'#22FF7A');
+    btnGrd.addColorStop(0.35,'#16C955');
+    btnGrd.addColorStop(0.7,'#0E8C38');
+    btnGrd.addColorStop(1,'#075C22');
+  }
+  ctx.fillStyle=btnGrd;
+  ctx.fill();
+
+  // Border ring
+  drawRoundRect(ctx,btnX,finalBtnY,btnW,btnH,btnR);
+  ctx.strokeStyle=isRealistic?'rgba(255,240,120,0.85)':'rgba(150,255,180,0.7)';
+  ctx.lineWidth=isPortrait?4:3;
+  ctx.stroke();
+
+  // Shine — top half highlight
+  drawRoundRect(ctx,btnX+4,finalBtnY+3,btnW-8,btnH*0.46,btnR-4);
+  ctx.fillStyle='rgba(255,255,255,0.28)';
+  ctx.fill();
+
+  // Button label
+  const btnFontSize=isPortrait?Math.round(btnH*0.48):Math.round(btnH*0.46);
+  ctx.font=`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.shadowColor='rgba(0,0,0,0.7)';
+  ctx.shadowBlur=isPortrait?10:8;
+  ctx.shadowOffsetY=isPortrait?4:3;
+  ctx.fillStyle='#FFFFFF';
+  ctx.fillText(ctaText,W/2,finalBtnY+btnH/2);
+  ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.shadowColor='transparent';
+
+  return finalBtnY+btnH;
+}
+
+// ── MAIN COMPOSITE FUNCTION ──────────────────────────────────────────────────
 async function compositeTextOnImage(bgImageUrl){
   return new Promise((resolve)=>{
     const fmt=state.format==='both'?'portrait':state.format||'portrait';
     const isPortrait=fmt==='portrait';
     const W=1080;
     const H=isPortrait?1920:1080;
+    const isRealistic=state.style==='Realistic';
+    const isTextOnly=state.style==='Text Only';
+    const isTurkish=state.platform==='bankobet';
 
-    const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
-    const isTurkishCtx2=state.platform==='bankobet';
-    const ctaText=isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW';
+    const rawOffer=state.offer&&state.offer!=='none'?state.offer:'WIN BIG';
+    const offerText=rawOffer.toUpperCase();
+    const ctaText=isTurkish?'HEMEN OYNA':(isWannaFlow()||isThrillzzFlow()?'CLAIM NOW':'PLAY NOW!');
     const disclaimer=isWannaFlow()||isThrillzzFlow()
       ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
-      :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
+      :'No Purchase Necessary. 18+. Void Where Prohibited by Law. Terms of Use Apply.';
 
     const canvas=document.createElement('canvas');
-    canvas.width=W; canvas.height=H;
+    canvas.width=W;canvas.height=H;
     const ctx=canvas.getContext('2d');
 
     const img=new Image();
     img.crossOrigin='anonymous';
     img.onload=()=>{
-      // ── BACKGROUND ──────────────────────────────────────────
+
+      // ── 1. BACKGROUND ────────────────────────────────────────
       ctx.drawImage(img,0,0,W,H);
 
-      // For Text Only — no dark overlays, keep background pure and bright
-      if(state.style!=='Text Only'){
-        const isRealistic=state.style==='Realistic';
-        // Realistic gets lighter touch — let the image show through
-        const vigOpacity=isRealistic?0.45:0.68;
-        const topOpacity=isRealistic?0.72:0.88;
-        const botOpacity=isRealistic?0.78:0.95;
-
-        // Edge vignette
-        const vignette=ctx.createRadialGradient(W/2,H*0.38,H*0.1,W/2,H*0.38,H*0.65);
-        vignette.addColorStop(0,'rgba(0,0,0,0)');
-        vignette.addColorStop(0.65,'rgba(0,0,0,0.2)');
-        vignette.addColorStop(1,`rgba(0,0,0,${vigOpacity})`);
-        ctx.fillStyle=vignette;
+      if(!isTextOnly){
+        // Subtle edge vignette — don't kill the image, just frame it
+        const vig=ctx.createRadialGradient(W/2,H*0.42,H*0.18,W/2,H*0.42,H*0.72);
+        vig.addColorStop(0,'rgba(0,0,0,0)');
+        vig.addColorStop(0.7,'rgba(0,0,0,0.08)');
+        vig.addColorStop(1,'rgba(0,0,0,0.38)');
+        ctx.fillStyle=vig;
         ctx.fillRect(0,0,W,H);
 
-        // Top gradient
-        const topGrad=ctx.createLinearGradient(0,0,0,H*0.52);
-        topGrad.addColorStop(0,`rgba(0,0,0,${topOpacity})`);
-        topGrad.addColorStop(0.5,'rgba(0,0,0,0.4)');
-        topGrad.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.fillStyle=topGrad;
-        ctx.fillRect(0,0,W,H*0.52);
-
-        // Bottom gradient
-        const botGrad=ctx.createLinearGradient(0,H*0.6,0,H);
+        // Bottom dark zone — ensures banner/button area is readable
+        const botGrad=ctx.createLinearGradient(0,H*0.46,0,H);
         botGrad.addColorStop(0,'rgba(0,0,0,0)');
-        botGrad.addColorStop(0.35,`rgba(0,0,0,${isRealistic?0.5:0.65})`);
-        botGrad.addColorStop(1,`rgba(0,0,0,${botOpacity})`);
+        botGrad.addColorStop(0.28,'rgba(0,0,0,0.35)');
+        botGrad.addColorStop(0.6,'rgba(0,0,0,0.70)');
+        botGrad.addColorStop(1,'rgba(0,0,0,0.88)');
         ctx.fillStyle=botGrad;
-        ctx.fillRect(0,H*0.6,W,H*0.4);
+        ctx.fillRect(0,H*0.46,W,H*0.54);
       }
 
-      // ── HEADLINE TEXT ────────────────────────────────────────
-      // Smart word wrap — measure and split
-      const words=offerText.split(' ');
-      // Text Only style: offer fills entire image, much larger font
-      const isTextOnly=state.style==='Text Only';
-      const maxW=isTextOnly?W*0.85:W*0.9;
-      let lines=[];
-      let line='';
-      let testSize=isTextOnly?(isPortrait?230:160):(isPortrait?148:95);
-      ctx.font=`900 ${testSize}px Impact, 'Arial Black', sans-serif`;
-      
-      // Build lines
-      words.forEach(word=>{
-        const test=line?line+' '+word:word;
-        if(ctx.measureText(test).width>maxW&&line){
-          lines.push(line); line=word;
-        } else line=test;
-      });
-      if(line)lines.push(line);
-
-      // Scale down font if too many lines
-      let fontSize=testSize;
-      if(lines.length>3)fontSize=Math.max(isPortrait?90:60,Math.floor(fontSize*(3/lines.length)));
-      
-      // Re-wrap at new size
-      if(lines.length>3){
-        ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
-        lines=[]; line='';
-        words.forEach(word=>{
-          const test=line?line+' '+word:word;
-          if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=word;}else line=test;
-        });
-        if(line)lines.push(line);
+      // ── 2. TEXT ONLY MODE — fill frame with big text, no banner/button ──
+      if(isTextOnly){
+        const maxW=W*0.86;
+        const {fontSize,lines}=fitText(ctx,offerText,maxW,isPortrait?240:160,60,'Impact,Arial Black,sans-serif');
+        const lineH=fontSize*1.15;
+        const totalH=lines.length*lineH;
+        const startY=(H-totalH)/2;
+        drawAdText(ctx,lines,fontSize,startY,lineH,W,['#FFFFFF','#FFFFFF'],fontSize*0.1);
+        // Disclaimer bar
+        const barH=isPortrait?60:48;
+        ctx.fillStyle='rgba(0,0,0,0.88)';
+        ctx.fillRect(0,H-barH,W,barH);
+        ctx.fillStyle='rgba(255,255,255,0.12)';
+        ctx.fillRect(0,H-barH,W,2);
+        ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
+        ctx.fillStyle='rgba(255,255,255,0.88)';
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillText(disclaimer,W/2,H-barH/2);
+        return resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
       }
 
-      const lineH=isTextOnly?fontSize*1.18:fontSize*1.12;
-      const totalH=lines.length*lineH;
-      // Text Only: fill entire image with text - start near top, massive font
-      const textTop=isTextOnly?H*0.04:isPortrait?H*0.06:H*0.06;
+      // ── 3. OFFER BANNER ──────────────────────────────────────
+      // Fit offer text to banner width
+      const bannerTextMaxW=isPortrait?W*0.78:W*0.70;
+      const offerStartSize=isPortrait?118:82;
+      const {fontSize:offerFontSize,lines:offerLines}=fitText(ctx,offerText,bannerTextMaxW,offerStartSize,isPortrait?56:40,'Impact,Arial Black,sans-serif');
+      const bannerBottom=drawOfferBanner(ctx,offerLines,offerFontSize,W,H,isPortrait,isRealistic);
 
-      ctx.textAlign='center';
-      ctx.textBaseline='top';
+      // ── 4. CTA BUTTON ────────────────────────────────────────
+      const btnBottom=drawCTAButton(ctx,ctaText,W,H,isPortrait,bannerBottom,isRealistic);
 
-      lines.forEach((ln,i)=>{
-        const y=textTop+(i*lineH);
-        
-        // For Text Only — no stroke, no glow, clean pure white
-        if(state.style!=='Text Only'){
-          ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
-          ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
-          ctx.shadowBlur=40;
-          ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
-          ctx.fillText(ln,W/2,y);
-          ctx.shadowBlur=0;
-          ctx.strokeStyle='rgba(0,0,0,0.98)';
-          ctx.lineWidth=fontSize*0.13;
-          ctx.lineJoin='round';
-          ctx.strokeText(ln,W/2,y);
-        }
-
-        // Brand-specific gradient fill
-        const isWannaCtx=typeof isWannaFlow==='function'&&isWannaFlow();
-        const isThrillzzCtx=typeof isThrillzzFlow==='function'&&isThrillzzFlow();
-        const isMarioCtx=typeof isMarioFlow==='function'&&isMarioFlow();
-        const isTextOnlyCtx=state.style==='Text Only';
-        const grd=ctx.createLinearGradient(0,y,0,y+fontSize);
-        if(isTextOnlyCtx){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(1,'#FFFFFF');
-        } else if(isWannaCtx){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.15,'#FFF500');
-          grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF8C00');grd.addColorStop(1,'#FFD700');
-        } else if(isThrillzzCtx){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFF00');
-          grd.addColorStop(0.5,'#00FF88');grd.addColorStop(0.85,'#00C8FF');grd.addColorStop(1,'#00FF88');
-        } else if(isMarioCtx&&state.platform==='bankobet'){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#FFD700');
-          grd.addColorStop(0.7,'#FF2200');grd.addColorStop(1,'#FFD700');
-        } else if(isMarioCtx){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,'#88CCFF');
-          grd.addColorStop(0.7,'#0088FF');grd.addColorStop(1,'#00CCFF');
-        } else if(isEpicSweepFlow()){
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
-          grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
-        } else if(isTestLabFlow()){
-          // TestLab: vary by style — Classic gets hot colors, Realistic gets gold/white
-          if(state.style==='Classic'){
-            // Hot vibrant gradient to match cartoon chaos
-            const hues=['#FF1493','#FF6600','#FFD700','#00FF88','#FF00FF','#00CCFF'];
-            const h=hues[Math.floor(Math.random()*hues.length)];
-            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,h);
-            grd.addColorStop(0.7,h);grd.addColorStop(1,'#FFFFFF');
-          } else if(state.style==='Realistic'){
-            // Cinematic gold/white for luxury feel
-            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFF8DC');
-            grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FFA500');grd.addColorStop(1,'#FFD700');
-          } else {
-            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
-            grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
-          }
-        } else {
-          // SpinPals: gold to purple
-          grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFD700');
-          grd.addColorStop(0.5,'#AA44FF');grd.addColorStop(0.85,'#FFD700');grd.addColorStop(1,'#AA44FF');
-        }
-        ctx.fillStyle=grd;
-        ctx.fillText(ln,W/2,y);
-
-                // Second pass - shine (not for Text Only)
-        if(state.style!=='Text Only'){
-          const shine=ctx.createLinearGradient(0,y,0,y+fontSize*0.45);
-          shine.addColorStop(0,'rgba(255,255,255,0.55)');
-          shine.addColorStop(1,'rgba(255,255,255,0)');
-          ctx.fillStyle=shine;
-          ctx.fillText(ln,W/2,y);
-        }
-      });
-
-      // ── CTA BUTTON — skip for Text Only ────────────────────
-      if(state.style!=='Text Only'){
-        const btnW=isPortrait?800:580;
-        const btnH=isPortrait?140:104;
-        const btnR=btnH/2;
-        const btnX=(W-btnW)/2;
-        const btnY=isPortrait?H*0.75:H*0.73;
-
-        // Outer glow — double pass for intensity
-        ctx.shadowColor='rgba(0,255,80,0.7)';
-        ctx.shadowBlur=50;
-        ctx.shadowOffsetY=0;
-
-        // Draw pill button
-        const drawPill=(x,y,w,h,r)=>{
-          ctx.beginPath();
-          ctx.moveTo(x+r,y);
-          ctx.lineTo(x+w-r,y);
-          ctx.arcTo(x+w,y,x+w,y+h,r);
-          ctx.lineTo(x+w,y+h-r);
-          ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
-          ctx.lineTo(x+r,y+h);
-          ctx.arcTo(x,y+h,x,y+h-r,r);
-          ctx.lineTo(x,y+r);
-          ctx.arcTo(x,y,x+r,y,r);
-          ctx.closePath();
-        };
-
-        // Glow halo layer
-        drawPill(btnX-8,btnY-8,btnW+16,btnH+16,btnR+8);
-        ctx.fillStyle='rgba(0,230,80,0.25)';
-        ctx.fill();
-
-        // Main button
-        ctx.shadowBlur=35;
-        drawPill(btnX,btnY,btnW,btnH,btnR);
-        const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-        btnGrd.addColorStop(0,'#00FF66');
-        btnGrd.addColorStop(0.4,'#22C55E');
-        btnGrd.addColorStop(1,'#15803D');
-        ctx.fillStyle=btnGrd;
-        ctx.fill();
-
-        // Shine highlight
-        ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-        drawPill(btnX+3,btnY+3,btnW-6,btnH*0.48,btnR-3);
-        ctx.fillStyle='rgba(255,255,255,0.22)';
-        ctx.fill();
-
-        // Button text — bigger and bolder
-        const btnFontSize=isPortrait?70:50;
-        ctx.font=`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
-        ctx.textAlign='center';
-        ctx.textBaseline='middle';
-        // Text shadow
-        ctx.shadowColor='rgba(0,0,0,0.6)';
-        ctx.shadowBlur=12;
-        ctx.shadowOffsetY=4;
-        ctx.fillStyle='#FFFFFF';
-        ctx.fillText(ctaText,W/2,btnY+btnH/2);
-        ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-      }
-
-      // ── DISCLAIMER BAR ───────────────────────────────────────
-      const barH=isPortrait?62:50;
-      // Solid dark bar
+      // ── 5. DISCLAIMER BAR ────────────────────────────────────
+      const barH=isPortrait?58:46;
       ctx.fillStyle='rgba(0,0,0,0.92)';
       ctx.fillRect(0,H-barH,W,barH);
-      // Bright top border line
-      ctx.fillStyle='rgba(255,255,255,0.15)';
+      ctx.fillStyle='rgba(255,255,255,0.13)';
       ctx.fillRect(0,H-barH,W,2);
-      // Disclaimer text
-      ctx.font=`400 ${isPortrait?25:21}px -apple-system,Arial,sans-serif`;
-      ctx.fillStyle='rgba(255,255,255,0.9)';
-      ctx.textAlign='center';
-      ctx.textBaseline='middle';
+      ctx.font=`400 ${isPortrait?24:20}px -apple-system,Arial,sans-serif`;
+      ctx.fillStyle='rgba(255,255,255,0.88)';
+      ctx.textAlign='center';ctx.textBaseline='middle';
       ctx.fillText(disclaimer,W/2,H-barH/2);
 
       resolve({composite:canvas.toDataURL('image/jpeg',0.93),original:bgImageUrl});
