@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19E224B7311",
+    "game_name": "Le Bandit",
+    "format": "portrait",
+    "offer_text": "$4.99 — 12,000 GC + 6 SC + 250 VIP XP",
+    "style": "Custom",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/8c/0464a7504b60091d2cb2f8c8abc945cceea687c8482aa6c01572b2e4fc4bae.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260513%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260513T170311Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d63cd43b5d37215bfc0014c5b39d6ba98619210046837272eccc032d7a881bf6",
+    "created_at": "2026-05-13 17:03:32"
+  },
+  {
     "id": "cr-19E2243D8E7",
     "game_name": "Snoop Dogg Dollars",
     "format": "square",
