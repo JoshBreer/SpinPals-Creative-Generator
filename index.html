@@ -943,6 +943,17 @@ async function stepStyle(){
     w.appendChild(bElectric);
   }
 
+  if(isEpicSweepFlow()){
+    const bEpicMap=document.createElement('button');bEpicMap.className='opt-btn';bEpicMap.textContent='Map Style';
+    bEpicMap.onclick=()=>{
+      if(bEpicMap.disabled)return;lockButtons(w);
+      bEpicMap.style.opacity='1';bEpicMap.style.borderColor='var(--blue)';bEpicMap.style.color='var(--blue)';
+      state.style='Map';
+      state.customInstructions='Create a premium advertising creative with a stylized US map. EpicSweep available in 39 states. HIGHLIGHT these states in bright neon green with glow: Alabama Alaska Arizona Arkansas Colorado Florida Georgia Hawaii Illinois Indiana Iowa Kansas Kentucky Maine Maryland Massachusetts Minnesota Mississippi Missouri Nebraska New Hampshire New Mexico North Carolina North Dakota Ohio Oklahoma Oregon Pennsylvania Rhode Island South Carolina South Dakota Tennessee Texas Utah Vermont Virginia West Virginia Wisconsin Wyoming. COLOR these DARK GRAY restricted: California Connecticut Delaware Idaho Louisiana Michigan Montana Nevada New Jersey New York Washington. Dark background. Map center. Bold offer headline top. AVAILABLE IN 39 STATES subtext. Green CTA button PLAY FREE NOW. Disclaimer 21+ Sweepstakes Casino Free to Play Not Available in All States See Terms. NO EpicSweep logo.';
+      msg('Map Style','user');state.game='N/A';stepOffer();
+    };
+    w.appendChild(bEpicMap);
+  }
   const customBtn=document.createElement('button');customBtn.className='opt-btn';customBtn.textContent='Custom ✏️';
   customBtn.onclick=()=>{if(customBtn.disabled)return;customWrap.classList.toggle('visible');customBtn.style.borderColor='var(--blue)';customBtn.style.color='var(--blue)';};
   w.appendChild(customBtn);
