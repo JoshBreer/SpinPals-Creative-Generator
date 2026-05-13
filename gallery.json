@@ -1,23 +1,23 @@
 [
   {
-    "id": "cr-19E226F7AC3",
-    "game_name": "Map",
+    "id": "cr-1778694675SB9X16",
+    "game_name": "Sweet Bonanza",
     "format": "portrait",
-    "offer_text": "Sign Up FREE — 100,000 GC + 1 SC",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/2e/f8594ebeac081850a72ecb3e205dd9090eaac9da38076738db8f9ab6741327.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260513%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260513T174224Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=49fa552892883dec4a5f3b7861652631cd252b28fb718c667b9ea779e2e15f1f",
-    "created_at": "2026-05-13 17:42:54"
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778694675SB9X16.jpg",
+    "created_at": "2026-05-13 17:51:15"
   },
   {
-    "id": "cr-19E226E04C5",
-    "game_name": "Map",
-    "format": "portrait",
-    "offer_text": "Sign Up FREE â 100,000 GC + 1 SC",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://v3b.fal.media/files/b/0a9a125c/kPOLh0zHgLcSFpYL_sZmv_0367650da9a643f1bd1288497cc04231.jpg",
-    "created_at": "2026-05-13 17:40:46"
+    "id": "cr-1778694675SB1X1",
+    "game_name": "Sweet Bonanza",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778694675SB1X1.jpg",
+    "created_at": "2026-05-13 17:51:15"
   },
   {
     "id": "cr-1778693796FC16",
@@ -1998,25 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f3/92b4423341d844a6ac13b24e649e9df2fda01a8fffd5a506089fba3f2d99da.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T045549Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=788c99e10cd3fa0fa8bc55947c7bd8e32e72218963bb9749073cf24b027cea7e",
     "created_at": "2026-04-14 04:55:01"
-  },
-  {
-    "id": "cr-1776142501BBF7A",
-    "game_name": "Cowboys Gold",
-    "format": "square",
-    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
-    "style": "Surprise me",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/64/22e45b0320acb2db0778d672cf029393dfa51586501c192d670d38b21beb5f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T045612Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0089507cc987020ac53fef8bc462e36a1679d001e97e5a080b25c4eef49fb3ff",
-    "created_at": "2026-04-14 04:55:01"
-  },
-  {
-    "id": "cr-1776141961DE79",
-    "game_name": "Fire Joker",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Fire/Inferno",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/5d/3e63c4e04fa6672aece2dec29d43cf381ecabb2d6d21fa3e41f924ee0365cf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260414%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260414T044651Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ed65fee4f9bdb9c4550d88351ac7373e51e3a382ff0d33855e8b0c8cc205a876",
-    "created_at": "2026-04-14 04:46:01"
   }
 ]
