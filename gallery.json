@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1778700981SDP1",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778700981SDP1.jpg",
+    "created_at": "2026-05-13 19:36:21"
+  },
+  {
+    "id": "cr-1778700981SDS1",
+    "game_name": "Snoop Dogg Dollars",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778700981SDS1.jpg",
+    "created_at": "2026-05-13 19:36:21"
+  },
+  {
     "id": "cr-1778700926987D",
     "game_name": "Text Only",
     "format": "square",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0c/f6b3a32e4d51626ab923e3462a7eb39f1893fc95eb98e4a15c4800e4b4bc70.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T195244Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0fb7ae3ad647c34da225393007ea2ab4a5c48e6e13af77aa69b49dfc6bcf67b0",
     "created_at": "2026-04-15 19:52:04"
-  },
-  {
-    "id": "cr-17762805777AE7",
-    "game_name": "Ocean King",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Bold Text",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4f/9c213dd29b713954b07cd8175f9c4d7465fe68608b46b6d0be8f4fc63d2a09.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T191653Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=666c34fa9463bd7d881e0b6e4eeac297921175dd2e649a73c05f21a57bcacfd7",
-    "created_at": "2026-04-15 19:16:17"
-  },
-  {
-    "id": "cr-17762777474831",
-    "game_name": "Test",
-    "format": "portrait",
-    "offer_text": "50 FREE SPINS + 400K GOLD COINS",
-    "style": "Bold Text",
-    "user_email": "breerjoshua@gmail.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c6/bd5451f72f4705eeb2e42d99703ba1df8b2567242177bb74ffd47be6eb4377.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T182946Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c4fe04ef8af9e01a6e6217619998c7421e43e87f1823148b7343a0ee90ff6960",
-    "created_at": "2026-04-15 18:29:07"
   }
 ]
