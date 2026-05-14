@@ -1,23 +1,13 @@
 [
   {
-    "id": "cr-19E22F6E758",
-    "game_name": "Snoop Dogg Dollars",
+    "id": "cr-1778793643AFF4",
+    "game_name": "N/A",
     "format": "portrait",
-    "offer_text": "$4.99 â 12,000 GC + 6 SC + 250 VIP XP",
-    "style": "Classic",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
     "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/4a/7fc166f4f1cd149470aa3f604db8d7e42cbf855886460010f82be531cf00b1.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260513%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260513T201036Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c5c13d1e36994a31c53db179b8edaa912b450579c5a6ae0f755bd2075ba4d213",
-    "created_at": "2026-05-13 20:10:36"
-  },
-  {
-    "id": "cr-19E22F309E1SQ1",
-    "game_name": "3 Super Hot Chillies",
-    "format": "square",
-    "offer_text": "Sign Up FREE Ã¢ÂÂ 100,000 GC + 1 SC",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/21/aedf1ba2fc767789a5bd4fe8ca60255a9a2b50a2cb70b8a71a63bcbe148efa.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260513%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260513T200617Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d814b6f3c4e340e02859f92d96a623e68ddbe3755c21d2dbe766589377d16669",
-    "created_at": "2026-05-13 20:06:17"
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778793643AFF4.jpg",
+    "created_at": "2026-05-14 21:20:43"
   },
   {
     "id": "cr-1778701184SND1",
@@ -2008,15 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/92/5870a6134ea0b764de0c45ca961cbb90268bf28f5478a89ad053fbfeae4c36.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T214044Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=248a70f2b4aced5c912de02708af05dbb31d5198a416052e6a31165f80f508cc",
     "created_at": "2026-04-15 21:40:01"
-  },
-  {
-    "id": "cr-1776287484C7CD",
-    "game_name": "Coins of Leprechaun",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ec/da8c90c38d54013577549b0e674f582c1ed24948ce9f01a58e8300ae34196e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260415%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260415T211209Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d6f16241c2e886aa6a11877d5b7d3a32fbb5aa3aa85a9841cfc90c4cec9dee03",
-    "created_at": "2026-04-15 21:11:24"
   }
 ]
