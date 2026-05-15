@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1778881345LP4R",
+    "game_name": "4 Pot Riches",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778881345LP4R.jpg",
+    "created_at": "2026-05-15 21:42:25"
+  },
+  {
+    "id": "cr-1778881345SQ4R",
+    "game_name": "4 Pot Riches",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778881345SQ4R.jpg",
+    "created_at": "2026-05-15 21:42:25"
+  },
+  {
     "id": "cr-17788696243044",
     "game_name": "Panda Fortune",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/57/b301342775e56132cbc36007a45d03195f9fc5a6d89482f209b8051f0876d8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T181527Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=884561a5a78388053d8127c9583608f552834e0020cf528fd8825c14cfb3b7ee",
     "created_at": "2026-04-17 18:14:52"
-  },
-  {
-    "id": "cr-17764451744279",
-    "game_name": "Snoop Dogg Dollars",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/16/9b13c99f700c46058fc41923b4ebabbe318b85ab5cbea3b62117b9b672278e.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T170043Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=10899b8dff60ee23e441ec9681eebc1376942296a2d95282351434783f38665f",
-    "created_at": "2026-04-17 16:59:34"
-  },
-  {
-    "id": "cr-17764447900AF0",
-    "game_name": "Mustang Gold",
-    "format": "square",
-    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/39/71a098b94c26b4e32e52a885c585a2f19392c6ee75a036cf98fed846848600.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T165353Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d10231b6d9ddf197d6e122c70823f17734a522d00b0cef86e2989eb5670c3d01",
-    "created_at": "2026-04-17 16:53:10"
   }
 ]
