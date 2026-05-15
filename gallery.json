@@ -1,9 +1,19 @@
 [
   {
+    "id": "cr-19E2C9AC71D",
+    "game_name": "3 Super Hot Chillies",
+    "format": "portrait",
+    "offer_text": "$4.99 â 12,000 GC + 6 SC + 250 VIP XP",
+    "style": "Classic",
+    "user_email": "justin@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/05/a234088243f0a4350b1c2e4cca48d96f3d57cb9dcd60548d65ada0e756b4e8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260515%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260515T170609Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d783bbabad7e8d5abfefd110ae3ff685360060e4aa007ec33ff9f589211f8a77",
+    "created_at": "2026-05-15 17:06:09"
+  },
+  {
     "id": "cr-19E2C610752DBW1",
     "game_name": "N/A",
     "format": "portrait",
-    "offer_text": "Daily Bonus Wheel â Free GC + SC Every Day",
+    "offer_text": "Daily Bonus Wheel Ã¢ÂÂ Free GC + SC Every Day",
     "style": "Map",
     "user_email": "justin@rmgs.online",
     "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/55/d8d04c159eba0355494fefd1f06f1f82216d62f46238400026a4a993d91db0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260515%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260515T160300Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=599ff36624b347474f3587fda6b7f5a0b8de609183a8b4cabae621e152523605",
