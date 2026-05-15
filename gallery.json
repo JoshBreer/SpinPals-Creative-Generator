@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17788696243044",
+    "game_name": "Panda Fortune",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17788696243044.jpg",
+    "created_at": "2026-05-15 18:27:04"
+  },
+  {
+    "id": "cr-1778869624BAC0",
+    "game_name": "Panda Fortune",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1778869624BAC0.jpg",
+    "created_at": "2026-05-15 18:27:04"
+  },
+  {
     "id": "cr-1778869489AB72",
     "game_name": "Cash Elevator",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/39/71a098b94c26b4e32e52a885c585a2f19392c6ee75a036cf98fed846848600.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T165353Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d10231b6d9ddf197d6e122c70823f17734a522d00b0cef86e2989eb5670c3d01",
     "created_at": "2026-04-17 16:53:10"
-  },
-  {
-    "id": "cr-1776444045873C",
-    "game_name": "Sweet Bonanza",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/49/23c916fa1ff1f12bf65a4eedc2478cdf3aebc16ddc419381c3ab8eb763547f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T164127Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=93f85ffe95f81ceb58e6075319f4656cb6c147286e3af30f994187a89e727a71",
-    "created_at": "2026-04-17 16:40:45"
-  },
-  {
-    "id": "cr-17764437145701",
-    "game_name": "Classic Blackjack",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/60/0809ecbaaf8a3bb9ce6f08afbbd2716b54edd3b6c23bdb25f34f5d45c12867.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T163535Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=c546d497364a67369fb8b0901446734f289c8e510aa421c57504f5c3da6117ab",
-    "created_at": "2026-04-17 16:35:14"
   }
 ]
