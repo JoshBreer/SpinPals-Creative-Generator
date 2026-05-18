@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v75 — EpicSweep hook offers -->
+<!-- RMGS Creative Studio v77 — fal timeout fix, stop button works -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1882,115 +1882,31 @@ function buildFalFallbackPrompt(){
     if(gamePrompts[gameNameLower]){
       classicPrompt=gamePrompts[gameNameLower];
     } else if(isTestLab) {
-      const tlName=state.game||'slots';
-      const tlLower=tlName.toLowerCase().replace(/[^a-z0-9]/g,'');
-      const offerUp=(state.offer&&state.offer!=='none'?state.offer:'WIN BIG').toUpperCase();
-      const cta='PLAY NOW!';
-
-      // Helper — builds the text block tailored to each game's visual language
-      const tb=(titleStyle,bannerStyle,btnStyle)=>
-        `\n\nThis is a COMPLETE casino advertisement — render ALL three text elements as physically part of the illustration:\n1. GAME TITLE "${tlName}" at the top filling 28% of frame: ${titleStyle}\n2. OFFER BANNER center-lower containing "${offerUp}": ${bannerStyle}\n3. CTA BUTTON at the bottom with "${cta}": ${btnStyle}\nEvery element is seamlessly integrated. One cohesive premium ad, not a background with text on top. 8K.`;
-
-      const gameAds={
-        // ACTION SLOTS
-        'neonhunter': 'Complete casino ad. Dark cyberpunk megacity at night — towering neon-lit skyscrapers, hot pink and electric cyan neon signs reflecting in wet streets, holographic slot symbols floating mid-air, circuit board energy trails, gold coins with cyan trails raining down, futuristic hunter silhouette mid-action.' + tb(
-          'massive glowing neon tube letters — hot pink with electric cyan halos, like real neon signage from the scene itself',
-          'a sleek dark holographic display panel with electric cyan neon border, large bold white text with cyan glow',
-          'a futuristic dark pill with cyan-to-pink neon border gradient and glowing cyan label — no generic green'
-        ),
-        'cashblitz': 'Complete casino ad. Explosive money celebration — hundred dollar bills and gold coins blasting outward from center, each bill razor-sharp, giant green $ symbols glowing, money bags mid-burst, stacks of cash launching upward, gold confetti everywhere, deep dark background making money pop.' + tb(
-          'massive 3D letters built from stacked dollar bills and gold coins, green and gold gradient, like the money is literally forming the title',
-          'a rich dark green ribbon banner with thick gold frame, crisp white text with gold drop shadow',
-          'a deep money-green to bright gold gradient pill, bold white text, warm golden aura radiating outward'
-        ),
-        'thundervault': 'Complete casino ad. Epic vault heist — colossal steel vault door BLASTING open mid-explosion, gold bars and coins erupting in perfect arcs, massive electric lightning bolt shapes as pure energy, blinding golden light pouring from vault interior, gold ingots spinning mid-air, dramatic smoke.' + tb(
-          'massive industrial steel letters with electric gold lightning bolt accents, like forged metal with electric charge running through them',
-          'a thick steel plate banner with lightning bolt border and gold rivets, bold gold text with electric white glow',
-          'a bold electric gold-to-amber gradient pill, lightning crackle glow, white bold text — powerful and charged'
-        ),
-        'goldrushx': 'Complete casino ad. Wild West gold rush bonanza — dramatic canyon at blazing golden hour, gold nuggets and coins exploding outward catching sunlight, overflowing mine cart, pickaxe and lantern props glowing warm amber, gold dust particle trails, wooden mine shaft entrance, dynamite blast mid-air.' + tb(
-          'massive wooden frontier sign letters with gold leaf inlay and rustic texture — like a classic Wild West saloon sign',
-          'a weathered wooden plank banner with gold pin border and rope detail, bold gold letters with warm lantern glow',
-          'a warm amber-to-gold gradient pill with gold nugget border texture and warm glowing aura'
-        ),
-        'wildcircuit': 'Complete casino ad. Electric racing circuit at night — glowing neon racing track with electric energy lines, slot machine symbols in neon flying at speed, gold coins streaking like motion blur, electric blue and volt yellow energy field, circuit board patterns in background, speed and voltage everywhere.' + tb(
-          'massive bold racing-style letters with electric volt yellow fill, motion blur streaks, neon speed lines radiating outward',
-          'a dark carbon-fiber panel with volt yellow electric border, bold white text with yellow speed-streak glow',
-          'a volt yellow-to-electric green gradient pill, bold dark text, electric spark glow around entire button'
-        ),
-        'dragonstacks': 'Complete casino ad. Dragon treasure epic — magnificent jade-and-gold dragon coiled around a mountain of golden treasure, emerald scales glinting, Chinese lucky symbols and red lanterns glowing, gold coins cascading, jade ornaments, dramatic fire and smoke trails, deep crimson and gold palette.' + tb(
-          'massive ornate letters with gold dragon scale texture, red lacquer detail, jade gem accents — imperial Chinese gold style',
-          'a rich red lacquer banner with intricate gold dragon border and tassel detail, bold gold text with warm red glow',
-          'a deep crimson-to-gold gradient pill with ornate gold dragon border, bold white text, warm imperial glow'
-        ),
-        // JACKPOT GAMES
-        'megastrike': 'Complete casino ad. Massive jackpot explosion — giant glowing 777 slot machine reels locking in mid-spin, explosive gold and silver coins fountaining upward, starbursts of light from every direction, playing cards flying, triumphant trophy emerging from coins, deep cosmic purple-black background with gold starburst rays.' + tb(
-          'massive chrome-and-gold 3D letters with mirror finish and starburst explosion radiating from each letter — the jackpot moment',
-          'a sleek chrome banner with gold lightning bolt border, bold white text with gold metallic shimmer',
-          'a polished chrome-to-gold gradient pill, bold white text, starburst glow effect — premium jackpot energy'
-        ),
-        'vaultbreaker': 'Complete casino ad. Bank heist explosion — massive armored vault door EXPLODING off its hinges, gold bars, diamonds and stacks of cash blasting outward, dramatic white-hot explosion light from the breach, smoke and debris, laser beams cut through vault, silhouette of mastermind thief against the light.' + tb(
-          'massive bold letters made of vault door steel with blown-out explosion damage effect, gold bars bursting from inside each letter',
-          'a dark steel vault banner with gold bar border and combination lock detail, bold white text with gold glow',
-          'a dark charcoal-to-gold gradient pill, like a vault dial, bold white text, golden explosion light glow'
-        ),
-        'luckygrid': 'Complete casino ad. Lucky charm rainbow explosion — deep purple background, rainbow arching above overflowing pot of gold, four-leaf clovers spinning everywhere, horseshoes, dice showing lucky numbers, gold coins cascading from grid shapes, shamrocks and stars, warm golden light from center, pure Irish luck energy.' + tb(
-          'massive shamrock-green 3D letters with gold four-leaf clover accents and rainbow shimmer, like lucky charms brought to life',
-          'a deep purple banner with rainbow gradient border and clover detail, bold gold text with green lucky glow',
-          'a vivid shamrock-green to gold gradient pill, bold white text, rainbow sparkle glow — pure lucky energy'
-        ),
-        'supersevens': 'Complete casino ad. Classic Vegas jackpot glory — triple 7s locked in giant glowing slot reels center stage, rivers of gold coins flowing, neon Vegas signs glowing red and gold, playing cards fanned everywhere, casino chips stacked tall, searchlights, confetti, pure classic casino celebration energy.' + tb(
-          'massive retro Vegas sign letters in hot red neon with gold halo — like the classic Las Vegas strip sign style',
-          'a classic dark red banner with gold neon border, bold white text with hot red neon glow',
-          'a classic Las Vegas red-to-gold gradient pill, bold white text, warm red neon glow emanating outward'
-        ),
-        // LIVE CASINO
-        'vipliveroulette': 'Complete casino ad. Ultra-luxury VIP casino interior — close-up on a roulette wheel spinning at speed mid-shot, ball a streak of white light, rich teal and gold casino atmosphere, crystal chandeliers bokeh behind, deep mahogany and velvet surroundings, the wheel lit dramatically from above, pure luxury and tension.' + tb(
-          'massive elegant serif letters in gold leaf on dark background — like the gold lettering of a Michelin-starred restaurant sign',
-          'a rich dark velvet banner with ornate gold filigree border, bold cream-white text with gold letterpress detail',
-          'a deep black-to-gold gradient pill with ornate gold filigree border, bold gold text — not green, pure VIP luxury'
-        ),
-        'lightningtables': 'Complete casino ad. Electric live casino table moment — dramatic overhead spotlight on a casino table, electric lightning bolt shapes crackling across the felt, playing cards frozen mid-flip catching light, casino chips mid-air, electric blue and gold energy radiating from center, atmospheric haze.' + tb(
-          'massive electrified letters with lightning bolt cracks running through them, gold and electric blue — live energy made visible',
-          'a dramatic dark banner with electric blue lightning border, bold white text with electric blue glow',
-          'a dark electric blue-to-gold gradient pill, bold white text, electric spark crackle glow'
-        ),
-        'highrollerbj': 'Complete casino ad. High-roller blackjack room — dramatic single overhead spotlight on a premium blackjack table, cards dealt face-up showing a perfect 21, towers of black and gold premium chips, deep mahogany and black leather, atmospheric cigar smoke haze, pure high-stakes luxury energy.' + tb(
-          'massive elegant black and gold serif letters — the understated confidence of old-money luxury, like a private members club sign',
-          'a premium black banner with double gold border and playing card suit accents, bold gold text with warm spotlight glow',
-          'a premium matte black-to-gold gradient pill with gold border, bold gold text — never green, black card luxury only'
-        ),
-        // CRASH & INSTANT
-        'rocketcash': 'Complete casino ad. Rocket launch jackpot — sleek gold rocket ship blasting off vertically trailing blazing fire and smoke, giant multiplier numbers climbing beside it, dollar bills and gold coins caught in the rocket wake and spiraling upward, deep space black background with stars, pure speed and momentum energy.' + tb(
-          'massive bold italic letters like rocket speed, gold with fire gradient at the base, jet exhaust flame effect below each letter',
-          'a dark space banner with gold rocket exhaust glow border, bold white text with warm fire glow',
-          'a fire-orange-to-gold gradient pill, bold white text, warm rocket exhaust glow — speed and heat energy'
-        ),
-        'flipx': 'Complete casino ad. Coin flip frenzy — giant coin spinning at apex tumbling through the air, heads and tails visible simultaneously in dramatic slow motion, burst of gold coins exploding outward at the flip moment, bold graphic elements, deep contrast dark background, pure high-energy instant win moment.' + tb(
-          'massive bold graphic letters that look like they are flipping in 3D, gold coin texture, motion blur on the tips',
-          'a bold dark banner with coin-gold border and flip motion lines, bold white text with gold coin shimmer',
-          'a bright coin-gold gradient pill, bold white text with coin shimmer effect — instant win energy'
-        ),
-        'dropzone': 'Complete casino ad. Vertical drop jackpot — dramatic top-down perspective, gold coins and prizes dropping straight down through zones of increasing value, motion blur trails, neon zone markers glowing, explosive gold burst at the bottom landing zone, deep dramatic dark background, momentum and drop energy.' + tb(
-          'massive letters that appear to be falling downward with motion blur trails, gold with neon zone-marker color accents',
-          'a dark banner with neon drop-zone border lines, bold white text with neon glow',
-          'a neon yellow-to-gold gradient pill, bold white text, downward motion glow — drop zone energy'
-        ),
+      const tlName=(state.game||'slots').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const gameVisuals={
+        'neonhunter':     'Cyberpunk megacity at night. Towering neon-lit skyscrapers, hot pink and electric cyan signs reflecting in rain-slicked streets. Circuit board energy trails glowing. Gold coins with neon trails raining down. Dark atmospheric depth. Ultra vivid.',
+        'cashblitz':      'Explosive money scene. Hundred dollar bills and gold coins blasting outward from center against pure black. Each bill razor-sharp. Giant glowing dollar symbols radiating light. Money bags mid-burst. Dramatic strobe lighting.',
+        'thundervault':   'Massive steel vault door blasting open. Gold bars and coins erupting in perfect arcs. Bold electric lightning bolt shapes as pure energy. Blinding golden light spilling from vault interior. Dramatic smoke. Dark background.',
+        'goldrushx':      'Wild West canyon at blazing golden hour. Gold nuggets and coins exploding outward catching sunlight. Overflowing mine cart. Pickaxe and glowing amber lantern props. Gold dust particle trails everywhere.',
+        'wildcircuit':    'Electric racing circuit at night. Glowing neon track with volt yellow energy lines. Slot symbols flying at speed. Gold coins streaking as motion blur. Electric blue and yellow energy field. Circuit board patterns glowing.',
+        'dragonstacks':   'Magnificent jade-and-gold dragon coiled around overflowing golden treasure mountain. Emerald scales glinting. Red lanterns and Chinese lucky symbols glowing. Gold coins cascading. Dramatic fire and smoke trails. Deep crimson and gold.',
+        'megastrike':     'Giant glowing 777 slot machine reels locking at jackpot. Explosive gold and silver coins fountaining upward. Starbursts of light from every direction. Royal flush cards flying. Deep cosmic purple-black background with gold starburst rays.',
+        'vaultbreaker':   'Armored vault door exploding off hinges mid-heist. Gold bars, diamonds and cash blasting outward. White-hot explosion light from the breach. Silhouette of mastermind thief against the light. Cinematic and dramatic.',
+        'luckygrid':      'Deep purple background. Rainbow arching above overflowing pot of gold. Four-leaf clovers spinning everywhere. Horseshoes and lucky dice. Gold coins cascading. Green shamrocks and gold stars. Warm golden light from center.',
+        'supersevens':    'Classic Las Vegas at golden hour. Iconic neon casino signs glowing against deep blue dusk sky. Triple 7s in giant glowing slot reels. Rivers of gold coins. Neon Vegas signs blazing red and gold. Celebration energy.',
+        'vipliveroulette':'Ultra-luxury VIP casino. Roulette wheel spinning under single dramatic overhead spotlight. Ball a streak of white light. Crystal chandeliers bokeh behind. Deep mahogany and velvet surroundings. Pure luxury atmosphere.',
+        'lightningtables':'Casino table in near-darkness. Single overhead beam lighting the felt. Playing cards frozen mid-air. Chips in perfect positions. Electric blue energy crackling at table edges. Atmospheric and dramatic.',
+        'highrollerbj':   'Blackjack hand showing perfect 21 on dark green felt. Single pendant light above. Black and gold premium chips stacked perfectly. Playing cards razor sharp. Rich dark leather surroundings. Understated luxury.',
+        'rocketcash':     'Sleek gold rocket ship blasting off vertically. Blazing fire and smoke trail. Giant multiplier numbers climbing beside it. Dollar bills caught in rocket wake spiraling upward. Deep space black background.',
+        'flipx':          'Single gold coin at apex of flip. Frozen by strobe perfectly sharp mid-air. Deep black background. Single hard overhead spotlight catching both faces simultaneously. Explosion of coins outward from impact.',
+        'dropzone':       'Aerial top-down view of neon-lit drop zone target. Coins mid-fall captured by strobe in various positions. Neon zone markers glowing. Deep dark floor. Dramatic overhead lighting. Motion energy downward.',
       };
-
-      // Match game — use exact key or fall back to a premium default
-      classicPrompt = gameAds[tlLower] ||
-        'Complete casino ad. Epic jackpot explosion — deep purple cosmic background, enormous glossy playing card suits, towering chip stacks with specular highlights, gold coins erupting upward, oversized lucky dice, glittering trophy, thick cartoon outlines, every inch packed.' +
-        tb(
-          'massive glossy 3D cartoon letters with gold and purple gradient and starburst rays — premium casino title energy',
-          'a deep purple banner with gold neon border, bold white text with gold glow',
-          'a rich purple-to-gold gradient pill, bold white text, starburst glow — premium casino style'
-        );
+      classicPrompt=gameVisuals[tlName]||'Epic casino jackpot explosion. Deep purple-to-black cosmic background. Enormous glossy playing card suits, towering chip stacks with specular highlights, gold coins erupting upward, oversized lucky dice, glittering trophy. Ultra packed vivid scene.';
     } else {
       classicPrompt=gamePrompts[defaultKeys[Math.floor(Math.random()*defaultKeys.length)]];
     }
 
-    prompt=isTestLab?classicPrompt:classicPrompt+' CRITICAL: NO text, NO words, NO letters, NO logos, NO buttons anywhere. Pure background illustration only. Ultra high resolution 8K.';
+    prompt=classicPrompt+' NO text, NO words, NO letters, NO logos, NO buttons, NO UI elements anywhere in the image. Pure illustration only. Ultra high resolution 8K.';
 
   } else if(style==='Realistic'){
     const gameNameR=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -2010,100 +1926,28 @@ function buildFalFallbackPrompt(){
       'bigbassbonanza':'Cinematic fishing photograph. Golden hour lake, lone fisherman silhouette on dock, massive bass leaping from water catching the last sunlight, perfect reflection below. Shot on Canon R5, 300mm f/2.8. Warm and beautiful.',
     };
 
-    // TestLab game-specific Realistic — each game gets its own cinematic world
+    // TestLab game-specific Realistic — pure cinematic scene, NO text instructions
     const getTestlabRealistic=()=>{
-      const tlName=state.game||'casino';
-      const offerUp=(state.offer&&state.offer!=='none'?state.offer:'WIN BIG').toUpperCase();
-      const cta='PLAY NOW!';
-
-      const tb=(titleStyle,bannerStyle,btnStyle)=>
-        `\n\nCOMPLETE AD — render ALL text as physical elements in the scene:\n1. GAME TITLE "${tlName}" at the top: ${titleStyle}\n2. OFFER BANNER containing "${offerUp}" center-lower: ${bannerStyle}\n3. CTA BUTTON "${cta}" near bottom: ${btnStyle}\nAll elements lit by the scene's actual light source. One cohesive cinematic casino ad.`;
-
-      const realisticAds={
-        'neonhunter': 'Complete cinematic casino ad. Rain-slicked neon city street at night — electric blue and pink neon signs reflecting in wet asphalt puddles, one hard spotlight cone cutting dramatically through rain, atmospheric ground fog. Sony Venice 2, 35mm anamorphic.' + tb(
-          'clean modern sans-serif title in glowing neon pink lit by the street signs, like the real neon signs in the scene',
-          'a glowing neon sign prop physically mounted in the scene — dark panel with electric pink-and-cyan neon border tube, lit from within',
-          'a sleek dark pill button with cyan neon tube border, text glowing cyan — matches the neon sign aesthetic of the scene'
-        ),
-        'cashblitz': 'Complete cinematic casino ad. Hundred dollar bills caught mid-fall frozen by 1/8000s strobe against pure black, each bill razor sharp catching overhead spotlight, rich green tones, gold rim light on bill edges. Hasselblad X2D, 120mm macro.' + tb(
-          'clean bold serif title in crisp gold leaf — like embossed letterpress on a premium bank note, lit by the same strobe',
-          'a physical dark green ribbon banner with gold pin-stripe border, hanging in the scene catching the strobe light',
-          'a rich money-green to warm gold gradient pill, text crisp white, lit by the same overhead strobe light in the scene'
-        ),
-        'thundervault': 'Complete cinematic casino ad. Massive round steel vault door open a crack, intense warm gold light spilling from inside casting dramatic shadows outward, dark moody exterior, steam wisping at floor level. ARRI Alexa, 35mm T2.0.' + tb(
-          'heavy industrial steel serif letters mounted above the vault, lit by the golden vault interior light spilling across them',
-          'a solid steel plate banner mounted on the vault door, gold-trimmed, text illuminated by the vault interior glow',
-          'a premium dark metal pill button with gold border, lit by warm vault light — industrial luxury'
-        ),
-        'goldrushx': 'Complete cinematic casino ad. Dramatic red sandstone canyon formations glowing rich amber in the setting sun, long diagonal shadow, single prospector lantern in sharp foreground focus, heat shimmer in distance. Phase One IQ4, 40mm.' + tb(
-          'weathered hand-painted wooden signboard letters above the canyon, warm lantern light catching the gold leaf paint',
-          'a physical weathered wooden plank sign hanging in the scene, gold lettering catching warm lantern light from below',
-          'a warm amber pill button with worn gold border, lit naturally by the lantern in the foreground'
-        ),
-        'wildcircuit': 'Complete cinematic casino ad. Neon racing track at night, electric energy lines tracing the circuit, dramatic motion blur of speed, single spotlight on the track center, volt yellow and electric blue energy glow. Sony Venice 2, 24mm anamorphic.' + tb(
-          'bold italic speed-style lettering in volt yellow, lit by the circuit energy lines, motion blur on edges',
-          'a clean dark carbon-fiber mounted sign with volt yellow electric border, lit by the circuit glow',
-          'a volt yellow-to-electric green pill, dark bold text, electric edge glow matching the circuit energy'
-        ),
-        'dragonstacks': 'Complete cinematic casino ad. Ancient misty mountain range at dramatic dawn, golden temple silhouette on the highest peak, volumetric sun rays breaking through layered clouds, hint of vast dragon wing shadow in the mist. RED Monstro, 35mm.' + tb(
-          'ornate imperial gold serif letters at the top, catching the dawn golden light — like temple gate inscription',
-          'a physical stone or bronze plaque hanging between two pillars in the scene, lit by dawn light, gold lettering',
-          'a deep imperial gold pill button with bronze border, lit by the warm dawn light — ancient luxury'
-        ),
-        'megastrike': 'Complete cinematic casino ad. Extreme close-up of a slot machine display at the jackpot moment — screen emitting intense golden light into surrounding darkness, motion blur on reels resolving to triple 7s, coins starting to cascade from the tray catching screen light. RED Monstro 8K, 85mm T1.4.' + tb(
-          'premium chrome and gold lettering mounted above the machine, lit by the jackpot screen golden light',
-          'an illuminated display panel on the machine body showing the offer text, lit from behind in warm gold',
-          'a polished chrome-to-gold pill button below the display, text illuminated by the machine glow'
-        ),
-        'vaultbreaker': 'Complete cinematic casino ad. Armored car interior — gold bars stacked perfectly under hard strobe light, each bar sharp with specular highlights, dark armored walls surrounding, one overhead spotlight creating dramatic shadows. Nikon Z9, 85mm.' + tb(
-          'bold stencil-style letters spray-painted in gold on the armored wall, caught in the spotlight beam',
-          'a physical metal plate riveted to the armored interior wall, gold stencil text lit by the overhead spot',
-          'a dark armored metal pill button with gold rivet border, text in hard spotlight — tactical and premium'
-        ),
-        'luckygrid': 'Complete cinematic casino ad. Extreme macro of a four-leaf clover on dark velvet, each cell of the clover perfectly sharp catching side light, gold coins arranged around it catching bokeh background, soft warm golden hour light. Canon R5, 100mm macro.' + tb(
-          'elegant script gold lettering arching over the macro scene, lit by the same warm side light as the clover',
-          'a small ornate gold-framed sign card in the scene near the clover, warm lettering catching the golden light',
-          'a warm shamrock green-to-gold pill button with delicate gold border, naturally lit by warm scene light'
-        ),
-        'supersevens': 'Complete cinematic casino ad. Classic Las Vegas at golden hour — iconic neon sign of a vintage casino glowing against a deep blue dusk sky, warm tungsten light spilling onto the sidewalk below, atmospheric heat haze. Leica M10, 35mm.' + tb(
-          'classic Vegas neon sign style lettering — retro red and gold neon tubes, glowing against the dusk sky',
-          'a glowing vintage neon sign prop in the scene, dark backing with red neon tube border, warm letter glow',
-          'a warm vintage red-to-gold gradient pill, matching the neon sign aesthetic of the scene — retro Vegas energy'
-        ),
-        'vipliveroulette': 'Complete cinematic casino ad. Single roulette wheel under a perfect overhead spotlight in a dark luxury casino, ball a streak of white light, rich mahogany and crystal bokeh background, deep atmospheric shadows everywhere. ARRI Alexa, 50mm T1.4.' + tb(
-          'engraved gold leaf lettering on dark wood — like the name plate of a luxury private members club',
-          'a physical dark velvet banner with ornate gold filigree border hanging in the scene, ambient casino light',
-          'a matte black-to-deep-gold pill button with gold filigree border — VIP only, never green'
-        ),
-        'lightningtables': 'Complete cinematic casino ad. Wide angle of a casino table in darkness, single overhead beam light illuminating the felt, playing cards scattered mid-air frozen, chips in perfect positions, electric blue energy crackling at table edges. ARRI Alexa, 18mm T2.8.' + tb(
-          'electric blue neon-style lettering above the table, lit by the same overhead beam and electric edge light',
-          'a glowing display above the table in the scene — dark panel with electric blue border, bold lit text',
-          'a dark electric blue pill button with neon border, matching the table energy light'
-        ),
-        'highrollerbj': 'Complete cinematic casino ad. Blackjack hand showing perfect 21 on dark green felt under a single overhead pendant light, black and gold premium chips stacked perfectly, playing cards razor sharp. Hasselblad X2D, 80mm.' + tb(
-          'understated luxury gold serif letterpress on dark — like a private bank letterhead, lit by pendant lamp',
-          'a premium dark leather-bound menu card propped in the scene with gold lettering, warm pendant light',
-          'a premium matte black pill with double gold border — understated luxury, never green'
-        ),
-        'rocketcash': 'Complete cinematic casino ad. Rocket launch pad at night, rocket illuminated by blazing engine exhaust light, dramatic steam clouds billowing, launch tower silhouette, stars above, pure power and speed energy. Sony Venice 2, 21mm.' + tb(
-          'bold italic rocket-speed lettering lit by the engine exhaust warm orange glow from below',
-          'a mission briefing board mounted on the launch tower, lit by exhaust glow, bold text on dark background',
-          'a fire orange-to-gold pill button, lit by the rocket engine glow from below'
-        ),
-        'flipx': 'Complete cinematic casino ad. Single gold coin at the apex of a flip, frozen by 1/10000s strobe perfectly sharp in mid-air, deep black background, single hard overhead spotlight catching both faces simultaneously. Phase One IQ4, 120mm macro.' + tb(
-          'bold coin-gold serif letters, lit by the same overhead strobe creating deep shadows — like minted into gold',
-          'a physical coin-gold metal sign plate in the scene, strobe lit, text engraved into polished gold',
-          'a bright coin-gold gradient pill, bold dark text, strobe-lit specular highlight on the surface'
-        ),
-        'dropzone': 'Complete cinematic casino ad. Aerial overhead shot looking straight down at a neon-lit drop zone target on dark floor, coins mid-fall captured by strobe, each coin perfectly sharp in different positions, dramatic overhead lighting. RED Monstro, 50mm overhead.' + tb(
-          'bold clean letters on the floor of the scene, lit by the overhead neon zone lights — seen from above',
-          'a neon-bordered display panel mounted overhead in the scene, bright zone-marker colors, bold text lit from within',
-          'a neon yellow-to-bright-gold pill button with zone-marker border, bold dark text, neon lit from above'
-        ),
+      const tlName=(state.game||'casino').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const realisticVisuals={
+        'neonhunter':     'Rain-slicked neon city street at night. Electric blue and pink neon signs reflecting in wet asphalt puddles. Hard spotlight cone cutting dramatically through rain. Atmospheric ground fog. Sony Venice 2, 35mm anamorphic. Cinematic noir.',
+        'cashblitz':      'Hundred dollar bills caught mid-fall, frozen by 1/8000s strobe against pure black. Each bill razor sharp catching overhead spotlight. Rich green tones, gold rim light on bill edges. Hasselblad X2D, 120mm macro.',
+        'thundervault':   'Massive round steel vault door open a crack. Intense warm gold light spilling from inside casting dramatic shadows outward. Dark moody exterior. Steam wisping at floor level. ARRI Alexa, 35mm T2.0.',
+        'goldrushx':      'Dramatic red sandstone canyon glowing rich amber in setting sun. Long diagonal shadow. Single prospector lantern in sharp foreground focus. Heat shimmer in distance. Phase One IQ4, 40mm.',
+        'wildcircuit':    'Neon racing track at night. Electric energy lines tracing the circuit. Dramatic motion blur of speed. Single spotlight on track center. Volt yellow and electric blue energy glow. Sony Venice 2, 24mm anamorphic.',
+        'dragonstacks':   'Ancient misty mountain range at dramatic dawn. Golden temple silhouette on highest peak. Volumetric sun rays breaking through layered clouds. Hint of vast dragon wing shadow in the mist. RED Monstro, 35mm.',
+        'megastrike':     'Slot machine display screen at jackpot moment. Screen emitting intense golden light into surrounding darkness. Motion blur on reels resolving to triple 7s. Coins beginning to cascade catching screen light. RED Monstro 8K, 85mm T1.4.',
+        'vaultbreaker':   'Gold bars stacked perfectly in armored car interior under hard strobe light. Each bar sharp with specular highlights. Dark armored walls. One overhead spotlight creating dramatic shadows. Nikon Z9, 85mm.',
+        'luckygrid':      'Extreme macro four-leaf clover on dark velvet. Each cell perfectly sharp catching side light. Gold coins arranged around it in soft bokeh. Warm golden hour light. Canon R5, 100mm macro.',
+        'supersevens':    'Classic Las Vegas neon sign glowing against deep blue dusk sky. Warm tungsten light spilling onto sidewalk below. Atmospheric heat haze. Leica M10, 35mm.',
+        'vipliveroulette':'Single roulette wheel under perfect overhead spotlight in dark luxury casino. Ball a streak of white light. Rich mahogany and crystal bokeh. Deep atmospheric shadows. ARRI Alexa, 50mm T1.4.',
+        'lightningtables':'Casino table in near-darkness. Single overhead beam light illuminating the felt. Playing cards scattered mid-air frozen. Chips in perfect positions. Electric blue energy crackling at table edges. ARRI Alexa, 18mm T2.8.',
+        'highrollerbj':   'Blackjack hand showing perfect 21 on dark green felt under single overhead pendant light. Black and gold premium chips stacked perfectly. Playing cards razor sharp. Hasselblad X2D, 80mm.',
+        'rocketcash':     'Rocket launch pad at night. Rocket illuminated by blazing engine exhaust light. Dramatic steam clouds billowing. Launch tower silhouette. Stars above. Sony Venice 2, 21mm.',
+        'flipx':          'Single gold coin at apex of flip frozen by 1/10000s strobe. Perfectly sharp mid-air. Deep black background. Hard overhead spotlight catching both faces simultaneously. Phase One IQ4, 120mm macro.',
+        'dropzone':       'Aerial overhead shot looking straight down at neon-lit drop zone target on dark floor. Coins mid-fall captured by strobe, each coin perfectly sharp. Dramatic overhead lighting. RED Monstro, 50mm overhead.',
       };
-
-      return realisticAds[gameNameR] || pick(realisticTestlab)+
-        `\n\nCOMPLETE AD — render ALL text as physical elements lit by the scene:\n1. GAME TITLE "${tlName}" at top: elegant gold lettering matching scene lighting\n2. OFFER "${offerUp}" center-lower: physical illuminated banner/sign prop in scene\n3. "${cta}" button near bottom: premium pill button matching scene's color palette\nOne cohesive cinematic casino ad.`;
+      return realisticVisuals[tlName]||pick(realisticTestlab);
     };
 
     let realisticPrompt;
@@ -2140,7 +1984,7 @@ function buildFalFallbackPrompt(){
       ]:isSpinPals?spinpalsRealistic:isTurkish?bankobetRealistic:betewinRealistic);
     }
 
-    prompt=isTestLab?realisticPrompt:realisticPrompt+' Cinematic color grade. NO people unless specified above. NO text. NO logos. NO buttons. Clean background only.';
+    prompt=realisticPrompt+' Cinematic color grade. NO people unless specified above. NO text. NO logos. NO buttons. Clean background only.';
 
   } else if(style==='Electric'){
     const spinpalsElectric=[
@@ -2188,10 +2032,6 @@ function buildFalFallbackPrompt(){
 
 // Draw text overlay on top of fal background image using canvas
 async function compositeTextOnImage(bgImageUrl){
-  // TestLab: fal generated the complete ad — pass URL directly, no canvas needed
-  if(typeof isTestLabFlow==='function'&&isTestLabFlow()){
-    return {composite:bgImageUrl,original:bgImageUrl};
-  }
   return new Promise((resolve)=>{
     const fmt=state.format==='both'?'portrait':state.format||'portrait';
     const isPortrait=fmt==='portrait';
@@ -2332,20 +2172,33 @@ async function compositeTextOnImage(bgImageUrl){
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
           grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
         } else if(isTestLabFlow()){
-          // TestLab: vary by style — Classic gets hot colors, Realistic gets gold/white
-          if(state.style==='Classic'){
-            // Hot vibrant gradient to match cartoon chaos
-            const hues=['#FF1493','#FF6600','#FFD700','#00FF88','#FF00FF','#00CCFF'];
-            const h=hues[Math.floor(Math.random()*hues.length)];
-            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,h);
-            grd.addColorStop(0.7,h);grd.addColorStop(1,'#FFFFFF');
-          } else if(state.style==='Realistic'){
-            // Cinematic gold/white for luxury feel
+          // TestLab: game-specific gradient colors
+          const gameColors={
+            'neonhunter':    ['#FFFFFF','#FF44CC','#FF44CC','#00CCFF'],
+            'cashblitz':     ['#FFFFFF','#00FF66','#FFD700','#FFD700'],
+            'thundervault':  ['#FFFFFF','#FFD700','#FF8800','#FFD700'],
+            'goldrushx':     ['#FFFFFF','#FFD700','#FF8C00','#FFD700'],
+            'wildcircuit':   ['#FFFFFF','#FFFF00','#00FF88','#FFFF00'],
+            'dragonstacks':  ['#FFFFFF','#FFD700','#FF2200','#FFD700'],
+            'megastrike':    ['#FFFFFF','#FFD700','#C0C0C0','#FFD700'],
+            'vaultbreaker':  ['#FFFFFF','#FFD700','#888888','#FFD700'],
+            'luckygrid':     ['#FFFFFF','#00FF66','#FFD700','#00FF66'],
+            'supersevens':   ['#FFFFFF','#FF3300','#FFD700','#FF3300'],
+            'vipliveroulette':['#FFFFFF','#FFD700','#C0A060','#FFD700'],
+            'lightningtables':['#FFFFFF','#00CCFF','#FFD700','#00CCFF'],
+            'highrollerbj':  ['#FFFFFF','#FFD700','#C0A060','#FFD700'],
+            'rocketcash':    ['#FFFFFF','#FF8800','#FFD700','#FF8800'],
+            'flipx':         ['#FFFFFF','#FFD700','#FFA500','#FFD700'],
+            'dropzone':      ['#FFFFFF','#FFFF00','#FFD700','#FFFF00'],
+          };
+          const gameLower=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+          const cols=gameColors[gameLower]||['#FFFFFF','#FFD700','#AA44FF','#FFD700'];
+          if(state.style==='Realistic'){
             grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFF8DC');
             grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FFA500');grd.addColorStop(1,'#FFD700');
           } else {
-            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
-            grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
+            grd.addColorStop(0,cols[0]);grd.addColorStop(0.2,cols[1]);
+            grd.addColorStop(0.6,cols[2]);grd.addColorStop(1,cols[3]);
           }
         } else {
           // SpinPals: gold to purple
@@ -2374,7 +2227,33 @@ async function compositeTextOnImage(bgImageUrl){
         const btnY=isPortrait?H*0.75:H*0.73;
 
         // Outer glow — double pass for intensity
-        ctx.shadowColor='rgba(0,255,80,0.7)';
+        // TestLab: game-specific button colors
+        const tlBtnColors={
+          'neonhunter':['rgba(0,200,255,0.7)','rgba(0,180,230,0.25)','#00DDFF','#0099CC','#006688'],
+          'cashblitz':['rgba(0,200,80,0.7)','rgba(0,180,60,0.25)','#00FF66','#22C55E','#15803D'],
+          'thundervault':['rgba(255,180,0,0.7)','rgba(255,150,0,0.25)','#FFD700','#FF9900','#CC6600'],
+          'goldrushx':['rgba(255,160,0,0.7)','rgba(255,140,0,0.25)','#FFD700','#FF9900','#CC6600'],
+          'wildcircuit':['rgba(200,255,0,0.7)','rgba(180,230,0,0.25)','#CCFF00','#99CC00','#669900'],
+          'dragonstacks':['rgba(255,50,0,0.7)','rgba(200,30,0,0.25)','#FF4400','#CC2200','#881100'],
+          'megastrike':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
+          'vaultbreaker':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
+          'luckygrid':['rgba(0,220,80,0.7)','rgba(0,180,60,0.25)','#00FF66','#22C55E','#15803D'],
+          'supersevens':['rgba(255,50,0,0.7)','rgba(200,30,0,0.25)','#FF3300','#CC2200','#881100'],
+          'vipliveroulette':['rgba(255,200,80,0.7)','rgba(200,160,40,0.25)','#FFD700','#CC9900','#997700'],
+          'lightningtables':['rgba(0,180,255,0.7)','rgba(0,150,200,0.25)','#00AAFF','#0077CC','#004499'],
+          'highrollerbj':['rgba(255,200,80,0.7)','rgba(200,160,40,0.25)','#FFD700','#CC9900','#997700'],
+          'rocketcash':['rgba(255,130,0,0.7)','rgba(200,100,0,0.25)','#FF8800','#CC6600','#994400'],
+          'flipx':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
+          'dropzone':['rgba(200,255,0,0.7)','rgba(160,200,0,0.25)','#CCFF00','#99CC00','#669900'],
+        };
+        const tlGame=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+        const tlBtn=isTestLabFlow()&&tlBtnColors[tlGame]?tlBtnColors[tlGame]:null;
+        const btnGlowColor=tlBtn?tlBtn[0]:'rgba(0,255,80,0.7)';
+        const btnHaloColor=tlBtn?tlBtn[1]:'rgba(0,230,80,0.25)';
+        const btnC0=tlBtn?tlBtn[2]:'#00FF66';
+        const btnC1=tlBtn?tlBtn[3]:'#22C55E';
+        const btnC2=tlBtn?tlBtn[4]:'#15803D';
+        ctx.shadowColor=btnGlowColor;
         ctx.shadowBlur=50;
         ctx.shadowOffsetY=0;
 
@@ -2395,16 +2274,16 @@ async function compositeTextOnImage(bgImageUrl){
 
         // Glow halo layer
         drawPill(btnX-8,btnY-8,btnW+16,btnH+16,btnR+8);
-        ctx.fillStyle='rgba(0,230,80,0.25)';
+        ctx.fillStyle=btnHaloColor;
         ctx.fill();
 
         // Main button
         ctx.shadowBlur=35;
         drawPill(btnX,btnY,btnW,btnH,btnR);
         const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-        btnGrd.addColorStop(0,'#00FF66');
-        btnGrd.addColorStop(0.4,'#22C55E');
-        btnGrd.addColorStop(1,'#15803D');
+        btnGrd.addColorStop(0,btnC0);
+        btnGrd.addColorStop(0.4,btnC1);
+        btnGrd.addColorStop(1,btnC2);
         ctx.fillStyle=btnGrd;
         ctx.fill();
 
@@ -2457,30 +2336,51 @@ async function falFallbackGenerate(){
     // Submit to fal queue
     const falBody={prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg',seed:Math.floor(Math.random()*999999999)};
     if(negativePrompt)falBody.negative_prompt=negativePrompt;
+
+    // 30 second timeout on submit
+    const submitController=new AbortController();
+    const submitTimeout=setTimeout(()=>submitController.abort(),30000);
     const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
       method:'POST',
       headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify(falBody)
+      body:JSON.stringify(falBody),
+      signal:submitController.signal
     });
+    clearTimeout(submitTimeout);
     if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
     const submitData=await submitRes.json();
     const requestId=submitData.request_id;
     if(!requestId)throw new Error('No request_id');
     const statusUrl=submitData.status_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId+'/status');
     const responseUrl=submitData.response_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId);
-    console.log('FAL FALLBACK SUBMITTED, requestId:',requestId);
-    // Poll for completion
+    console.log('FAL SUBMITTED, requestId:',requestId);
+
+    // Poll — 2 minute hard timeout, checks stop flags
+    const pollStart=Date.now();
+    const MAX_POLL_MS=120000; // 2 minutes
     let attempts=0;
-    while(attempts<60){
-      await new Promise(r=>setTimeout(r,5000));
+    while(true){
+      // Check if user stopped generation
+      if(typeof falStopped!=='undefined'&&falStopped)return null;
+      if(typeof falStoppedQG!=='undefined'&&falStoppedQG)return null;
+      // Hard timeout
+      if(Date.now()-pollStart>MAX_POLL_MS)throw new Error('fal timed out after 2 minutes');
+      await new Promise(r=>setTimeout(r,4000));
       attempts++;
-      const sr=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-      if(!sr.ok)continue;
-      const sd=await sr.json();
-      console.log('FAL FALLBACK STATUS attempt '+attempts+':',sd.status);
-      if(sd.status==='FAILED')throw new Error('fal generation failed');
-      if(sd.status==='COMPLETED')break;
+      try{
+        const sr=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+        if(!sr.ok)continue;
+        const sd=await sr.json();
+        console.log('FAL STATUS attempt '+attempts+':',sd.status);
+        if(sd.status==='FAILED')throw new Error('fal generation failed');
+        if(sd.status==='COMPLETED')break;
+      }catch(pollErr){
+        if(pollErr.message.includes('FAILED')||pollErr.message.includes('timed out'))throw pollErr;
+        // Network hiccup — keep trying
+        continue;
+      }
     }
+
     // Fetch result
     const rr=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
     if(!rr.ok)throw new Error('fal result fetch failed');
@@ -2489,13 +2389,13 @@ async function falFallbackGenerate(){
     if(falResult.images&&falResult.images[0]){
       const img=falResult.images[0];
       const bgUrl=typeof img==='string'?img:img.url;
-      console.log('FAL: compositing text overlay on',bgUrl.substring(0,60));
+      console.log('FAL: compositing on',bgUrl.substring(0,60));
       const composited=await compositeTextOnImage(bgUrl);
       return composited;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
-    console.error('FAL FALLBACK ERROR:',e);
+    console.error('FAL ERROR:',e);
     return null;
   }
 }
