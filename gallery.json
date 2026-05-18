@@ -1,143 +1,23 @@
 [
   {
-    "id": "cr-19E3C0C45A0GSQR",
-    "game_name": "N/A - Map style",
+    "id": "cr-1779126991HP1x1B",
+    "game_name": "Hot Pepper",
     "format": "square",
-    "offer_text": "Will You Be the Next Big Winner?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/0d/df45a2759af50da2b770e5de384321cb1830cb765c5488dd2aec1e9477fe05.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T170234Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=885011a2d8498dfb82ba6780b9c888aef5a91d24ec386d946afc8399af32861d",
-    "created_at": "2026-05-18 17:03:00"
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779126991HP1x1B.jpg",
+    "created_at": "2026-05-18 17:56:31"
   },
   {
-    "id": "cr-19E3C0C45A0GPRT",
-    "game_name": "N/A - Map style",
+    "id": "cr-1779126978HP9x16A",
+    "game_name": "Hot Pepper",
     "format": "portrait",
-    "offer_text": "Will You Be the Next Big Winner?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/15/5f4ac40dd2a272ced2a2e6be7ec2358101d1d542e734e717e85579f56cbc7e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T170256Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a75f99a2d5d6564d593cbb4fbcab764361da8cdb116eeacc4b2b78f8c176cf74",
-    "created_at": "2026-05-18 17:03:00"
-  },
-  {
-    "id": "cr-19E3BFF689ASQ",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/ef/250707a1d66c22641ecb9ecb25eadea863a7e82c5084a34c3cce7b8cdae6b0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T164949Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d1284de1a3b1cd6a9f3246014574431ff1f9721a3e1624e9663d86d5eff191b6",
-    "created_at": "2026-05-18 16:50:54"
-  },
-  {
-    "id": "cr-19E3BFF689APT",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/28/6e7439fb414b2676cceed05175d05ad0e1ac8988cdc06199ad42f07c7b2ab0.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T165011Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b76ac7553468734d0bcd9610fa84abe2f6f33ce2ab5d61eba4a016a76a91dcbb",
-    "created_at": "2026-05-18 16:50:54"
-  },
-  {
-    "id": "cr-19E3BFD8150SQ",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/2a/57fa2f2827c82ff2a94ee06fe70d2c01424face74ccabb9fd21b9a730c0335.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T164747Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3b9b3f836a15c4eecb467db69878e81af97fd5e0708b5a05f158e44bf516c3bf",
-    "created_at": "2026-05-18 16:48:50"
-  },
-  {
-    "id": "cr-19E3BFD8150PT",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/b5/660959e04487fd152af1213ef286eb916dd669c969787118fce2d588cf4ca6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T164814Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fbcb911d18a73fb2c9a825ccae80dd42168bc89d08d15347b4a39c85eae5e594",
-    "created_at": "2026-05-18 16:48:50"
-  },
-  {
-    "id": "cr-19E3BFA6BF3",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/06/3f18ffc64033798e5c58e47506aab6d2b623617661f3f1ea039ba96f38cd43.jpg",
-    "created_at": "2026-05-18 16:45:00"
-  },
-  {
-    "id": "cr-19E3BFA6BF4",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Edward D. Won Big on EpicSweep, Can You?",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/d7/d24343e82dbf16264ff46fe34adf065b9b9e928d1b29ce449c35785f99de2b.jpg",
-    "created_at": "2026-05-18 16:45:00"
-  },
-  {
-    "id": "cr-19E3BF03C63",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Play FREE in 39 States ÃÂ¢ÃÂÃÂ No Purchase Ever Required",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/79/4b187b80620a0e98d3ce3a5c8e2df99f95193189f0c50fa4ebdac72deeb7c5.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T163324Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=cb160a100411e8a7006d72579de2a9c27e7049d43883486410f66d673112290a",
-    "created_at": "2026-05-18 16:34:30"
-  },
-  {
-    "id": "cr-19E3BF03C64",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Play FREE in 39 States ÃÂ¢ÃÂÃÂ No Purchase Ever Required",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/6b/f61fa390d14720d0c2d5da9742a8d0d758ccfa1bf9e2135f86b29196b59dcf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T163346Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=b294ed56c76dbb668e425d14e32736ddc9fbfd1ba27f76cabde6974d7b97767a",
-    "created_at": "2026-05-18 16:34:30"
-  },
-  {
-    "id": "cr-19E3BE487CC",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Sign Up FREE ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ 100,000 GC + 1 SC",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/06/aa8679f04dcb530db387c40aef0d3a41a784fac467955c597deb82bd4729d6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T162058Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8a0d542b33cf197a0c3d54d7eb9923211fdb6f25a2d30beeccee3d68413c0505",
-    "created_at": "2026-05-18 16:21:33"
-  },
-  {
-    "id": "cr-19E3BE487CD",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Sign Up FREE ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ 100,000 GC + 1 SC",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/44/fec9cecf5bb66ea63a808b630b6ccdffeca9c53deed385ab2289a518597421.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T162121Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4a031b11415a5317be133bef505255318f507b05c4690b5aae2313c32a0f5d9c",
-    "created_at": "2026-05-18 16:21:33"
-  },
-  {
-    "id": "cr-19E3BD461F6",
-    "game_name": "N/A - Map style",
-    "format": "square",
-    "offer_text": "Sign Up FREE ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ 100,000 GC + 1 SC",
-    "style": "Map",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/fe/bb89ade2d8538b75e4f23ab7c0f40b63e62ec395dfb801b93af81d97a24451.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T160323Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e469348e3c79569a9b5ad2c9371d38189479e232c9447438c80dcad30e73c210",
-    "created_at": "2026-05-18 16:03:23"
-  },
-  {
-    "id": "cr-19E37D6A5AA",
-    "game_name": "N/A - Map style",
-    "format": "portrait",
-    "offer_text": "Get More for 9.99 ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ 220,000 GC + 22 SC + 499 VIP XP",
-    "style": "Map",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/7c/efe97c5e8a8a4d0176820f8eb3808b446b5d067c493250863df365e86f5e77.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260517%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260517T212718Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5a4029a0ba4efa57b03a98ebed34c4b26ac5fcdae1064ea96c8ab2b4b47c694d",
-    "created_at": "2026-05-17 21:27:18"
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779126978HP9x16A.jpg",
+    "created_at": "2026-05-18 17:56:18"
   },
   {
     "id": "cr-1778881345LP4R",
@@ -2118,25 +1998,5 @@
     "user_email": "josh@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d4/e5cc0f22bbc6ae118166660007a9dfe561100955b30d2a3b3e6472b6b92086.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T224401Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d4be8be1bc7cc02165c3eb036265af2b40dfbfb1de874d3bf88c00022ca192b4",
     "created_at": "2026-04-17 22:43:18"
-  },
-  {
-    "id": "cr-17764654090FDF",
-    "game_name": "Thunderstruck II",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Classic",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/01/699516c6e765714c9ca9ad02c77133c5e8f43ef6eada89422813bcce185a58.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T223732Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9b97e863ff7a75b65532639be00a8a44e05ae9d82dcb052b4d1b0760a12fa58e",
-    "created_at": "2026-04-17 22:36:49"
-  },
-  {
-    "id": "cr-17764496928417",
-    "game_name": "N/A",
-    "format": "portrait",
-    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
-    "style": "Text Only",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/57/b301342775e56132cbc36007a45d03195f9fc5a6d89482f209b8051f0876d8.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T181527Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=884561a5a78388053d8127c9583608f552834e0020cf528fd8825c14cfb3b7ee",
-    "created_at": "2026-04-17 18:14:52"
   }
 ]
