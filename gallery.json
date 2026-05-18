@@ -1,9 +1,29 @@
 [
   {
-    "id": "cr-19E3BD461F6",
+    "id": "cr-19E3BE487CC",
     "game_name": "N/A - Map style",
     "format": "square",
     "offer_text": "Sign Up FREE â 100,000 GC + 1 SC",
+    "style": "Map",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/06/aa8679f04dcb530db387c40aef0d3a41a784fac467955c597deb82bd4729d6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T162058Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8a0d542b33cf197a0c3d54d7eb9923211fdb6f25a2d30beeccee3d68413c0505",
+    "created_at": "2026-05-18 16:21:33"
+  },
+  {
+    "id": "cr-19E3BE487CD",
+    "game_name": "N/A - Map style",
+    "format": "portrait",
+    "offer_text": "Sign Up FREE â 100,000 GC + 1 SC",
+    "style": "Map",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/44/fec9cecf5bb66ea63a808b630b6ccdffeca9c53deed385ab2289a518597421.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T162121Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4a031b11415a5317be133bef505255318f507b05c4690b5aae2313c32a0f5d9c",
+    "created_at": "2026-05-18 16:21:33"
+  },
+  {
+    "id": "cr-19E3BD461F6",
+    "game_name": "N/A - Map style",
+    "format": "square",
+    "offer_text": "Sign Up FREE Ã¢ÂÂ 100,000 GC + 1 SC",
     "style": "Map",
     "user_email": "josh@rmgs.online",
     "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/fe/bb89ade2d8538b75e4f23ab7c0f40b63e62ec395dfb801b93af81d97a24451.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260518%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260518T160323Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e469348e3c79569a9b5ad2c9371d38189479e232c9447438c80dcad30e73c210",
@@ -13,7 +33,7 @@
     "id": "cr-19E37D6A5AA",
     "game_name": "N/A - Map style",
     "format": "portrait",
-    "offer_text": "Get More for 9.99 Ã¢ÂÂ 220,000 GC + 22 SC + 499 VIP XP",
+    "offer_text": "Get More for 9.99 ÃÂ¢ÃÂÃÂ 220,000 GC + 22 SC + 499 VIP XP",
     "style": "Map",
     "user_email": "justin@rmgs.online",
     "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/7c/efe97c5e8a8a4d0176820f8eb3808b446b5d067c493250863df365e86f5e77.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260517%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260517T212718Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=5a4029a0ba4efa57b03a98ebed34c4b26ac5fcdae1064ea96c8ab2b4b47c694d",
