@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1779129070FJR1",
+    "game_name": "Fire Joker",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779129070FJR1.jpg",
+    "created_at": "2026-05-18 18:31:10"
+  },
+  {
+    "id": "cr-1779129070FJR2",
+    "game_name": "Fire Joker",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779129070FJR2.jpg",
+    "created_at": "2026-05-18 18:31:10"
+  },
+  {
     "id": "cr-17791272878730",
     "game_name": "Hot Pepper",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "cuneyt@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ab/0ac71b6499fe8073f073d551d417c723597dd7447c982eccc2b7c24f7c240a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T233905Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ac988622581088ab331e098b2131b5d38cae393eb46429f68f2d0481c9229f30",
     "created_at": "2026-04-17 23:38:43"
-  },
-  {
-    "id": "cr-17764673433DC3",
-    "game_name": "Wolf Gold",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/53/92fe13a7d21320470b16e6a37c0ea3cbfc91d72e72d81f952d35918bf1d8ac.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T230942Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f76b64234743493d16a827d2db308590c9dd559f702da3e10ed369e48ff759a0",
-    "created_at": "2026-04-17 23:09:03"
-  },
-  {
-    "id": "cr-1776466135F546",
-    "game_name": "Starlight Princess",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/81/e55df69843a755bd790dedbf12d91be06334dd3d97716f0ae5eee533a31612.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260417%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260417T224936Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ecc79b0258fd8c9f9d822f4cfa9035284ac5cf80403ce9618669aa2d88118712",
-    "created_at": "2026-04-17 22:48:55"
   }
 ]
