@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v71 — rotating map themes for EpicSweep and WannaParlay -->
+<!-- RMGS Creative Studio v72 — both sizes fix -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -2620,20 +2620,25 @@ function showResult(loadMsg,found){
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
   const isBoth=state.format==='both';
 
-  // Build image grid — Twin images only
+  // Build image grid
   const images=[];
   if(isBoth){
     images.push({url:found.image_url,label:'Portrait 9:16'});
-    // Look for matching square Twin image from same session
-    const sessionStart=Date.now()-600000;
-    const twinSquare=galleryData.find(c=>
-      c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
-      c.image_url&&c.image_url!==found.image_url&&
-      c.id!==found.id&&
-      new Date(c.created_at).getTime()>=sessionStart&&
-      (c.format==='square'||c.format==='both')
-    );
-    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1'});
+    // For fal direct both-generation, square URL is on the entry itself
+    if(found.image_url_square){
+      images.push({url:found.image_url_square,label:'Square 1:1'});
+    } else {
+      // Twin path — look for matching square from same session in galleryData
+      const sessionStart=Date.now()-600000;
+      const twinSquare=galleryData.find(c=>
+        c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
+        c.image_url&&c.image_url!==found.image_url&&
+        c.id!==found.id&&
+        new Date(c.created_at).getTime()>=sessionStart&&
+        (c.format==='square'||c.format==='both')
+      );
+      if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1'});
+    }
   } else {
     images.push({url:found.image_url,label:found.format==='portrait'?'Portrait 9:16':'Square 1:1'});
   }
