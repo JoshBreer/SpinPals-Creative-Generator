@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v73 — EpicSweep social proof offer -->
+<!-- RMGS Creative Studio v75 — EpicSweep hook offers -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -392,7 +392,12 @@ const EPICSWEEP_OFFERS=[
   {id:'es7',title:'VIP Coinback — Earn SC Back Every Week',description:'Level up through tiers for weekly SC coinback and exclusive rewards'},
   {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins — always free to play'},
   {id:'es9',title:'Play FREE in 39 States — No Purchase Ever Required',description:'Sweepstakes casino — free to play always, real prizes available'},
-  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof offer — winner testimonial style'}
+  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof offer — winner testimonial style'},
+  {id:'es11',title:'Will You Be the Next Big Winner?',description:'Curiosity hook — challenge the viewer'},
+  {id:'es12',title:'Your Next Big Win is One Spin Away',description:'Urgency hook — proximity to winning'},
+  {id:'es13',title:'People Are Winning Right Now. Are You In?',description:'Social proof urgency — FOMO hook'},
+  {id:'es14',title:'Free to Play. Real Prizes. What Are You Waiting For?',description:'Value proposition hook — removes barrier'},
+  {id:'es15',title:'Join Thousands Already Playing for FREE',description:'Social proof volume — crowd hook'},
 ];
 
 const SPINPALS_OFFERS=[
@@ -938,25 +943,22 @@ async function stepStyle(){
   if(isSportsFlow()){
     const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
     bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions=(()=>{
-      const available='Alabama, Alaska, Arizona, Arkansas, Colorado, Florida, Georgia, Hawaii, Illinois, Indiana, Iowa, Kansas, Kentucky, Maine, Maryland, Massachusetts, Minnesota, Mississippi, Missouri, Nebraska, New Hampshire, New Mexico, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, West Virginia, Wisconsin, Wyoming';
-      const restricted='California, Connecticut, Delaware, Idaho, Louisiana, Michigan, Montana, Nevada, New Jersey, New York, Washington';
-      const mapCore=`Flat-design United States map. AVAILABLE states highlighted: ${available}. RESTRICTED states in dark muted gray: ${restricted}. Alaska and Hawaii shown in inset box bottom-left. Clean crisp accurate state borders.`;
+      // NO state names in prompt — prevents AI rendering state labels on map
+      const mapCore=`Flat-design United States map showing state boundaries. Color: the MAJORITY of states (39 out of 50) in the accent color — large central states, most of the south, most of the northeast, pacific northwest, and others. Exactly 11 states colored dark muted gray — scattered: entire west coast (3 states), several northeast states, a few others. Alaska and Hawaii in small inset box bottom-left. NO text labels on the map. NO state names on the map. Clean flat design, crisp borders, accurate US geography.`;
       const disclaimer='"21+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly"';
       const themes=[
-        // Theme 1: Purple gold — WannaParlay brand colors
-        `Premium fantasy sports ad. Deep purple background (#0A0E2A). ${mapCore} Available states: vivid gold (#FFD700) with warm glow. Restricted: dark charcoal. TOP: Bold white headline with offer text. "PLAY IN 23 STATES" in gold. BOTTOM: Gold gradient rounded pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Premium sports brand feel — purple and gold throughout.`,
-        // Theme 2: Neon green electric sports energy
-        `Premium fantasy sports ad. Dark navy (#060C1E). ${mapCore} Available states: electric neon green (#00FF66) with glow. Restricted: dark slate. Diagonal lightning bolt shapes in dark purple behind the map for energy. TOP: Bold white and green headline with offer text. BOTTOM: Bright green pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Electric sports energy.`,
-        // Theme 3: Bold typographic with map inset
-        `Premium fantasy sports ad. Dark purple-black background. ${mapCore} Map is positioned right side, slightly smaller. LEFT SIDE: Massive bold typographic "23" in huge gold font, "STATES" below, offer text below that, stacked vertically. BOTTOM CENTER: Gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Bold editorial typographic style.`,
-        // Theme 4: Red white blue patriotic
-        `Premium fantasy sports ad. Dark navy background. ${mapCore} Available states: bright red (#FF3333) with glow. Restricted: dark gray. Subtle stars scattered around border. TOP: Bold white headline with offer text. "LEGAL IN 23 STATES" in white with red accent. BOTTOM: Red-to-gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Patriotic American sports feel.`,
-        // Theme 5: Clean minimalist white states
-        `Clean minimal fantasy sports ad. Almost black background (#0D0D12). ${mapCore} Available states: clean crisp white with subtle shadow. Restricted: very dark barely-visible gray. Map is large and centered. Minimal text — just offer text at top in clean white sans-serif. "23 STATES" as large watermark text behind the map at low opacity. BOTTOM: Clean white pill CTA "PLAY NOW" with dark text. Disclaimer: ${disclaimer}. Ultra clean minimalist.`,
-        // Theme 6: Celebration confetti purple
-        `Premium fantasy sports ad. Deep purple (#0D0520) background. ${mapCore} Available states: bright purple-pink (#CC44FF) with neon glow. Restricted: dark muted gray. Gold and purple confetti pieces scattered around edges. TOP: Bold white and gold headline with offer text, trophy emoji accent. BOTTOM: Vibrant purple pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Celebratory winning energy.`,
+        `Premium fantasy sports ad. Deep purple background (#0A0E2A). ${mapCore} Accent color: vivid gold (#FFD700) with warm glow. Restricted: dark charcoal. TOP: Bold white headline with offer text. "PLAY IN 23 STATES" in gold. BOTTOM: Gold gradient rounded pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Premium sports brand feel — purple and gold.`,
+        `Premium fantasy sports ad. Dark navy (#060C1E). ${mapCore} Accent color: electric neon green (#00FF66) with glow. Diagonal lightning bolt shapes in dark purple behind the map. TOP: Bold white and green headline with offer text. BOTTOM: Bright green pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Electric sports energy.`,
+        `Premium fantasy sports ad. Dark purple-black background. ${mapCore} Map positioned right side. LEFT SIDE: Massive bold "23" in huge gold font, "STATES" below, offer text below. BOTTOM CENTER: Gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Bold editorial typographic style.`,
+        `Premium fantasy sports ad. Dark navy background. ${mapCore} Accent color: bright red (#FF3333) with glow. Subtle stars around border. TOP: Bold white headline with offer text. "LEGAL IN 23 STATES" with red accent. BOTTOM: Red-to-gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Patriotic American sports feel.`,
+        `Clean minimal fantasy sports ad. Almost black background (#0D0D12). ${mapCore} Accent color: clean crisp white. Restricted: very dark gray. Large map centered. Offer text at top in clean white. "23 STATES" as large watermark behind map at low opacity. BOTTOM: Clean white pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Ultra clean minimalist.`,
+        `Premium fantasy sports ad. Deep purple (#0D0520) background. ${mapCore} Accent color: bright purple-pink (#CC44FF) with neon glow. Gold and purple confetti around edges. TOP: Bold white and gold headline with offer text. BOTTOM: Vibrant purple pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Celebratory winning energy.`,
       ];
-      return themes[Math.floor(Math.random()*themes.length)];
+      const lastIdx=window._lastWpMapTheme||null;
+      let idx;
+      do { idx=Math.floor(Math.random()*themes.length); } while(themes.length>1&&idx===lastIdx);
+      window._lastWpMapTheme=idx;
+      return themes[idx];
     })();msg('Map Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMap);
 
@@ -979,34 +981,26 @@ async function stepStyle(){
       bEpicMap.style.opacity='1';bEpicMap.style.borderColor='var(--blue)';bEpicMap.style.color='var(--blue)';
       state.style='Map';
 
-      // Core state data — same every time, only the visual theme rotates
-      const available='Alabama, Alaska, Arizona, Arkansas, Colorado, Florida, Georgia, Hawaii, Illinois, Indiana, Iowa, Kansas, Kentucky, Maine, Maryland, Massachusetts, Minnesota, Mississippi, Missouri, Nebraska, New Hampshire, New Mexico, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, West Virginia, Wisconsin, Wyoming';
-      const restricted='California, Connecticut, Delaware, Idaho, Louisiana, Michigan, Montana, Nevada, New Jersey, New York, Washington';
-      const mapCore=`Flat-design United States map. AVAILABLE states highlighted: ${available}. RESTRICTED states in dark muted gray: ${restricted}. Alaska and Hawaii shown in inset box bottom-left. Clean crisp state borders. Accurate geography.`;
+      // Core map description — NO state names listed (causes AI to render labels on map)
+      // Just describe the visual pattern: most states green, 11 specific ones gray
+      const mapCore=`Flat-design United States map showing state boundaries clearly. Color the map as follows: the MAJORITY of states (39 out of 50) are highlighted in the accent color — these are the large central states, most of the south, most of the northeast, the pacific northwest, and others. Exactly 11 states are colored dark muted gray — these are scattered around: the entire west coast (3 states), several northeast states, and a few others scattered. Alaska and Hawaii shown in small inset box bottom-left corner. NO state name labels on the map. NO text on the map itself. Clean flat design, crisp state borders, accurate US geography.`;
       const disclaimer='"21+ | Sweepstakes Casino | Free to Play | Not Available in All States | See Terms"';
 
       const esMapThemes=[
-        // Theme 1: Classic neon green (like the reference image)
-        `Premium sweepstakes casino ad. Dark navy background (#0B0F1A). ${mapCore} Available states: vivid neon green (#00FF88) with soft outer glow. TOP: Bold white headline with offer text, subtext "AVAILABLE IN 39 STATES — FREE TO PLAY". BOTTOM: Bright green rounded pill CTA "PLAY FREE NOW". Disclaimer bar at very bottom: ${disclaimer}. Clean modern app aesthetic.`,
-
-        // Theme 2: Gold/amber states, dark background, luxury feel
-        `Premium sweepstakes casino ad. Deep black background (#080A12). ${mapCore} Available states: rich gold (#FFD700) with warm amber glow. Restricted states: very dark charcoal. TOP: Bold white and gold headline with offer text. "AVAILABLE IN 39 STATES" in gold. BOTTOM: Gold gradient pill CTA button "PLAY FREE NOW". Disclaimer at bottom: ${disclaimer}. Luxury premium feel — like a VIP casino ad.`,
-
-        // Theme 3: Electric blue states, centered EpicSweep mascot/logo watermark
-        `Premium sweepstakes casino ad. Dark blue-black background (#060D1F). ${mapCore} Available states: electric cyan-blue (#00CFFF) with electric glow and subtle pulse effect. Restricted: dark slate. CENTER OF MAP: Subtle large watermark of a sweepstakes coin or star icon behind the map at 15% opacity. TOP: Bold white headline with offer text. "39 STATES — FREE TO PLAY" in bright cyan. BOTTOM: Bright cyan-to-blue pill CTA "PLAY FREE NOW". Disclaimer: ${disclaimer}. Futuristic electric feel.`,
-
-        // Theme 4: Purple gradient states, confetti celebration
-        `Premium sweepstakes casino ad. Deep purple background (#0D0520 to #1A0A3A gradient). ${mapCore} Available states: vivid purple-to-pink gradient (#AA44FF to #FF44AA) with neon glow. Restricted: dark muted. Confetti in purple, gold, and pink scattered around the top and sides of the image — celebration energy. TOP: Bold white headline with offer text, gold star emoji accents. BOTTOM: Vibrant purple rounded CTA pill "PLAY FREE NOW". Disclaimer: ${disclaimer}. Fun, celebratory, sweepstakes energy.`,
-
-        // Theme 5: Minimal white-on-dark, big bold typography focus
-        `Clean minimal sweepstakes casino ad. Pure dark charcoal background (#111318). ${mapCore} Available states: clean white (#FFFFFF) with very subtle glow. Restricted: medium gray (#2A2D35). The map is smaller, positioned left-center. RIGHT SIDE: Very large bold typographic layout — massive "39" in huge white font, "STATES" below it, offer text beneath. BOTTOM: Simple clean white pill CTA "PLAY FREE NOW" with dark text. Disclaimer: ${disclaimer}. Bold typographic editorial style.`,
-
-        // Theme 6: Sunrise/patriotic red white and blue
-        `Premium sweepstakes casino ad. Dark navy background. ${mapCore} Available states: bright patriotic red (#FF4444) with glow. Restricted: dark gray. Subtle stars-and-stripes texture overlay at 8% opacity across the whole image for patriotic feel. TOP: Bold white and red headline with offer text, "FREE TO PLAY IN 39 STATES". BOTTOM: Bold red-to-white gradient CTA pill "PLAY FREE NOW". Gold stars scattered lightly around the border. Disclaimer: ${disclaimer}. Patriotic American feel.`,
+        `Premium sweepstakes casino ad. Dark navy background (#0B0F1A). ${mapCore} Accent color: vivid neon green (#00FF88) with soft outer glow on highlighted states. TOP: Bold white headline with offer text, subtext "AVAILABLE IN 39 STATES — FREE TO PLAY". BOTTOM: Bright green rounded pill CTA "PLAY FREE NOW". Disclaimer bar at very bottom: ${disclaimer}. Clean modern app aesthetic.`,
+        `Premium sweepstakes casino ad. Deep black background (#080A12). ${mapCore} Accent color: rich gold (#FFD700) with warm amber glow on highlighted states. Restricted states: very dark charcoal. TOP: Bold white and gold headline with offer text. "AVAILABLE IN 39 STATES" in gold. BOTTOM: Gold gradient pill CTA "PLAY FREE NOW". Disclaimer: ${disclaimer}. Luxury VIP casino feel.`,
+        `Premium sweepstakes casino ad. Dark blue-black background (#060D1F). ${mapCore} Accent color: electric cyan-blue (#00CFFF) with electric glow on highlighted states. Restricted: dark slate. Subtle large coin/star watermark behind map at 15% opacity. TOP: Bold white headline with offer text. "39 STATES — FREE TO PLAY" in bright cyan. BOTTOM: Cyan-to-blue pill CTA "PLAY FREE NOW". Disclaimer: ${disclaimer}. Futuristic electric feel.`,
+        `Premium sweepstakes casino ad. Deep purple background (#0D0520). ${mapCore} Accent color: vivid purple-pink (#AA44FF) with neon glow on highlighted states. Confetti in purple, gold, and pink scattered around edges. TOP: Bold white headline with offer text. BOTTOM: Vibrant purple rounded CTA pill "PLAY FREE NOW". Disclaimer: ${disclaimer}. Celebratory sweepstakes energy.`,
+        `Clean minimal sweepstakes casino ad. Pure dark charcoal background (#111318). ${mapCore} Accent color: clean white on highlighted states. Restricted: medium gray. Map positioned left-center, smaller. RIGHT SIDE: Massive bold "39" in huge white font, "STATES" below, offer text beneath. BOTTOM: Clean white pill CTA "PLAY FREE NOW" with dark text. Disclaimer: ${disclaimer}. Bold typographic editorial style.`,
+        `Premium sweepstakes casino ad. Dark navy background (#0A0E20). ${mapCore} Accent color: bright patriotic red (#FF4444) with glow on highlighted states. Subtle stars scattered lightly around the border. TOP: Bold white and red headline with offer text, "FREE TO PLAY IN 39 STATES". BOTTOM: Red-to-white gradient CTA pill "PLAY FREE NOW". Disclaimer: ${disclaimer}. Patriotic American feel.`,
       ];
 
-      const theme=esMapThemes[Math.floor(Math.random()*esMapThemes.length)];
-      state.customInstructions=theme;
+      // Prevent repeating the same theme twice in a row
+      const lastTheme=window._lastEsMapTheme||null;
+      let idx;
+      do { idx=Math.floor(Math.random()*esMapThemes.length); } while(esMapThemes.length>1&&idx===lastTheme);
+      window._lastEsMapTheme=idx;
+      state.customInstructions=esMapThemes[idx];
       msg('Map Style','user');state.game='N/A';stepOffer();
     };
     w.appendChild(bEpicMap);
@@ -2629,12 +2623,13 @@ function showResult(loadMsg,found){
     if(found.image_url_square){
       images.push({url:found.image_url_square,label:'Square 1:1'});
     } else {
-      // Twin path — look for matching square from same session in galleryData
-      const sessionStart=Date.now()-600000;
+      // Twin path — look for matching square from same session (90s window, same source)
+      const sessionStart=Date.now()-90000;
       const twinSquare=galleryData.find(c=>
         c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
         c.image_url&&c.image_url!==found.image_url&&
         c.id!==found.id&&
+        c.source===found.source&&
         new Date(c.created_at).getTime()>=sessionStart&&
         (c.format==='square'||c.format==='both')
       );
