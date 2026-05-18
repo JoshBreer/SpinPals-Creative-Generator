@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v69 — no dollar signs, differentiated offers -->
+<!-- RMGS Creative Studio v70 — accurate EpicSweep offers, improved map creatives -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -384,14 +384,14 @@ const EPICSWEEP_GAMES={
 // EPICSWEEP OFFERS — verified by client May 2026
 const EPICSWEEP_OFFERS=[
   {id:'es1',title:'Sign Up FREE — 100,000 GC + 1 SC',description:'Register and verify email — no purchase needed'},
-  {id:'es2',title:'Only 4.99 — 12,000 GC + 6 SC + 250 VIP XP',description:'Starter welcome package'},
-  {id:'es3',title:'Get More for 9.99 — 220,000 GC + 22 SC + 499 VIP XP',description:'Mid-tier welcome package'},
-  {id:'es4',title:'Best Seller at 19.99 — 275,000 GC + 45 SC + 999 VIP XP',description:'Popular welcome package'},
-  {id:'es5',title:'Max Value at 34.99 — 400,000 GC + 60 SC + 1,749 VIP XP',description:'Best value welcome package'},
-  {id:'es6',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours for free Gold Coins and Sweeps Coins'},
-  {id:'es7',title:'Refer a Friend — Earn FREE Coins',description:'Share your link — earn bonus coins when friends join and purchase'},
-  {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins'},
-  {id:'es9',title:'VIP Program — SC Coinback + Exclusive Rewards',description:'Level up through tiers for SC coinback and exclusive promos'}
+  {id:'es2',title:'Starter Pack — 12,000 GC + 6 SC FREE',description:'First purchase: only 4.99 — 20% extra free'},
+  {id:'es3',title:'Best Value — 200,000 GC + 40 SC FREE',description:'First purchase: only 19.99 — 100% extra free, most popular'},
+  {id:'es4',title:'Max Bonus — 250,000 GC + 50 SC FREE + 500 VIP XP',description:'First purchase: only 34.99 — normally worth 50'},
+  {id:'es5',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours for free Gold Coins and Sweeps Coins'},
+  {id:'es6',title:'Refer a Friend — Up to 200,000 GC + 50 SC',description:'Share your link — earn bonus coins when friends join and purchase'},
+  {id:'es7',title:'VIP Coinback — Earn SC Back Every Week',description:'Level up through tiers for weekly SC coinback and exclusive rewards'},
+  {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins — always free to play'},
+  {id:'es9',title:'Play FREE in 39 States — No Purchase Ever Required',description:'Sweepstakes casino — free to play always, real prizes available'}
 ];
 
 const SPINPALS_OFFERS=[
@@ -936,7 +936,7 @@ async function stepStyle(){
   // Sports client styles (WannaParlay + Thrillzz)
   if(isSportsFlow()){
     const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
-    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='US map showing 23 highlighted states where WannaParlay is available. Deep purple background. Bold offer text at top. PLAY IN 23 STATES visual. Premium WannaParlay brand feel. Gold CTA button.';msg('Map Style','user');state.game='N/A';stepOffer();};
+    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions='Premium US map advertisement. EXACT LAYOUT: Dark deep navy (#0A0E2A) full-bleed background. A beautifully rendered flat-design United States map centered in the middle 60% of the image. HIGHLIGHTED in vivid neon green with soft outer glow — these exact states: Alabama, Alaska, Arizona, Arkansas, Colorado, Florida, Georgia, Hawaii, Illinois, Indiana, Iowa, Kansas, Kentucky, Maine, Maryland, Massachusetts, Minnesota, Mississippi, Missouri, Nebraska, New Hampshire, New Mexico, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, West Virginia, Wisconsin, Wyoming. All other states in dark slate gray (#1A2040) with subtle border lines. State borders clean and precise. TOP: Bold white headline text "PLAY IN 23 STATES" with gold accent. Selected offer text beneath in bright gold. BOTTOM: Premium rounded green pill CTA button. Thin disclaimer text at very bottom. OVERALL: Looks like a premium sports app ad — clean, modern, high contrast. Purple and gold accent colors throughout.';msg('Map Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMap);
 
     const bMatchup=document.createElement('button');bMatchup.className='opt-btn';bMatchup.textContent='Matchup Style 🏆';
@@ -957,7 +957,7 @@ async function stepStyle(){
       if(bEpicMap.disabled)return;lockButtons(w);
       bEpicMap.style.opacity='1';bEpicMap.style.borderColor='var(--blue)';bEpicMap.style.color='var(--blue)';
       state.style='Map';
-      state.customInstructions='Create a premium advertising creative with a stylized US map. EpicSweep available in 39 states. HIGHLIGHT these states in bright neon green with glow: Alabama Alaska Arizona Arkansas Colorado Florida Georgia Hawaii Illinois Indiana Iowa Kansas Kentucky Maine Maryland Massachusetts Minnesota Mississippi Missouri Nebraska New Hampshire New Mexico North Carolina North Dakota Ohio Oklahoma Oregon Pennsylvania Rhode Island South Carolina South Dakota Tennessee Texas Utah Vermont Virginia West Virginia Wisconsin Wyoming. COLOR these DARK GRAY restricted: California Connecticut Delaware Idaho Louisiana Michigan Montana Nevada New Jersey New York Washington. Dark background. Map center. Bold offer headline top. AVAILABLE IN 39 STATES subtext. Green CTA button PLAY FREE NOW. Disclaimer 21+ Sweepstakes Casino Free to Play Not Available in All States See Terms. NO EpicSweep logo.';
+      state.customInstructions='Premium US map advertisement for a sweepstakes casino. EXACT LAYOUT: Dark background (#0B0F1A) full-bleed. A beautifully rendered flat-design United States map centered prominently. HIGHLIGHT these states in vivid neon green with soft glow effect — AVAILABLE states: Alabama, Alaska, Arizona, Arkansas, Colorado, Florida, Georgia, Hawaii, Illinois, Indiana, Iowa, Kansas, Kentucky, Maine, Maryland, Massachusetts, Minnesota, Mississippi, Missouri, Nebraska, New Hampshire, New Mexico, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, West Virginia, Wisconsin, Wyoming. These states DARK GRAY (#1C2035) — NOT available: California, Connecticut, Delaware, Idaho, Louisiana, Michigan, Montana, Nevada, New Jersey, New York, Washington. Clean precise state borders. TOP: Bold white headline with the selected offer text. Subtext "AVAILABLE IN 39 STATES — FREE TO PLAY". BOTTOM: Bright green rounded pill CTA button "PLAY FREE NOW". Small disclaimer at very bottom: "18+ Sweepstakes Casino. Free to Play. Not Available in All States. See Terms." STYLE: Clean modern app-store ad aesthetic. Green and white color palette. Professional and trustworthy feel.';
       msg('Map Style','user');state.game='N/A';stepOffer();
     };
     w.appendChild(bEpicMap);
