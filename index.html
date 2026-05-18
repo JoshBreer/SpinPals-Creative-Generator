@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v78 — remove AbortController, fix submit hang -->
+<!-- RMGS Creative Studio v79 — global stop flags, fix generation hang -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -505,6 +505,9 @@ const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
 const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
+// Global stop flags — must be global so falFallbackGenerate can read them
+let falStopped=false;
+let falStoppedQG=false;
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
@@ -1276,7 +1279,7 @@ async function doQuickGenerate(){
     const stopBtnQG=document.createElement('button');
     stopBtnQG.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
     stopBtnQG.textContent='Stop Generation';
-    let falStoppedQG=false;
+    falStoppedQG=false;
     stopBtnQG.onclick=()=>{falStoppedQG=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
     loadDiv.appendChild(stopBtnQG);
     const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
@@ -1474,7 +1477,7 @@ async function doGenerate(){
     const stopBtn=document.createElement('button');
     stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
     stopBtn.textContent='Stop Generation';
-    let falStopped=false;
+    falStopped=false;
     stopBtn.onclick=()=>{falStopped=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
     loadDiv.appendChild(stopBtn);
     const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
