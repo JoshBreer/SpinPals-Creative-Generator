@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v77 — fal timeout fix, stop button works -->
+<!-- RMGS Creative Studio v78 — remove AbortController, fix submit hang -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -2337,16 +2337,11 @@ async function falFallbackGenerate(){
     const falBody={prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg',seed:Math.floor(Math.random()*999999999)};
     if(negativePrompt)falBody.negative_prompt=negativePrompt;
 
-    // 30 second timeout on submit
-    const submitController=new AbortController();
-    const submitTimeout=setTimeout(()=>submitController.abort(),30000);
     const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
       method:'POST',
       headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify(falBody),
-      signal:submitController.signal
+      body:JSON.stringify(falBody)
     });
-    clearTimeout(submitTimeout);
     if(!submitRes.ok)throw new Error('fal submit failed: '+submitRes.status);
     const submitData=await submitRes.json();
     const requestId=submitData.request_id;
