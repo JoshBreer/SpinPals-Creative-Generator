@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v79 — global stop flags, fix generation hang -->
+<!-- RMGS Creative Studio v80 — clean rebuild from original -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -384,32 +384,24 @@ const EPICSWEEP_GAMES={
 // EPICSWEEP OFFERS — verified by client May 2026
 const EPICSWEEP_OFFERS=[
   {id:'es1',title:'Sign Up FREE — 100,000 GC + 1 SC',description:'Register and verify email — no purchase needed'},
-  {id:'es2',title:'Starter Pack — 12,000 GC + 6 SC FREE',description:'First purchase: only 4.99 — 20% extra free'},
-  {id:'es3',title:'Best Value — 200,000 GC + 40 SC FREE',description:'First purchase: only 19.99 — 100% extra free, most popular'},
-  {id:'es4',title:'Max Bonus — 250,000 GC + 50 SC FREE + 500 VIP XP',description:'First purchase: only 34.99 — normally worth 50'},
-  {id:'es5',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours for free Gold Coins and Sweeps Coins'},
-  {id:'es6',title:'Refer a Friend — Up to 200,000 GC + 50 SC',description:'Share your link — earn bonus coins when friends join and purchase'},
-  {id:'es7',title:'VIP Coinback — Earn SC Back Every Week',description:'Level up through tiers for weekly SC coinback and exclusive rewards'},
-  {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins — always free to play'},
-  {id:'es9',title:'Play FREE in 39 States — No Purchase Ever Required',description:'Sweepstakes casino — free to play always, real prizes available'},
-  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof offer — winner testimonial style'},
+  {id:'es2',title:'Starter Pack — 12,000 GC + 6 SC FREE',description:'First purchase only 4.99 — starter package'},
+  {id:'es3',title:'Best Value — 200,000 GC + 40 SC FREE',description:'First purchase only 19.99 — most popular'},
+  {id:'es4',title:'Max Bonus — 250,000 GC + 50 SC FREE',description:'First purchase only 34.99 — maximum value'},
+  {id:'es5',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours for free coins'},
+  {id:'es6',title:'Refer a Friend — Up to 200,000 GC + 50 SC',description:'Share your link — earn bonus coins'},
+  {id:'es7',title:'VIP Coinback — Earn SC Back Every Week',description:'Level up for weekly SC coinback'},
+  {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins'},
+  {id:'es9',title:'Play FREE in 39 States — No Purchase Ever Required',description:'Free to play always, real prizes available'},
+  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof — winner testimonial style'},
   {id:'es11',title:'Will You Be the Next Big Winner?',description:'Curiosity hook — challenge the viewer'},
   {id:'es12',title:'Your Next Big Win is One Spin Away',description:'Urgency hook — proximity to winning'},
-  {id:'es13',title:'People Are Winning Right Now. Are You In?',description:'Social proof urgency — FOMO hook'},
-  {id:'es14',title:'Free to Play. Real Prizes. What Are You Waiting For?',description:'Value proposition hook — removes barrier'},
-  {id:'es15',title:'Join Thousands Already Playing for FREE',description:'Social proof volume — crowd hook'},
+  {id:'es13',title:'People Are Winning Right Now. Are You In?',description:'FOMO social proof hook'},
+  {id:'es14',title:'Free to Play. Real Prizes. What Are You Waiting For?',description:'Value proposition hook'},
+  {id:'es15',title:'Join Thousands Already Playing for FREE',description:'Social proof volume hook'},
 ];
 
-const SPINPALS_OFFERS=[
-  {id:'s0',title:'50 FREE SPINS on First Purchase',description:'Best performing offer - 50 free spins'},
-  {id:'s1',title:'6 SC FREE + 60K GC FREE + Daily FREE Spins',description:'New player welcome bonus'},
-  {id:'s2',title:'GC 400K + FREE SC 35 + 50 FREE SPINS',description:'Premium signup offer'},
-  {id:'s3',title:'25 FREE SC + 250K GC on First Purchase',description:'First purchase bonus'},
-  {id:'s4',title:'Daily Login Bonus: Up to 10 SC FREE',description:'Daily rewards program'},
-  {id:'s5',title:'Refer a Friend: Get 20 SC + 100K GC',description:'Referral program'},
-  {id:'s6',title:'Weekend Special: Double GC on All Purchases',description:'Weekend promotion'},
-  {id:'s7',title:'VIP Exclusive: 100 SC + 1M GC Package',description:'VIP tier reward'}
-];
+const SPINPALS_OFFERS=[{id:'s0',title:'50 FREE SPINS on First Purchase',description:'Best performing offer - 50 free spins'},
+{id:'s1',title:'6 SC FREE + 60K GC FREE + Daily FREE Spins',description:'New player welcome bonus'},{id:'s2',title:'GC 400K + FREE SC 35 + 50 FREE SPINS',description:'Premium signup offer'},{id:'s3',title:'25 FREE SC + 250K GC on First Purchase',description:'First purchase bonus'},{id:'s4',title:'Daily Login Bonus: Up to 10 SC FREE',description:'Daily rewards program'},{id:'s5',title:'Refer a Friend: Get 20 SC + 100K GC',description:'Referral program'},{id:'s6',title:'Weekend Special: Double GC on All Purchases',description:'Weekend promotion'},{id:'s7',title:'VIP Exclusive: 100 SC + 1M GC Package',description:'VIP tier reward'}];
 
 // BETEWIN GAMES
 const BETEWIN_TOP=['Gates of Olympus','Sweet Bonanza','Aviator','Football - Premier League','Football - Champions League','Lightning Roulette','Big Bass Bonanza','Crazy Time'];
@@ -454,16 +446,16 @@ const THRILLZZ_OFFERS=[
 ];
 
 const WANNAPARLAY_OFFERS=[
-  {id:'wp1',title:'100% Deposit Match Up To 250',description:'Sign up today and double your first deposit — up to 250 free'},
+  {id:'wp1',title:'100% Deposit Match Up To 250',description:'Sign up today and double your first deposit'},
   {id:'wp2',title:'Turn 4 Into 4,000',description:'Stack your parlay legs and win 1000x your money'},
-  {id:'wp3',title:'Win Up to 1,000x Your Money',description:'The biggest parlay payouts anywhere — low risk, high reward'},
-  {id:'wp4',title:'The Main Event — 2 Entry, Win 2,000',description:'Top 10 places all pay out 1,000 in our flagship daily contest'},
-  {id:'wp5',title:'Parlay Royale — 50 Entry, 1,000 Prize',description:'High stakes winner-take-all contest for serious players'},
+  {id:'wp3',title:'Win Up to 1,000x Your Money',description:'The biggest parlay payouts anywhere'},
+  {id:'wp4',title:'The Main Event — 2 Entry, Win 2,000',description:'Top 10 places all pay out in our flagship daily contest'},
+  {id:'wp5',title:'Parlay Royale — 50 Entry, 1,000 Prize',description:'High stakes winner-take-all contest'},
   {id:'wp6',title:'FREE Daily Entry — Available in 23 States',description:'Free contest entry every single day, no purchase needed'},
-  {id:'wp7',title:'Spreads, Moneylines & Player Props',description:'The only DFS app where you can pick all three — not just props'},
+  {id:'wp7',title:'Spreads, Moneylines & Player Props',description:'The only DFS app where you can pick all three'},
   {id:'wp8',title:'Compete Against Real People',description:'You are playing against real sports fans — biggest payouts anywhere'},
-  {id:'wp9',title:'Turn Your Sports Knowledge Into Cash',description:'The biggest parlay payouts in fantasy sports — sharks and bettors welcome'},
-  {id:'wp10',title:'Play in 23 States',description:'Available across 23 US states — check if your state is included'}
+  {id:'wp9',title:'Turn Your Sports Knowledge Into Cash',description:'The biggest parlay payouts in fantasy sports'},
+  {id:'wp10',title:'Play in 23 States',description:'Available across 23 US states'}
 ];
 
 // WEBHOOKS
@@ -505,9 +497,6 @@ const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
 const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
-// Global stop flags — must be global so falFallbackGenerate can read them
-let falStopped=false;
-let falStoppedQG=false;
 const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
@@ -945,24 +934,19 @@ async function stepStyle(){
   // Sports client styles (WannaParlay + Thrillzz)
   if(isSportsFlow()){
     const bMap=document.createElement('button');bMap.className='opt-btn';bMap.textContent='Map Style 🗺️';
-    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';state.customInstructions=(()=>{
-      // NO state names in prompt — prevents AI rendering state labels on map
-      const mapCore=`Flat-design United States map showing state boundaries. Color: the MAJORITY of states (39 out of 50) in the accent color — large central states, most of the south, most of the northeast, pacific northwest, and others. Exactly 11 states colored dark muted gray — scattered: entire west coast (3 states), several northeast states, a few others. Alaska and Hawaii in small inset box bottom-left. NO text labels on the map. NO state names on the map. Clean flat design, crisp borders, accurate US geography.`;
-      const disclaimer='"21+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly"';
-      const themes=[
-        `Premium fantasy sports ad. Deep purple background (#0A0E2A). ${mapCore} Accent color: vivid gold (#FFD700) with warm glow. Restricted: dark charcoal. TOP: Bold white headline with offer text. "PLAY IN 23 STATES" in gold. BOTTOM: Gold gradient rounded pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Premium sports brand feel — purple and gold.`,
-        `Premium fantasy sports ad. Dark navy (#060C1E). ${mapCore} Accent color: electric neon green (#00FF66) with glow. Diagonal lightning bolt shapes in dark purple behind the map. TOP: Bold white and green headline with offer text. BOTTOM: Bright green pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Electric sports energy.`,
-        `Premium fantasy sports ad. Dark purple-black background. ${mapCore} Map positioned right side. LEFT SIDE: Massive bold "23" in huge gold font, "STATES" below, offer text below. BOTTOM CENTER: Gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Bold editorial typographic style.`,
-        `Premium fantasy sports ad. Dark navy background. ${mapCore} Accent color: bright red (#FF3333) with glow. Subtle stars around border. TOP: Bold white headline with offer text. "LEGAL IN 23 STATES" with red accent. BOTTOM: Red-to-gold pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Patriotic American sports feel.`,
-        `Clean minimal fantasy sports ad. Almost black background (#0D0D12). ${mapCore} Accent color: clean crisp white. Restricted: very dark gray. Large map centered. Offer text at top in clean white. "23 STATES" as large watermark behind map at low opacity. BOTTOM: Clean white pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Ultra clean minimalist.`,
-        `Premium fantasy sports ad. Deep purple (#0D0520) background. ${mapCore} Accent color: bright purple-pink (#CC44FF) with neon glow. Gold and purple confetti around edges. TOP: Bold white and gold headline with offer text. BOTTOM: Vibrant purple pill CTA "PLAY NOW". Disclaimer: ${disclaimer}. Celebratory winning energy.`,
-      ];
-      const lastIdx=window._lastWpMapTheme||null;
-      let idx;
-      do { idx=Math.floor(Math.random()*themes.length); } while(themes.length>1&&idx===lastIdx);
-      window._lastWpMapTheme=idx;
-      return themes[idx];
-    })();msg('Map Style','user');state.game='N/A';stepOffer();};
+    bMap.onclick=()=>{if(bMap.disabled)return;lockButtons(w);customWrap.classList.remove('visible');bMap.style.opacity='1';bMap.style.borderColor='var(--blue)';bMap.style.color='var(--blue)';state.style='Map';
+    const mapCore='Flat-design United States map. Most states (39 of 50) highlighted in accent color. Exactly 11 states in dark muted gray. Alaska and Hawaii in small inset box bottom-left. NO text labels on the map. Clean flat design, crisp borders, accurate US geography.';
+    const disc='"21+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly"';
+    const wpThemes=[
+      `Premium fantasy sports ad. Deep purple background. ${mapCore} Accent: vivid gold with warm glow. TOP: Bold white headline with offer, "PLAY IN 23 STATES" in gold. BOTTOM: Gold pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+      `Premium fantasy sports ad. Dark navy background. ${mapCore} Accent: electric neon green with glow. Diagonal lightning shapes in dark purple behind map. TOP: Bold white and green headline. BOTTOM: Green pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+      `Premium fantasy sports ad. Dark purple-black. ${mapCore} Map right side. LEFT: Massive bold "23" in huge gold font, "STATES" below, offer text beneath. BOTTOM: Gold pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+      `Premium fantasy sports ad. Dark navy. ${mapCore} Accent: bright red with glow. Subtle stars around border. TOP: Bold white headline, "LEGAL IN 23 STATES". BOTTOM: Red-to-gold pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+      `Minimal fantasy sports ad. Almost black background. ${mapCore} Accent: clean white. Large map centered. Offer text at top. "23 STATES" watermark behind map. BOTTOM: White pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+      `Premium fantasy sports ad. Deep purple background. ${mapCore} Accent: purple-pink neon. Gold confetti around edges. TOP: Bold white and gold headline. BOTTOM: Purple pill CTA "PLAY NOW". Disclaimer: ${disc}.`,
+    ];
+    const lastWp=window._lastWpMap||null;let wpIdx;do{wpIdx=Math.floor(Math.random()*wpThemes.length);}while(wpThemes.length>1&&wpIdx===lastWp);window._lastWpMap=wpIdx;
+    state.customInstructions=wpThemes[wpIdx];msg('Map Style','user');state.game='N/A';stepOffer();};
     w.appendChild(bMap);
 
     const bMatchup=document.createElement('button');bMatchup.className='opt-btn';bMatchup.textContent='Matchup Style 🏆';
@@ -983,27 +967,20 @@ async function stepStyle(){
       if(bEpicMap.disabled)return;lockButtons(w);
       bEpicMap.style.opacity='1';bEpicMap.style.borderColor='var(--blue)';bEpicMap.style.color='var(--blue)';
       state.style='Map';
-
-      // Core map description — NO state names listed (causes AI to render labels on map)
-      // Just describe the visual pattern: most states green, 11 specific ones gray
-      const mapCore=`Flat-design United States map showing state boundaries clearly. Color the map as follows: the MAJORITY of states (39 out of 50) are highlighted in the accent color — these are the large central states, most of the south, most of the northeast, the pacific northwest, and others. Exactly 11 states are colored dark muted gray — these are scattered around: the entire west coast (3 states), several northeast states, and a few others scattered. Alaska and Hawaii shown in small inset box bottom-left corner. NO state name labels on the map. NO text on the map itself. Clean flat design, crisp state borders, accurate US geography.`;
-      const disclaimer='"21+ | Sweepstakes Casino | Free to Play | Not Available in All States | See Terms"';
-
-      const esMapThemes=[
-        `Premium sweepstakes casino ad. Dark navy background (#0B0F1A). ${mapCore} Accent color: vivid neon green (#00FF88) with soft outer glow on highlighted states. TOP: Bold white headline with offer text, subtext "AVAILABLE IN 39 STATES — FREE TO PLAY". BOTTOM: Bright green rounded pill CTA "PLAY FREE NOW". Disclaimer bar at very bottom: ${disclaimer}. Clean modern app aesthetic.`,
-        `Premium sweepstakes casino ad. Deep black background (#080A12). ${mapCore} Accent color: rich gold (#FFD700) with warm amber glow on highlighted states. Restricted states: very dark charcoal. TOP: Bold white and gold headline with offer text. "AVAILABLE IN 39 STATES" in gold. BOTTOM: Gold gradient pill CTA "PLAY FREE NOW". Disclaimer: ${disclaimer}. Luxury VIP casino feel.`,
-        `Premium sweepstakes casino ad. Dark blue-black background (#060D1F). ${mapCore} Accent color: electric cyan-blue (#00CFFF) with electric glow on highlighted states. Restricted: dark slate. Subtle large coin/star watermark behind map at 15% opacity. TOP: Bold white headline with offer text. "39 STATES — FREE TO PLAY" in bright cyan. BOTTOM: Cyan-to-blue pill CTA "PLAY FREE NOW". Disclaimer: ${disclaimer}. Futuristic electric feel.`,
-        `Premium sweepstakes casino ad. Deep purple background (#0D0520). ${mapCore} Accent color: vivid purple-pink (#AA44FF) with neon glow on highlighted states. Confetti in purple, gold, and pink scattered around edges. TOP: Bold white headline with offer text. BOTTOM: Vibrant purple rounded CTA pill "PLAY FREE NOW". Disclaimer: ${disclaimer}. Celebratory sweepstakes energy.`,
-        `Clean minimal sweepstakes casino ad. Pure dark charcoal background (#111318). ${mapCore} Accent color: clean white on highlighted states. Restricted: medium gray. Map positioned left-center, smaller. RIGHT SIDE: Massive bold "39" in huge white font, "STATES" below, offer text beneath. BOTTOM: Clean white pill CTA "PLAY FREE NOW" with dark text. Disclaimer: ${disclaimer}. Bold typographic editorial style.`,
-        `Premium sweepstakes casino ad. Dark navy background (#0A0E20). ${mapCore} Accent color: bright patriotic red (#FF4444) with glow on highlighted states. Subtle stars scattered lightly around the border. TOP: Bold white and red headline with offer text, "FREE TO PLAY IN 39 STATES". BOTTOM: Red-to-white gradient CTA pill "PLAY FREE NOW". Disclaimer: ${disclaimer}. Patriotic American feel.`,
+      const mapCore='Flat-design United States map. Most states (39 of 50) highlighted in accent color. Exactly 11 states in dark muted gray — the entire west coast, several northeast states, a few others scattered. Alaska and Hawaii in small inset box bottom-left. NO text labels on the map states. Clean flat design, crisp borders, accurate US geography.';
+      const disc='"21+ | Sweepstakes Casino | Free to Play | Not Available in All States | See Terms"';
+      const themes=[
+        `Premium sweepstakes casino ad. Dark navy background. ${mapCore} Accent: vivid neon green with soft glow. TOP: Bold white headline with offer, "AVAILABLE IN 39 STATES — FREE TO PLAY". BOTTOM: Green pill CTA "PLAY FREE NOW". Disclaimer: ${disc}.`,
+        `Premium sweepstakes casino ad. Deep black background. ${mapCore} Accent: rich gold with warm amber glow. TOP: Bold white and gold headline with offer. BOTTOM: Gold gradient pill CTA "PLAY FREE NOW". Disclaimer: ${disc}. Luxury feel.`,
+        `Premium sweepstakes casino ad. Dark blue-black background. ${mapCore} Accent: electric cyan-blue with electric glow. TOP: Bold white headline, "39 STATES — FREE TO PLAY" in cyan. BOTTOM: Cyan-to-blue pill CTA "PLAY FREE NOW". Disclaimer: ${disc}.`,
+        `Premium sweepstakes casino ad. Deep purple background. ${mapCore} Accent: vivid purple-pink with neon glow. Confetti in purple and gold scattered around edges. TOP: Bold white headline with offer. BOTTOM: Purple CTA pill "PLAY FREE NOW". Disclaimer: ${disc}.`,
+        `Clean minimal sweepstakes casino ad. Dark charcoal background. ${mapCore} Accent: clean white. Map positioned left. RIGHT: Massive bold "39" in huge white font, "STATES" below, offer text beneath. BOTTOM: White pill CTA "PLAY FREE NOW". Disclaimer: ${disc}.`,
+        `Premium sweepstakes casino ad. Dark navy background. ${mapCore} Accent: bright patriotic red with glow. Subtle stars around border. TOP: Bold white and red headline, "FREE TO PLAY IN 39 STATES". BOTTOM: Red-to-white pill CTA "PLAY FREE NOW". Disclaimer: ${disc}.`,
       ];
-
-      // Prevent repeating the same theme twice in a row
-      const lastTheme=window._lastEsMapTheme||null;
-      let idx;
-      do { idx=Math.floor(Math.random()*esMapThemes.length); } while(esMapThemes.length>1&&idx===lastTheme);
-      window._lastEsMapTheme=idx;
-      state.customInstructions=esMapThemes[idx];
+      const last=window._lastEsMap||null;
+      let idx;do{idx=Math.floor(Math.random()*themes.length);}while(themes.length>1&&idx===last);
+      window._lastEsMap=idx;
+      state.customInstructions=themes[idx];
       msg('Map Style','user');state.game='N/A';stepOffer();
     };
     w.appendChild(bEpicMap);
@@ -1279,7 +1256,7 @@ async function doQuickGenerate(){
     const stopBtnQG=document.createElement('button');
     stopBtnQG.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
     stopBtnQG.textContent='Stop Generation';
-    falStoppedQG=false;
+    let falStoppedQG=false;
     stopBtnQG.onclick=()=>{falStoppedQG=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
     loadDiv.appendChild(stopBtnQG);
     const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
@@ -1477,7 +1454,7 @@ async function doGenerate(){
     const stopBtn=document.createElement('button');
     stopBtn.style.cssText='margin-top:16px;padding:8px 20px;border-radius:6px;border:1px solid #ef4444;background:transparent;color:#ef4444;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;';
     stopBtn.textContent='Stop Generation';
-    falStopped=false;
+    let falStopped=false;
     stopBtn.onclick=()=>{falStopped=true;loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:var(--txt2);">Generation stopped.</div>';};
     loadDiv.appendChild(stopBtn);
     const loadMsg=document.createElement('div');loadMsg.className='bubble bot';loadMsg.appendChild(loadDiv);
@@ -1885,31 +1862,31 @@ function buildFalFallbackPrompt(){
     if(gamePrompts[gameNameLower]){
       classicPrompt=gamePrompts[gameNameLower];
     } else if(isTestLab) {
-      const tlName=(state.game||'slots').toLowerCase().replace(/[^a-z0-9]/g,'');
-      const gameVisuals={
-        'neonhunter':     'Cyberpunk megacity at night. Towering neon-lit skyscrapers, hot pink and electric cyan signs reflecting in rain-slicked streets. Circuit board energy trails glowing. Gold coins with neon trails raining down. Dark atmospheric depth. Ultra vivid.',
-        'cashblitz':      'Explosive money scene. Hundred dollar bills and gold coins blasting outward from center against pure black. Each bill razor-sharp. Giant glowing dollar symbols radiating light. Money bags mid-burst. Dramatic strobe lighting.',
-        'thundervault':   'Massive steel vault door blasting open. Gold bars and coins erupting in perfect arcs. Bold electric lightning bolt shapes as pure energy. Blinding golden light spilling from vault interior. Dramatic smoke. Dark background.',
-        'goldrushx':      'Wild West canyon at blazing golden hour. Gold nuggets and coins exploding outward catching sunlight. Overflowing mine cart. Pickaxe and glowing amber lantern props. Gold dust particle trails everywhere.',
-        'wildcircuit':    'Electric racing circuit at night. Glowing neon track with volt yellow energy lines. Slot symbols flying at speed. Gold coins streaking as motion blur. Electric blue and yellow energy field. Circuit board patterns glowing.',
-        'dragonstacks':   'Magnificent jade-and-gold dragon coiled around overflowing golden treasure mountain. Emerald scales glinting. Red lanterns and Chinese lucky symbols glowing. Gold coins cascading. Dramatic fire and smoke trails. Deep crimson and gold.',
-        'megastrike':     'Giant glowing 777 slot machine reels locking at jackpot. Explosive gold and silver coins fountaining upward. Starbursts of light from every direction. Royal flush cards flying. Deep cosmic purple-black background with gold starburst rays.',
-        'vaultbreaker':   'Armored vault door exploding off hinges mid-heist. Gold bars, diamonds and cash blasting outward. White-hot explosion light from the breach. Silhouette of mastermind thief against the light. Cinematic and dramatic.',
-        'luckygrid':      'Deep purple background. Rainbow arching above overflowing pot of gold. Four-leaf clovers spinning everywhere. Horseshoes and lucky dice. Gold coins cascading. Green shamrocks and gold stars. Warm golden light from center.',
-        'supersevens':    'Classic Las Vegas at golden hour. Iconic neon casino signs glowing against deep blue dusk sky. Triple 7s in giant glowing slot reels. Rivers of gold coins. Neon Vegas signs blazing red and gold. Celebration energy.',
-        'vipliveroulette':'Ultra-luxury VIP casino. Roulette wheel spinning under single dramatic overhead spotlight. Ball a streak of white light. Crystal chandeliers bokeh behind. Deep mahogany and velvet surroundings. Pure luxury atmosphere.',
-        'lightningtables':'Casino table in near-darkness. Single overhead beam lighting the felt. Playing cards frozen mid-air. Chips in perfect positions. Electric blue energy crackling at table edges. Atmospheric and dramatic.',
-        'highrollerbj':   'Blackjack hand showing perfect 21 on dark green felt. Single pendant light above. Black and gold premium chips stacked perfectly. Playing cards razor sharp. Rich dark leather surroundings. Understated luxury.',
-        'rocketcash':     'Sleek gold rocket ship blasting off vertically. Blazing fire and smoke trail. Giant multiplier numbers climbing beside it. Dollar bills caught in rocket wake spiraling upward. Deep space black background.',
-        'flipx':          'Single gold coin at apex of flip. Frozen by strobe perfectly sharp mid-air. Deep black background. Single hard overhead spotlight catching both faces simultaneously. Explosion of coins outward from impact.',
-        'dropzone':       'Aerial top-down view of neon-lit drop zone target. Coins mid-fall captured by strobe in various positions. Neon zone markers glowing. Deep dark floor. Dramatic overhead lighting. Motion energy downward.',
+      const tlLower=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const tlVisuals={
+        'neonhunter':     'Cyberpunk megacity at night. Towering neon-lit skyscrapers, hot pink and electric cyan signs, circuit board patterns glowing on buildings. Gold coins with neon trails raining. Deep dark. Ultra vivid 8K.',
+        'cashblitz':      'Explosive money scene. Hundred dollar bills and gold coins blasting from center against pure black. Each bill razor-sharp. Giant glowing dollar symbols. Money bags bursting open. Dramatic strobe lighting. Ultra detailed 8K.',
+        'thundervault':   'Massive steel vault door blasting open. Gold bars and coins erupting outward. Bold electric lightning bolt shapes as energy. Blinding golden light from vault interior. Dramatic smoke. Dark background. 8K.',
+        'goldrushx':      'Wild West canyon at blazing golden hour. Gold nuggets and coins exploding outward. Overflowing mine cart. Pickaxe and glowing amber lantern. Gold dust particle trails. 8K.',
+        'wildcircuit':    'Electric racing circuit at night. Glowing neon track, volt yellow energy lines. Slot symbols flying at speed. Gold coins streaking. Electric blue and yellow energy field. Circuit board patterns. 8K.',
+        'dragonstacks':   'Magnificent jade-and-gold dragon coiled around overflowing golden treasure. Emerald scales glinting. Red lanterns and lucky symbols glowing. Gold coins cascading. Dramatic fire and smoke. Deep crimson and gold. 8K.',
+        'megastrike':     'Giant glowing 777 slot machine reels locking at jackpot. Gold and silver coins fountaining upward. Starbursts of light. Royal flush cards flying. Deep cosmic purple-black with gold starburst rays. 8K.',
+        'vaultbreaker':   'Armored vault door exploding off hinges. Gold bars, diamonds and cash blasting outward. White-hot explosion light. Silhouette of thief against the light. Cinematic and dramatic. 8K.',
+        'luckygrid':      'Deep purple background. Rainbow arching above overflowing pot of gold. Four-leaf clovers spinning. Gold coins cascading. Green shamrocks and gold stars. Warm golden light from center. 8K.',
+        'supersevens':    'Classic Las Vegas at golden hour. Giant glowing slot reels with triple 7s. Rivers of gold coins. Neon Vegas signs blazing red and gold. Celebration energy. 8K.',
+        'vipliveroulette':'Roulette wheel spinning under single dramatic overhead spotlight in dark luxury casino. Ball a streak of white light. Crystal chandeliers bokeh. Pure luxury atmosphere. 8K.',
+        'lightningtables':'Casino table in near-darkness. Single overhead beam lighting the felt. Playing cards frozen mid-air. Electric blue energy crackling at table edges. 8K.',
+        'highrollerbj':   'Blackjack hand showing perfect 21 on dark green felt. Single pendant light above. Black and gold premium chips stacked. Cards razor sharp. Understated luxury. 8K.',
+        'rocketcash':     'Sleek gold rocket ship blasting off vertically. Blazing fire and smoke trail. Dollar bills caught in rocket wake spiraling upward. Deep space black background. 8K.',
+        'flipx':          'Single gold coin at apex of flip. Frozen by strobe perfectly sharp mid-air. Deep black background. Hard overhead spotlight catching both faces simultaneously. 8K.',
+        'dropzone':       'Aerial top-down view of neon-lit drop zone target. Coins mid-fall in various positions. Neon zone markers glowing. Deep dark floor. Dramatic overhead lighting. 8K.',
       };
-      classicPrompt=gameVisuals[tlName]||'Epic casino jackpot explosion. Deep purple-to-black cosmic background. Enormous glossy playing card suits, towering chip stacks with specular highlights, gold coins erupting upward, oversized lucky dice, glittering trophy. Ultra packed vivid scene.';
+      classicPrompt=tlVisuals[tlLower]||gamePrompts[defaultKeys[Math.floor(Math.random()*defaultKeys.length)]];
     } else {
       classicPrompt=gamePrompts[defaultKeys[Math.floor(Math.random()*defaultKeys.length)]];
     }
 
-    prompt=classicPrompt+' NO text, NO words, NO letters, NO logos, NO buttons, NO UI elements anywhere in the image. Pure illustration only. Ultra high resolution 8K.';
+    prompt=classicPrompt+' CRITICAL: NO text, NO words, NO letters, NO logos, NO buttons anywhere. Pure background illustration only. Ultra high resolution 8K.';
 
   } else if(style==='Realistic'){
     const gameNameR=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -1929,28 +1906,28 @@ function buildFalFallbackPrompt(){
       'bigbassbonanza':'Cinematic fishing photograph. Golden hour lake, lone fisherman silhouette on dock, massive bass leaping from water catching the last sunlight, perfect reflection below. Shot on Canon R5, 300mm f/2.8. Warm and beautiful.',
     };
 
-    // TestLab game-specific Realistic — pure cinematic scene, NO text instructions
+    // TestLab game-specific Realistic
     const getTestlabRealistic=()=>{
-      const tlName=(state.game||'casino').toLowerCase().replace(/[^a-z0-9]/g,'');
+      const tlLower=(state.game||'casino').toLowerCase().replace(/[^a-z0-9]/g,'');
       const realisticVisuals={
-        'neonhunter':     'Rain-slicked neon city street at night. Electric blue and pink neon signs reflecting in wet asphalt puddles. Hard spotlight cone cutting dramatically through rain. Atmospheric ground fog. Sony Venice 2, 35mm anamorphic. Cinematic noir.',
-        'cashblitz':      'Hundred dollar bills caught mid-fall, frozen by 1/8000s strobe against pure black. Each bill razor sharp catching overhead spotlight. Rich green tones, gold rim light on bill edges. Hasselblad X2D, 120mm macro.',
-        'thundervault':   'Massive round steel vault door open a crack. Intense warm gold light spilling from inside casting dramatic shadows outward. Dark moody exterior. Steam wisping at floor level. ARRI Alexa, 35mm T2.0.',
-        'goldrushx':      'Dramatic red sandstone canyon glowing rich amber in setting sun. Long diagonal shadow. Single prospector lantern in sharp foreground focus. Heat shimmer in distance. Phase One IQ4, 40mm.',
-        'wildcircuit':    'Neon racing track at night. Electric energy lines tracing the circuit. Dramatic motion blur of speed. Single spotlight on track center. Volt yellow and electric blue energy glow. Sony Venice 2, 24mm anamorphic.',
-        'dragonstacks':   'Ancient misty mountain range at dramatic dawn. Golden temple silhouette on highest peak. Volumetric sun rays breaking through layered clouds. Hint of vast dragon wing shadow in the mist. RED Monstro, 35mm.',
-        'megastrike':     'Slot machine display screen at jackpot moment. Screen emitting intense golden light into surrounding darkness. Motion blur on reels resolving to triple 7s. Coins beginning to cascade catching screen light. RED Monstro 8K, 85mm T1.4.',
-        'vaultbreaker':   'Gold bars stacked perfectly in armored car interior under hard strobe light. Each bar sharp with specular highlights. Dark armored walls. One overhead spotlight creating dramatic shadows. Nikon Z9, 85mm.',
-        'luckygrid':      'Extreme macro four-leaf clover on dark velvet. Each cell perfectly sharp catching side light. Gold coins arranged around it in soft bokeh. Warm golden hour light. Canon R5, 100mm macro.',
-        'supersevens':    'Classic Las Vegas neon sign glowing against deep blue dusk sky. Warm tungsten light spilling onto sidewalk below. Atmospheric heat haze. Leica M10, 35mm.',
-        'vipliveroulette':'Single roulette wheel under perfect overhead spotlight in dark luxury casino. Ball a streak of white light. Rich mahogany and crystal bokeh. Deep atmospheric shadows. ARRI Alexa, 50mm T1.4.',
-        'lightningtables':'Casino table in near-darkness. Single overhead beam light illuminating the felt. Playing cards scattered mid-air frozen. Chips in perfect positions. Electric blue energy crackling at table edges. ARRI Alexa, 18mm T2.8.',
-        'highrollerbj':   'Blackjack hand showing perfect 21 on dark green felt under single overhead pendant light. Black and gold premium chips stacked perfectly. Playing cards razor sharp. Hasselblad X2D, 80mm.',
-        'rocketcash':     'Rocket launch pad at night. Rocket illuminated by blazing engine exhaust light. Dramatic steam clouds billowing. Launch tower silhouette. Stars above. Sony Venice 2, 21mm.',
-        'flipx':          'Single gold coin at apex of flip frozen by 1/10000s strobe. Perfectly sharp mid-air. Deep black background. Hard overhead spotlight catching both faces simultaneously. Phase One IQ4, 120mm macro.',
-        'dropzone':       'Aerial overhead shot looking straight down at neon-lit drop zone target on dark floor. Coins mid-fall captured by strobe, each coin perfectly sharp. Dramatic overhead lighting. RED Monstro, 50mm overhead.',
+        'neonhunter':     'Rain-slicked neon city street at night. Electric blue and pink sign reflections in wet asphalt. Hard spotlight cone through rain. Atmospheric fog. Sony Venice 2, 35mm anamorphic. NO text.',
+        'cashblitz':      'Hundred dollar bills caught mid-fall by 1/8000s strobe against pure black. Each bill razor sharp. Rich green tones, gold rim light. Hasselblad X2D, 120mm macro. NO text.',
+        'thundervault':   'Massive steel vault door open a crack. Intense warm gold light spilling from inside. Dark dramatic exterior. Steam wisping at floor level. ARRI Alexa, 35mm. NO text.',
+        'goldrushx':      'Red sandstone canyon glowing amber in setting sun. Single prospector lantern in sharp foreground focus. Heat shimmer in distance. Phase One IQ4, 40mm. NO text.',
+        'wildcircuit':    'Neon racing track at night. Electric energy lines tracing the circuit. Motion blur of speed. Volt yellow and electric blue energy glow. Sony Venice 2, 24mm anamorphic. NO text.',
+        'dragonstacks':   'Ancient misty mountain range at dawn. Golden temple silhouette on highest peak. Sun rays through clouds. Hint of dragon wing shadow in mist. RED Monstro, 35mm. NO text.',
+        'megastrike':     'Slot machine display at jackpot. Screen emitting intense golden light. Motion blur on reels resolving to triple 7s. Coins starting to cascade. RED Monstro 8K, 85mm. NO text.',
+        'vaultbreaker':   'Gold bars stacked in armored car interior under hard strobe. Each bar sharp with specular highlights. One overhead spotlight. Nikon Z9, 85mm. NO text.',
+        'luckygrid':      'Extreme macro four-leaf clover on dark velvet. Each cell perfectly sharp catching side light. Gold coins in soft bokeh around it. Canon R5, 100mm macro. NO text.',
+        'supersevens':    'Classic Las Vegas neon sign glowing against deep blue dusk sky. Warm tungsten light on sidewalk below. Leica M10, 35mm. NO text.',
+        'vipliveroulette':'Roulette wheel under perfect overhead spotlight in dark luxury casino. Ball a streak of white light. Mahogany and crystal bokeh. ARRI Alexa, 50mm T1.4. NO text.',
+        'lightningtables':'Casino table in darkness. Single overhead beam on the felt. Cards scattered mid-air frozen. Electric blue energy at table edges. ARRI Alexa, 18mm. NO text.',
+        'highrollerbj':   'Blackjack perfect 21 on dark green felt under pendant light. Black and gold chips stacked. Cards razor sharp. Hasselblad X2D, 80mm. NO text.',
+        'rocketcash':     'Rocket launch pad at night. Rocket lit by engine exhaust. Steam clouds billowing. Launch tower silhouette. Stars above. Sony Venice 2, 21mm. NO text.',
+        'flipx':          'Single gold coin at apex of flip frozen by strobe. Perfectly sharp mid-air. Deep black. Hard overhead spotlight. Phase One IQ4, 120mm macro. NO text.',
+        'dropzone':       'Overhead shot looking straight down at neon-lit drop zone target. Coins mid-fall each perfectly sharp. Neon zone markers glowing. RED Monstro, 50mm overhead. NO text.',
       };
-      return realisticVisuals[tlName]||pick(realisticTestlab);
+      return realisticVisuals[tlLower]||pick(realisticTestlab);
     };
 
     let realisticPrompt;
@@ -2175,33 +2152,20 @@ async function compositeTextOnImage(bgImageUrl){
           grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFFAAA');
           grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FF9900');grd.addColorStop(1,'#FFD700');
         } else if(isTestLabFlow()){
-          // TestLab: game-specific gradient colors
-          const gameColors={
-            'neonhunter':    ['#FFFFFF','#FF44CC','#FF44CC','#00CCFF'],
-            'cashblitz':     ['#FFFFFF','#00FF66','#FFD700','#FFD700'],
-            'thundervault':  ['#FFFFFF','#FFD700','#FF8800','#FFD700'],
-            'goldrushx':     ['#FFFFFF','#FFD700','#FF8C00','#FFD700'],
-            'wildcircuit':   ['#FFFFFF','#FFFF00','#00FF88','#FFFF00'],
-            'dragonstacks':  ['#FFFFFF','#FFD700','#FF2200','#FFD700'],
-            'megastrike':    ['#FFFFFF','#FFD700','#C0C0C0','#FFD700'],
-            'vaultbreaker':  ['#FFFFFF','#FFD700','#888888','#FFD700'],
-            'luckygrid':     ['#FFFFFF','#00FF66','#FFD700','#00FF66'],
-            'supersevens':   ['#FFFFFF','#FF3300','#FFD700','#FF3300'],
-            'vipliveroulette':['#FFFFFF','#FFD700','#C0A060','#FFD700'],
-            'lightningtables':['#FFFFFF','#00CCFF','#FFD700','#00CCFF'],
-            'highrollerbj':  ['#FFFFFF','#FFD700','#C0A060','#FFD700'],
-            'rocketcash':    ['#FFFFFF','#FF8800','#FFD700','#FF8800'],
-            'flipx':         ['#FFFFFF','#FFD700','#FFA500','#FFD700'],
-            'dropzone':      ['#FFFFFF','#FFFF00','#FFD700','#FFFF00'],
-          };
-          const gameLower=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-          const cols=gameColors[gameLower]||['#FFFFFF','#FFD700','#AA44FF','#FFD700'];
-          if(state.style==='Realistic'){
+          // TestLab: vary by style — Classic gets hot colors, Realistic gets gold/white
+          if(state.style==='Classic'){
+            // Hot vibrant gradient to match cartoon chaos
+            const hues=['#FF1493','#FF6600','#FFD700','#00FF88','#FF00FF','#00CCFF'];
+            const h=hues[Math.floor(Math.random()*hues.length)];
+            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.3,h);
+            grd.addColorStop(0.7,h);grd.addColorStop(1,'#FFFFFF');
+          } else if(state.style==='Realistic'){
+            // Cinematic gold/white for luxury feel
             grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#FFF8DC');
             grd.addColorStop(0.5,'#FFD700');grd.addColorStop(0.85,'#FFA500');grd.addColorStop(1,'#FFD700');
           } else {
-            grd.addColorStop(0,cols[0]);grd.addColorStop(0.2,cols[1]);
-            grd.addColorStop(0.6,cols[2]);grd.addColorStop(1,cols[3]);
+            grd.addColorStop(0,'#FFFFFF');grd.addColorStop(0.2,'#AAFFEE');
+            grd.addColorStop(0.5,'#00DDCC');grd.addColorStop(0.85,'#00AAFF');grd.addColorStop(1,'#00DDCC');
           }
         } else {
           // SpinPals: gold to purple
@@ -2230,33 +2194,7 @@ async function compositeTextOnImage(bgImageUrl){
         const btnY=isPortrait?H*0.75:H*0.73;
 
         // Outer glow — double pass for intensity
-        // TestLab: game-specific button colors
-        const tlBtnColors={
-          'neonhunter':['rgba(0,200,255,0.7)','rgba(0,180,230,0.25)','#00DDFF','#0099CC','#006688'],
-          'cashblitz':['rgba(0,200,80,0.7)','rgba(0,180,60,0.25)','#00FF66','#22C55E','#15803D'],
-          'thundervault':['rgba(255,180,0,0.7)','rgba(255,150,0,0.25)','#FFD700','#FF9900','#CC6600'],
-          'goldrushx':['rgba(255,160,0,0.7)','rgba(255,140,0,0.25)','#FFD700','#FF9900','#CC6600'],
-          'wildcircuit':['rgba(200,255,0,0.7)','rgba(180,230,0,0.25)','#CCFF00','#99CC00','#669900'],
-          'dragonstacks':['rgba(255,50,0,0.7)','rgba(200,30,0,0.25)','#FF4400','#CC2200','#881100'],
-          'megastrike':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
-          'vaultbreaker':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
-          'luckygrid':['rgba(0,220,80,0.7)','rgba(0,180,60,0.25)','#00FF66','#22C55E','#15803D'],
-          'supersevens':['rgba(255,50,0,0.7)','rgba(200,30,0,0.25)','#FF3300','#CC2200','#881100'],
-          'vipliveroulette':['rgba(255,200,80,0.7)','rgba(200,160,40,0.25)','#FFD700','#CC9900','#997700'],
-          'lightningtables':['rgba(0,180,255,0.7)','rgba(0,150,200,0.25)','#00AAFF','#0077CC','#004499'],
-          'highrollerbj':['rgba(255,200,80,0.7)','rgba(200,160,40,0.25)','#FFD700','#CC9900','#997700'],
-          'rocketcash':['rgba(255,130,0,0.7)','rgba(200,100,0,0.25)','#FF8800','#CC6600','#994400'],
-          'flipx':['rgba(255,200,0,0.7)','rgba(200,160,0,0.25)','#FFD700','#CCAA00','#997700'],
-          'dropzone':['rgba(200,255,0,0.7)','rgba(160,200,0,0.25)','#CCFF00','#99CC00','#669900'],
-        };
-        const tlGame=(state.game||'').toLowerCase().replace(/[^a-z0-9]/g,'');
-        const tlBtn=isTestLabFlow()&&tlBtnColors[tlGame]?tlBtnColors[tlGame]:null;
-        const btnGlowColor=tlBtn?tlBtn[0]:'rgba(0,255,80,0.7)';
-        const btnHaloColor=tlBtn?tlBtn[1]:'rgba(0,230,80,0.25)';
-        const btnC0=tlBtn?tlBtn[2]:'#00FF66';
-        const btnC1=tlBtn?tlBtn[3]:'#22C55E';
-        const btnC2=tlBtn?tlBtn[4]:'#15803D';
-        ctx.shadowColor=btnGlowColor;
+        ctx.shadowColor='rgba(0,255,80,0.7)';
         ctx.shadowBlur=50;
         ctx.shadowOffsetY=0;
 
@@ -2277,16 +2215,16 @@ async function compositeTextOnImage(bgImageUrl){
 
         // Glow halo layer
         drawPill(btnX-8,btnY-8,btnW+16,btnH+16,btnR+8);
-        ctx.fillStyle=btnHaloColor;
+        ctx.fillStyle='rgba(0,230,80,0.25)';
         ctx.fill();
 
         // Main button
         ctx.shadowBlur=35;
         drawPill(btnX,btnY,btnW,btnH,btnR);
         const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-        btnGrd.addColorStop(0,btnC0);
-        btnGrd.addColorStop(0.4,btnC1);
-        btnGrd.addColorStop(1,btnC2);
+        btnGrd.addColorStop(0,'#00FF66');
+        btnGrd.addColorStop(0.4,'#22C55E');
+        btnGrd.addColorStop(1,'#15803D');
         ctx.fillStyle=btnGrd;
         ctx.fill();
 
@@ -2339,7 +2277,6 @@ async function falFallbackGenerate(){
     // Submit to fal queue
     const falBody={prompt,aspect_ratio:aspectRatio,num_images:1,safety_tolerance:'6',output_format:'jpeg',seed:Math.floor(Math.random()*999999999)};
     if(negativePrompt)falBody.negative_prompt=negativePrompt;
-
     const submitRes=await fetch('https://queue.fal.run/'+FAL_MODEL,{
       method:'POST',
       headers:{'Authorization':'Key '+FAL_KEY,'Content-Type':'application/json'},
@@ -2351,34 +2288,19 @@ async function falFallbackGenerate(){
     if(!requestId)throw new Error('No request_id');
     const statusUrl=submitData.status_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId+'/status');
     const responseUrl=submitData.response_url||('https://queue.fal.run/fal-ai/flux-pro/requests/'+requestId);
-    console.log('FAL SUBMITTED, requestId:',requestId);
-
-    // Poll — 2 minute hard timeout, checks stop flags
-    const pollStart=Date.now();
-    const MAX_POLL_MS=120000; // 2 minutes
+    console.log('FAL FALLBACK SUBMITTED, requestId:',requestId);
+    // Poll for completion
     let attempts=0;
-    while(true){
-      // Check if user stopped generation
-      if(typeof falStopped!=='undefined'&&falStopped)return null;
-      if(typeof falStoppedQG!=='undefined'&&falStoppedQG)return null;
-      // Hard timeout
-      if(Date.now()-pollStart>MAX_POLL_MS)throw new Error('fal timed out after 2 minutes');
-      await new Promise(r=>setTimeout(r,4000));
+    while(attempts<60){
+      await new Promise(r=>setTimeout(r,5000));
       attempts++;
-      try{
-        const sr=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
-        if(!sr.ok)continue;
-        const sd=await sr.json();
-        console.log('FAL STATUS attempt '+attempts+':',sd.status);
-        if(sd.status==='FAILED')throw new Error('fal generation failed');
-        if(sd.status==='COMPLETED')break;
-      }catch(pollErr){
-        if(pollErr.message.includes('FAILED')||pollErr.message.includes('timed out'))throw pollErr;
-        // Network hiccup — keep trying
-        continue;
-      }
+      const sr=await fetch(statusUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
+      if(!sr.ok)continue;
+      const sd=await sr.json();
+      console.log('FAL FALLBACK STATUS attempt '+attempts+':',sd.status);
+      if(sd.status==='FAILED')throw new Error('fal generation failed');
+      if(sd.status==='COMPLETED')break;
     }
-
     // Fetch result
     const rr=await fetch(responseUrl,{headers:{'Authorization':'Key '+FAL_KEY}});
     if(!rr.ok)throw new Error('fal result fetch failed');
@@ -2387,13 +2309,13 @@ async function falFallbackGenerate(){
     if(falResult.images&&falResult.images[0]){
       const img=falResult.images[0];
       const bgUrl=typeof img==='string'?img:img.url;
-      console.log('FAL: compositing on',bgUrl.substring(0,60));
+      console.log('FAL: compositing text overlay on',bgUrl.substring(0,60));
       const composited=await compositeTextOnImage(bgUrl);
       return composited;
     }
     throw new Error('No image URL in fal result');
   }catch(e){
-    console.error('FAL ERROR:',e);
+    console.error('FAL FALLBACK ERROR:',e);
     return null;
   }
 }
@@ -2513,26 +2435,20 @@ function showResult(loadMsg,found){
   const gameName=found.game_name&&found.game_name!=='N/A'?found.game_name:state.style;
   const isBoth=state.format==='both';
 
-  // Build image grid
+  // Build image grid — Twin images only
   const images=[];
   if(isBoth){
     images.push({url:found.image_url,label:'Portrait 9:16'});
-    // For fal direct both-generation, square URL is on the entry itself
-    if(found.image_url_square){
-      images.push({url:found.image_url_square,label:'Square 1:1'});
-    } else {
-      // Twin path — look for matching square from same session (90s window, same source)
-      const sessionStart=Date.now()-90000;
-      const twinSquare=galleryData.find(c=>
-        c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
-        c.image_url&&c.image_url!==found.image_url&&
-        c.id!==found.id&&
-        c.source===found.source&&
-        new Date(c.created_at).getTime()>=sessionStart&&
-        (c.format==='square'||c.format==='both')
-      );
-      if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1'});
-    }
+    // Look for matching square Twin image from same session
+    const sessionStart=Date.now()-600000;
+    const twinSquare=galleryData.find(c=>
+      c.user_email&&c.user_email.trim().toLowerCase()===currentUserEmail&&
+      c.image_url&&c.image_url!==found.image_url&&
+      c.id!==found.id&&
+      new Date(c.created_at).getTime()>=sessionStart&&
+      (c.format==='square'||c.format==='both')
+    );
+    if(twinSquare)images.push({url:twinSquare.image_url,label:'Square 1:1'});
   } else {
     images.push({url:found.image_url,label:found.format==='portrait'?'Portrait 9:16':'Square 1:1'});
   }
