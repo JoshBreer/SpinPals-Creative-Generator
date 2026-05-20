@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-19E462476E6",
+    "game_name": "Super Hot Chilli",
+    "format": "square",
+    "offer_text": "Starter Pack — 12,000 GC + 6 SC FREE",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/02/59a1df9e44620c0c4c37ce3f56e3a947013f65bf72bd2a6fc235d9dd3d7d33.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260520%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260520T160709Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9d7b366c56a30c3b6e86554bd997cd0d9266ac6869dad2c89ae15c20dd79b52b",
+    "created_at": "2026-05-20 16:07:35"
+  },
+  {
     "id": "cr-19E461B540Asq",
     "game_name": "Le Bandit",
     "format": "square",
