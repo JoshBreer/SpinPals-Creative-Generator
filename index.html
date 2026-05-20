@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v82 — font preload fix, correct sizing -->
+<!-- RMGS Creative Studio v84 — fix gallery save blocking image display -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -497,7 +497,7 @@ const GALLERY_URL='https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative
 const RESEND_API_KEY='re_X1gSZy79_2Sej99h9rNWbQJ6r1EdYfrTm';
 const FAL_KEY='3666a808-aebc-40ff-826d-07f67e487a23:6ee8006c605cfec61bc41c05061a0f96';
 const FAL_MODEL='fal-ai/flux-pro/v1.1-ultra';
-const GITHUB_TOKEN='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';
+const GITHUB_TOKEN='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';
 const GITHUB_REPO='JoshBreer/SpinPals-Creative-Generator';
 const DAILY_LIMIT=10;
 
@@ -1282,7 +1282,7 @@ async function doQuickGenerate(){
         localStorage.setItem(lk,JSON.stringify(existing));
         console.log('FAL: saved to localStorage');
       }catch(e){}
-      saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG,gallery_url:gUrlQG});
+      try{saveFalEntryToGithub({...falEntryQG,image_url:dUrlQG,gallery_url:gUrlQG});}catch(e){console.warn('saveFal QG error:',e);}
     } else {
       loadDiv.innerHTML='<div style="text-align:center;padding:16px 0;color:#ef4444;">Generation failed. Please try again.</div>';
     }
@@ -1600,7 +1600,8 @@ async function doGenerate(){
           falEntry.image_url=fbDispUrl;
           galleryData.unshift(falEntry);
           showResult(loadMsg,falEntry);
-          saveFalEntryToGithub({...falEntry,image_url:fbGalUrl});
+          // Save to gallery - non-blocking, never crashes the display
+          try{saveFalEntryToGithub({...falEntry,image_url:fbGalUrl});}catch(e){console.warn('saveFal error:',e);}
           const emailPayload={
             event:'creative_complete',
             source:'fal',
@@ -1764,25 +1765,29 @@ function drawTextOnly(ctx,W,H,offer,disclaimer,usableH,maxW,disclaimerBarH,isPor
 async function saveFalEntryToGithub(entry){
   const saveUrl=entry.gallery_url||entry.image_url;
   const webhookUrl=getWebhook();
+  const isTestLab=typeof isTestLabFlow==='function'&&isTestLabFlow();
 
-  // Only fire Twin webhook if there's a real webhook URL (skip for TestLab)
-  if(webhookUrl){
-    console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
-    triggerWebhook({
-      event:'fal_creative_complete',
-      source:'fal',
-      save_to_gallery:true,
-      image_url:saveUrl,
-      game_name:entry.game_name,
-      offer_text:entry.offer_text,
-      style:entry.style,
-      format:entry.format,
-      platform:entry.platform,
-      user_email:entry.user_email,
-      created_at:entry.created_at
-    },webhookUrl);
-    // Send email via Resend
-    sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');
+  // Skip Twin webhook for TestLab — it has no webhook and causes CORS errors
+  if(webhookUrl&&!isTestLab){
+    try{
+      console.log('FAL: sending to Twin for gallery save...',saveUrl.substring(0,60));
+      triggerWebhook({
+        event:'fal_creative_complete',
+        source:'fal',
+        save_to_gallery:true,
+        image_url:saveUrl,
+        game_name:entry.game_name,
+        offer_text:entry.offer_text,
+        style:entry.style,
+        format:entry.format,
+        platform:entry.platform,
+        user_email:entry.user_email,
+        created_at:entry.created_at
+      },webhookUrl);
+    }catch(e){console.warn('FAL: Twin webhook error (non-blocking):',e);}
+    // Send email via Resend — non-blocking
+    try{sendFalEmail(entry.user_email,saveUrl,entry.offer_text||'',entry.style||'');}
+    catch(e){console.warn('FAL: email error (non-blocking):',e);}
   } else {
     console.log('FAL: TestLab mode — skipping Twin webhook and email');
   }
