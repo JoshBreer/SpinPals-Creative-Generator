@@ -1,4 +1,4 @@
-<!-- RMGS Creative Studio v81 — EpicSweep Jost/Roboto fonts, button style, no dashes -->
+<!-- RMGS Creative Studio v82 — font preload fix, correct sizing -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -2012,24 +2012,33 @@ function buildFalFallbackPrompt(){
 
 // Draw text overlay on top of fal background image using canvas
 async function compositeTextOnImage(bgImageUrl){
+  const fmt=state.format==='both'?'portrait':state.format||'portrait';
+  const isPortrait=fmt==='portrait';
+  const W=1080;
+  const H=isPortrait?1920:1080;
+  const isEpicSweep=typeof isEpicSweepFlow==='function'&&isEpicSweepFlow();
+
+  const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
+  const isTurkishCtx2=state.platform==='bankobet';
+  const ctaText=isEpicSweep?'GET OFFER':(isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW');
+  const headlineFont=isEpicSweep?`'Jost','Arial Black',sans-serif`:`Impact,'Arial Black',sans-serif`;
+  const disclaimerFont=isEpicSweep?`'Roboto',Arial,sans-serif`:`-apple-system,Arial,sans-serif`;
+  const disclaimer=isWannaFlow()||isThrillzzFlow()
+    ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
+    :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
+
+  // Wait for custom fonts to load before drawing (critical for canvas)
+  if(isEpicSweep&&document.fonts){
+    try{
+      await Promise.all([
+        document.fonts.load("800 40px 'Jost'"),
+        document.fonts.load("700 40px 'Jost'"),
+        document.fonts.load("400 20px 'Roboto'"),
+      ]);
+    }catch(e){console.warn('Font load warning:',e);}
+  }
+
   return new Promise((resolve)=>{
-    const fmt=state.format==='both'?'portrait':state.format||'portrait';
-    const isPortrait=fmt==='portrait';
-    const W=1080;
-    const H=isPortrait?1920:1080;
-    const isEpicSweep=typeof isEpicSweepFlow==='function'&&isEpicSweepFlow();
-
-    const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
-    const isTurkishCtx2=state.platform==='bankobet';
-    // EpicSweep uses "GET OFFER", others use "CLAIM NOW"
-    const ctaText=isEpicSweep?'GET OFFER':(isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW');
-    // EpicSweep: Jost ExtraBold for headlines, Roboto for disclaimer
-    const headlineFont=isEpicSweep?`'Jost','Arial Black',sans-serif`:`Impact,'Arial Black',sans-serif`;
-    const disclaimerFont=isEpicSweep?`'Roboto',Arial,sans-serif`:`-apple-system,Arial,sans-serif`;
-    const disclaimer=isWannaFlow()||isThrillzzFlow()
-      ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
-      :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
-
     const canvas=document.createElement('canvas');
     canvas.width=W; canvas.height=H;
     const ctx=canvas.getContext('2d');
