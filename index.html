@@ -1,10 +1,10 @@
-<!-- RMGS Creative Studio v80 — clean rebuild from original -->
+<!-- RMGS Creative Studio v81 — EpicSweep Jost/Roboto fonts, button style, no dashes -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>RMGS Creative Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Bebas+Neue&family=Jost:wght@700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -383,18 +383,18 @@ const EPICSWEEP_GAMES={
 
 // EPICSWEEP OFFERS — verified by client May 2026
 const EPICSWEEP_OFFERS=[
-  {id:'es1',title:'Sign Up FREE — 100,000 GC + 1 SC',description:'Register and verify email — no purchase needed'},
-  {id:'es2',title:'Starter Pack — 12,000 GC + 6 SC FREE',description:'First purchase only 4.99 — starter package'},
-  {id:'es3',title:'Best Value — 200,000 GC + 40 SC FREE',description:'First purchase only 19.99 — most popular'},
-  {id:'es4',title:'Max Bonus — 250,000 GC + 50 SC FREE',description:'First purchase only 34.99 — maximum value'},
-  {id:'es5',title:'Daily Bonus Wheel — Free GC + SC Every Day',description:'Spin once every 24 hours for free coins'},
-  {id:'es6',title:'Refer a Friend — Up to 200,000 GC + 50 SC',description:'Share your link — earn bonus coins'},
-  {id:'es7',title:'VIP Coinback — Earn SC Back Every Week',description:'Level up for weekly SC coinback'},
-  {id:'es8',title:'Mail-In Free SC — No Purchase Needed',description:'Send mail-in request for free Sweeps Coins'},
-  {id:'es9',title:'Play FREE in 39 States — No Purchase Ever Required',description:'Free to play always, real prizes available'},
-  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof — winner testimonial style'},
-  {id:'es11',title:'Will You Be the Next Big Winner?',description:'Curiosity hook — challenge the viewer'},
-  {id:'es12',title:'Your Next Big Win is One Spin Away',description:'Urgency hook — proximity to winning'},
+  {id:'es1',title:'Sign Up FREE  100,000 GC + 1 SC',description:'Register and verify email, no purchase needed'},
+  {id:'es2',title:'Starter Pack  12,000 GC + 6 SC FREE',description:'First purchase only 4.99'},
+  {id:'es3',title:'Best Value  200,000 GC + 40 SC FREE',description:'First purchase only 19.99, most popular'},
+  {id:'es4',title:'Max Bonus  250,000 GC + 50 SC FREE',description:'First purchase only 34.99, maximum value'},
+  {id:'es5',title:'Daily Bonus Wheel  Free GC + SC Every Day',description:'Spin once every 24 hours for free coins'},
+  {id:'es6',title:'Refer a Friend  Up to 200,000 GC + 50 SC',description:'Share your link, earn bonus coins'},
+  {id:'es7',title:'VIP Coinback  Earn SC Back Every Week',description:'Level up for weekly SC coinback'},
+  {id:'es8',title:'Mail-In Free SC  No Purchase Needed',description:'Send mail-in request for free Sweeps Coins'},
+  {id:'es9',title:'Play FREE in 39 States  No Purchase Ever Required',description:'Free to play always, real prizes available'},
+  {id:'es10',title:'Edward D. Won Big on EpicSweep, Can You?',description:'Social proof winner testimonial style'},
+  {id:'es11',title:'Will You Be the Next Big Winner?',description:'Curiosity hook'},
+  {id:'es12',title:'Your Next Big Win is One Spin Away',description:'Urgency hook'},
   {id:'es13',title:'People Are Winning Right Now. Are You In?',description:'FOMO social proof hook'},
   {id:'es14',title:'Free to Play. Real Prizes. What Are You Waiting For?',description:'Value proposition hook'},
   {id:'es15',title:'Join Thousands Already Playing for FREE',description:'Social proof volume hook'},
@@ -2017,10 +2017,15 @@ async function compositeTextOnImage(bgImageUrl){
     const isPortrait=fmt==='portrait';
     const W=1080;
     const H=isPortrait?1920:1080;
+    const isEpicSweep=typeof isEpicSweepFlow==='function'&&isEpicSweepFlow();
 
     const offerText=state.offer&&state.offer!=='none'?state.offer.toUpperCase():'WIN BIG';
     const isTurkishCtx2=state.platform==='bankobet';
-    const ctaText=isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW';
+    // EpicSweep uses "GET OFFER", others use "CLAIM NOW"
+    const ctaText=isEpicSweep?'GET OFFER':(isTurkishCtx2?'HEMEN OYNA':'CLAIM NOW');
+    // EpicSweep: Jost ExtraBold for headlines, Roboto for disclaimer
+    const headlineFont=isEpicSweep?`'Jost','Arial Black',sans-serif`:`Impact,'Arial Black',sans-serif`;
+    const disclaimerFont=isEpicSweep?`'Roboto',Arial,sans-serif`:`-apple-system,Arial,sans-serif`;
     const disclaimer=isWannaFlow()||isThrillzzFlow()
       ?(isWannaFlow()?'18+ | Fantasy Sports Contest | Not Available in All States | Play Responsibly':'19+ | Free to Play | No Purchase Necessary | Not Available in All States | See Terms')
       :'18+ | Play Responsibly | Terms & Conditions Apply | BeGambleAware.org';
@@ -2077,7 +2082,7 @@ async function compositeTextOnImage(bgImageUrl){
       let lines=[];
       let line='';
       let testSize=isTextOnly?(isPortrait?230:160):(isPortrait?148:95);
-      ctx.font=`900 ${testSize}px Impact, 'Arial Black', sans-serif`;
+      ctx.font=`900 ${testSize}px ${headlineFont}`;
       
       // Build lines
       words.forEach(word=>{
@@ -2094,7 +2099,7 @@ async function compositeTextOnImage(bgImageUrl){
       
       // Re-wrap at new size
       if(lines.length>3){
-        ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
+        ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue, ':''} ${headlineFont}`;
         lines=[]; line='';
         words.forEach(word=>{
           const test=line?line+' '+word:word;
@@ -2105,7 +2110,6 @@ async function compositeTextOnImage(bgImageUrl){
 
       const lineH=isTextOnly?fontSize*1.18:fontSize*1.12;
       const totalH=lines.length*lineH;
-      // Text Only: fill entire image with text - start near top, massive font
       const textTop=isTextOnly?H*0.04:isPortrait?H*0.06:H*0.06;
 
       ctx.textAlign='center';
@@ -2114,9 +2118,8 @@ async function compositeTextOnImage(bgImageUrl){
       lines.forEach((ln,i)=>{
         const y=textTop+(i*lineH);
         
-        // For Text Only — no stroke, no glow, clean pure white
         if(state.style!=='Text Only'){
-          ctx.font=`900 ${fontSize}px ${state.style==='Text Only'?'Bebas Neue':'Impact'}, Impact, 'Arial Black', sans-serif`;
+          ctx.font=`900 ${fontSize}px ${headlineFont}`;
           ctx.shadowColor=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,180,0,0.8)':'rgba(0,255,100,0.8)';
           ctx.shadowBlur=40;
           ctx.fillStyle=typeof isWannaFlow==='function'&&isWannaFlow()?'rgba(255,200,0,0.4)':'rgba(0,255,150,0.4)';
@@ -2189,16 +2192,17 @@ async function compositeTextOnImage(bgImageUrl){
       if(state.style!=='Text Only'){
         const btnW=isPortrait?800:580;
         const btnH=isPortrait?140:104;
-        const btnR=btnH/2;
+        // EpicSweep: moderate radius (not full pill). Others: full pill.
+        const btnR=isEpicSweep?24:btnH/2;
         const btnX=(W-btnW)/2;
         const btnY=isPortrait?H*0.75:H*0.73;
 
-        // Outer glow — double pass for intensity
-        ctx.shadowColor='rgba(0,255,80,0.7)';
+        // EpicSweep: lime-to-yellow gradient matching the reference button
+        const esBtn=isEpicSweep;
+        ctx.shadowColor=esBtn?'rgba(150,255,0,0.7)':'rgba(0,255,80,0.7)';
         ctx.shadowBlur=50;
         ctx.shadowOffsetY=0;
 
-        // Draw pill button
         const drawPill=(x,y,w,h,r)=>{
           ctx.beginPath();
           ctx.moveTo(x+r,y);
@@ -2213,51 +2217,55 @@ async function compositeTextOnImage(bgImageUrl){
           ctx.closePath();
         };
 
-        // Glow halo layer
+        // Glow halo
         drawPill(btnX-8,btnY-8,btnW+16,btnH+16,btnR+8);
-        ctx.fillStyle='rgba(0,230,80,0.25)';
+        ctx.fillStyle=esBtn?'rgba(150,255,0,0.25)':'rgba(0,230,80,0.25)';
         ctx.fill();
 
         // Main button
         ctx.shadowBlur=35;
         drawPill(btnX,btnY,btnW,btnH,btnR);
         const btnGrd=ctx.createLinearGradient(0,btnY,0,btnY+btnH);
-        btnGrd.addColorStop(0,'#00FF66');
-        btnGrd.addColorStop(0.4,'#22C55E');
-        btnGrd.addColorStop(1,'#15803D');
+        if(esBtn){
+          // Lime green to yellow — matches EpicSweep reference
+          btnGrd.addColorStop(0,'#7FFF00');
+          btnGrd.addColorStop(0.5,'#AAFF00');
+          btnGrd.addColorStop(1,'#FFFF00');
+        } else {
+          btnGrd.addColorStop(0,'#00FF66');
+          btnGrd.addColorStop(0.4,'#22C55E');
+          btnGrd.addColorStop(1,'#15803D');
+        }
         ctx.fillStyle=btnGrd;
         ctx.fill();
 
         // Shine highlight
         ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-        drawPill(btnX+3,btnY+3,btnW-6,btnH*0.48,btnR-3);
+        drawPill(btnX+3,btnY+3,btnW-6,btnH*0.48,btnR);
         ctx.fillStyle='rgba(255,255,255,0.22)';
         ctx.fill();
 
-        // Button text — bigger and bolder
+        // Button text
         const btnFontSize=isPortrait?70:50;
-        ctx.font=`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
+        // EpicSweep: Jost Bold, #1D0B31 dark text
+        ctx.font=esBtn?`800 ${btnFontSize}px 'Jost','Arial Black',sans-serif`:`900 ${btnFontSize}px Impact,'Arial Black',sans-serif`;
         ctx.textAlign='center';
         ctx.textBaseline='middle';
-        // Text shadow
-        ctx.shadowColor='rgba(0,0,0,0.6)';
-        ctx.shadowBlur=12;
-        ctx.shadowOffsetY=4;
-        ctx.fillStyle='#FFFFFF';
+        ctx.shadowColor=esBtn?'rgba(0,0,0,0.3)':'rgba(0,0,0,0.6)';
+        ctx.shadowBlur=esBtn?6:12;
+        ctx.shadowOffsetY=esBtn?2:4;
+        ctx.fillStyle=esBtn?'#1D0B31':'#FFFFFF';
         ctx.fillText(ctaText,W/2,btnY+btnH/2);
         ctx.shadowBlur=0;ctx.shadowOffsetY=0;
       }
 
       // ── DISCLAIMER BAR ───────────────────────────────────────
       const barH=isPortrait?62:50;
-      // Solid dark bar
       ctx.fillStyle='rgba(0,0,0,0.92)';
       ctx.fillRect(0,H-barH,W,barH);
-      // Bright top border line
       ctx.fillStyle='rgba(255,255,255,0.15)';
       ctx.fillRect(0,H-barH,W,2);
-      // Disclaimer text
-      ctx.font=`400 ${isPortrait?25:21}px -apple-system,Arial,sans-serif`;
+      ctx.font=`400 ${isPortrait?25:21}px ${disclaimerFont}`;
       ctx.fillStyle='rgba(255,255,255,0.9)';
       ctx.textAlign='center';
       ctx.textBaseline='middle';
