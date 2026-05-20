@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-17793034844076",
+    "game_name": "Hot Fiesta",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17793034844076.jpg",
+    "created_at": "2026-05-20 18:58:07"
+  },
+  {
+    "id": "cr-17793034835865",
+    "game_name": "Hot Fiesta",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17793034835865.jpg",
+    "created_at": "2026-05-20 18:58:05"
+  },
+  {
     "id": "cr-1779129571AZP",
     "game_name": "Aztec Gems",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "justinc@spinpals.com",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9d/5d558eff62991b660380cea96871ea9d185c462e236dc7ec52ddf68d9f297a.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T194648Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9f0b4f7e062f91214a0b6e209ea18d116a03e6788732401e21926c0c52c3e6e9",
     "created_at": "2026-04-20 19:46:05"
-  },
-  {
-    "id": "cr-17767112586423",
-    "game_name": "N/A",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Text Only",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/40/b104ef2c217df9710f376506cd75d5ba75ca081cc6446b63cfdecd7f4f18c8.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T185526Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6f6f3ad0e1ae4d019c7eca5ae3ae4374dd9888492986c725adcc36372d54555d",
-    "created_at": "2026-04-20 18:54:18"
-  },
-  {
-    "id": "cr-1776700032528F",
-    "game_name": "Snoop Dogg Dollars",
-    "format": "portrait",
-    "offer_text": "Daily Login Bonus: Up to 10 SC FREE",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/dd/43e1c34b4793a8812b869ad70f66242585e381988d350a8b8ca3100ab08546.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T154857Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e4968d78eefdbfb8afa547bc35335621eaeea476e840e845aedf795c78b29799",
-    "created_at": "2026-04-20 15:47:12"
   }
 ]
