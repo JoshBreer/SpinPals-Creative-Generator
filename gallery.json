@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-19E461B540Asq",
+    "game_name": "Le Bandit",
+    "format": "square",
+    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
+    "style": "Classic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/a1/2f30f8cb9505a3f3fdf6e7fc6be2620b67e334d9a0631342568b855577992b.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260520%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260520T155601Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=0cc0da3d767887e65b379fc3f5f16bdfd28e50d30022ef265ca958c9ef12dd1f",
+    "created_at": "2026-05-20 15:56:00"
+  },
+  {
+    "id": "cr-19E461B540Bls",
+    "game_name": "Le Bandit",
+    "format": "landscape",
+    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
+    "style": "Classic",
+    "user_email": "josh@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/ab/8b81fb57673fbe0f34211caed3507615d8513a79c495a418ecb4aacb7aa333.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260520%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260520T155640Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=695cc305ef27ef0063efa6cdc2243123eed1aedbbfb8e5374ddd1302ae2ee878",
+    "created_at": "2026-05-20 15:56:00"
+  },
+  {
     "id": "cr-19e4242110d",
     "game_name": "Buffalo King Megaways",
     "format": "portrait",
