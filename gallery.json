@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1779480135P4PR",
+    "game_name": "4 Pot Riches",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779480135P4PR.jpg",
+    "created_at": "2026-05-22 20:02:15"
+  },
+  {
+    "id": "cr-1779480135S4PR",
+    "game_name": "4 Pot Riches",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779480135S4PR.jpg",
+    "created_at": "2026-05-22 20:02:15"
+  },
+  {
     "id": "cr-1779313453FAL2",
     "game_name": "Release the Kraken",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/57/ca917b6f7ded26166bfbf5570672e117d9ccb18b64f7fc06d6c3777bfd5279.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T231207Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ee4a11fda4288607bda87fea901078dc4747f1384b3cde5708ff619ed48449e8",
     "created_at": "2026-04-20 23:11:24"
-  },
-  {
-    "id": "cr-1776726008762A",
-    "game_name": "Fortune Tiger",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/e3/2d067fe60c64458153b5f821da485cb56610a3d60454a936290cfc1e13147d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T230050Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=50c0e3de1106ee5fbde652c51f0335c8bf01d7191d89c373f8800526ab8a2b61",
-    "created_at": "2026-04-20 23:00:08"
-  },
-  {
-    "id": "cr-17767242973B92",
-    "game_name": "Ocean King",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d8/91ba0de9640ec2e1e16da779451f2a8a311c6058e472281c977952293c6bea.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T223218Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a6619b42b9f3d015ae9aa6d25c26506af3bb3c3dd4e838cf62523ddd8633991d",
-    "created_at": "2026-04-20 22:31:37"
   }
 ]
