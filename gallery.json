@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1779487025A4PR",
+    "game_name": "4 Pot Riches",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779487025A4PR.jpg",
+    "created_at": "2026-05-22 21:57:05"
+  },
+  {
+    "id": "cr-1779487025B4PR",
+    "game_name": "4 Pot Riches",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779487025B4PR.jpg",
+    "created_at": "2026-05-22 21:57:05"
+  },
+  {
     "id": "cr-1779480135P4PR",
     "game_name": "4 Pot Riches",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/81/664ce577218665115e658b29b856622d63ebf593afab462487ad59f45f8c0a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161128Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8317d529f2d9c0a90c7e7adf475174e8f456bbb22a29441420765bb457807dd6",
     "created_at": "2026-04-21 16:10:06"
-  },
-  {
-    "id": "cr-17767396018F58",
-    "game_name": "Fortune Tiger",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d9/3ed5f7d16c3ce820100935d41f2e44a4217baf333ef02f6594093320134c40.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T024702Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=cf45ecf989626713dd0fa301c83300818e74fd164771780331b5cae37d9dad54",
-    "created_at": "2026-04-21 02:46:41"
-  },
-  {
-    "id": "cr-17767266840DA5",
-    "game_name": "Panda Fortune",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/57/ca917b6f7ded26166bfbf5570672e117d9ccb18b64f7fc06d6c3777bfd5279.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260420%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260420T231207Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ee4a11fda4288607bda87fea901078dc4747f1384b3cde5708ff619ed48449e8",
-    "created_at": "2026-04-20 23:11:24"
   }
 ]
