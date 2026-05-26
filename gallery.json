@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-19E65AB2627SQ",
+    "game_name": "Le Bandit",
+    "format": "square",
+    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/d3/291099d2fa32875b715aaab5b3ca7746f019cd8f86dcdbf2d5954acb227609.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260526%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260526T190146Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=628ddcc03ad675a809944b4645a7a4adbd24e2e727806e9749bdc0a80a558825",
+    "created_at": "2026-05-26 19:02:00"
+  },
+  {
+    "id": "cr-19E65AB2628LS",
+    "game_name": "Le Bandit",
+    "format": "landscape",
+    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/57/fb9dd4386026e1af3032bb186ec1af191f92c5a55ec5d2330f1c639f23a2c6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260526%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260526T190208Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e5edb82439dd8a03e711a40e438ec9886ebef672fdb57f621186c4be4c72a72b",
+    "created_at": "2026-05-26 19:02:00"
+  },
+  {
     "id": "cr-1779487025A4PR",
     "game_name": "4 Pot Riches",
     "format": "portrait",
