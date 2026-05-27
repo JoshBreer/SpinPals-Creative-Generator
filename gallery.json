@@ -1,5 +1,15 @@
 [
   {
+    "id": "cr-1779849200FAL",
+    "game_name": "4 Pot Riches",
+    "format": "portrait",
+    "offer_text": "none",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1779849200FAL.jpg",
+    "created_at": "2026-05-27 02:33:20"
+  },
+  {
     "id": "cr-17798488301170",
     "game_name": "4 Pot Riches",
     "format": "portrait",
@@ -1988,15 +1998,5 @@
     "user_email": "john@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b7/1c6c2aef526199bc452bc740bdb6c412ca8f6f944b53f90038a45200bae301.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161812Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=32055793c7c8992ed205c1c5cb7df406bb32704fb433bc386094ea66bace5f88",
     "created_at": "2026-04-21 16:17:02"
-  },
-  {
-    "id": "cr-177678808552B7p",
-    "game_name": "Treasure Wild",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Classic",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b1/0fe48362e4f9163d2ed35485d6d3380de2c8c35c76d84c6753e29952d8b337.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161532Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=394a187c5406aa258e22413bf2d4ad0c1b989adc131e13d7503f26b4f3f0f8f7",
-    "created_at": "2026-04-21 16:14:45"
   }
 ]
