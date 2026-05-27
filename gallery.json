@@ -1,43 +1,23 @@
 [
   {
-    "id": "cr-19E66FEFC96SQ",
-    "game_name": "Miami Mayhem",
+    "id": "cr-17798488301170",
+    "game_name": "4 Pot Riches",
+    "format": "portrait",
+    "offer_text": "none",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17798488301170.jpg",
+    "created_at": "2026-05-27 02:27:12"
+  },
+  {
+    "id": "cr-17798488303339",
+    "game_name": "4 Pot Riches",
     "format": "square",
-    "offer_text": "Sign Up FREE  100,000 GC + 1 SC",
-    "style": "Realistic",
+    "offer_text": "none",
+    "style": "Custom",
     "user_email": "john@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/c7/f5dfbe1cef042049c803c387309bef73c6f16abf8bb56310b8230da129c390.jpg",
-    "created_at": "2026-05-27 01:13:00"
-  },
-  {
-    "id": "cr-19E66FEFC96LS",
-    "game_name": "Miami Mayhem",
-    "format": "landscape",
-    "offer_text": "Sign Up FREE  100,000 GC + 1 SC",
-    "style": "Realistic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/6e/51719f1dee3cbf8a11f9bc2da435b67174054a5935043130fb2cc68cd8659c.jpg",
-    "created_at": "2026-05-27 01:13:00"
-  },
-  {
-    "id": "cr-19E65AB2627SQ",
-    "game_name": "Le Bandit",
-    "format": "square",
-    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/d3/291099d2fa32875b715aaab5b3ca7746f019cd8f86dcdbf2d5954acb227609.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260526%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260526T190146Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=628ddcc03ad675a809944b4645a7a4adbd24e2e727806e9749bdc0a80a558825",
-    "created_at": "2026-05-26 19:02:00"
-  },
-  {
-    "id": "cr-19E65AB2628LS",
-    "game_name": "Le Bandit",
-    "format": "landscape",
-    "offer_text": "Sign Up FREE 100,000 GC + 1 SC",
-    "style": "Classic",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/57/fb9dd4386026e1af3032bb186ec1af191f92c5a55ec5d2330f1c639f23a2c6.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=280e2ff8-eb3e-4579-aaf1-a3c045984881%2F20260526%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260526T190208Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e5edb82439dd8a03e711a40e438ec9886ebef672fdb57f621186c4be4c72a72b",
-    "created_at": "2026-05-26 19:02:00"
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17798488303339.jpg",
+    "created_at": "2026-05-27 02:27:12"
   },
   {
     "id": "cr-1779487025A4PR",
@@ -2018,25 +1998,5 @@
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/b1/0fe48362e4f9163d2ed35485d6d3380de2c8c35c76d84c6753e29952d8b337.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161532Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=394a187c5406aa258e22413bf2d4ad0c1b989adc131e13d7503f26b4f3f0f8f7",
     "created_at": "2026-04-21 16:14:45"
-  },
-  {
-    "id": "cr-177678808592A5s",
-    "game_name": "Treasure Wild",
-    "format": "square",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Classic",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f0/9563623e8c556ce6f4794b77a03259a51c893a71b330c0486af1c22169a9a4.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161558Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=d1caf2ea6dff2f16dd570bd5529ea91f27ec82f9515624699e3d2ce192d3b49b",
-    "created_at": "2026-04-21 16:14:45"
-  },
-  {
-    "id": "cr-1776787806A0BD",
-    "game_name": "Snoop Dogg Dollars",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/81/664ce577218665115e658b29b856622d63ebf593afab462487ad59f45f8c0a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T161128Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=8317d529f2d9c0a90c7e7adf475174e8f456bbb22a29441420765bb457807dd6",
-    "created_at": "2026-04-21 16:10:06"
   }
 ]
