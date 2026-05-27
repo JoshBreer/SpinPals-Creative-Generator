@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-19E66FEFC96SQ",
+    "game_name": "Miami Mayhem",
+    "format": "square",
+    "offer_text": "Sign Up FREE  100,000 GC + 1 SC",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/c7/f5dfbe1cef042049c803c387309bef73c6f16abf8bb56310b8230da129c390.jpg",
+    "created_at": "2026-05-27 01:13:00"
+  },
+  {
+    "id": "cr-19E66FEFC96LS",
+    "game_name": "Miami Mayhem",
+    "format": "landscape",
+    "offer_text": "Sign Up FREE  100,000 GC + 1 SC",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://artifacts.prod.twin.so/cobb-artifacts-prod/6e/51719f1dee3cbf8a11f9bc2da435b67174054a5935043130fb2cc68cd8659c.jpg",
+    "created_at": "2026-05-27 01:13:00"
+  },
+  {
     "id": "cr-19E65AB2627SQ",
     "game_name": "Le Bandit",
     "format": "square",
