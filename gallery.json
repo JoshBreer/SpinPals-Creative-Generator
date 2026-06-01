@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1780343108D1E9",
+    "game_name": "Joker's Jewels",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1780343108D1E9.jpg",
+    "created_at": "2026-06-01 19:45:08"
+  },
+  {
+    "id": "cr-17803431051D9B",
+    "game_name": "Joker's Jewels",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-17803431051D9B.jpg",
+    "created_at": "2026-06-01 19:45:05"
+  },
+  {
     "id": "cr-17799065341BDF",
     "game_name": "N/A",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "john@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/17/1bfb0208cd18b5d37d46b562e3caf35f7f0c8eee46af9128caad99b022a85d.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T184858Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=fb5c6472a90d6738512031f91ba62449d2a0727d16d1c6c5e3a5a2328d7c8437",
     "created_at": "2026-04-21 18:48:11"
-  },
-  {
-    "id": "cr-17767971707AEC",
-    "game_name": "Snoop Dogg Dollars",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/d8/8fa673f3dd71dcdb2d8cd600150f4f2e2c5534c0dbd87a940d91bf96a8ae0a.png?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T184726Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=093ba06663a408ca105ef9d5603147df93658db95a7d915ba124b40e9fff59c0",
-    "created_at": "2026-04-21 18:46:10"
-  },
-  {
-    "id": "cr-177678987068F6",
-    "game_name": "Hot Pepper",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/ba/1079638a16f47c1899611002df2259c2c302f4bc27716e1c4c83704cc97c1e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T164510Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=35144dc48485a3d7ad31d58a93258c4be7931756a551bbd2e3efb135da72cf70",
-    "created_at": "2026-04-21 16:44:30"
   }
 ]
