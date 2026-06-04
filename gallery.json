@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1780593154RTKS",
+    "game_name": "Release the Kraken",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1780593154RTKS.jpg",
+    "created_at": "2026-06-04 17:12:34"
+  },
+  {
+    "id": "cr-1780593148RTKP",
+    "game_name": "Release the Kraken",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1780593148RTKP.jpg",
+    "created_at": "2026-06-04 17:12:28"
+  },
+  {
     "id": "cr-17804348404DCD",
     "game_name": "N/A",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/51b929990534acf70457558067b35d3845e8969e5aa9d047601b9529bec51f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T202748Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6b47469c91fcbf8459d1347ac1712b5f6a9a0a96553fdfe4ed278708812019cb",
     "created_at": "2026-04-21 20:27:03"
-  },
-  {
-    "id": "cr-1776802646BC7D",
-    "game_name": "Hot Fiesta",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/0f/a564dc0d05058796954a8a1fd1153f2bef35938e79fff424e4ba296fd45bcf.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T201809Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e56fe533a882fc99c473e90a3bf2a43ff44bfa2517a1d7e61d5e606a44876700",
-    "created_at": "2026-04-21 20:17:26"
-  },
-  {
-    "id": "cr-17767976907DA1p",
-    "game_name": "Hot Pepper",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Custom",
-    "user_email": "john@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/06/9b49b2e03350834432b2bd4b66950f89d98e2e3d71e7e6679ae55009a69e99.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T185531Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1f6638c825167aeeb1bd8f55add4b907841d5a04947391ea07c6c805cabc6b17",
-    "created_at": "2026-04-21 18:54:50"
   }
 ]
