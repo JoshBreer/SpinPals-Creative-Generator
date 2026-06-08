@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1780946272HFCP",
+    "game_name": "Hot Fiesta",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1780946272HFCP.jpg",
+    "created_at": "2026-06-08 19:17:52"
+  },
+  {
+    "id": "cr-1780946272HFCS",
+    "game_name": "Hot Fiesta",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Custom",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1780946272HFCS.jpg",
+    "created_at": "2026-06-08 19:17:52"
+  },
+  {
     "id": "cr-1780593154RTKS",
     "game_name": "Release the Kraken",
     "format": "square",
@@ -1978,25 +1998,5 @@
     "user_email": "justin@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/e4/6ee2855cf45aa2f22bc098e71f97c89d1b27be1969fb3037cf1424e6a01469.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T204130Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=993728a9a9f2f79ed383ff2a1298e59ca3369a9c96c3eca6f890ac52e44aeb4c",
     "created_at": "2026-04-21 20:40:48"
-  },
-  {
-    "id": "cr-1776803655CFC4",
-    "game_name": "Spin & Score Megaways",
-    "format": "portrait",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Custom",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/3f/c16485cf0bebad84978f4c5d336669107f0830bb47cbc4f8bd86ba06b3ea49.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T203456Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=bf467d7715bc9e9afa94b774e506372a49bf13f0063cc23dec531e8e6096b890",
-    "created_at": "2026-04-21 20:34:15"
-  },
-  {
-    "id": "cr-177680322368E3",
-    "game_name": "Hot Fiesta",
-    "format": "square",
-    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
-    "style": "Classic",
-    "user_email": "justin@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/7b/51b929990534acf70457558067b35d3845e8969e5aa9d047601b9529bec51f.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260421%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260421T202748Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6b47469c91fcbf8459d1347ac1712b5f6a9a0a96553fdfe4ed278708812019cb",
-    "created_at": "2026-04-21 20:27:03"
   }
 ]
