@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1781631967LFSP",
+    "game_name": "Live Football Studio",
+    "format": "portrait",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1781631967LFSP.jpg",
+    "created_at": "2026-06-16 17:46:07"
+  },
+  {
+    "id": "cr-1781631967LFSS",
+    "game_name": "Live Football Studio",
+    "format": "square",
+    "offer_text": "50 FREE SPINS on First Purchase",
+    "style": "Classic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1781631967LFSS.jpg",
+    "created_at": "2026-06-16 17:46:07"
+  },
+  {
     "id": "cr-1781624820LFSP",
     "game_name": "Live Football Studio",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/05/b3b2b4ef52b7fc2f719eec059b9aaa6c502e8b8563c4b25ea8163d99646684.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T165314Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=3f20126d80902517f803afbffa3c8dc24ed40d1844542f98ffb64f54c3a1ed9c",
     "created_at": "2026-04-22 16:52:52"
-  },
-  {
-    "id": "cr-1776875649DE93",
-    "game_name": "European Roulette",
-    "format": "portrait",
-    "offer_text": "25 FREE SC + 250K GC on First Purchase",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/9a/c668e061bbc19ac6d92904f853f0ce4ae0b8e1c08ba8015993f17098e22e67.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T163451Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e6f2b6a7b72f3b17fde5e34ad7a42f419557fcf14893bffedf40c5f0eddfb621",
-    "created_at": "2026-04-22 16:34:09"
-  },
-  {
-    "id": "cr-1776872487B8AF",
-    "game_name": "Dragon Kingdom",
-    "format": "square",
-    "offer_text": "Weekend Special: Double GC on All Purchases",
-    "style": "Realistic",
-    "user_email": "josh@rmgs.online",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/14/17a29556751bb388eb6318f8c7b63c52c3931e5330787b7d78c0cbc6864e7e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T154212Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ef42f8b092792b9e781f0c9810560947f49203bf44aee5f98d2897af5089df7c",
-    "created_at": "2026-04-22 15:41:27"
   }
 ]
