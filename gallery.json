@@ -1,5 +1,25 @@
 [
   {
+    "id": "cr-1781624820LFSP",
+    "game_name": "Live Football Studio",
+    "format": "portrait",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1781624820LFSP.jpg",
+    "created_at": "2026-06-16 15:47:00"
+  },
+  {
+    "id": "cr-1781624820LFSS",
+    "game_name": "Live Football Studio",
+    "format": "square",
+    "offer_text": "GC 400K + FREE SC 35 + 50 FREE SPINS",
+    "style": "Realistic",
+    "user_email": "john@rmgs.online",
+    "image_url": "https://raw.githubusercontent.com/JoshBreer/SpinPals-Creative-Generator/main/creatives/cr-1781624820LFSS.jpg",
+    "created_at": "2026-06-16 15:47:00"
+  },
+  {
     "id": "cr-1781194123SB1K",
     "game_name": "Sweet Bonanza 1000",
     "format": "portrait",
@@ -1978,25 +1998,5 @@
     "user_email": "josh@rmgs.online",
     "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/14/17a29556751bb388eb6318f8c7b63c52c3931e5330787b7d78c0cbc6864e7e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T154212Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=ef42f8b092792b9e781f0c9810560947f49203bf44aee5f98d2897af5089df7c",
     "created_at": "2026-04-22 15:41:27"
-  },
-  {
-    "id": "cr-17768626768FE1",
-    "game_name": "Gates of Olympus",
-    "format": "portrait",
-    "offer_text": "Weekend Special: Double GC on All Purchases",
-    "style": "Realistic",
-    "user_email": "dragan@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/c9/ff95e2c44352ca46a3fc513efe9907c1686ecc93ae9f58055c731ac804cb3e.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T125818Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=284e15084cbd176e62b8ad6cb30e22a094c2e0efcdbbf504558aed5e0ad1c946",
-    "created_at": "2026-04-22 12:57:56"
-  },
-  {
-    "id": "cr-1776858670BC3C",
-    "game_name": "Gates of Olympus",
-    "format": "portrait",
-    "offer_text": "Weekend Special: Double GC on All Purchases",
-    "style": "Realistic",
-    "user_email": "dragan@spinpals.com",
-    "image_url": "https://fsn1.your-objectstorage.com:443/cobb-artifacts-prod/f2/a7dbb496a6884563ab228d135982e4118bcd1a51a5e00c16af17e0d30950fc.jpg?x-id=GetObject&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HULDI5IVO0R3DR12KERN%2F20260422%2Ffsn1%2Fs3%2Faws4_request&X-Amz-Date=20260422T115154Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=9ece3d49b0a1cbe6bc4ebc1bd5fce9434df225a992ade18d918021320ec75c63",
-    "created_at": "2026-04-22 11:51:10"
   }
 ]
